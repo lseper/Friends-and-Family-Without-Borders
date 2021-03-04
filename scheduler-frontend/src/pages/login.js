@@ -29,21 +29,21 @@ export class login extends Component {
                   </div>
                   <div>
                     <NavLink to = "/homePage">
-                    <button className="bg-coolGreen hover:bg-coolGrey text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline " type="button">Sign In</button>
+                    <button className="bg-coolGreen hover:bg-coolGrey hover:shadow-md text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl" type="button">Sign In</button>
                     </NavLink>
                   </div>
                   &nbsp;&nbsp;&nbsp;
                   <div className="px-4">
-                    <p className="text-sm hover:bg-coolGrey text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
-                      Forgot your password?
+                    <p className="text-sm text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
+                      Forgot your password? 
                       <NavLink to = "/createAccount">
-                          <button>Click here</button>
+                          <button className="hover:text-coolBlue-dark text-coolBlue"> Click here</button>
                       </NavLink>
                     </p>
-                    <p className="text-sm hover:bg-coolGrey text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
-                      Don't have an account?
+                    <p className="text-sm text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
+                      Don't have an account? 
                       <NavLink to = "/createAccount">
-                          <button>Sign up here</button>
+                          <button className="hover:text-coolBlue-dark text-coolBlue"> Sign up here</button>
                       </NavLink>
                     </p>
                   </div>
