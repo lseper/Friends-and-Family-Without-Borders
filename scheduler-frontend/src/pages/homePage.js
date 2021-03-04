@@ -19,7 +19,9 @@ export class homePage extends Component {
 
                     <div className="mr-auto ml-auto">
                         <label htmlFor="title" className="text-5xl block font-bold  pb-2 text-coolGrey-dark mb-2">Created Events</label>
-                        <button className="bg-coolBlue py-1 px-5 rounded hover:bg-coolBlue-dark font-bold text-white focus:outline-none focus:shadow-outline">+ CREATE EVENT</button>
+                        <NavLink to = "/createEvent">
+                            <button className="bg-coolBlue py-1 px-5 rounded hover:bg-coolBlue-dark font-bold text-white focus:outline-none focus:shadow-outline">+ CREATE EVENT</button>
+                        </NavLink>
                         <CreatedEventsButton />
                         <CreatedEventsButton />
                         <CreatedEventsButton />
