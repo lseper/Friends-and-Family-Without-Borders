@@ -22,7 +22,7 @@ export class homePage extends Component {
                     <div className="mr-auto ml-auto">
                         <label htmlFor="title" className="text-5xl block font-bold  pb-2 text-coolGrey-dark mb-2">Created Events</label>
                         <NavLink to = "/createEvent">
-                            <button className="bg-coolBlue py-1 px-5 rounded hover:bg-coolBlue-dark font-bold text-white focus:outline-none focus:shadow-outline">+ CREATE EVENT</button>
+                            <button className="bg-coolBlue py-1 px-5 rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl">+ CREATE EVENT</button>
                         </NavLink>
                         <CreatedEventsButton />
                         <CreatedEventsButton />

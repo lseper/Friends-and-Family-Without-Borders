@@ -14,7 +14,7 @@ export class homePage extends Component {
             <div>
                 <TopBar />
 
-                <div className="bg-coolGrey flex pt-5 pb-5 text-white text-2xl mb-12">
+                <div className="bg-coolGrey flex pt-5 pb-5 text-white text-2xl mb-12 shadow-xl hover:shadow-md">
                     <NavLink to = "/homePage">
                         <button className="ml-5 hover:text-gray-300">←</button>
                     </NavLink>
@@ -56,7 +56,7 @@ export class homePage extends Component {
                 </div>
                 
                 <div className="absolute bottom-0 right-14">
-                    <button className="bg-coolGreen hover:bg-coolGreen-dark text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline">CREATE EVENT</button>
+                    <button className="bg-coolGreen hover:bg-coolGreen-dark hover:shadow-md text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl">CREATE EVENT</button>
                 </div>
             </div>
         )
