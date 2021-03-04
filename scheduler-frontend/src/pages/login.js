@@ -28,7 +28,9 @@ export class login extends Component {
                     <input type="password" name="email" id="" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-coolGreen" placeholder="Enter your password" />
                   </div>
                   <div>
+                    <NavLink to = "/homePage">
                     <button className="bg-coolGreen hover:bg-coolGrey text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline " type="button">Sign In</button>
+                    </NavLink>
                   </div>
                   &nbsp;&nbsp;&nbsp;
                   <div className="px-4">
