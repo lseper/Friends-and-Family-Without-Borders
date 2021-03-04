@@ -12,7 +12,7 @@ export class firstComponent extends Component {
     render() {
         return (
             <div>
-                <h1>{this.props.name}Page</h1>
+                <h1>Welcome {this.props.name}</h1>
             </div>
         )
     }
