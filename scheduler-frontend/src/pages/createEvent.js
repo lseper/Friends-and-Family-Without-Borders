@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import CreatedEventsButton from '../components/createdEventsButton';
-import EventInvitationsButton from '../components/eventInvitationsButton';
-import NavBar from '../components/navBar';
+import TopBar from '../components/topBar';
 
 import { NavLink } from 'react-router-dom';
 
@@ -14,6 +12,8 @@ export class homePage extends Component {
     render() {
         return (
             <div>
+                <TopBar />
+
                 <div className="bg-coolGrey flex pt-5 pb-5 text-white text-2xl mb-12">
                     <NavLink to = "/homePage">
                         <button className="ml-5 hover:text-gray-300">←</button>
@@ -56,7 +56,7 @@ export class homePage extends Component {
                 </div>
                 
                 <div className="absolute bottom-0 right-14">
-                    <button className="mt-10 mb-10 bg-coolGreen hover:bg-coolGreen-dark text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline">CREATE EVENT</button>
+                    <button className="bg-coolGreen hover:bg-coolGreen-dark text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline">CREATE EVENT</button>
                 </div>
             </div>
         )
