@@ -8,14 +8,16 @@ module.exports = {
                   DEFAULT: '#BDE4A7'
                 },
                 coolBlue: {
-                  DEFAULT: '#98D2EB'
+                  DEFAULT: '#98D2EB',
+                  dark: '#5DADE2'
                 },
                 coolGrey: {
                   DEFAULT: '#A4969B',
                   dark: '#454851'
                 },
                 brightPink: {
-                  DEFAULT: '#CD8B76'
+                  DEFAULT: '#CD8B76',
+                  dark: '#CB4335'
                 }
               }
     },
