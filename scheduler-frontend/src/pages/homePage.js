@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CreatedEventsButton from '../components/createdEventsButton';
 import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
+import TopBar from '../components/topBar';
 
 import { NavLink } from 'react-router-dom';
 
@@ -14,6 +15,7 @@ export class homePage extends Component {
     render() {
         return (
             <div>
+                <TopBar />
                 <NavBar />
                 <div className="flex">
 
