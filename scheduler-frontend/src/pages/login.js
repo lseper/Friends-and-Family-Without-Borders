@@ -3,10 +3,6 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 
 export class login extends Component {
-    onSubmit = () => {
-        console.log("test");
-        this.props.history.push('./pages/createAccount');
-     }
 
      //plain object with just a user name and a password -- to send to backend 
      //will depend on the backend -- dictionary representation 

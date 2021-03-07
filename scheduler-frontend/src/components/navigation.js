@@ -11,6 +11,8 @@ export class navigation extends Component {
                 <NavLink to="/createAccount"></NavLink>
                 <NavLink to="/homePage"></NavLink>
                 <NavLink to="/createEvent"></NavLink>
+                <NavLink to="/questionnaire"></NavLink>
+                <NavLink to="/profile"></NavLink>
             </div>
         );
     }

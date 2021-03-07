@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import CreatedEventsButton from '../components/createdEventsButton';
 import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
@@ -7,11 +7,6 @@ import TopBar from '../components/topBar';
 import { NavLink } from 'react-router-dom';
 
 export class homePage extends Component {
-    onSubmit = () => {
-        console.log("test");
-        this.props.history.push('./pages/createAccount');
-     }
-
     render() {
         return (
             <div>
