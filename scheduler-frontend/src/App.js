@@ -14,9 +14,6 @@ export class App extends Component {
 
   render() {
     return (
-      // <div className="Login">
-      //   <Login/>
-      // </div>
       <BrowserRouter>
         <div>
           <Navigation />
