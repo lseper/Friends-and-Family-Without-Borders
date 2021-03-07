@@ -10,6 +10,7 @@ export class navigation extends Component {
                 <NavLink to="/"></NavLink>
                 <NavLink to="/createAccount"></NavLink>
                 <NavLink to="/homePage"></NavLink>
+                <NavLink to="/createEvent"></NavLink>
             </div>
         );
     }
