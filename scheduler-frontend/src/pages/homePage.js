@@ -12,12 +12,12 @@ export class homePage extends Component {
             <div>
                 {/* <TopBar /> */}
                 <NavBar />
-                <div className="flex">
+                <div>
 
                     <div className="mr-auto ml-auto">
-                        <label htmlFor="title" className="text-5xl block font-bold  pb-2 text-coolGrey-dark mb-2">Created Events</label>
+                        <label htmlFor="title" className="text-4xl block font-bold  pb-2 text-coolGrey-dark mb-2 ml-2">Created Events</label>
                         <NavLink to = "/createEvent">
-                            <button className="bg-coolBlue py-1 px-5 rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl">+ CREATE EVENT</button>
+                            <button className="bg-coolBlue py-1 px-5 rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl ml-2">+ CREATE EVENT</button>
                         </NavLink>
                         <CreatedEventsButton />
                         <CreatedEventsButton />
@@ -31,7 +31,7 @@ export class homePage extends Component {
                     </div>
                     
                     <div className="mr-auto ml-auto">
-                        <label htmlFor="title" className="text-5xl block font-bold  pb-2 text-brightPink mb-2">Event Invitations</label>
+                        <label htmlFor="title" className="text-4xl block font-bold  pb-2 text-brightPink mb-2 ml-2">Event Invitations</label>
                         <EventInvitationsButton />
                         <EventInvitationsButton />
                         <EventInvitationsButton />
