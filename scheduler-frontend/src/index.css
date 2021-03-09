@@ -1,0 +1,9 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom styles */
+/* .customClass {
+  font-size: 600px;
+} */
