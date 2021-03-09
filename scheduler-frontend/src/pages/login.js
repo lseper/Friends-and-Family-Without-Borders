@@ -11,16 +11,16 @@ export class login extends Component {
     render() {
         return (
             <div>
-            <section className="App h-20 w-full flex justify-center items-center bg-grey-500">
-              <div className="px-1 pb-1 py-36">
+            <section className="App py-10 w-full flex justify-center items-coolGrey">
+              <div className="px-1 pb-1">
                   <label htmlFor="title" className="text-3xl block font-bold  pb-2 text-coolGrey-dark">WELCOME</label>
               </div>
             </section>
-            <section className="App h-screen w-full flex justify-center items-start bg-grey-500 py-48">
+            <section className="App h-screen w-full flex justify-center items-start bg-grey-500 py-4 px-4">
               <div className="w-full max-w-md bg-gray-800" >
                 <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
                   <InputText type = "email" border = "coolGreen" placeholder = "example@gmail.com" label = "EMAIL ADDRESS"/>
-                  <InputText type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
+                  <InputText type = "password" border = "coolGreen" placeholder = "examplePassword" label = ""/>
                   <div>
                     <NavLink to = "/homePage">
                     <button className="bg-coolGreen hover:bg-coolGrey hover:shadow-md text-white font-bold py-1 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl" type="button">Sign In</button>

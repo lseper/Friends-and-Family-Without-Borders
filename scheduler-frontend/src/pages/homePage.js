@@ -10,7 +10,7 @@ export class homePage extends Component {
     render() {
         return (
             <div>
-                <TopBar />
+                {/* <TopBar /> */}
                 <NavBar />
                 <div className="flex">
 

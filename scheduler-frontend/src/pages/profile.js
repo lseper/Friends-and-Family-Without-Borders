@@ -6,7 +6,7 @@ export class profile extends Component {
     render() {
         return (
             <div>
-                <TopBar />
+                {/* <TopBar /> */}
                 <NavBar />
                 <section className="App h-20 w-full flex justify-center items-center bg-grey-500">
                     <div className="px-1 pb-1 py-36">
