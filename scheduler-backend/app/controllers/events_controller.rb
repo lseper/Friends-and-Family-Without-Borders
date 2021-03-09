@@ -1,19 +1,21 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
-  # GET /events
+  # GET /user/:id/events
+  # return JSON of all events that this user is the owner of
+  #
   def index
     @events = Event.all
 
     render json: @events
   end
 
-  # GET /events/1
+  # GET /events/:id
   def show
     render json: @event
   end
 
-  # POST /events
+  # POST /user/:id/events
   def create
     @event = Event.new(event_params)
 
@@ -24,7 +26,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
+  # PATCH/PUT /events/:id
   def update
     if @event.update(event_params)
       render json: @event
@@ -33,7 +35,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
+  # DELETE /events/:id
   def destroy
     @event.destroy
   end

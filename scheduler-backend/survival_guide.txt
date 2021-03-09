@@ -1,0 +1,50 @@
+This doc is intended to be used as a reference for useful things you learn about Rails. 
+Feel free to add onto it, I just thought I would compile a list of things that are useful.
+
+COMMANDS:
+
+bundle i
+    installs anything in your Gemfile. If you are "missing gems ..." or something of the like, 
+    try running this, then run the command below to start the application. Hopefully, that was
+    the only issue.
+
+rails s
+    starts the application. Must be ran in the same directory as the rails application. Make sure you don't
+    have another rails application running when you run this command, as it will not work if you do.
+
+rails c
+    starts the rails console. This lets you interact with your application (while it is running. See the command
+    above for running the application). Very useful for debugging database issues, as well as testing individual lines of code.
+
+    Any code you write here will run when you press "enter". Models are especially useful as you can test if they are
+    functioning properly by using "ModelName.[method here]" to see what is returned.
+
+    Examples:
+        User.find(1) # retrieves the user from the database with the id of 1 (does not store in any variable)
+        user = User.find(1) # stores the retrieved user from the database in the variable "user"
+        user.events # returns all the events that this user is invited too
+                    # (only works because of the has_and_belongs_to_many keyword in the User Model)
+
+        Event.all # returns all the events in the database in an array
+
+rails generate [scaffold / model / migration / controller] [name]
+    generates the boilerplate code for a lot of these things. Very useful for quickly and easily adding new things.
+
+rails db:migrate
+    runs all the new migrations in your migrations folder in ./db/
+    run this if you see "pending migrations"
+
+    if you want to revert or migrate to a specific version, add VERSION=[version_number]
+    Example: 
+        rails db:migrate VERSION=0 # resets the database schema back to its original, unmigrated form
+
+rails routes
+    shows all the routes in your application. If you're on Mac, you can pipe this into a "grep" to filter out certain routes.
+    
+    Example:
+        rails routes # gets all the routes in your application
+
+        rails routes | grep "user" # gets all routes with "user" somewhere in the name
+
+
+
