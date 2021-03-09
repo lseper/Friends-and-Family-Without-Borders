@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navBar';
 import TopBar from '../components/topBar';
-import { NavLink } from 'react-router-dom';
+import Question from '../components/question';
 
 export class questionnaire extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            emilysState: 'hello',
+        }
+    }
     render() {
         return (
             <div>
                 <TopBar />
                 <NavBar />
-                <div className="App h-20 w-full flex justify-center items-center bg-grey-500">
-                    <div className="px-1 pb-1 py-36">
-                        <label htmlFor="title" className="text-3xl block font-bold  pb-2 text-coolGrey-dark">QUESTIONNAIRE</label>
+                    <div className = "flex flex-wrap w-full mr-auto ml-auto justify-center">
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
+                        <Question className="w-1/2"/>
                     </div>
-                </div> 
             </div>
 
         )
