@@ -20,18 +20,6 @@ export class questionnaire extends Component {
             q8: 4, 
             q9: 4,
             q10: 4,
-            q1Answer: '',
-            q2Answer: '',
-            q3Answer: '',
-            q4Answer: '',
-            q5Answer: '',
-            q6Answer: '',
-            q7Answer: '',
-            q8Answer: '',
-            q9Answer: '',
-            q10Answer: '',
-            q11Answer: '',
-            q12Answer: '',
             quesitonnaireId: '1'
           };
 
@@ -90,18 +78,18 @@ export class questionnaire extends Component {
         .then(res => {
             console.log(res.data[0].q1answer)
             this.setState({
-                q1Answer: res.data[0].q1answer,
-                q2Answer: res.data[0].q2answer,
-                q3Answer: res.data[0].q3answer,
-                q4Answer: res.data[0].q4answer,
-                q5Answer: res.data[0].q5answer,
-                q6Answer: res.data[0].q6answer,
-                q7Answer: res.data[0].q7answer,
-                q8Answer: res.data[0].q8answer,
-                q9Answer: res.data[0].q9answer,
-                q10Answer: res.data[0].q10answer,
-                q11Answer: res.data[0].q11answer,
-                q12Answer: res.data[0].q12answer,
+                q1: res.data[0].q1answer,
+                q2: res.data[0].q2answer,
+                q3: res.data[0].q3answer,
+                q4: res.data[0].q4answer,
+                q5: res.data[0].q5answer,
+                q6: res.data[0].q6answer,
+                q7: res.data[0].q7answer,
+                q8: res.data[0].q8answer,
+                q9: res.data[0].q9answer,
+                q10: res.data[0].q10answer,
+                q11: res.data[0].q11answer,
+                q12: res.data[0].q12answer,
             })
         }).then(() => {
             console.log(this.state.q1Answer);
