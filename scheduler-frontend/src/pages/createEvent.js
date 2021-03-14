@@ -3,10 +3,6 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 
 export class homePage extends Component {
-    onSubmit = () => {
-        console.log("test");
-        this.props.history.push('./pages/createAccount');
-     }
 
     render() {
         return (
@@ -60,4 +56,4 @@ export class homePage extends Component {
     } 
 }
 
-export default homePage
+export default homePage;

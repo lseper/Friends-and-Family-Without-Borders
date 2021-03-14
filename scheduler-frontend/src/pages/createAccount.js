@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import DropDown from '../components/dropDown';
 import InputText from '../components/inputText';
-import { withRouter } from "react-router";
 import GreenButton from '../components/greenButton'
 
 export class createAccount extends Component {
@@ -27,7 +26,7 @@ export class createAccount extends Component {
                     <DropDown name = "INFORMATION PUBLIC TO USERS" option1 = "Yes" option2 = "No"/>
                     &nbsp;&nbsp;&nbsp;
                     <div className = "flex justify-evenly align-center items-center">
-                      <NavLink to = "/homePage">
+                      <NavLink to = "/">
                         <GreenButton name = "Create Account" />                        
                       </NavLink>
                   </div>
