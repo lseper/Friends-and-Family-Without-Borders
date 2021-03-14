@@ -14,11 +14,27 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
-    if @user.save
-      render json: @user, status: :created, location: @user
+    @user_exists = User.find_by(phone: params[:phone])
+
+    if @user_exists
+      render json: { message: "User already exists!" }
     else
-      render json: @user.errors, status: :unprocessable_entity
+      # creating a new user regularly works fine, but for some reason using bcrypt breaks everything
+      # something wrong with bcrypt is causing this to recurse infinitely??????
+      @user = User.new(
+        username: params[:username],
+        password: params[:password],
+        password_confirmation: params[:password], # could be this??????????
+        phone: params[:phone],
+        name: params[:name],
+        privacy: params[:privacy]
+      )
+      if @user.save
+        token = encode( { user_id: @user.id } )
+        render json: { user_id: token }
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     end
   end
 
