@@ -96,6 +96,8 @@ export class questionnaire extends Component {
         }).catch(err => {
             console.log(err);
         })
+
+        console.log(localStorage.getItem("user_id"));
     }
 
     render() {
