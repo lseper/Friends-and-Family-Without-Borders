@@ -6,7 +6,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
+    width: 250,
   },
 });
 
@@ -25,7 +25,7 @@ function valuetext(value) {
 
 export default function DiscreteSlider() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState(0);
 
   // sets a new value and tests it by printing it to the console
   const handleChange = (event, newValue) => {
@@ -33,25 +33,56 @@ export default function DiscreteSlider() {
     console.log(newValue);
   };
 
+  const marks = [
+    {
+      value: 2,
+      label: 2,
+    },
+    {
+      value: 4,
+      label: 4,
+    },
+    {
+      value: 6,
+      label: 6,
+    },
+    {
+        value: 8,
+        label: 8,
+      },
+      {
+        value: 10,
+        label: 10,
+      },
+  ];
+
+  //FIX SLIDER LENGTH
   return (
-    <MuiThemeProvider theme={theme}>
-    <div className={classes.root}>
-      <Typography className = "text-sm text-coolGrey-dark" id="discrete-slider" gutterBottom>
-        1 is least comfortable and 10 is most comfortable 
-      </Typography>
-      <Slider
-        value={value}
-        getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={1}
-        max={10}
-        // when Callback function that is fired when the mouseup is triggered.
-        onChangeCommitted = {handleChange}
-      />
+    <div className = "flex items-stretch static ">
+        <div className = "px-4 flex items-start static ">
+            <MuiThemeProvider theme={theme}>
+            <div className={classes.root}>
+            <Slider
+                value={value}
+                getAriaValueText={valuetext}
+                aria-labelledby="discrete-slider-custom"
+                valueLabelDisplay="auto"
+                step={1}
+                marks = {marks}
+                min={1}
+                max={10}
+                // when Callback function that is fired when the mouseup is triggered.
+                onChangeCommitted = {handleChange}
+            />
+            {/* <Typography className = "text-xs text-coolGrey-dark text-left" id="discrete-slider-custom" gutterBottom>
+                Rate 1-10 (10 most comfortable) 
+            </Typography> */}
+            </div>
+        </MuiThemeProvider>
+        </div >
+        <div className = "pb-12 px-2 flex items-end inline-block">
+            <p className = "text-5xl text-coolGreen">{value}</p>
+        </div>
     </div>
-    </MuiThemeProvider>
   );
 }
