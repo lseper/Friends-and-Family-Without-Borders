@@ -23,14 +23,16 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function DiscreteSlider() {
+
+const DiscreteSlider = ({userNumber, callBack}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+
+  const [value, setValue] = React.useState(userNumber);
 
   // sets a new value and tests it by printing it to the console
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(newValue);
+    callBack(newValue);
   };
 
   const marks = [
@@ -56,7 +58,6 @@ export default function DiscreteSlider() {
       },
   ];
 
-  //FIX SLIDER LENGTH
   return (
     <div className = "flex items-stretch static ">
         <div className = "px-4 flex items-start static ">
@@ -86,3 +87,5 @@ export default function DiscreteSlider() {
     </div>
   );
 }
+
+export default DiscreteSlider;
