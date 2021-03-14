@@ -21,17 +21,19 @@ class UsersController < ApplicationController
     else
       # creating a new user regularly works fine, but for some reason using bcrypt breaks everything
       # something wrong with bcrypt is causing this to recurse infinitely??????
-      @user = User.new(
-        username: params[:username],
-        password: params[:password],
-        password_confirmation: params[:password], # could be this??????????
-        phone: params[:phone],
-        name: params[:name],
-        privacy: params[:privacy]
-      )
+      # @user = User.new(
+      #   username: params[:username],
+      #   password: params[:password],
+      #   password_confirmation: params[:password], # could be this??????????
+      #   phone: params[:phone],
+      #   name: params[:name],
+      #   privacy: params[:privacy]
+      # )
+
+      @user = User.new(user_params)
       if @user.save
-        token = encode( { user_id: @user.id } )
-        render json: { user_id: token }
+        # token = encode( { user_id: @user.id } )
+        render json: { user_id: @user.id }
       else
         render json: @user.errors, status: :unprocessable_entity
       end
