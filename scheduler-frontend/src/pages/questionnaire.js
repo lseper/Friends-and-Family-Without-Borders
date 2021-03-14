@@ -21,29 +21,30 @@ export class questionnaire extends Component {
           q10Answer: '',
           q11Answer: '',
           q12Answer: '',
-          quesitonnaireId: ''
+          quesitonnaireId: '1'
         };
       }
 
     componentDidMount() {
-        axios.get(`/questionnaire/${this.props.quesitonnaireId}`)
+        axios.get(`/questionnaires/1`)
         .then(res => {
+            console.log(res.data[0].q1answer)
             this.setState({
-                q1Answer: res.data.q1Answer,
-                q2Answer: res.data.q2Answer,
-                q3Answer: res.data.q3Answer,
-                q4Answer: res.data.q4Answer,
-                q5Answer: res.data.q5Answer,
-                q6Answer: res.data.q6Answer,
-                q7Answer: res.data.q7Answer,
-                q8Answer: res.data.q8Answer,
-                q9Answer: res.data.q9Answer,
-                q10Answer: res.data.q10Answer,
-                q11Answer: res.data.q11Answer,
-                q12Answer: res.data.q12Answer,
+                q1Answer: res.data[0].q1answer,
+                q2Answer: res.data[0].q2answer,
+                q3Answer: res.data[0].q3answer,
+                q4Answer: res.data[0].q4answer,
+                q5Answer: res.data[0].q5answer,
+                q6Answer: res.data[0].q6answer,
+                q7Answer: res.data[0].q7answer,
+                q8Answer: res.data[0].q8answer,
+                q9Answer: res.data[0].q9answer,
+                q10Answer: res.data[0].q10answer,
+                q11Answer: res.data[0].q11answer,
+                q12Answer: res.data[0].q12answer,
             })
         }).then(() => {
-            console.log(this.props.q1Answer);
+            console.log(this.state.q1Answer);
         }).catch(err => {
             console.log(err);
         })

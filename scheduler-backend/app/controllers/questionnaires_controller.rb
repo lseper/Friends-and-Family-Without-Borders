@@ -10,12 +10,14 @@ class QuestionnairesController < ApplicationController
 
   # GET /questionnaires/1
   def show
+    @questionnaire = Questionnaire.where(id: params[:id])
+
     render json: @questionnaire
   end
 
-  # POST /questionnaires
+  # POST /users/1/questionnaires
   def create
-    @questionnaire = Questionnaire.new(questionnaire_params)
+    @questionnaire = Questionnaire.new(questionnaire_params, params[:user_id])
 
     if @questionnaire.save
       render json: @questionnaire, status: :created, location: @questionnaire
@@ -46,6 +48,6 @@ class QuestionnairesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def questionnaire_params
-      params.fetch(:questionnaire, {})
+      params.require(:questionnaire).permit(:q1answer, :q2answer, :q3answer, :q4answer, :q5answer, :q6answer, :q7answer, :q8answer, :q9answer, :q10answer, :q11answer, :q12answer)
     end
 end
