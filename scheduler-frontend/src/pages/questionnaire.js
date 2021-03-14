@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import NavBar from '../components/navBar';
 import Question from '../components/question';
 import { NavLink } from 'react-router-dom';
-import GreenButton from '../components/greenButton'
 import DiscreteSlider from '../components/slider';
+import GreenButton from '../components/greenButton';
+import axios from 'axios';
 
 export class questionnaire extends Component {
     constructor(props){
@@ -18,7 +19,20 @@ export class questionnaire extends Component {
             q7: 4, 
             q8: 4, 
             q9: 4,
-            q10: 4
+            q10: 4,
+            q1Answer: '',
+            q2Answer: '',
+            q3Answer: '',
+            q4Answer: '',
+            q5Answer: '',
+            q6Answer: '',
+            q7Answer: '',
+            q8Answer: '',
+            q9Answer: '',
+            q10Answer: '',
+            q11Answer: '',
+            q12Answer: '',
+            quesitonnaireId: '1'
           };
 
     }
@@ -69,6 +83,31 @@ export class questionnaire extends Component {
 
     handleTotalCallBack10 = (questionData) => {
         this.setState({q10: questionData})
+    }
+
+    componentDidMount() {
+        axios.get(`/questionnaires/1`)
+        .then(res => {
+            console.log(res.data[0].q1answer)
+            this.setState({
+                q1Answer: res.data[0].q1answer,
+                q2Answer: res.data[0].q2answer,
+                q3Answer: res.data[0].q3answer,
+                q4Answer: res.data[0].q4answer,
+                q5Answer: res.data[0].q5answer,
+                q6Answer: res.data[0].q6answer,
+                q7Answer: res.data[0].q7answer,
+                q8Answer: res.data[0].q8answer,
+                q9Answer: res.data[0].q9answer,
+                q10Answer: res.data[0].q10answer,
+                q11Answer: res.data[0].q11answer,
+                q12Answer: res.data[0].q12answer,
+            })
+        }).then(() => {
+            console.log(this.state.q1Answer);
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {

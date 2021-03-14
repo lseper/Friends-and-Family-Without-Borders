@@ -12,7 +12,8 @@ import CreatedEvents from './pages/createdEvents';
 
 import './App.css';
 
-
+import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 export class App extends Component {
   //adding a function to set a user id 
