@@ -49,7 +49,7 @@ export class questionnaire extends Component {
             console.log(err);
         })
 
-        
+        console.log(localStorage.getItem("user_id"));
     }
 
     render() {
