@@ -2,15 +2,53 @@ import React, { Component } from 'react';
 import NavBar from '../components/navBar';
 import Question from '../components/question';
 import { NavLink } from 'react-router-dom';
-import GreenButton from '../components/greenButton'
+import GreenButton from '../components/greenButton';
+import axios from 'axios';
 
 export class questionnaire extends Component {
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
+        this.state = {
+          q1Answer: '',
+          q2Answer: '',
+          q3Answer: '',
+          q4Answer: '',
+          q5Answer: '',
+          q6Answer: '',
+          q7Answer: '',
+          q8Answer: '',
+          q9Answer: '',
+          q10Answer: '',
+          q11Answer: '',
+          q12Answer: '',
+          quesitonnaireId: ''
+        };
+      }
 
-        // this.state = {
-            
-        // }
+    componentDidMount() {
+        axios.get(`/questionnaire/${this.props.quesitonnaireId}`)
+        .then(res => {
+            this.setState({
+                q1Answer: res.data.q1Answer,
+                q2Answer: res.data.q2Answer,
+                q3Answer: res.data.q3Answer,
+                q4Answer: res.data.q4Answer,
+                q5Answer: res.data.q5Answer,
+                q6Answer: res.data.q6Answer,
+                q7Answer: res.data.q7Answer,
+                q8Answer: res.data.q8Answer,
+                q9Answer: res.data.q9Answer,
+                q10Answer: res.data.q10Answer,
+                q11Answer: res.data.q11Answer,
+                q12Answer: res.data.q12Answer,
+            })
+        }).then(() => {
+            console.log(this.props.q1Answer);
+        }).catch(err => {
+            console.log(err);
+        })
+
+        
     }
 
     render() {
