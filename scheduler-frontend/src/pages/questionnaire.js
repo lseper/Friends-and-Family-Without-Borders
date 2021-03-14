@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navBar';
-import TopBar from '../components/topBar';
 import Question from '../components/question';
 import { NavLink } from 'react-router-dom';
+import GreenButton from '../components/greenButton'
 
 export class questionnaire extends Component {
     constructor(props){
         super(props)
 
-        this.state = {
-            emilysState: 'hello',
-        }
+        // this.state = {
+            
+        // }
     }
+
     render() {
         return (
             <div>
-                {/* <TopBar /> */}
+                {/* <p>{this.props.userId}</p> */}
+               
                 <NavBar />
-                    <div className = "flex flex-wrap w-full mr-auto ml-auto justify-center">
-                        <Question className="w-1/2" question = "Would you be okay with indoor events?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
-                        <Question className="w-1/2" question = "Are you okay with being unmasked?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
-                        <Question className="w-1/2" question = "Have you attended an in person events?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
-                        <Question className="w-1/2" question = "Do you really care at all about the pandemic?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
-                        <Question className="w-1/2" question = "Are you done with Covid?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
-                        <Question className="w-1/2" question = "Would you be okay with indoor events?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
-                        <Question className="w-1/2" question = "Would you be okay with indoor events?" option1 = "yes" option2 ="no" option3 = "it depends" option4="prefer not to answer"/>
+                <section className="App py-10 px-2 w-full flex justify-start items-coolGrey bg-white">
+                    <div className="px-1 pb-1">
+                        <label htmlFor="title" className="text-3xl block font-bold text-left pb-2 text-coolGrey-dark">RATE YOUR COMFORT LEVEL FOR THE FOLLOWING SCENARIOS</label>
                     </div>
+                </section>
+                <div className = "flex grid grid-cols-1 md:grid-cols-2 flex place-items-center bg-coolGrey py-4">
+                    <Question className="" question = "In-person event:"/>
+                    <Question className="" question = "Indoor event:"/>
+                    <Question className="" question = "Indoor event without social distancing:"/>
+                    <Question className="" question = "Event with 10+ people:"/>
+                    <Question className="" question = "People eating food at an event:"/>
+                    <Question className="" question = "People being unmasked at an event:"/>
+                    <Question className="" question = "Meeting people over Zoom:"/>
+                    <Question className="" question = "Using public restrooms:"/>
+                    <Question className="" question = "Eating public food:"/>
+                    <Question className="" question = "Sharing physical objects:"/>
+                  </div>  
                     <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-4 px-4">
                         <div className="px-1 pb-1">
-                        <NavLink to = "/">
-                            <button className="bg-coolGreen hover:bg-coolGrey item-end justify-bottom text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline " type="button">Update Questionnaire Responses</button>
+                        <NavLink to = "/homePage">
+                            <GreenButton name = "Submit Questionnaire Responses"/>
                         </NavLink>
                         </div>
                     </section>

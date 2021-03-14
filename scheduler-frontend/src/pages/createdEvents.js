@@ -10,9 +10,15 @@ export class homePage extends Component {
             <div>
                 <NavBar />
                 <div>                   
-                    <div className="App py-10 w-full flex justify-start px-2 items-coolGrey">
-                        <label htmlFor="title" className="text-4xl block font-bold  pb-2 text-brightPink mb-2 ml-2">EVENT INVITATIONS</label>
+                    <div className="App pt-10 w-full flex justify-start px-2 items-coolGrey">
+                        <label htmlFor="title" className="text-4xl text-left block font-bold  pb-2 text-brightPink mb-2 ml-2 px-2" >CREATED EVENTS</label>
                     </div> 
+                    <div className = "pb-10 px-2">
+                        <NavLink to = "/createEvent">
+                            <button className=" bg-coolBlue py-2 px-5 rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl ml-2">+ CREATE EVENT</button>
+                        </NavLink>
+                    </div>
+
                     <div className ="flex grid grid-cols-1 flex place-items-left bg-coolGrey py-4">
                         
                         <EventInvitationsButton />
@@ -20,14 +26,19 @@ export class homePage extends Component {
                         <EventInvitationsButton />
                         <EventInvitationsButton />
                         <EventInvitationsButton />
-                        <EventInvitationsButton /> 
+                        <EventInvitationsButton />
                        
-                        <label htmlFor="title" className="text-xl block font-bold  pb-2 text-white mb-2 ml-2 px-10 py-10">YOU CURRENTLY DO NOT HAVE ANY EVENT INVITATION YOU SHOULD MAKE SOME FRIENDS:)</label>
+                        {/* <label htmlFor="title" className="text-xl block font-bold  pb-2 text-white mb-2 ml-2 px-10 py-10">YOU CURRENTLY HAVE NOT MADE ANY EVENTS</label> */}
                     </div>        
                 </div>
               <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-8 px-4">
               </section>
             </div>
+
+
+                    
+
+ 
         )
     } 
 }

@@ -1,36 +1,13 @@
 //import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import { withRouter } from "react-router";
-
-// export class navBar extends Component {
-
-//     render() {
-//         return (
-//             <section className="bg-coolGrey flex pt-5 pb-5 text-white  shadow-2xl text-2xl mb-12">
-//                 <div className="mr-auto ml-auto text-white">
-//                     <NavLink to = "/" >
-//                     <button>EVENT HOME</button>
-//                     </NavLink>
-//                 </div>
-//                 <div className="mr-auto ml-auto text-white">
-//                     <NavLink to = "/questionnaire">
-//                     <button >QUESTIONAIRE RESPONSE</button>
-//                     </NavLink>
-//                 </div>
-//                 <div className="mr-auto ml-auto text-white">
-//                     <NavLink to = "/profile">
-//                     <button>PROFILE</button>
-//                     </NavLink>
-//                 </div>
-//             </section>
-//         )
-//     }
-// }
+import { AiOutlineBars } from "react-icons/ai";
 
 import React from "react";
 
 function NavBar({ fixed }) {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
+    const {icon} = AiOutlineBars;
     return (
       <>
         <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-coolGrey mb-3">
@@ -43,11 +20,12 @@ function NavBar({ fixed }) {
                 Friends and Family with Borders
               </a>
               <button
-                className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-white block lg:hidden outline-none focus:outline-none"
+                className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded block lg:hidden outline-none focus:outline-none"
                 type="button"
                 onClick={() => setNavbarOpen(!navbarOpen)}
               >
-                <i className="fas fa-bars" aria-hidden="true"></i>
+                <h1> <AiOutlineBars/></h1>
+                <i aria-hidden="true"> </i>
               </button>
             </div>
             <div
@@ -64,7 +42,17 @@ function NavBar({ fixed }) {
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
-                    <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Home Page</span>
+                    <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Home Page</span>
+                  </a>
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink to = "/createdEvents">
+                  <a
+                    className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    href="#pablo"
+                  >
+                    <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Created Events</span>
                   </a>
                   </NavLink>
                 </li>
@@ -74,7 +62,7 @@ function NavBar({ fixed }) {
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
-                    <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Questionnaire</span>
+                    <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Questionnaire</span>
                   </a>
                   </NavLink>
                 </li>
@@ -84,7 +72,7 @@ function NavBar({ fixed }) {
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
-                    <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Profile</span>
+                    <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Profile</span>
                   </a>
                   </NavLink>
                 </li>

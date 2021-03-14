@@ -8,16 +8,22 @@ import HomePage from './pages/homePage';
 import Navigation from './components/navigation';
 import Questionnaire from './pages/questionnaire';
 import Profile from './pages/profile';
+import CreatedEvents from './pages/createdEvents';
 
 import './App.css';
 
 
 
 export class App extends Component {
+  //adding a function to set a user id 
+  //call function if authorized 
+  //pass this function to login render instead of pageProps it would be the name of your function 
+  //in login, call that function, set the id 
+  //set pageProps.match.params.id
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter >
         <div>
           <Navigation />
             <Switch>
@@ -25,8 +31,10 @@ export class App extends Component {
              <Route path="/createAccount" component={CreateAccount}/>
              <Route path="/homePage" component={HomePage}/>
              <Route path="/createEvent" component={CreateEvent}/>
-             <Route path="/questionnaire" component={Questionnaire}/>
+             <Route path="/questionnaire" component={Questionnaire} />
+             <Route path="/questionnaire/:id" render = {(pageProps) => (<Questionnaire userId={pageProps.match.params.id} />) }/>
              <Route path="/profile" component={Profile}/>
+             <Route path="/createdEvents" component={CreatedEvents}/>
            </Switch>
         </div> 
       </BrowserRouter>
