@@ -46,9 +46,12 @@ export class login extends Component {
     }
 
 
-    handleTotalCallBack = (inputText) => {
+    userNameCallBack = (inputText) => {
       this.setState({userName: inputText})
-      console.log(this.state.userName)
+    }
+
+    passwordCallBack = (inputText) => {
+      this.setState({password: inputText})
     }
 
     render() {
@@ -64,13 +67,12 @@ export class login extends Component {
             <section className="App h-2/3 w-full flex justify-center items-start bg-grey-500 py-4 px-4">
               <div className="w-full max-w-md bg-gray-800" >
                 <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
-                  <InputText handleCallback = {this.handleTotalCallBack} type = "email" border = "coolGreen" placeholder = "example@gmail.com" label = "EMAIL ADDRESS"/>
-                  <InputText type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
+                  <InputText handleCallback = {this.userNameCallBack} type = "text" border = "coolGreen" placeholder = "exampleUsername" label = "USERNAME"/>
+                  <InputText handleCallback = {this.passwordCallBack} type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
                   &nbsp;&nbsp;&nbsp;
                   <div>
                     <NavLink to = "/homePage">
                       <GreenButton name = "Sign In"/>
-                      {/* <button className="bg-coolGreen hover:bg-coolGrey hover:shadow-md text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl" type="button">Sign In</button> */}
                     </NavLink>
                   </div>
                   &nbsp;&nbsp;&nbsp;
