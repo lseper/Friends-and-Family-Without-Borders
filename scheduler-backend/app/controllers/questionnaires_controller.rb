@@ -20,7 +20,21 @@ class QuestionnairesController < ApplicationController
     puts params[:user_id]
     puts params
     puts questionnaire_params
-    @questionnaire = Questionnaire.new(questionnaire_params)
+    @questionnaire = Questionnaire.new(
+      q1answer: questionnaire_params[:q1answer],
+      q2answer: questionnaire_params[:q2answer],
+      q3answer: questionnaire_params[:q3answer],
+      q4answer: questionnaire_params[:q4answer],
+      q5answer: questionnaire_params[:q5answer],
+      q6answer: questionnaire_params[:q6answer],
+      q7answer: questionnaire_params[:q7answer],
+      q8answer: questionnaire_params[:q8answer],
+      q9answer: questionnaire_params[:q9answer],
+      q10answer: questionnaire_params[:q10answer],
+      q11answer: questionnaire_params[:q11answer],
+      q12answer: questionnaire_params[:q12answer],
+      user_id: params[:user_id]
+    )
 
     if @questionnaire.save
       render json: @questionnaire, status: :created, location: @questionnaire
