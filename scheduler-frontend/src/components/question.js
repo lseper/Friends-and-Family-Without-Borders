@@ -14,7 +14,7 @@ export class question extends Component {
 
      handleCallback = (sliderData) => {
        //this.setState({data: sliderData})
-       this.props.totalCallBack(sliderData);
+       this.props.totalCallBack(sliderData, this.props.qNum);
      }
 
     render() {
