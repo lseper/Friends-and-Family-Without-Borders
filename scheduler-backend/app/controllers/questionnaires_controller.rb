@@ -17,9 +17,6 @@ class QuestionnairesController < ApplicationController
 
   # POST /users/1/questionnaires
   def create
-    puts params[:user_id]
-    puts params
-    puts questionnaire_params
     @questionnaire = Questionnaire.new(
       q1answer: questionnaire_params[:q1answer],
       q2answer: questionnaire_params[:q2answer],
