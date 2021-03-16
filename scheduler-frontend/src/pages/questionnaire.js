@@ -120,16 +120,16 @@ export class questionnaire extends Component {
                     </div>
                 </section>
                 <div className = "flex grid grid-cols-1 md:grid-cols-2 flex place-items-center bg-coolGrey py-4">
-                  <Question className="" question = "In-person event:" userNumber = {this.state.q1} totalCallBack = {this.handleTotalCallBack1}/>
-                    <Question className="" question = "Indoor event:" userNumber = {this.state.q2} totalCallBack = {this.handleTotalCallBack2}/>
-                    <Question className="" question = "Indoor event without social distancing:" userNumber = {this.state.q3} totalCallBack = {this.handleTotalCallBack3}/>
-                    <Question className="" question = "Event with 10+ people:" userNumber = {this.state.q4} totalCallBack = {this.handleTotalCallBack4}/>
-                    <Question className="" question = "People eating food at an event:" userNumber = {this.state.q5} totalCallBack = {this.handleTotalCallBack5}/>
-                    <Question className="" question = "People being unmasked at an event:" userNumber = {this.state.q6} totalCallBack = {this.handleTotalCallBack6}/>
-                    <Question className="" question = "Meeting people over Zoom:" userNumber = {this.state.q7} totalCallBack = {this.handleTotalCallBack7}/>
-                    <Question className="" question = "Using public restrooms:" userNumber = {this.state.q8} totalCallBack = {this.handleTotalCallBack8}/>
-                    <Question className="" question = "Eating public food:" userNumber = {this.state.q9} totalCallBack = {this.handleTotalCallBack9}/>
-                    <Question className="" question = "Sharing physical objects:" userNumber = {this.state.q10} totalCallBack = {this.handleTotalCallBack10}/>
+                  <Question className="" question = "In-person event:" userNumber = {this.state.q1} qNum = {1} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Indoor event:" userNumber = {this.state.q2} qNum = {2} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Indoor event without social distancing:" userNumber = {this.state.q3} qNum = {3} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Event with 10+ people:" userNumber = {this.state.q4} qNum = {4} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "People eating food at an event:" userNumber = {this.state.q5} qNum = {5} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "People being unmasked at an event:" userNumber = {this.state.q6} qNum = {6} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Meeting people over Zoom:" userNumber = {this.state.q7} qNum = {7} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Using public restrooms:" userNumber = {this.state.q8} qNum = {8} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Eating public food:" userNumber = {this.state.q9} qNum = {9} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Sharing physical objects:" userNumber = {this.state.q10} qNum = {10} totalCallBack = {this.handleTotalCallBack}/>
                   </div>  
 
                     <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-4 px-4">
