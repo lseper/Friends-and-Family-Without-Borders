@@ -8,16 +8,16 @@ export class questionnaire extends Component {
     constructor(props){
         super(props)
         this.state = {
-            q1: 4,
-            q2: 4,
-            q3: 4,
-            q4: 4, 
-            q5: 4, 
-            q6: 4, 
-            q7: 4, 
-            q8: 4, 
-            q9: 4,
-            q10: 4,
+            q1: 0,
+            q2: 0,
+            q3: 0,
+            q4: 0, 
+            q5: 0, 
+            q6: 0, 
+            q7: 0, 
+            q8: 0, 
+            q9: 0,
+            q10: 0,
             quesitonnaireId: '1'
           };
 
@@ -26,6 +26,22 @@ export class questionnaire extends Component {
     buildPost = () => {
         let questions = [this.state.q1, this.state.q2, this.state.q3, this.state.q4, this.state.q5, this.state.q6, this.state.q7, this.state.q8, this.state.q9, this.state.q10]
         console.log(questions);
+        localStorage.setItem('filledOutQuestionnaire', true);
+
+         // possible way to send a post request?
+        // axios.post('/questionnaires/1')
+        // .then(response => this.setState({ q1answer: this.state.ql,
+        //                                   q2answer: this.state.q2,
+        //                                   q3answer: this.state.q3,
+        //                                   q4answer: this.state.q4,
+        //                                   q5answer: this.state.q5, 
+        //                                   q6answer: this.state.q6,
+        //                                   q7answer: this.state.q7,
+        //                                   q8answer: this.state.q8,
+        //                                   q9answer: this.state.q9,
+        //                                   q10answer: this.state.q10,
+        //                                 }));
+
     }
 
     handleTotalCallBack = (questionData, questionNum) => {
@@ -104,17 +120,18 @@ export class questionnaire extends Component {
                     </div>
                 </section>
                 <div className = "flex grid grid-cols-1 md:grid-cols-2 flex place-items-center bg-coolGrey py-4">
-                    <Question className="" question = "In-person event:" userNumber = {4} qNum = {1} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Indoor event:" userNumber = {4} qNum = {2} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Indoor event without social distancing:" userNumber = {4} qNum = {3} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Event with 10+ people:" userNumber = {4} qNum = {4} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "People eating food at an event:" userNumber = {4} qNum = {5} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "People being unmasked at an event:" userNumber = {4} qNum = {6} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Meeting people over Zoom:" userNumber = {4} qNum = {7} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Using public restrooms:" userNumber = {4} qNum = {8} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Eating public food:" userNumber = {4} qNum = {9} totalCallBack = {this.handleTotalCallBack}/>
-                    <Question className="" question = "Sharing physical objects:" userNumber = {4} qNum = {10} totalCallBack = {this.handleTotalCallBack}/>
+                  <Question className="" question = "In-person event:" userNumber = {this.state.q1} totalCallBack = {this.handleTotalCallBack1}/>
+                    <Question className="" question = "Indoor event:" userNumber = {this.state.q2} totalCallBack = {this.handleTotalCallBack2}/>
+                    <Question className="" question = "Indoor event without social distancing:" userNumber = {this.state.q3} totalCallBack = {this.handleTotalCallBack3}/>
+                    <Question className="" question = "Event with 10+ people:" userNumber = {this.state.q4} totalCallBack = {this.handleTotalCallBack4}/>
+                    <Question className="" question = "People eating food at an event:" userNumber = {this.state.q5} totalCallBack = {this.handleTotalCallBack5}/>
+                    <Question className="" question = "People being unmasked at an event:" userNumber = {this.state.q6} totalCallBack = {this.handleTotalCallBack6}/>
+                    <Question className="" question = "Meeting people over Zoom:" userNumber = {this.state.q7} totalCallBack = {this.handleTotalCallBack7}/>
+                    <Question className="" question = "Using public restrooms:" userNumber = {this.state.q8} totalCallBack = {this.handleTotalCallBack8}/>
+                    <Question className="" question = "Eating public food:" userNumber = {this.state.q9} totalCallBack = {this.handleTotalCallBack9}/>
+                    <Question className="" question = "Sharing physical objects:" userNumber = {this.state.q10} totalCallBack = {this.handleTotalCallBack10}/>
                   </div>  
+
                     <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-4 px-4">
                         <div className="px-1 pb-1" onClick = {this.buildPost}>
                             <GreenButton name = "Submit Questionnaire Responses"/>

@@ -6,7 +6,6 @@ import GreenButton from '../components/greenButton'
 
 export class createAccount extends Component {
 
-
   constructor(props){
     super(props);
     this.state = { 

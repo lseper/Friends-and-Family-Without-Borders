@@ -24,6 +24,7 @@ export class App extends Component {
 
   componentDidMount() {
     localStorage.setItem("user_id", 100)
+    //name?
     localStorage.setItem("firstTimeUser", false)
   }
 
