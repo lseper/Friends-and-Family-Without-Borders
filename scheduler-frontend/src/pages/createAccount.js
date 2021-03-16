@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import DropDown from '../components/dropDown';
 import InputText from '../components/inputText';
 import GreenButton from '../components/greenButton'
+import axios from 'axios';
 
 export class createAccount extends Component {
 
@@ -13,13 +14,35 @@ export class createAccount extends Component {
       userName: '',
       password: '',
       notification: '',
-      publicInfo: ''
+      publicInfo: false,
+      errors: ''
     };
   }
 
   buildPost = () => {
-    let accountInformation = [this.state.name, this.state.userName, this.state.password, this.state.notification, this.state.publicInfo]
+    let accountInformation = {
+      username: this.state.userName, 
+      password: this.state.password,  
+      name: this.state.name, 
+      privacy: this.state.publicInfo
+    }
     console.log(accountInformation);
+
+    axios.post('/users', accountInformation)
+    .then(res => {
+      const authorization = `Bearer ${res.data.auth_token}`;
+      localStorage.setItem('authToken', authorization);
+      const userId = res.data.user_id;
+      localStorage.setItem('user_id', userId)
+      axios.defaults.headers.common['Authorization'] = authorization;
+      console.log("We have successfully signed up!");
+      console.log("Authorization token is for the sign in page:", localStorage['authToken']);
+      console.log("User id is for the sign in page:", localStorage['user_id']);
+    }).catch(err => {
+      this.setState({
+        errors: err.message
+      })
+    })
     //will send in post request
 }
 
@@ -40,7 +63,12 @@ export class createAccount extends Component {
   // }
 
   publicCallBack = (option) => {
-    this.setState({publicInfo: option})
+    if (option == 1) {
+      this.setState({publicInfo: true});
+    } else {
+      this.setState({publicInfo: false});
+    }
+    
   }
 
     render() {

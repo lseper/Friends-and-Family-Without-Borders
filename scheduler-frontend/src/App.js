@@ -23,7 +23,7 @@ export class App extends Component {
   //set pageProps.match.params.id
 
   componentDidMount() {
-    localStorage.setItem("user_id", 100)
+    
     //name?
     localStorage.setItem("firstTimeUser", false)
   }

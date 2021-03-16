@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import InputText from '../components/inputText';
-import GreenButton from '../components/greenButton'
+import GreenButton from '../components/greenButton';
+import axios from 'axios';
 
 export class login extends Component {
 
@@ -42,7 +43,8 @@ export class login extends Component {
       super(props);
       this.state = { 
         userName: '',
-        password: ''
+        password: '',
+        error: ''
       };
     }
 
@@ -50,9 +52,29 @@ export class login extends Component {
     //set user id to be used across pages 
 
     buildPost = () => {
-      let loginInfo = [this.state.userName, this.state.password]
+      let loginInfo = {
+        username: this.state.userName, 
+        password: this.state.password
+      }
       console.log(loginInfo);
       //will send in post request
+
+      axios.post('/login', loginInfo)
+      .then(res => {
+        const authorization = `Bearer ${res.data.auth_token}`;
+        localStorage.setItem('authToken', authorization);
+        const userId = res.data.user_id;
+        localStorage.setItem('user_id', userId)
+        axios.defaults.headers.common['Authorization'] = authorization;
+        console.log("We have successfully logged in!");
+        console.log("Authorization token is:", localStorage['authToken']);
+        console.log("User id is:", localStorage['user_id']);
+      }).catch(err => {
+        this.setState({
+          error: err.message
+        })
+        console.log("Did not log in");
+      })
     }
 
 

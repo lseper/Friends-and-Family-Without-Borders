@@ -8,7 +8,7 @@ export class questionnaire extends Component {
     constructor(props){
         super(props)
         this.state = {
-            q1: 8,
+            q1: 0,
             q2: 0,
             q3: 0,
             q4: 0, 
@@ -30,7 +30,7 @@ export class questionnaire extends Component {
         console.log(questions);
         localStorage.setItem('filledOutQuestionnaire', true);
 
-        axios.post('/users/1/questionnaires', {
+        axios.post(`/users/${localStorage['user_id']}/questionnaires`, {
           q1answer: this.state.q1,
           q2answer: this.state.q2,
           q3answer: this.state.q3,
@@ -111,9 +111,13 @@ export class questionnaire extends Component {
     }
 
     componentDidMount() {
-      console.log("test");
+      const token = localStorage.getItem("authToken").toString();
+      console.log("User token on questionnaire page: ", token);
+      axios.defaults.headers.common['Authorization'] = token;
+
+      console.log("User id on questionnaire page: ", localStorage['user_id']);
       //this.setState({q10: 5})
-        axios.get(`/questionnaires/1`)
+        axios.get(`/users/${localStorage['user_id']}/questionnaires`)
         .then(res => {
             //console.log(res.data[0].q1answer)
             //console.log(res.data[0].q12answer)
@@ -136,8 +140,6 @@ export class questionnaire extends Component {
         }).catch(err => {
             console.log(err);
         })
-
-        console.log(localStorage.getItem("user_id"));
     }
 
     render() {
