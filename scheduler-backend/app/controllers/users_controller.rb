@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy]
+  # before doing these actions, do authorized() first
+  before_action :authorized, only: [:show, :update, :destroy]
 
   # GET /users
   def index
@@ -9,7 +11,27 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: {message: "Success"}
+    render json: @user
+  end
+
+
+  # logging in to an existing user (POST)
+  def login
+    # match to see if user exists based on username
+    @user = User.where(username: params[:username]).first
+
+    if @user
+      # hash the password sent by the user to match with the one in the database
+      if @user.authenticate(params[:password])
+        token = encode( { user_id: @user.id } )
+        render json: { auth_token: token, user_id: @user.id }
+      else
+        render json: { message: "password incorrect"}
+      end
+    else
+      render json: { message: "username incorrect" }
+    end
+
   end
 
   # POST /users
@@ -17,23 +39,21 @@ class UsersController < ApplicationController
     @user_exists = User.find_by(phone: params[:phone])
 
     if @user_exists
-      render json: { message: "User already exists!" }
+      render json: { message: "User with the phone already exists!" }
     else
-      # creating a new user regularly works fine, but for some reason using bcrypt breaks everything
-      # something wrong with bcrypt is causing this to recurse infinitely??????
-      # @user = User.new(
-      #   username: params[:username],
-      #   password: params[:password],
-      #   password_confirmation: params[:password], # could be this??????????
-      #   phone: params[:phone],
-      #   name: params[:name],
-      #   privacy: params[:privacy]
-      # )
+      @user = User.new(
+        username: params[:username],
+        password: params[:password],
+        password_confirmation: params[:password], 
+        phone: params[:phone],
+        name: params[:name],
+        privacy: params[:privacy]
+      )
 
-      @user = User.new(user_params)
+      # @user = User.new(user_params)
       if @user.save
-        # token = encode( { user_id: @user.id } )
-        render json: { user_id: @user.id }
+        token = encode( { user_id: @user.id } )
+        render json: { auth_token: token, user_id: @user.id }
       else
         render json: @user.errors, status: :unprocessable_entity
       end
