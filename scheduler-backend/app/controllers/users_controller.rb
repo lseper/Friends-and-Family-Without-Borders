@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  # how to set up login functionality?
-  before_action :authorized, only: [:show]
+  # before doing these actions, do authorized() first
+  before_action :authorized, only: [:show, :update, :destroy]
 
   # GET /users
   def index
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       # hash the password sent by the user to match with the one in the database
       if @user.authenticate(params[:password])
         token = encode( { user_id: @user.id } )
-        render json: { token: token, user_id: @user.id }
+        render json: { auth_token: token, user_id: @user.id }
       else
         render json: { message: "password incorrect"}
       end
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       # @user = User.new(user_params)
       if @user.save
         token = encode( { user_id: @user.id } )
-        render json: { token: token, user_id: @user.id }
+        render json: { auth_token: token, user_id: @user.id }
       else
         render json: @user.errors, status: :unprocessable_entity
       end

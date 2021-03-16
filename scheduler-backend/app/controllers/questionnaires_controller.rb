@@ -1,5 +1,6 @@
 class QuestionnairesController < ApplicationController
   before_action :set_questionnaire, only: [:show, :update, :destroy]
+  before_action :authorized, only: [:show, :create, :update, :index]
 
   # GET users/id/questionnaires
   def index
@@ -17,9 +18,6 @@ class QuestionnairesController < ApplicationController
 
   # POST /users/1/questionnaires
   def create
-    puts params[:user_id]
-    puts params
-    puts questionnaire_params
     @questionnaire = Questionnaire.new(
       q1answer: questionnaire_params[:q1answer],
       q2answer: questionnaire_params[:q2answer],
