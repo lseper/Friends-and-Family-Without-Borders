@@ -4,15 +4,10 @@ export class inputText extends Component {
 
     constructor(props){
         super(props);
-        // this.state = { 
-        //   userName: '' 
-        // };
+         this.state = { 
+
+         };
       }
-  
-    //   handleChange = event => {
-    //     this.setState({ userName: event.target.value });
-    //     console.log(this.state.userName);
-    //   };
 
       handleCallback = (event) => {
         //this.setState({data: sliderData})

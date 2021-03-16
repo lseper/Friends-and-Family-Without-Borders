@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navBar';
 import Question from '../components/question';
-import { NavLink } from 'react-router-dom';
-import DiscreteSlider from '../components/slider';
 import GreenButton from '../components/greenButton';
 import axios from 'axios';
 
@@ -24,9 +22,6 @@ export class questionnaire extends Component {
           };
 
     }
-    
-    //get original numbers
-    //set this.setState({q1: number})
 
     buildPost = () => {
         let questions = [this.state.q1, this.state.q2, this.state.q3, this.state.q4, this.state.q5, this.state.q6, this.state.q7, this.state.q8, this.state.q9, this.state.q10]

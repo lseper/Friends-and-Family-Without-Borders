@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -75,9 +74,6 @@ const DiscreteSlider = ({userNumber, callBack}) => {
                 // when Callback function that is fired when the mouseup is triggered.
                 onChangeCommitted = {handleChange}
             />
-            {/* <Typography className = "text-xs text-coolGrey-dark text-left" id="discrete-slider-custom" gutterBottom>
-                Rate 1-10 (10 most comfortable) 
-            </Typography> */}
             </div>
         </MuiThemeProvider>
         </div >
