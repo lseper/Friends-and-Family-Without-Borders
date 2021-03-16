@@ -5,37 +5,38 @@ import GreenButton from '../components/greenButton'
 
 export class login extends Component {
 
-     //before components gets added to a page -- do this
-     componentDidMount(){
-       this.UserList();
-     }
+    //getInformation using fetch instead of axios
+    //  //before components gets added to a page -- do this
+    //  componentDidMount(){
+    //    this.UserList();
+    //  }
 
-     //id comes from backend 
-     //pass id as a prop for each component 
-     //<navigation to {"/events/" + eventid}
-     //https://jsonplaceholder.typicode.com/events/:id
-     async UserList(){
-       //get object
-       //
-      let response =  await fetch('https://jsonplaceholder.typicode.com/users/') //make sure this responds before moving to text function
-      response = await response.json()
-      console.log(response)
-     }
+    //  //id comes from backend 
+    //  //pass id as a prop for each component 
+    //  //<navigation to {"/events/" + eventid}
+    //  //https://jsonplaceholder.typicode.com/events/:id
+    //  async UserList(){
+    //    //get object
+    //    //
+    //   let response =  await fetch('https://jsonplaceholder.typicode.com/users/') //make sure this responds before moving to text function
+    //   response = await response.json()
+    //   console.log(response)
+    //  }
 
-    //call this on a button click to send to backend 
-    async sendInformationToBackend() {
-        // POST request using fetch with async/await
-        //json obejct is teh body 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            //stores as string might 
-            body: JSON.stringify({ id: '12345', email:'someemail', pass:'somepass' })
-        };
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts', requestOptions);
-        const data = await response.json();
-        this.setState({ postId: data.id });
-    }
+    // //call this on a button click to send to backend 
+    // async sendInformationToBackend() {
+    //     // POST request using fetch with async/await
+    //     //json obejct is teh body 
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         //stores as string might 
+    //         body: JSON.stringify({ id: '12345', email:'someemail', pass:'somepass' })
+    //     };
+    //     const response = await fetch('https://jsonplaceholder.typicode.com/posts', requestOptions);
+    //     const data = await response.json();
+    //     this.setState({ postId: data.id });
+    // }
 
     constructor(props){
       super(props);
@@ -43,6 +44,15 @@ export class login extends Component {
         userName: '',
         password: ''
       };
+    }
+
+    //get user id based of of username and password 
+    //set user id to be used across pages 
+
+    buildPost = () => {
+      let loginInfo = [this.state.userName, this.state.password]
+      console.log(loginInfo);
+      //will send in post request
     }
 
 
@@ -70,7 +80,7 @@ export class login extends Component {
                   <InputText handleCallback = {this.userNameCallBack} type = "text" border = "coolGreen" placeholder = "exampleUsername" label = "USERNAME"/>
                   <InputText handleCallback = {this.passwordCallBack} type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
                   &nbsp;&nbsp;&nbsp;
-                  <div>
+                  <div onClick = {this.buildPost}>
                     <NavLink to = "/homePage">
                       <GreenButton name = "Sign In"/>
                     </NavLink>

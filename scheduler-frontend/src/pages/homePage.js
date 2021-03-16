@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
 
-import { NavLink } from 'react-router-dom';
-
 export class homePage extends Component {
-    render() {
+    render() {      
         return (
             <div>
                 <NavBar />

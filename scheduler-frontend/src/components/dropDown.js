@@ -14,12 +14,11 @@ const DropDown = ({ name, option1, option2, handleCallback }) => {
         }
       ];
     
-      const [selectedValue, setSelectedValue] = React.useState(1);
-      console.log(selectedValue);
+      const selectedValue = React.useState(1);
 
       const handleChange = (event, newValue) => {
-        setSelectedValue(event.value);
-        handleCallback(newValue)
+        //setSelectedValue(event.value);
+        handleCallback(event.value)
       };
 
     return(

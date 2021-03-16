@@ -1,13 +1,12 @@
-//import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import { withRouter } from "react-router";
 import { AiOutlineBars } from "react-icons/ai";
+
 
 import React from "react";
 
 function NavBar({ fixed }) {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
-    const {icon} = AiOutlineBars;
     return (
       <>
         <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-coolGrey mb-3">

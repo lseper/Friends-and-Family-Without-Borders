@@ -18,6 +18,12 @@ export class createAccount extends Component {
     };
   }
 
+  buildPost = () => {
+    let accountInformation = [this.state.name, this.state.userName, this.state.password, this.state.notification, this.state.publicInfo]
+    console.log(accountInformation);
+    //will send in post request
+}
+
   nameCallBack = (inputText) => {
     this.setState({name: inputText})
   }
@@ -56,7 +62,7 @@ export class createAccount extends Component {
                     <DropDown handleCallback = {this.notificationCallBack} name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/>
                     <DropDown handleCallback = {this.publicCallBack} name = "INFORMATION PUBLIC TO USERS" option1 = "Yes" option2 = "No"/>
                     &nbsp;&nbsp;&nbsp;
-                    <div className = "flex justify-evenly align-center items-center">
+                    <div onClick = {this.buildPost} className = "flex justify-evenly align-center items-center">
                       <NavLink to = "/">
                         <GreenButton name = "Create Account" />                        
                       </NavLink>

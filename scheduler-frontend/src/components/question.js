@@ -3,15 +3,6 @@ import Slider from '../components/slider';
 
 export class question extends Component {
 
-    constructor(props) {
-        super(props);
-        // this.state = {
-        //   data: null
-        // };
-        
-     }
-     
-
      handleCallback = (sliderData) => {
        //this.setState({data: sliderData})
        this.props.totalCallBack(sliderData);
