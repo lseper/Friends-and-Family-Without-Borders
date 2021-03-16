@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CreatedEvents from '../components/createdEventsButton';
+import CreatedEventButton from '../components/createdEventsButton';
 import NavBar from '../components/navBar';
 
 import { NavLink } from 'react-router-dom';
@@ -21,12 +21,12 @@ export class homePage extends Component {
 
                     <div className ="flex grid grid-cols-1 flex place-items-left bg-coolGrey py-4">
                         
-                        <CreatedEvents />
-                        <CreatedEvents />
-                        <CreatedEvents />
-                        <CreatedEvents />
-                        <CreatedEvents />
-                        <CreatedEvents />
+                        <CreatedEventButton />
+                        <CreatedEventButton />
+                        <CreatedEventButton />
+                        <CreatedEventButton />
+                        <CreatedEventButton />
+                        <CreatedEventButton />
                        
                         {/* <label htmlFor="title" className="text-xl block font-bold  pb-2 text-white mb-2 ml-2 px-10 py-10">YOU CURRENTLY HAVE NOT MADE ANY EVENTS</label> */}
                     </div>        

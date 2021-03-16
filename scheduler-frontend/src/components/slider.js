@@ -18,15 +18,13 @@ const theme = createMuiTheme({
     },
   });
 
-function valuetext(value) {
-  return `${value}°C`;
-}
-
 
 const DiscreteSlider = ({userNumber, callBack}) => {
   const classes = useStyles();
 
-  const [value, setValue] = React.useState(userNumber);
+
+  let [num, setValue] = React.useState(userNumber);
+  num = userNumber;
 
   // sets a new value and tests it by printing it to the console
   const handleChange = (event, newValue) => {
@@ -57,14 +55,15 @@ const DiscreteSlider = ({userNumber, callBack}) => {
       },
   ];
 
+  //console.log(num)
+
   return (
     <div className = "flex items-stretch static ">
         <div className = "px-4 flex items-start static ">
             <MuiThemeProvider theme={theme}>
             <div className={classes.root}>
             <Slider
-                value={value}
-                getAriaValueText={valuetext}
+                value={num}
                 aria-labelledby="discrete-slider-custom"
                 valueLabelDisplay="auto"
                 step={1}
@@ -78,7 +77,7 @@ const DiscreteSlider = ({userNumber, callBack}) => {
         </MuiThemeProvider>
         </div >
         <div className = "pb-12 px-2 flex items-end inline-block">
-            <p className = "text-5xl text-coolGreen">{value}</p>
+            <p className = "text-5xl text-coolGreen">{num}</p>
         </div>
     </div>
   );

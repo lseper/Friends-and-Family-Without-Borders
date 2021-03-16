@@ -8,7 +8,7 @@ export class questionnaire extends Component {
     constructor(props){
         super(props)
         this.state = {
-            q1: 0,
+            q1: 8,
             q2: 0,
             q3: 0,
             q4: 0, 
@@ -18,6 +18,8 @@ export class questionnaire extends Component {
             q8: 0, 
             q9: 0,
             q10: 0,
+            q11: 0,
+            q12: 0,
             quesitonnaireId: '1'
           };
 
@@ -28,18 +30,39 @@ export class questionnaire extends Component {
         console.log(questions);
         localStorage.setItem('filledOutQuestionnaire', true);
 
-         // possible way to send a post request?
-        // axios.post('/questionnaires/1')
+        axios.post('/users/1/questionnaires', {
+          q1answer: this.state.q1,
+          q2answer: this.state.q2,
+          q3answer: this.state.q3,
+          q4answer: this.state.q4,
+          q5answer: this.state.q5, 
+          q6answer: this.state.q6,
+          q7answer: this.state.q7,
+          q8answer: this.state.q8,
+          q9answer: this.state.q9,
+          q10answer: this.state.q10,
+          q11answer: this.state.q11,
+          q12answer: this.state.q12, 
+          user_id: 1
+        }).then(function (response) {
+          console.log(response)
+        })
+
+        //possible way to send a post request?
+        // axios.post('/users/1/questionnaires')
         // .then(response => this.setState({ q1answer: this.state.ql,
-        //                                   q2answer: this.state.q2,
-        //                                   q3answer: this.state.q3,
-        //                                   q4answer: this.state.q4,
-        //                                   q5answer: this.state.q5, 
-        //                                   q6answer: this.state.q6,
-        //                                   q7answer: this.state.q7,
-        //                                   q8answer: this.state.q8,
-        //                                   q9answer: this.state.q9,
-        //                                   q10answer: this.state.q10,
+                                          // q2answer: this.state.q2,
+                                          // q3answer: this.state.q3,
+                                          // q4answer: this.state.q4,
+                                          // q5answer: this.state.q5, 
+                                          // q6answer: this.state.q6,
+                                          // q7answer: this.state.q7,
+                                          // q8answer: this.state.q8,
+                                          // q9answer: this.state.q9,
+                                          // q10answer: this.state.q10,
+                                          // q11answer: this.state.q11,
+                                          // q12answer: this.state.q12, 
+        //                                   user_id       
         //                                 }));
 
     }
@@ -76,15 +99,24 @@ export class questionnaire extends Component {
             case 10:
               this.setState({q10: questionData})
               break;
+            case 11:
+              this.setState({q11: questionData})
+              break; 
+            case 12:
+              this.setState({q12: questionData})
+              break;                           
             default:
               // code block
           }
     }
 
     componentDidMount() {
+      console.log("test");
+      //this.setState({q10: 5})
         axios.get(`/questionnaires/1`)
         .then(res => {
-            console.log(res.data[0].q1answer)
+            //console.log(res.data[0].q1answer)
+            //console.log(res.data[0].q12answer)
             this.setState({
                 q1: res.data[0].q1answer,
                 q2: res.data[0].q2answer,
@@ -100,7 +132,7 @@ export class questionnaire extends Component {
                 q12: res.data[0].q12answer,
             })
         }).then(() => {
-            console.log(this.state.q1Answer);
+            console.log(this.state);
         }).catch(err => {
             console.log(err);
         })
@@ -120,7 +152,7 @@ export class questionnaire extends Component {
                     </div>
                 </section>
                 <div className = "flex grid grid-cols-1 md:grid-cols-2 flex place-items-center bg-coolGrey py-4">
-                  <Question className="" question = "In-person event:" userNumber = {this.state.q1} qNum = {1} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "In-person event:" userNumber = {this.state.q1} qNum = {1} totalCallBack = {this.handleTotalCallBack}/>
                     <Question className="" question = "Indoor event:" userNumber = {this.state.q2} qNum = {2} totalCallBack = {this.handleTotalCallBack}/>
                     <Question className="" question = "Indoor event without social distancing:" userNumber = {this.state.q3} qNum = {3} totalCallBack = {this.handleTotalCallBack}/>
                     <Question className="" question = "Event with 10+ people:" userNumber = {this.state.q4} qNum = {4} totalCallBack = {this.handleTotalCallBack}/>
@@ -130,6 +162,8 @@ export class questionnaire extends Component {
                     <Question className="" question = "Using public restrooms:" userNumber = {this.state.q8} qNum = {8} totalCallBack = {this.handleTotalCallBack}/>
                     <Question className="" question = "Eating public food:" userNumber = {this.state.q9} qNum = {9} totalCallBack = {this.handleTotalCallBack}/>
                     <Question className="" question = "Sharing physical objects:" userNumber = {this.state.q10} qNum = {10} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Another thing:" userNumber = {this.state.q11} qNum = {11} totalCallBack = {this.handleTotalCallBack}/>
+                    <Question className="" question = "Another thing:" userNumber = {this.state.q12} qNum = {12} totalCallBack = {this.handleTotalCallBack}/>
                   </div>  
 
                     <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-4 px-4">

@@ -35,9 +35,9 @@ export class createAccount extends Component {
     this.setState({password: inputText})
   }
 
-  notificationCallBack = (option) => {
-    this.setState({notification: option})
-  }
+  // notificationCallBack = (option) => {
+  //   this.setState({notification: option})
+  // }
 
   publicCallBack = (option) => {
     this.setState({publicInfo: option})
@@ -58,7 +58,7 @@ export class createAccount extends Component {
                     <InputText handleCallback = {this.nameCallBack} type = "text" border = "coolGreen" placeholder = "Name" label = "PREFERRED NAME"/>
                     <InputText handleCallback = {this.userNameCallBack} type = "text" border = "coolGreen" placeholder = "exampleUsername" label = "USERNAME"/>
                     <InputText handleCallback = {this.passwordCallBack} type = "phoneNumber" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
-                    <DropDown handleCallback = {this.notificationCallBack} name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/>
+                    {/* <DropDown handleCallback = {this.notificationCallBack} name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/> */}
                     <DropDown handleCallback = {this.publicCallBack} name = "INFORMATION PUBLIC TO USERS" option1 = "Yes" option2 = "No"/>
                     &nbsp;&nbsp;&nbsp;
                     <div onClick = {this.buildPost} className = "flex justify-evenly align-center items-center">

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { NavLink } from 'react-router-dom';
 
 export class homePage extends Component {
@@ -8,7 +7,7 @@ export class homePage extends Component {
         return (
             <div>
                 <div className="bg-coolGrey flex pt-5 pb-5 text-white text-2xl mb-12 shadow-xl hover:shadow-md">
-                    <NavLink to = "/homePage">
+                    <NavLink to = "/createdEvents">
                         <button className="ml-5 hover:text-gray-300">←</button>
                     </NavLink>
                     <button className="mr-auto ml-auto font-bold">CREATE AN EVENT</button>
