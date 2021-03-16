@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navBar';
-import Banner from '../components/banner';
 import DropDown from '../components/dropDown';
 import InputText from '../components/inputText';
 import { NavLink } from 'react-router-dom';

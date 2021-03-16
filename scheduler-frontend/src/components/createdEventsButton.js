@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 export class createdEventsButton extends Component {
-
+    
     render() {
         return (
            
-            <div className="w-9/10 max-w-md bg-gray-800 m-2 h-full" >
+            <div className="w-9/10 max-w-md bg-coolGrey m-2 h-full" >
               <form action="" className="bg-white shadow-md rounded px-8 py-8 pt-8 ">
                     <h2 className="text-2xl font-bold">JAYDEN'S BIRTHDAY BASH</h2>
                     <h3>Date: 3/8/2021</h3>

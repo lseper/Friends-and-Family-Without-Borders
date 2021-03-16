@@ -22,6 +22,12 @@ export class App extends Component {
   //in login, call that function, set the id 
   //set pageProps.match.params.id
 
+  componentDidMount() {
+    localStorage.setItem("user_id", 100)
+    //name?
+    localStorage.setItem("firstTimeUser", false)
+  }
+
   render() {
     return (
       <BrowserRouter >
