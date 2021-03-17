@@ -63,7 +63,7 @@ export class createAccount extends Component {
   // }
 
   publicCallBack = (option) => {
-    if (option == 1) {
+    if (option === 1) {
       this.setState({publicInfo: true});
     } else {
       this.setState({publicInfo: false});

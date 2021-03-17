@@ -6,6 +6,19 @@ import { NavLink } from 'react-router-dom';
 import GreenButton from '../components/greenButton'
 
 export class profile extends Component {
+
+  logout = () => {
+    console.log("Logging out")
+    localStorage.setItem('authToken', '');
+    localStorage.setItem('user_id', '');
+    
+    console.log("Authorization token after logging out: ", localStorage['authToken']);
+    console.log("User id after loggin out: ", localStorage['user_id']);
+
+    if (localStorage['authToken'] === '' && localStorage['user_id'] === '') {
+      alert("Logging out!");
+    }
+  }
     render() {
         return (
             <div>
@@ -14,6 +27,11 @@ export class profile extends Component {
                 <section className="App py-10 w-full flex justify-start items-coolGrey">
                 <div className="px-2 pb-1 align-left text-left">
                     <label htmlFor="title" className="text-3xl block font-bold text-coolGrey-dark">USERS PROFILE INFORMATION</label>
+                    <div className="mt-4">
+                      <NavLink to = "/">
+                        <button className="bg-coolGreen hover:bg-coolGrey hover:shadow-md text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl" type="button" onClick={this.logout}>Logout</button>
+                      </NavLink>
+                    </div>
                 </div>
               </section>
               <div className = "flex px-4 py-10 w-full justify-center items-start bg-coolGrey ">
