@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 
-export class homePage extends Component {
+export class createEvent extends Component {
 
     render() {
         return (
@@ -55,4 +55,4 @@ export class homePage extends Component {
     } 
 }
 
-export default homePage;
+export default createEvent;

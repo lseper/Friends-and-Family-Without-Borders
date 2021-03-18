@@ -21,9 +21,9 @@ export class createdEventsButton extends Component {
                     <h3 className="font-bold text-coolGrey-dark">Location: {this.props.location}</h3>
                     &nbsp;&nbsp;&nbsp;
                     <div className = "">
-                      <NavLink to = "/homePage">
+                    <NavLink to = "/invitationDetails">
                         <button className="bg-coolGreen bg-brightPink hover:bg-brightPink-dark text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl" type="button">Click For Event Details</button>
-                      </NavLink>
+                     </NavLink>
                   </div>
                     &nbsp;&nbsp;&nbsp;
                 

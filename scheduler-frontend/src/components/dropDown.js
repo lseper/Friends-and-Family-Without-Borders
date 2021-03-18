@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select'
 
-const DropDown = ({ name, option1, option2, handleCallback }) => {
+const DropDown = ({ name, option1, option2, handleCallback}) => {
 
     const data = [
         {

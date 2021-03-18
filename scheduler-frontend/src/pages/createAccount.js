@@ -13,7 +13,7 @@ export class createAccount extends Component {
       name: '',
       userName: '',
       password: '',
-      notification: '',
+      phoneNumber: '',
       publicInfo: false,
       errors: ''
     };
@@ -24,6 +24,7 @@ export class createAccount extends Component {
       username: this.state.userName, 
       password: this.state.password,  
       name: this.state.name, 
+      phone: this.state.phoneNumber,
       privacy: this.state.publicInfo
     }
     console.log(accountInformation);
@@ -32,6 +33,8 @@ export class createAccount extends Component {
     .then(res => {
       const authorization = `Bearer ${res.data.auth_token}`;
       localStorage.setItem('authToken', authorization);
+      //user_id is sometimes undefined after creating one user 
+      console.log(res.data.user_id);
       const userId = res.data.user_id;
       localStorage.setItem('user_id', userId)
       axios.defaults.headers.common['Authorization'] = authorization;
@@ -44,7 +47,8 @@ export class createAccount extends Component {
       })
     })
     //will send in post request
-}
+    localStorage.setItem('filledOutQuestionnaire', false);
+  } 
 
   nameCallBack = (inputText) => {
     this.setState({name: inputText})
@@ -71,6 +75,10 @@ export class createAccount extends Component {
     
   }
 
+  numberCallBack = (inputText) => {
+    this.setState({phoneNumber: inputText})
+  }
+
     render() {
         return (
           <div >
@@ -85,7 +93,8 @@ export class createAccount extends Component {
                   <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
                     <InputText handleCallback = {this.nameCallBack} type = "text" border = "coolGreen" placeholder = "Name" label = "PREFERRED NAME"/>
                     <InputText handleCallback = {this.userNameCallBack} type = "text" border = "coolGreen" placeholder = "exampleUsername" label = "USERNAME"/>
-                    <InputText handleCallback = {this.passwordCallBack} type = "phoneNumber" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
+                    <InputText handleCallback = {this.passwordCallBack} type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
+                    <InputText handleCallback = {this.numberCallBack} type = "phoneNumber" border = "coolGreen" placeholder = "123456789" label = "PHONE NUMBER"/>
                     {/* <DropDown handleCallback = {this.notificationCallBack} name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/> */}
                     <DropDown handleCallback = {this.publicCallBack} name = "INFORMATION PUBLIC TO USERS" option1 = "Yes" option2 = "No"/>
                     &nbsp;&nbsp;&nbsp;

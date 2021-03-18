@@ -20,6 +20,7 @@ export class questionnaire extends Component {
             q10: 0,
             q11: 0,
             q12: 0,
+            // do we need this?
             quesitonnaireId: '1'
           };
 

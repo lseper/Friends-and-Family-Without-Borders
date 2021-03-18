@@ -9,6 +9,7 @@ import Navigation from './components/navigation';
 import Questionnaire from './pages/questionnaire';
 import Profile from './pages/profile';
 import CreatedEvents from './pages/createdEvents';
+import InvitationDetails from './pages/invitationDetails';
 
 import './App.css';
 
@@ -21,12 +22,6 @@ export class App extends Component {
   //pass this function to login render instead of pageProps it would be the name of your function 
   //in login, call that function, set the id 
   //set pageProps.match.params.id
-
-  componentDidMount() {
-    
-    //name?
-    localStorage.setItem("firstTimeUser", false)
-  }
 
   render() {
     return (
@@ -42,6 +37,7 @@ export class App extends Component {
              <Route path="/questionnaire/:id" render = {(pageProps) => (<Questionnaire userId={pageProps.match.params.id} />) }/>
              <Route path="/profile" component={Profile}/>
              <Route path="/createdEvents" component={CreatedEvents}/>
+             <Route path="/invitationDetails" component={InvitationDetails}/>
            </Switch>
         </div> 
       </BrowserRouter>

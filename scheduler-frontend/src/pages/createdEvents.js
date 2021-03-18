@@ -4,7 +4,15 @@ import NavBar from '../components/navBar';
 
 import { NavLink } from 'react-router-dom';
 
-export class homePage extends Component {
+export class createdEvents extends Component {
+    
+    constructor(props){  
+        super(props);  
+        this.state = {
+            createdEvents: false
+        };  
+    }
+    
     render() {
         return (
             <div>
@@ -19,17 +27,29 @@ export class homePage extends Component {
                         </NavLink>
                     </div>
 
-                    <div className ="flex grid grid-cols-1 flex place-items-left bg-coolGrey py-4">
+                    
+                    {this.state.createdEvents ?
+                        <div className ="flex grid grid-cols-1 flex place-items-left bg-coolGrey py-4">
                         
-                        <CreatedEventButton />
-                        <CreatedEventButton />
-                        <CreatedEventButton />
-                        <CreatedEventButton />
-                        <CreatedEventButton />
-                        <CreatedEventButton />
-                       
-                        {/* <label htmlFor="title" className="text-xl block font-bold  pb-2 text-white mb-2 ml-2 px-10 py-10">YOU CURRENTLY HAVE NOT MADE ANY EVENTS</label> */}
-                    </div>        
+                            <CreatedEventButton />
+                            <CreatedEventButton />
+                            <CreatedEventButton />
+                                       
+                        </div>
+                        : null   
+                    } 
+                
+                    {this.state.createdEvents === false?  
+                        <div className = "bg-white px-4 py-4">
+                            <div className = "bg-coolBlue">
+                            <label htmlFor="title" className="text-xl block font-bold rounded pb-6 text-white mb-2 ml-2 px-10 py-10">YOU CURRENTLY HAVE NO EVENTS CREATED</label>
+                            </div>   
+
+                         </div>     
+                            : null  
+
+
+                    }         
                 </div>
               <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-8 px-4">
               </section>
@@ -43,4 +63,4 @@ export class homePage extends Component {
     } 
 }
 
-export default homePage
+export default createdEvents
