@@ -43,15 +43,15 @@ export class login extends Component {
       super(props);
       this.state = { 
         userName: '',
-        password: '',
-        error: ''
+        password: ''
       };
     }
 
     //get user id based of of username and password 
     //set user id to be used across pages 
 
-    buildPost = () => {
+    buildPost = (event) => {
+      event.preventDefault();
       let loginInfo = {
         username: this.state.userName, 
         password: this.state.password
@@ -61,6 +61,7 @@ export class login extends Component {
 
       axios.post('/login', loginInfo)
       .then(res => {
+        localStorage.setItem('LoginErrors', "None");
         const authorization = `Bearer ${res.data.auth_token}`;
         localStorage.setItem('authToken', authorization);
         const userId = res.data.user_id;
@@ -69,14 +70,13 @@ export class login extends Component {
         console.log("We have successfully logged in!");
         console.log("Authorization token is:", localStorage['authToken']);
         console.log("User id is:", localStorage['user_id']);
-      }).catch(err => {
-        this.setState({
-          error: err.message
-        })
-        console.log("Did not log in");
+        this.props.history.push('/homePage');
+      }).catch(() => {
+        console.log("We ran into an issue");
+        window.location.reload();
+        localStorage.setItem('LoginErrors', "The email or password you entered is incorrect");
       })
     }
-
 
     userNameCallBack = (inputText) => {
       this.setState({userName: inputText})
@@ -101,12 +101,21 @@ export class login extends Component {
                 <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
                   <InputText handleCallback = {this.userNameCallBack} type = "text" border = "coolGreen" placeholder = "exampleUsername" label = "USERNAME"/>
                   <InputText handleCallback = {this.passwordCallBack} type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
+                  
+                  {localStorage['LoginErrors'] !== 'None' && (
+                    <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
+                      {localStorage['LoginErrors']}
+                    </span>
+                  )}
+
                   &nbsp;&nbsp;&nbsp;
-                  <div onClick = {this.buildPost}>
+
                     <NavLink to = "/homePage">
-                      <GreenButton name = "Sign In"/>
+                      <div onClick = {this.buildPost}>
+                        <GreenButton name = "Sign In"/>
+                      </div>
                     </NavLink>
-                  </div>
+                  
                   &nbsp;&nbsp;&nbsp;
                   <div className="px-4">
                     <p className="text-sm text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
