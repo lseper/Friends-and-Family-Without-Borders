@@ -112,6 +112,12 @@ export class questionnaire extends Component {
     }
 
     componentDidMount() {
+      // if a user is not logged in, brings them to the login page
+      if(!localStorage['user_id'] && !localStorage['authToken']) {
+        this.props.history.push('/');
+        localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
+      }
+      
       const token = localStorage.getItem("authToken").toString();
       console.log("User token on questionnaire page: ", token);
       axios.defaults.headers.common['Authorization'] = token;

@@ -12,6 +12,12 @@ export class homePage extends Component {
     }
 
     componentDidMount() {
+        // if a user is not logged in, brings them to the login page
+        if(!localStorage['user_id'] && !localStorage['authToken']) {
+            this.props.history.push('/');
+            localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
+        }
+
         //localStorage.setItem('filledOutQuestionnaire', false);
         console.log(localStorage.getItem('filledOutQuestionnaire'))
         const needPopup = localStorage.getItem('filledOutQuestionnaire') === "false";

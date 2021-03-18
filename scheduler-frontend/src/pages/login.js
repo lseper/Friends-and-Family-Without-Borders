@@ -47,6 +47,13 @@ export class login extends Component {
       };
     }
 
+    componentDidMount() {
+      // if a user is already logged in then it brings them to the homepage
+      if(localStorage['user_id'] && localStorage['authToken']) {
+        this.props.history.push('/homePage');
+      }
+    }
+
     //get user id based of of username and password 
     //set user id to be used across pages 
 
