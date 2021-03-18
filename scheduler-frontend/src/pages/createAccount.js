@@ -14,12 +14,20 @@ export class createAccount extends Component {
       userName: '',
       password: '',
       phoneNumber: '',
-      publicInfo: false,
-      errors: ''
+      publicInfo: false
     };
   }
 
-  buildPost = () => {
+  componentDidMount() {
+    // if a user is not logged in, brings them to the login page
+    if(!localStorage['user_id'] && !localStorage['authToken']) {
+      this.props.history.push('/');
+      localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
+    }
+  }
+
+  buildPost = (event) => {
+    event.preventDefault();
     let accountInformation = {
       username: this.state.userName, 
       password: this.state.password,  
@@ -31,6 +39,7 @@ export class createAccount extends Component {
 
     axios.post('/users', accountInformation)
     .then(res => {
+      localStorage.setItem('SignupErrors', "None");
       const authorization = `Bearer ${res.data.auth_token}`;
       localStorage.setItem('authToken', authorization);
       //user_id is sometimes undefined after creating one user 
@@ -41,10 +50,11 @@ export class createAccount extends Component {
       console.log("We have successfully signed up!");
       console.log("Authorization token is for the sign in page:", localStorage['authToken']);
       console.log("User id is for the sign in page:", localStorage['user_id']);
-    }).catch(err => {
-      this.setState({
-        errors: err.message
-      })
+      this.props.history.push('/');
+    }).catch(() => {
+      console.log("We ran into an issue");
+      window.location.reload();
+      localStorage.setItem('SignupErrors', "User already registered with this phone number");
     })
     //will send in post request
     localStorage.setItem('filledOutQuestionnaire', false);
@@ -97,12 +107,19 @@ export class createAccount extends Component {
                     <InputText handleCallback = {this.numberCallBack} type = "phoneNumber" border = "coolGreen" placeholder = "123456789" label = "PHONE NUMBER"/>
                     {/* <DropDown handleCallback = {this.notificationCallBack} name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/> */}
                     <DropDown handleCallback = {this.publicCallBack} name = "INFORMATION PUBLIC TO USERS" option1 = "Yes" option2 = "No"/>
+                    {localStorage['SignupErrors'] !== 'None' && (
+                      <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
+                        {localStorage['SignupErrors']}
+                      </span>
+                    )}
                     &nbsp;&nbsp;&nbsp;
-                    <div onClick = {this.buildPost} className = "flex justify-evenly align-center items-center">
-                      <NavLink to = "/">
-                        <GreenButton name = "Create Account" />                        
-                      </NavLink>
-                  </div>
+                    
+                    <NavLink to = "/">
+                      <div onClick = {this.buildPost} className = "flex justify-evenly align-center items-center">
+                        <GreenButton name = "Create Account" />     
+                      </div>                   
+                    </NavLink>
+
                     &nbsp;&nbsp;&nbsp;
                   </form>
                   

@@ -11,13 +11,12 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: profile_info(@user) 
   end
 
 
   # logging in to an existing user (POST)
   def login
-    # match to see if user exists based on username
     @user = User.where(username: params[:username]).first
 
     if @user
@@ -26,12 +25,11 @@ class UsersController < ApplicationController
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: { message: "password incorrect"}
+        render json: { message: "password incorrect" }, status: 500
       end
     else
-      render json: { message: "username incorrect" }
+      render json: { message: "username incorrect" }, status: 500 
     end
-
   end
 
   # POST /users
@@ -39,7 +37,7 @@ class UsersController < ApplicationController
     @user_exists = User.find_by(phone: params[:phone])
 
     if @user_exists
-      render json: { message: "User with the phone already exists!" }
+      render json: { message: "User with the phone already exists!" }, status: 500
     else
       @user = User.new(
         username: params[:username],
@@ -50,12 +48,11 @@ class UsersController < ApplicationController
         privacy: params[:privacy]
       )
 
-      # @user = User.new(user_params)
       if @user.save
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: { message: "Some internal server error occurred. Review your information and attempt to submit again"}, status: 500
       end
     end
   end
@@ -75,6 +72,16 @@ class UsersController < ApplicationController
   end
 
   private
+    def profile_info(user)
+      {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        phone: user.phone,
+        privacy: user.privacy
+      }
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
