@@ -31,7 +31,7 @@ export class questionnaire extends Component {
         console.log(questions);
         localStorage.setItem('filledOutQuestionnaire', true);
 
-        axios.post(`/users/${localStorage['user_id']}/questionnaires`, {
+        let questionnaireInfo = {
           q1answer: this.state.q1,
           q2answer: this.state.q2,
           q3answer: this.state.q3,
@@ -43,10 +43,16 @@ export class questionnaire extends Component {
           q9answer: this.state.q9,
           q10answer: this.state.q10,
           q11answer: this.state.q11,
-          q12answer: this.state.q12, 
-          user_id: 1
-        }).then(function (response) {
-          console.log(response)
+          q12answer: this.state.q12,
+          user_id: localStorage['user_id']
+        }
+
+        axios.post(`/users/${localStorage['user_id']}/questionnaires`, questionnaireInfo)
+        .then(res => {
+          console.log(res);
+        }).catch(err => {
+          console.log("Something went wrong when making questionnaire");
+          console.log(err.response.data)
         })
 
         //possible way to send a post request?
@@ -117,7 +123,7 @@ export class questionnaire extends Component {
         this.props.history.push('/');
         localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
       }
-      
+
       const token = localStorage.getItem("authToken").toString();
       console.log("User token on questionnaire page: ", token);
       axios.defaults.headers.common['Authorization'] = token;

@@ -35,7 +35,7 @@ class QuestionnairesController < ApplicationController
     )
 
     if @questionnaire.save
-      render json: @questionnaire, status: :created, location: @questionnaire
+      render json: @questionnaire, status: :created
     else
       render json: @questionnaire.errors, status: :unprocessable_entity
     end
