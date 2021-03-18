@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select'
 
-const DropDown = ({ name, option1, option2, handleCallback}) => {
+const DropDown = ({ name, option1, option2, handleCallback, initalState}) => {
 
     const data = [
         {
@@ -14,7 +14,12 @@ const DropDown = ({ name, option1, option2, handleCallback}) => {
         }
       ];
     
-      const selectedValue = React.useState(1);
+      const inital = 1; 
+      if (initalState){
+        inital = initalState;
+      }
+
+      const selectedValue = React.useState(inital);
 
       const handleChange = (event, newValue) => {
         //setSelectedValue(event.value);

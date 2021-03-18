@@ -3,7 +3,8 @@ import NavBar from '../components/navBar';
 import DropDown from '../components/dropDown';
 import InputText from '../components/inputText';
 import { NavLink } from 'react-router-dom';
-import GreenButton from '../components/greenButton'
+import GreenButton from '../components/greenButton';
+import axios from 'axios';
 
 export class profile extends Component {
 
@@ -19,14 +20,80 @@ export class profile extends Component {
       alert("Logging out!");
     }
   }
+
+  constructor(props){
+    super(props);
+    this.state = { 
+      preferredName: '',
+      userName: '',
+      password: '',
+      phoneNumber: '',
+      publicInfo: ''
+    };
+  }
+
+  preferredCallBack = (inputText) => {
+    this.setState({preferredName: inputText})
+  }
+
+  userNameCallBack = (inputText) => {
+    this.setState({userName: inputText})
+  }
+
+  phoneNumberCallBack = (inputText) => {
+    this.setState({phoneNumber: inputText})
+  }
+
+  publicCallBack = (option) => {
+    if (option === 1) {
+      this.setState({publicInfo: true});
+    } else {
+      this.setState({publicInfo: false});
+    }
+    
+  }
+
+  buildPost = () => {
+    const newaccountinfo = [this.state.userName, this.state.preferredName, this.state.phoneNumber, this.state.publicInfo]
+    console.log(newaccountinfo);
+  }
+
+  componentDidMount() {
+
+    const authorization = localStorage.getItem('authToken');
+    //console.log(authorization);
+    //console.log("User id on profile page: ", localStorage['user_id']);
+        axios.get(`/users/${localStorage['user_id']}`,{
+          headers: {
+            'Authorization': authorization
+          }
+        })
+        .then(res => {
+            this.setState({
+                preferredName: res.data.name,
+                userName: res.data.username,
+                phoneNumber: res.data.phone,
+                publicInfo: res.data.privacy,
+            })
+        }).then(() => {
+            console.log(this.state);
+        }).catch(err => {
+            console.log(err);
+        })
+
+  }
+
     render() {
         return (
             <div>
                 <NavBar />
-                {/* <Banner username = " Emily"/> */}
-                <section className="App py-10 w-full flex justify-start items-coolGrey">
-                <div className="px-2 pb-1 align-left text-left">
-                    <label htmlFor="title" className="text-3xl block font-bold text-coolGrey-dark">USERS PROFILE INFORMATION</label>
+                <section className="App py-10 w-full flex justify-center items-coolGrey">
+                <div className="px-2 align-center text-center">
+                    <label htmlFor="title" className="text-4xl text-center block font-bold text-coolGrey-dark">{this.state.preferredName}</label>
+                    <div className = 'px-5 py-4 flex justify-center text-center align-center'>
+                      <label htmlFor="title" className="text-2xl text-center block font-bold text-coolGrey-dark py-2 px-3">COMFORT </label>
+                      <div class="rounded-full h-12 w-12 flex items-center justify-center text-center bg-coolGreen py-2 px-3"></div>
+                    </div>
                     <div className="mt-4">
                       <NavLink to = "/">
                         <button className="bg-coolGreen hover:bg-coolGrey hover:shadow-md text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline shadow-xl" type="button" onClick={this.logout}>Logout</button>
@@ -38,11 +105,10 @@ export class profile extends Component {
                 <section className="w-full flex align-top justify-evenly items-start bg-grey-500 py-4 px-4">
                 <div className="w-full max-w-md bg-gray-800" >
                   <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
-                    <InputText type = "text" border = "coolGreen" placeholder = "Emily" label = "PREFERRED NAME"/>
-                    <InputText type = "email" border = "coolGreen" placeholder = "emilyrosekraai@gmail.com" label = "EMAIL ADDRESS"/>
-                    <InputText type = "text" border = "coolGreen" placeholder = "4024194873" label = "PHONE NUMBER"/>
-                    <DropDown name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/>
-                    <DropDown name = "INFORMATION PUBLIC TO USERS" option1 = "Yes" option2 = "No"/>
+                    <InputText type = "text" border = "coolGreen" placeholder = {this.state.preferredName} handleCallback = {this.preferredCallBack} label = "PREFERRED NAME"/>
+                    <InputText type = "text" border = "coolGreen" placeholder = {this.state.userName} handleCallback = {this.userNameCallBack} label = "USERNAME"/>
+                    <InputText type = "text" border = "coolGreen" placeholder = {this.state.phoneNumber} handleCallback = {this.phoneNumberCallBack} label = "PHONE NUMBER"/>
+                    <DropDown name = "INFORMATION PUBLIC TO USERS" handleCallback = {this.publicCallBack}  option1 = "Yes" option2 = "No"/>
                     &nbsp;&nbsp;&nbsp;
                     <div className = "flex justify-evenly align-center items-center">
                       <NavLink to = "/homePage">
