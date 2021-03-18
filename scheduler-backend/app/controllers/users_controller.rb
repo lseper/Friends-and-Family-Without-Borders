@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     @user_exists = User.find_by(phone: params[:phone])
 
     if @user_exists
-      render json: { message: "User with the phone already exists!" }
+      render json: { message: "User with the phone already exists!" }, status: 500
     else
       @user = User.new(
         username: params[:username],
@@ -50,12 +50,11 @@ class UsersController < ApplicationController
         privacy: params[:privacy]
       )
 
-      # @user = User.new(user_params)
       if @user.save
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: { message: "Some internal server error occurred. Review your information and attempt to submit again"}, status: 500
       end
     end
   end
