@@ -7,15 +7,6 @@ import GreenButton from '../components/greenButton';
 import axios from 'axios';
 
 export class profile extends Component {
-
-  componentDidMount() {
-    // if a user is not logged in, brings them to the login page
-    if(!localStorage['user_id'] && !localStorage['authToken']) {
-      this.props.history.push('/');
-      localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
-    }
-  }
-  
   logout = () => {
     console.log("Logging out")
     localStorage.setItem('authToken', '');
@@ -67,6 +58,11 @@ export class profile extends Component {
   }
 
   componentDidMount() {
+    // if a user is not logged in, brings them to the login page
+    if(!localStorage['user_id'] && !localStorage['authToken']) {
+      this.props.history.push('/');
+      localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
+    }
 
     const authorization = localStorage.getItem('authToken');
     //console.log(authorization);
