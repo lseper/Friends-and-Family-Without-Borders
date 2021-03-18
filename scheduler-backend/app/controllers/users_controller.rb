@@ -11,13 +11,12 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: profile_info(@user) 
   end
 
 
   # logging in to an existing user (POST)
   def login
-    # match to see if user exists based on username
     @user = User.where(username: params[:username]).first
 
     if @user
@@ -26,12 +25,11 @@ class UsersController < ApplicationController
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: { message: "password incorrect"}
+        render json: { message: "password incorrect" }, status: 500
       end
     else
-      render json: { message: "username incorrect" }
+      render json: { message: "username incorrect" }, status: 500 
     end
-
   end
 
   # POST /users
@@ -74,6 +72,16 @@ class UsersController < ApplicationController
   end
 
   private
+    def profile_info(user)
+      {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        phone: user.phone,
+        privacy: user.privacy
+      }
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

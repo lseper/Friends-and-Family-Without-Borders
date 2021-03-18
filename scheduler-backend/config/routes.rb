@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # shallow: true makes it so that only [:index, :create] actions have /users/ before them
-  resources :users, shallow: true do
+  resources :users do
     # getting all events for a user -- /users/1/events
     resources :questionnaires
     resources :events, shallow: true
