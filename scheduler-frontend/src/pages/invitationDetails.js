@@ -14,6 +14,14 @@ export class invitationDetails extends Component {
                 </div>
                 <div className ="flex grid grid-cols-1 flex place-items-left bg-brightPink py-4">
                     <div className="w-9/10 bg-brightPink m-2 h-full" >
+                        <div className="bg-white shadow-md rounded px-8 py-8 pt-8 ">
+                            <div>
+                                <p className="text-xl font-bold text-coolGrey-dark">COMFORT:</p>
+                                <p className="text-xl font-bold text-coolGrey-dark">7.8 </p>
+                            </div> 
+                        </div>
+                    </div>
+                    <div className="w-9/10 bg-brightPink m-2 h-full" >
                         <div className="bg-white shadow-md rounded px-8 py-8 pt-8 py-2">
                             <div>
                                 <h2 className="text-xl font-bold text-coolGrey-dark">DESCRIPTION:</h2>
@@ -36,14 +44,6 @@ export class invitationDetails extends Component {
                             </div>
                         </div>
                         </div>
-                    <div className="w-9/10 bg-brightPink m-2 h-full" >
-                        <div className="bg-white shadow-md rounded px-8 py-8 pt-8 ">
-                            <div>
-                                <p className="text-xl font-bold text-coolGrey-dark">COMFORT:</p>
-                                <p className="text-xl font-bold text-coolGrey-dark">7.8 </p>
-                            </div> 
-                        </div>
-                    </div>
                     <div className="w-9/10 bg-brightPink m-2 h-full" >
                         <div className="bg-white shadow-md rounded px-8 py-8 pt-8 ">
                             <div>
