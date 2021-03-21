@@ -114,17 +114,7 @@ export class profile extends Component {
 
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 w-1/2 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-            <text className={"text-sm block font-bold pb-2 text-coolGrey text-left bg-grey-100"} >{this.state.userName}</text>
-            <hr
-              style={{
-                color: "#A4969B",
-                backgroundColor: "#A4969B",
-                height: 2
-              }}
-            />
-            <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</text>
-                        &nbsp;&nbsp;&nbsp;
-                        <text className={"text-sm block font-bold pb-2 text-coolGrey text-left bg-grey-100"} >{this.state.phoneNumber}</text>
+            <text className={"text-sm block font-bold pb-2 text-coolGrey text-left bg-grey-100"} >{this.state.phoneNumber}</text>
             <hr
               style={{
                 color: "#A4969B",
@@ -137,7 +127,17 @@ export class profile extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-            <input type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left placeholder-coolGrey"} placeholder={this.state.preferredName}></input>
+          <input type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left bg-grey-100"} placeholder = {this.state.userName}></input>
+            <hr
+              style={{
+                color: "#BDE4A7",
+                backgroundColor: "#BDE4A7",
+                height: 2
+              }}
+            />
+            <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</text>
+            &nbsp;&nbsp;&nbsp;
+            <input type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left placeholder-coolGrey"} placeholder={this.state.preferredName}></input>
             <hr
               style={{
                 color: "#BDE4A7",

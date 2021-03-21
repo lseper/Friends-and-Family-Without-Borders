@@ -41,7 +41,7 @@ export class createdEvents extends Component {
                         {this.state.createdEvents === false ?
                             <div>
                                 <div className="flex flex-grow align-start items-start py-4 w-full" >
-                                    <form action="" className="flex flex-grow grid grid-cols-1 justify-start align-left items-left bg-white shadow-lg rounded px-8 py-4 pt-8 container bg-white">
+                                    <form action="" className="flex flex-grow grid grid-cols-1 justify-start align-left items-left bg-white shadow-lg rounded px-5 py-4 container bg-white">
                                         <label htmlFor="title" className="text-left text-md block font-bold pb-10 text-coolGrey-dark mb-2">You currently have no created events </label>
                                     </form>
                                 </div>
