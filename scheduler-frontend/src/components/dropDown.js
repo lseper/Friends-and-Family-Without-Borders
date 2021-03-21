@@ -1,7 +1,7 @@
 import React from 'react';
-import Select from 'react-select'
+import Select from 'react-select';
 
-const DropDown = ({ name, option1, option2, handleCallback, initalState}) => {
+const DropDown = ({ name, option1, option2, handleCallback, initalState, border, downlable}) => {
 
     const data = [
         {
@@ -12,28 +12,53 @@ const DropDown = ({ name, option1, option2, handleCallback, initalState}) => {
           value: 2,
           label: option2
         }
-      ];
-    
-      const inital = 1; 
-      if (initalState){
-        inital = initalState;
+      ];   
+
+    let initalValue;
+
+    if (initalState){
+      console.log("test")
+      initalValue = {
+      value: 1,
+      label: option1
+      } 
+    }    
+    else {
+      initalValue = {
+      value: 2,
+      abel: option2
       }
+    }   
 
-      const selectedValue = React.useState(inital);
+    const selectedValue = React.useState(initalValue);
 
-      const handleChange = (event, newValue) => {
-        //setSelectedValue(event.value);
-        handleCallback(event.value)
-      };
+    const handleChange = (event, newValue) => {
+      handleCallback(event.value)
+    };
 
     return(
-        <div className="px-4 pb-4">
-            <label className={"text-sm block font-bold pb-2 text-coolGrey-dark"} >{name}</label>
-            <Select className={"text-sm block pb-2 text-coolGrey-dark bg-coolBlue"} 
+        <div className="w-full pb-4 bg-grey-100">
+            {downlable ? null
+                :< label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left"} >{name}</label>}
+            <Select className={"text-sm block pb-2 text-coolGrey-dark text-left bg-coolGreen border" + border} 
                 options={data}
                 onChange = {handleChange} 
                 value={data.find(obj => obj.value === selectedValue)} 
+                defaultValue={initalValue}
+                theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#BDE4A7',
+                      primary: '#A4969B',
+                    }})}
                 />
+                {downlable ? <div>
+                        < label className={"text-sm block font-bold text-coolGrey-dark text-left"} >{name}</label>
+                        </div>
+                    : null
+                }
         </div>
     )
 }

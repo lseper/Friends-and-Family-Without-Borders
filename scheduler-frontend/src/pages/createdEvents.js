@@ -5,70 +5,72 @@ import NavBar from '../components/navBar';
 import { NavLink } from 'react-router-dom';
 
 export class createdEvents extends Component {
-    
-    constructor(props){  
-        super(props);  
+
+    constructor(props) {
+        super(props);
         this.state = {
             createdEvents: false
-        };  
+        };
     }
 
     componentDidMount() {
         // if a user is not logged in, brings them to the login page
-        if(!localStorage['user_id'] && !localStorage['authToken']) {
-          this.props.history.push('/');
-          localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
+        if (!localStorage['user_id'] && !localStorage['authToken']) {
+            this.props.history.push('/');
+            localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
     }
-    
+
     render() {
         return (
             <div>
                 <NavBar />
-                <div>                   
-                    <div className="App pt-10 w-full flex justify-start px-2 items-coolGrey">
-                        <label htmlFor="title" className="text-4xl text-left block font-bold  pb-2 text-brightPink mb-2 ml-2 px-2" >CREATED EVENTS</label>
-                    </div> 
-                    <div className = "pb-10 px-2">
-                        <NavLink to = "/createEvent">
-                            <button className=" bg-coolBlue py-2 px-5 rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl ml-2">+ CREATE EVENT</button>
-                        </NavLink>
-                    </div>
-
-                    
-                    {this.state.createdEvents ?
-                        <div className ="flex grid grid-cols-1 flex place-items-left bg-coolGrey py-4">
-                        
-                            <CreatedEventButton />
-                            <CreatedEventButton />
-                            <CreatedEventButton />
-                                       
+                <div>
+                    <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-full">
+                        <div className="px-1 pb-1">
+                            <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> CREATED EVENTS</label>
                         </div>
-                        : null   
-                    } 
-                
-                    {this.state.createdEvents === false?  
-                        <div className = "bg-white px-4 py-4">
-                            <div className = "bg-coolBlue">
-                            <label htmlFor="title" className="text-xl block font-bold rounded pb-6 text-white mb-2 ml-2 px-10 py-10">YOU CURRENTLY HAVE NO EVENTS CREATED</label>
-                            </div>   
+                        <div className="flex px-1 pb-1 align-start">
+                            <NavLink to="/createEvent">
+                                <button className=" bg-coolBlue py-2 px-5 text-left rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl">+ CREATE EVENT</button>
+                            </NavLink>
+                        </div>
+                        <div>
 
-                         </div>     
-                            : null  
+                        </div>
+                        {this.state.createdEvents === false ?
+                            <div>
+                                <div className="flex flex-grow align-start items-start py-4 w-full" >
+                                    <form action="" className="flex flex-grow grid grid-cols-1 justify-start align-left items-left bg-white shadow-lg rounded px-8 py-4 pt-8 container bg-white">
+                                        <label htmlFor="title" className="text-left text-md block font-bold pb-10 text-coolGrey-dark mb-2">You currently have no created events </label>
+                                    </form>
+                                </div>
+                            </div>
+                            : null
 
+                        }
+                    </section>
 
-                    }         
+                    {this.state.createdEvents ?
+                        <div className="flex grid grid-cols-1 flex place-items-left py-4">
+                            <CreatedEventButton 
+                            name="Birthday Party" 
+                            dateString='March 18th 2021' 
+                            location="Holmes Lake" 
+                            details="Come to Holmes Lake for Courtney's Birthday Party! There will be food and plently of ourdoor games!" />
+                        </div>
+                        : null
+                    }
+
                 </div>
-              <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-8 px-4">
-              </section>
             </div>
 
 
-                    
 
- 
+
+
         )
-    } 
+    }
 }
 
 export default createdEvents

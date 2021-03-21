@@ -1,72 +1,34 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import InputText from '../components/inputText';
-import GreenButton from '../components/greenButton';
+import Button from '../components/button';
 import axios from 'axios';
 
 export class login extends Component {
 
-    //getInformation using fetch instead of axios
-    //  //before components gets added to a page -- do this
-    //  componentDidMount(){
-    //    this.UserList();
-    //  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: '',
+      password: ''
+    };
+  }
 
-    //  //id comes from backend 
-    //  //pass id as a prop for each component 
-    //  //<navigation to {"/events/" + eventid}
-    //  //https://jsonplaceholder.typicode.com/events/:id
-    //  async UserList(){
-    //    //get object
-    //    //
-    //   let response =  await fetch('https://jsonplaceholder.typicode.com/users/') //make sure this responds before moving to text function
-    //   response = await response.json()
-    //   console.log(response)
-    //  }
+  componentDidMount() {
+    // if a user is already logged in then it brings them to the homepage
+    if (localStorage['user_id'] && localStorage['authToken']) {
+      this.props.history.push('/homePage');
+    }
+  }
 
-    // //call this on a button click to send to backend 
-    // async sendInformationToBackend() {
-    //     // POST request using fetch with async/await
-    //     //json obejct is teh body 
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         //stores as string might 
-    //         body: JSON.stringify({ id: '12345', email:'someemail', pass:'somepass' })
-    //     };
-    //     const response = await fetch('https://jsonplaceholder.typicode.com/posts', requestOptions);
-    //     const data = await response.json();
-    //     this.setState({ postId: data.id });
-    // }
-
-    constructor(props){
-      super(props);
-      this.state = { 
-        userName: '',
-        password: ''
-      };
+  buildPost = (event) => {
+    event.preventDefault();
+    let loginInfo = {
+      username: this.state.userName,
+      password: this.state.password
     }
 
-    componentDidMount() {
-      // if a user is already logged in then it brings them to the homepage
-      if(localStorage['user_id'] && localStorage['authToken']) {
-        this.props.history.push('/homePage');
-      }
-    }
-
-    //get user id based of of username and password 
-    //set user id to be used across pages 
-
-    buildPost = (event) => {
-      event.preventDefault();
-      let loginInfo = {
-        username: this.state.userName, 
-        password: this.state.password
-      }
-      console.log(loginInfo);
-      //will send in post request
-
-      axios.post('/login', loginInfo)
+    axios.post('/login', loginInfo)
       .then(res => {
         localStorage.setItem('LoginErrors', "None");
         const authorization = `Bearer ${res.data.auth_token}`;
@@ -83,72 +45,64 @@ export class login extends Component {
         window.location.reload();
         localStorage.setItem('LoginErrors', "The email or password you entered is incorrect");
       })
-    }
+  }
 
-    userNameCallBack = (inputText) => {
-      this.setState({userName: inputText})
-    }
+  userNameCallBack = (inputText) => {
+    this.setState({ userName: inputText })
+  }
 
-    passwordCallBack = (inputText) => {
-      this.setState({password: inputText})
-    }
+  passwordCallBack = (inputText) => {
+    this.setState({ password: inputText })
+  }
 
-    render() {
-        return (
-          <div className ="">
-            
-            <section className="App py-10 px-10 w-full flex justify-center items-coolGrey">
-              <div className="px-1 pb-1">
-                  <label htmlFor="title" className="text-3xl block font-bold  pb-2 text-coolGrey-dark">FRIENDS AND FAMILIES WITH BORDERS</label>
+  render() {
+    return (
+      <div className="">
+        <section className="App py-10 px-10 w-full flex justify-center items-coolGrey">
+          <div className="px-1 pb-1">
+            <label htmlFor="title" className="text-3xl block font-bold  pb-2 text-coolGrey-dark">WELCOME</label>
+          </div>
+        </section>
+        <section className="App h-2/3 w-full flex justify-center items-start bg-white py-4 px-4">
+          <form action="" className=" sm:w-3/4 md:w-1/3 shadow-lg rounded px-8 py-8 pt-8">
+            <InputText login={true} handleCallback={this.userNameCallBack} type="text" border="coolGreen" placeholder="exampleUsername" label="USERNAME" />
+            <InputText login={true} handleCallback={this.passwordCallBack} type="password" border="coolGreen" placeholder="examplePassword" label="PASSWORD" />
+
+            {localStorage['LoginErrors'] !== 'None' && (
+              <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-brightPink text-xs mt-1 ml-1">
+                {localStorage['LoginErrors']}
+              </span>
+            )}
+
+                  &nbsp;&nbsp;&nbsp;
+
+                    <NavLink to="/homePage">
+              <div className="" onClick={this.buildPost}>
+                <Button name="Sign In" bgColor="bg-coolGreen" />
               </div>
-            </section>
-            <div className = "flex px-4 py-10 w-full justify-center items-start bg-coolGrey">
-            <section className="App h-2/3 w-full flex justify-center items-start bg-grey-500 py-4 px-4">
-              <div className="w-full max-w-md bg-gray-800" >
-                <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
-                  <InputText handleCallback = {this.userNameCallBack} type = "text" border = "coolGreen" placeholder = "exampleUsername" label = "USERNAME"/>
-                  <InputText handleCallback = {this.passwordCallBack} type = "password" border = "coolGreen" placeholder = "examplePassword" label = "PASSWORD"/>
-                  
-                  {localStorage['LoginErrors'] !== 'None' && (
-                    <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
-                      {localStorage['LoginErrors']}
-                    </span>
-                  )}
+            </NavLink>
 
                   &nbsp;&nbsp;&nbsp;
-
-                    <NavLink to = "/homePage">
-                      <div onClick = {this.buildPost}>
-                        <GreenButton name = "Sign In"/>
-                      </div>
-                    </NavLink>
-                  
-                  &nbsp;&nbsp;&nbsp;
-                  <div className="px-4">
+                  <div className="flex">
+              {/* 
+                    // not currently set up 
                     <p className="text-sm text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
                       Forgot your password? 
                       <NavLink to = "/createAccount">
                           <button className="hover:text-coolBlue-dark text-coolBlue"> Click here</button>
                       </NavLink>
-                    </p>
-                    <p className="text-sm text-coolGrey-dark font-sans py-1 px-10 rounded focus:outline-none focus:shadow-outline" >
-                      Don't have an account? 
-                      <NavLink to = "/createAccount">
-                          <button className="hover:text-coolBlue-dark text-coolBlue"> Sign up here</button>
-                      </NavLink>
-                    </p>
-                  </div>
-                </form>
-                </div>
-              </section>
-              </div> 
-              <section className="App pb-10 px-10 w-full flex justify-center items-coolGrey">
-              <div className="px-1 pb-1">
-              </div>
-            </section>
-          </div>
-        )
-    } 
+                    </p> */}
+              <p className="flex text-sm text-left text-coolGrey-dark font-sans py-1 rounded focus:outline-none focus:shadow-outline" >
+                <NavLink to="/createAccount">
+                  <button className="text-left text-coolGreen underline"> SIGN UP HERE</button>
+                </NavLink>
+              </p>
+            </div>
+          </form>
+        </section>
+      </div>
+    )
+  }
 }
 
 export default login;

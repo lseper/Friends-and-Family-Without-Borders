@@ -1,18 +1,23 @@
-import React, { Component } from 'react'
-// import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
+import Button from '../components/button';
+
 
 export class createdEventsButton extends Component {
-    
+
     render() {
         return (
-           
-            <div className="w-9/10 max-w-md bg-coolGrey m-2 h-full" >
-              <form action="" className="bg-white shadow-md rounded px-8 py-8 pt-8 text-coolGrey-dark ">
-                    <h2 className="text-2xl font-bold">JAYDEN'S BIRTHDAY BASH</h2>
-                    <h3>Date: 3/8/2021</h3>
-                    <h3>Location: Kauffman</h3>
-                    <button className="text-xs mt-1 bg-coolGrey hover:bg-coolGrey-dark hover:shadow-md shadow-xl py-2 px-5 text-white rounded w-4/5">CLICK FOR FULL REPORT</button>
-                </form>
+            <div className="flex flex-grow align-start items-start py-4 px-5 w-full md:w-3/4" >
+                <div className="flex flex-wrap justify-start align-left items-left bg-white shadow-lg rounded px-8 py-2 pt-2 container bg-white" >
+                    <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white">
+                        <h2 className="text-2xl font-bold text-coolGrey-dark">{this.props.name}</h2>
+                        <h3 className="text-sm text-coolGrey-dark pb-2">Datails: {this.props.details}</h3>
+                        <h3 className="font-bold text-coolGrey-dark">Date: {this.props.dateString}</h3>
+                        <h3 className="font-bold text-coolGrey-dark pb-2">Location: {this.props.location}</h3>
+                        <div className="py-2">
+                            <Button bgColor="bg-brightPink" name="Event Details" />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
