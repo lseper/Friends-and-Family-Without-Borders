@@ -8,7 +8,7 @@ export class homePage extends Component {
         super(props);
         this.state = {
             showPopup: false,
-            needFriends: true
+            needFriends: false
         };
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import DropDown from '../components/dropDown';
 import InputText from '../components/inputText';
-import Button from '../components/button'
+import Button from '../components/button';
 import axios from 'axios';
 
 export class createAccount extends Component {

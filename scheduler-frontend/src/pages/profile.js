@@ -3,7 +3,8 @@ import NavBar from '../components/navBar';
 import DropDown from '../components/dropDown';
 import Button from '../components/button';
 import axios from 'axios';
-import Loading from '../components/loading'
+import Loading from '../components/loading';
+
 
 export class profile extends Component {
 
@@ -20,18 +21,6 @@ export class profile extends Component {
     };
   }
 
-  preferredCallBack = (inputText) => {
-    this.setState({ preferredName: inputText })
-  }
-
-  userNameCallBack = (inputText) => {
-    this.setState({ userName: inputText })
-  }
-
-  phoneNumberCallBack = (inputText) => {
-    this.setState({ phoneNumber: inputText })
-  }
-
   publicCallBack = (option) => {
     if (option === 1) {
       this.setState({ publicInfo: true });
@@ -41,8 +30,17 @@ export class profile extends Component {
 
   }
 
+  handleUserName = (inputText) => {
+    console.log(inputText.target.value)
+    this.setState({ userName: inputText.target.value })
+  }
+  handlePreferredName = (inputText) => {
+    console.log(inputText.target.value)
+    this.setState({ preferredName: inputText.target.value })
+  }
+
   buildPost = () => {
-    const newaccountinfo = [this.state.preferredName, this.state.publicInfo]
+    const newaccountinfo = [this.state.userName, this.state.preferredName, this.state.publicInfo, this.state.phoneNumber]
     console.log(newaccountinfo);
   }
 
@@ -70,7 +68,7 @@ export class profile extends Component {
           publicInfo: res.data.privacy,
           loading: false
         })
-        console.log(this.state.publicInfo)
+        console.log(this.state.phoneNumber)
       }).then(() => {
         console.log(this.state);
       }).catch(err => {
@@ -127,7 +125,7 @@ export class profile extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-          <input type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left bg-grey-100"} placeholder = {this.state.userName}></input>
+            <input onChange={name => this.handleUserName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left bg-grey-100"} placeholder={this.state.userName}></input>
             <hr
               style={{
                 color: "#BDE4A7",
@@ -137,7 +135,7 @@ export class profile extends Component {
             />
             <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</text>
             &nbsp;&nbsp;&nbsp;
-            <input type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left placeholder-coolGrey"} placeholder={this.state.preferredName}></input>
+            <input onChange={name => this.handlePreferredName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left placeholder-coolGrey"} placeholder={this.state.preferredName}></input>
             <hr
               style={{
                 color: "#BDE4A7",
