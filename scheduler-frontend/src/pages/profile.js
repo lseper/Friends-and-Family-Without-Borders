@@ -17,7 +17,8 @@ export class profile extends Component {
       password: '',
       phoneNumber: '',
       publicInfo: '',
-      comfort: 'green'
+      comfortNum: 0,
+      comfort: ''
     };
   }
 
@@ -28,21 +29,6 @@ export class profile extends Component {
       this.setState({ publicInfo: false });
     }
 
-  }
-
-  handleUserName = (inputText) => {
-    console.log(inputText.target.value)
-    this.setState({ userName: inputText.target.value })
-  }
-  handlePreferredName = (inputText) => {
-    console.log(inputText.target.value)
-    this.setState({ preferredName: inputText.target.value })
-  }
-
-  buildPost = () => {
-    const newaccountinfo = [this.state.userName, this.state.preferredName, this.state.publicInfo, this.state.phoneNumber]
-    console.log(newaccountinfo);
-    this.componentDidMount();
   }
 
   async componentDidMount() {
@@ -59,23 +45,57 @@ export class profile extends Component {
       }
     })
       .then(res => {
-        console.log(res.data.privacy)
-        console.log(typeof (res.data.privacy))
         this.setState({
           preferredName: res.data.name,
           userName: res.data.username,
           phoneNumber: res.data.phone,
-          //not updating
           publicInfo: res.data.privacy,
+          comfortNum: res.data.comfort_metric,
           loading: false
         })
-        console.log(this.state.phoneNumber)
+        // set the color of the comfort metric
+        if (this.state.comfortNum < (1 / 3)) {
+          this.setState({ comfort: "red" });
+        } else if (this.state.comfortNum >= (1 / 3) & this.state.comfortNum < (2 / 3)) {
+          this.setState({ comfort: "yellow" });
+        } else {
+          this.setState({ comfort: "green" });
+        }
       }).then(() => {
         console.log(this.state);
       }).catch(err => {
         console.log(err);
       })
+  }
 
+  handleUserName = (inputText) => {
+    this.setState({ userName: inputText.target.value })
+  }
+  handlePreferredName = (inputText) => {
+    this.setState({ preferredName: inputText.target.value })
+  }
+
+  buildPost = (event) => {
+    event.preventDefault();
+    let accountInformation = {
+      username: this.state.userName,
+      name: this.state.preferredName,
+      privacy: this.state.publicInfo
+    }
+    console.log(accountInformation);
+    const authorization = localStorage.getItem('authToken');
+    axios.put(`/users/${localStorage['user_id']}`, accountInformation, {
+      headers: {
+        'Authorization': authorization
+      }
+    })
+      .then(res => {
+        localStorage.setItem('UpdateErrors', "None");
+        console.log("Account has been updated!");
+      }).catch(() => {
+        console.log("We ran into an issue");
+        localStorage.setItem('UpdateError', "Error Updating Account");
+      })
   }
 
   render() {

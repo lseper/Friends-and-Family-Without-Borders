@@ -26,7 +26,7 @@ const DropDown = ({ name, option1, option2, handleCallback, initalState, border,
     else {
       initalValue = {
       value: 2,
-      abel: option2
+      label: option2
       }
     }   
 
@@ -36,6 +36,8 @@ const DropDown = ({ name, option1, option2, handleCallback, initalState, border,
       handleCallback(event.value)
     };
 
+    console.log(selectedValue);
+
     return(
         <div className="w-full pb-4 bg-grey-100">
             {downlable ? null
@@ -43,8 +45,8 @@ const DropDown = ({ name, option1, option2, handleCallback, initalState, border,
             <Select className={"text-sm block pb-2 text-coolGrey-dark text-left bg-coolGreen border" + border} 
                 options={data}
                 onChange = {handleChange} 
-                value={data.find(obj => obj.value === selectedValue)} 
-                defaultValue={initalValue}
+                value={data.find(obj => obj.value === selectedValue.value)} 
+                defaultValue={selectedValue}
                 theme={theme => ({
                     ...theme,
                     borderRadius: 0,
