@@ -89,7 +89,7 @@ const CreateEvent = () => {
             </section>
             <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
                 <form action="" className="flex grid grid-cols-1 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-                    <input onChange={name => handleName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left bg-grey-100"} placeholder="example"></input>
+                    <input onChange={name => handleName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
                     <hr
                         style={{
                             color: "#BDE4A7",
@@ -99,7 +99,7 @@ const CreateEvent = () => {
                     />
                     <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >EVENT NAME</text>
             &nbsp;&nbsp;&nbsp;
-            <input onChange={handleDetails} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey focus:outline-none text-left placeholder-coolGrey"} placeholder="example"></input>
+            <input onChange={handleDetails} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
                     <hr
                         style={{
                             color: "#BDE4A7",
@@ -110,7 +110,7 @@ const CreateEvent = () => {
                     <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</text>
                   &nbsp;&nbsp;&nbsp;
                 <DatePicker
-                        className="font-bold text-coolGrey focus:outline-none"
+                        className="font-bold text-coolGrey-dark focus:outline-none"
                         selected={startDate}
                         onChange={date => setStartDate(date)}
                         showTimeSelect
@@ -127,7 +127,7 @@ const CreateEvent = () => {
                     <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START DATETIME</text>
                   &nbsp;&nbsp;&nbsp;
                   <DatePicker
-                        className="font-bold text-coolGrey focus:outline-none"
+                        className="font-bold text-coolGrey-dark focus:outline-none"
                         selected={endDate}
                         onChange={date => setEndDate(date)}
                         showTimeSelect
