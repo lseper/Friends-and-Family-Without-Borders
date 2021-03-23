@@ -1,8 +1,8 @@
 class CreateEventInvitations < ActiveRecord::Migration[6.1]
   def change
-    create_join_table :events, :users do |t| # table will be called "events_users" in db
-      t.index :event_id
-      t.index :user_id
+    create_table :invitations do |t|
+      t.references :event, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
       t.integer :comfort_level
       t.boolean :confirmed
 

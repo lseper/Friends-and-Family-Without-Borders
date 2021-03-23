@@ -1,12 +1,13 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
+  before_action :authorized, only[:index, :create]
 
   # GET /user/:id/events
   # return JSON of all events that this user is the owner of
-  #
+  # AUTHORIZATION NEEDED
   def index
     @events = Event.where(user_id: params[:user_id])
-    
+
     render json: @events
   end
 
@@ -16,6 +17,7 @@ class EventsController < ApplicationController
   end
 
   # POST /user/:id/events
+  # AUTHORIZATION NEEDED
   def create
     @event = Event.new(event_params)
 

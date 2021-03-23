@@ -1,0 +1,2 @@
+class SuggestedActivity < ApplicationRecord
+end

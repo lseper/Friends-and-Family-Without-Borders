@@ -1,5 +1,17 @@
 class ApplicationController < ActionController::API
 
+    QUESTIONNAIRE_TOTAL = 120.0
+
+    # Individual comfort metric calculation
+    def comfort_metric(questionnaire)
+        answers = [questionnaire[:q1answer], questionnaire[:q2answer], questionnaire[:q3answer], questionnaire[:q4answer], questionnaire[:q5answer],
+        questionnaire[:q6answer], questionnaire[:q7answer], questionnaire[:q8answer], questionnaire[:q9answer], questionnaire[:q10answer], questionnaire[:q11answer],
+        questionnaire[:q12answer]]
+        answers.sum / QUESTIONNAIRE_TOTAL
+    end
+
+    # ------------ Encryption and user authentication stuff ----------
+
     def encode(payload)
         JWT.encode(payload, 'test')
     end

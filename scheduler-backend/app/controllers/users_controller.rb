@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  # also return questionnaire comfort metric
+  # (total responses) / (total max scores for each thing)
   # GET /users/1
   def show
     render json: profile_info(@user) 
@@ -57,9 +59,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # only allow changing of username, name, and privacy setting
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
+
+    if @user.update_columns(username: params[:username], name: params[:name], privacy: params[:privacy])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -73,13 +77,20 @@ class UsersController < ApplicationController
 
   private
     def profile_info(user)
+      # get the most recent questionnaire response
+      user_questionnaire = get_questionnaire(user)
       {
         id: user.id,
         username: user.username,
         name: user.name,
         phone: user.phone,
-        privacy: user.privacy
+        privacy: user.privacy,
+        comfort_metric: comfort_metric(user_questionnaire)
       }
+    end
+
+    def get_questionnaire(user)
+      user_questionnaire = Questionnaire.where(user_id: user.id).order(created_at: :desc)[0]
     end
 
     # Use callbacks to share common setup or constraints between actions.
