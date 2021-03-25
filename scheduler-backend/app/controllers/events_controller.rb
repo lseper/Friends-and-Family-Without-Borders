@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
   before_action :authorized, only: [:index, :create, :destroy, :show, :update]
 
+
   # GET /user/:id/events
   # return JSON of all events that this user is the owner of
   # AUTHORIZATION NEEDED -- only user who created the event should be allowed to view it
@@ -20,7 +21,16 @@ class EventsController < ApplicationController
   # POST /user/:id/events
   # AUTHORIZATION NEEDED
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(
+      description: event_params[:description],
+      ending_at: event_params[:ending_at],
+      covid_guidelines: event_params[:covid_guidelines],
+      comfort_metric: 0,
+      activity_id: event_params[:activity_id],
+      location_id: event_params[:location_id],
+      user_id: params[:user_id],
+      start_time: event_params[:start_time]
+    )
 
     if @event.save
       render json: @event, status: :created, location: @event
@@ -53,6 +63,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:created_at, :description, :ending_at, :covid_guidelines, :comfort_metric)
+      params.require(:event).permit(:description, :ending_at, :covid_guidelines, :activity_id, :location_id, :start_time)
     end
 end
