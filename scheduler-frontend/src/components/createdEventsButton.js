@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../components/button';
+import ControlledAccordions from './controlledAccordions';
 
 
 export class createdEventsButton extends Component {
@@ -14,7 +15,9 @@ export class createdEventsButton extends Component {
                         <h3 className="font-bold text-coolGrey-dark">Date: {this.props.dateString}</h3>
                         <h3 className="font-bold text-coolGrey-dark pb-2">Location: {this.props.location}</h3>
                         <div className="py-2">
-                            <Button bgColor="bg-brightPink" name="Event Details" />
+                            {/* <Button bgColor="bg-brightPink" name="Event Details" /> */}
+                            <ControlledAccordions />
+                            
                         </div>
                     </div>
                 </div>
