@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resources :users do
     # getting all events for a user -- /users/1/events
     resources :questionnaires
-    resources :events, shallow: true
-    resources :invitations, shallow: true
+    resources :events
+    resources :invitations
   end
   # getting one specific event -- /events/1
 

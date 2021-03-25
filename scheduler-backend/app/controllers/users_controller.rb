@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
 
   # logging in to an existing user (POST)
+  # Tell Front-End they can access the json body in the error via err.response
   def login
     @user = User.where(username: params[:username]).first
 
@@ -27,10 +28,10 @@ class UsersController < ApplicationController
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: { message: "password incorrect" }, status: 500
+        render json: { message: "password incorrect" }, status: 422 # Unprocessable Entity (good for faulty usernames / passwords)
       end
     else
-      render json: { message: "username incorrect" }, status: 500 
+      render json: { message: "username incorrect" }, status: 422 
     end
   end
 
