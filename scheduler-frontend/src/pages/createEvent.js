@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
+import moment from "moment";
+import axios from 'axios';
 
 
 const CreateEvent = () => {
@@ -13,9 +16,27 @@ const CreateEvent = () => {
     const buildPost = (event) => {
         console.log(name);
         console.log(details)
-        console.log(startDate);
-        console.log(endDate);
+        console.log(moment(startDate).format("YYYY-MM-DD HH:mm:ss"))
+        console.log(moment(endDate).format("YYYY-MM-DD HH:mm:ss"))
         console.log(invitees);
+
+        // let eventInfo = {
+        //     //change database names
+        //     name: name,
+        //     details: details,
+        //     startDate: startDate,
+        //     endDate: endDate,
+        //     //not implemented yet
+        //     //invitees: this.state.q5,
+        //   }
+      
+        //   axios.post(`/users/${localStorage['user_id']}/events`, eventInfo)
+        //     .then(res => {
+        //       console.log(res);
+        //     }).catch(err => {
+        //       console.log("Something went wrong when creating an event");
+        //       console.log(err.response.data)
+        //     })
     };
 
     const [name, setName] = useState();
@@ -109,6 +130,9 @@ const CreateEvent = () => {
                     />
                     <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</text>
                   &nbsp;&nbsp;&nbsp;
+                <div className="inline mb-1">
+                <label className = "text-coolGrey-dark">
+                <FontAwesomeIcon className="inline fa-sm mr-2" icon={faCalendarDay} />
                 <DatePicker
                         className="font-bold text-coolGrey-dark focus:outline-none"
                         selected={startDate}
@@ -124,8 +148,13 @@ const CreateEvent = () => {
                             height: 2
                         }}
                     />
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START DATETIME</text>
+                    </label> 
+                    </div> 
+                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START</text>
                   &nbsp;&nbsp;&nbsp;
+                  <div className="inline mb-1">
+                  <label className = "text-coolGrey-dark">
+                    <FontAwesomeIcon className="inline fa-sm mr-2 " icon={faCalendarDay} />
                   <DatePicker
                         className="font-bold text-coolGrey-dark focus:outline-none"
                         selected={endDate}
@@ -141,7 +170,9 @@ const CreateEvent = () => {
                             height: 2
                         }}
                     />
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END DATETIME</text>
+                    </label>
+                    </div>
+                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END</text>
             &nbsp;&nbsp;&nbsp;
                 </form>
             </section>

@@ -65,8 +65,6 @@ export class questionnaire extends Component {
   }
 
   buildPost = () => {
-    let questions = [this.state.q1, this.state.q2, this.state.q3, this.state.q4, this.state.q5, this.state.q6, this.state.q7, this.state.q8, this.state.q9, this.state.q10]
-    console.log(questions);
     localStorage.setItem('filledOutQuestionnaire', true);
 
     let questionnaireInfo = {

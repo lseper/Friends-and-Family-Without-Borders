@@ -9,7 +9,7 @@ export class createdEvents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            createdEvents: false
+            createdEvents: true
         };
     }
 
