@@ -7,11 +7,12 @@ export class createEventInviteesList extends Component {
 
     render() {
         return (
-            <div className="flex" >
-                <text className="text-sm text-coolGrey-dark mr-auto ml-auto">{this.props.username}</text>
-                <text className="text-sm text-coolGrey-dark mr-auto ml-auto">{this.props.comfort}</text>
-                <text className="text-sm text-coolGrey-dark mr-auto ml-auto">{this.props.going}</text>
-            </div>
+           //<div className="flex" >
+           <tr>
+                <td className="text-sm text-coolGrey-dark mr-auto ml-auto">{this.props.username}</td>
+                <td className="text-sm text-coolGrey-dark mr-auto ml-auto">{this.props.comfort}</td>
+                <td className="text-sm text-coolGrey-dark mr-auto ml-auto">{this.props.going}</td>
+            </tr>
         )
     }
 }

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
-    color : '#454851'
+    color: '#454851'
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -39,30 +39,35 @@ export default function ControlledAccordions() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.heading}>Invitees</Typography>
+          <Typography variant = "h6">Invitees</Typography>
           {/* <Typography className={classes.secondaryHeading}>I am an accordion</Typography> */}
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <div className="flex font-bold text-coolGrey-dark flex-wrap content-evenly ">
-              <h4>Username</h4>
-              <h4>Comfort</h4>
-              <h4>Attendance</h4>
-            </div>
-            < CreateEventInviteesList
-            username="michaelkelly21" 
-            comfort="Very Comfortable"
-            going="Going" />
+            <table class="table-fixed font-bold text-coolGrey-dark">
+              <thead>
+                <tr className="text-left ">
+                  <th className="w-1/2">Username</th>
+                  <th className="w-1/4">Comfort</th>
+                  <th className="w-1/4">Attendance</th>
+                </tr>
+              </thead>
+              <tbody classname="text-sm">
+                < CreateEventInviteesList
+                  username="michaelkelly21"
+                  comfort="Very Comfortable"
+                  going="Going" />
+                < CreateEventInviteesList
+                  username="parkermiller34"
+                  comfort="Very Comfortable"
+                  going="Going" />
+                < CreateEventInviteesList
+                  username="liamseper"
+                  comfort="Very Comfortable"
+                  going="Going" />
+              </tbody>
+            </table>
 
-            < CreateEventInviteesList
-            username="parkermiller34" 
-            comfort="Very Comfortable"
-            going="Going" />
-
-            < CreateEventInviteesList
-            username="liamseper" 
-            comfort="Very Comfortable"
-            going="Going" />
           </Typography>
         </AccordionDetails>
       </Accordion>
