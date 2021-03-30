@@ -1,4 +1,4 @@
-class InvitationController < ApplicationController
+class InvitationsController < ApplicationController
     # Controller for Invitations
     
     # GET /user/:id/invitations
@@ -44,6 +44,6 @@ class InvitationController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invitation_params
-        params.require(:invitation).permit(:event_id, :user_id)
+        params.require(:invitation).permit(:event_id, )
     end
 end
