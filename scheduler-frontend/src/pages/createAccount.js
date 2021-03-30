@@ -89,9 +89,6 @@ export class createAccount extends Component {
             <InputText login={true} handleCallback={this.passwordCallBack} type="password" border="coolGreen" borderColor="border border-coolGreen" placeholder="examplePassword" label="PASSWORD" />
             <InputText login={true} handleCallback={this.numberCallBack} type="phoneNumber" border="coolGreen" borderColor="border border-coolGreen" placeholder="123456789" label="PHONE NUMBER" />
             <InputText login={true} handleCallback={this.nameCallBack} type="text" border="coolGreen" borderColor="border border-#E8E8E8" placeholder="Name" label="PREFERRED NAME" />
-            {/* 
-                    // not implemented yet
-                    <DropDown handleCallback = {this.notificationCallBack} name = "NOTIFICATION METHOD" option1 = "Text Message" option2 = "Email"/> */}
             <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" />
             {localStorage['SignupErrors'] !== 'None' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">

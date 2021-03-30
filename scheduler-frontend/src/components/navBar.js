@@ -50,52 +50,52 @@ function NavBar() {
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="nav-item">
                 <NavLink to="/homePage">
-                  <a
+                  <p
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Event Invitations</span>
-                  </a>
+                  </p>
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/createdEvents">
-                  <a
+                  <p
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Created Events</span>
-                  </a>
+                  </p>
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/questionnaire">
-                  <a
+                  <p
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Questionnaire</span>
-                  </a>
+                  </p>
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/profile">
-                  <a
+                  <p
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2">Profile</span>
-                  </a>
+                  </p>
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/">
-                  <a
+                  <p
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="#pablo"
                   >
                     <i className="text-lg leading-lg text-white opacity-75"></i><span className="ml-2" onClick={logout}>Log Out</span>
-                  </a>
+                  </p>
                 </NavLink>
               </li>
             </ul>
