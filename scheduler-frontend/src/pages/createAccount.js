@@ -42,10 +42,11 @@ export class createAccount extends Component {
         console.log("Authorization token is for the sign in page:", localStorage['authToken']);
         console.log("User id is for the sign in page:", localStorage['user_id']);
         this.props.history.push('/');
-      }).catch(() => {
+      }).catch(err => {
         console.log("We ran into an issue");
         window.location.reload();
-        localStorage.setItem('SignupErrors', "User already registered with this phone number");
+        localStorage.setItem('SignupErrors', err.response.data.message);
+        console.log(err.response.data.message);
       })
     localStorage.setItem('filledOutQuestionnaire', false);
   }
@@ -81,6 +82,9 @@ export class createAccount extends Component {
         <section className="App py-10 w-full flex justify-center items-coolGrey">
           <div className="px-1 pb-1 align-middle">
             <label htmlFor="title" className="text-3xl block font-bold  pb-2 text-coolGrey-dark">ENTER PROFILE INFORMATION</label>
+            <NavLink to="/">
+                    <button className="ml-5 hover:text-gray-300">Go Back to Login</button>
+          </NavLink>
           </div>
         </section>
         <section className="App h-2/3 w-full flex justify-center bg-white py-4 px-4">

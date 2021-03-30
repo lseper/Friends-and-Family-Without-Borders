@@ -40,10 +40,10 @@ export class login extends Component {
         console.log("Authorization token is:", localStorage['authToken']);
         console.log("User id is:", localStorage['user_id']);
         this.props.history.push('/homePage');
-      }).catch(() => {
+      }).catch(err => {
         console.log("We ran into an issue");
         window.location.reload();
-        localStorage.setItem('LoginErrors', "The email or password you entered is incorrect");
+        localStorage.setItem('LoginErrors', err.response.data.message);
       })
   }
 
@@ -78,7 +78,7 @@ export class login extends Component {
 
                     <NavLink to="/homePage">
               <div className="" onClick={this.buildPost}>
-                <Button name="Sign In" bgColor="bg-coolGreen" />
+                <Button name="Sign In" bgColor="bg-coolGreen" type="submit"/>
               </div>
             </NavLink>
 

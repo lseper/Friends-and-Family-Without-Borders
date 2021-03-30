@@ -118,7 +118,7 @@ const CreateEvent = () => {
                             height: 2
                         }}
                     />
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >EVENT NAME</text>
+                    <label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >EVENT NAME</label>
             &nbsp;&nbsp;&nbsp;
             <input onChange={handleDetails} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
                     <hr
@@ -128,7 +128,7 @@ const CreateEvent = () => {
                             height: 2
                         }}
                     />
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</text>
+                    <label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</label>
                   &nbsp;&nbsp;&nbsp;
                 <div className="inline mb-1">
                 <label className = "text-coolGrey-dark">
@@ -150,7 +150,7 @@ const CreateEvent = () => {
                     />
                     </label> 
                     </div> 
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START</text>
+                    <label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START</label>
                   &nbsp;&nbsp;&nbsp;
                   <div className="inline mb-1">
                   <label className = "text-coolGrey-dark">
@@ -172,7 +172,7 @@ const CreateEvent = () => {
                     />
                     </label>
                     </div>
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END</text>
+                    <label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END</label>
             &nbsp;&nbsp;&nbsp;
                 </form>
             </section>
@@ -181,7 +181,7 @@ const CreateEvent = () => {
 
                     <div className="inline mb-1">
                         <FontAwesomeIcon className="inline fa-sm mr-2" icon={faSearch} />
-                        <text className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</text>
+                        <label className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</label>
                     </div>
                     <div className="w-full pb-4 bg-grey-100">
                         <Select
