@@ -9,7 +9,7 @@ import CreateEventInviteesList from './createEventInviteesList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '95%',
+    width: '100%',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
     color: '#454851'
   },
   secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    fontSize: theme.typography.pxToRem(20),
+    color: "#454851",
   },
 }));
 
@@ -31,6 +31,11 @@ export default function ControlledAccordions() {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const users = [{ username: "mike", comfort: "very comfortable", attendance: "going" },
+  { username: "Em", comfort: "very comfortable", attendance: "going" },
+  { username: "Parker", comfort: "very comfortable", attendance: "going" }
+  ]
+
   return (
     <div className={classes.root}>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -39,91 +44,17 @@ export default function ControlledAccordions() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography variant = "h6">Invitees</Typography>
-          {/* <Typography className={classes.secondaryHeading}>I am an accordion</Typography> */}
+          <Typography className={classes.secondaryHeading} variant="h6">Invitees</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <table class="table-fixed font-bold text-coolGrey-dark">
-              <thead>
-                <tr className="text-left ">
-                  <th className="w-1/2">Username</th>
-                  <th className="w-1/4">Comfort</th>
-                  <th className="w-1/4">Attendance</th>
-                </tr>
-              </thead>
-              <tbody classname="text-sm">
-                < CreateEventInviteesList
-                  username="michaelkelly21"
-                  comfort="Very Comfortable"
-                  going="Going" />
-                < CreateEventInviteesList
-                  username="parkermiller34"
-                  comfort="Very Comfortable"
-                  going="Going" />
-                < CreateEventInviteesList
-                  username="liamseper"
-                  comfort="Very Comfortable"
-                  going="Going" />
-              </tbody>
-            </table>
-
+        <AccordionDetails className="w-full">
+          <Typography className="w-full">
+            <div className="md:w-full">
+              < CreateEventInviteesList
+                users={users} />
+            </div>
           </Typography>
         </AccordionDetails>
       </Accordion>
-
-      {/* extra accordion examples */}
-      {/* <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography className={classes.heading}>Users</Typography>
-          <Typography className={classes.secondaryHeading}>
-            You are currently not an owner
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.heading}>Advanced settings</Typography>
-          <Typography className={classes.secondaryHeading}>
-            Filtering has been entirely disabled for whole web server
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography className={classes.heading}>Personal data</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
-          </Typography>
-        </AccordionDetails>
-      </Accordion> */}
     </div>
   );
 }

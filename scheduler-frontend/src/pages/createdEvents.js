@@ -4,21 +4,54 @@ import NavBar from '../components/navBar';
 
 import { NavLink } from 'react-router-dom';
 
+
+//react function component
+const EventCard = ({name, date, location, details}) => {
+    return(
+    <div className="flex grid grid-cols-1 flex place-items-left py-4">
+        <CreatedEventButton 
+        name={name}
+        dateString={date}
+        location={location}
+        details={details} />
+    </div>
+    )
+}
+
 export class createdEvents extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            createdEvents: true
+            createdEvents: true,
+            eventList: []
         };
     }
 
     componentDidMount() {
+        const fakeArray = 
+            [
+                {name: 'Birthday', date: '04/28,2021', location: 'Holmes', details: 'Come to Holmes Lake!' },
+                {name: 'Dan', date: '04/28,2021', location: 'Lincoln', details: 'Come to Holmes Holmesmalsdkfjas;dkfjas!' },
+                {name: 'Emily', date: '04/28,2021', location: 'Omaha', details: 'Come to Holmes home I think this is going to make things look weird!' },
+                {name: 'Michael', date: '04/28,2021', location: 'AZ', details: 'Come to Holmes Pary!' }
+            ]
+
         // if a user is not logged in, brings them to the login page
         if (!localStorage['user_id'] && !localStorage['authToken']) {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
+        const eventsFromArray = fakeArray.map(event => {
+            return (<EventCard 
+                        name={event.name} 
+                        date={event.date}
+                        location={event.location}
+                        details={event.details}
+                        />)
+        })
+
+        this.setState({eventList: eventsFromArray})
     }
 
     render() {
@@ -52,13 +85,9 @@ export class createdEvents extends Component {
                     </section>
 
                     {this.state.createdEvents ?
-                        <div className="flex grid grid-cols-1 flex place-items-left py-4">
-                            <CreatedEventButton 
-                            name="Birthday Party" 
-                            dateString='March 18th 2021' 
-                            location="Holmes Lake" 
-                            details="Come to Holmes Lake for Courtney's Birthday Party! There will be food and plently of ourdoor games!" />
-                        </div>
+                    <div>
+                        {this.state.eventList}
+                    </div>
                         : null
                     }
 

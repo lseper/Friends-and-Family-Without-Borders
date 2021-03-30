@@ -45,6 +45,7 @@ export class profile extends Component {
       }
     })
       .then(res => {
+        console.log(res.data);
         this.setState({
           preferredName: res.data.name,
           userName: res.data.username,
@@ -133,7 +134,7 @@ export class profile extends Component {
 
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 w-1/2 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-            <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >{this.state.phoneNumber}</text>
+            <p className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >{this.state.phoneNumber}</p>
             <hr
               style={{
                 color: "#A4969B",
@@ -141,7 +142,7 @@ export class profile extends Component {
                 height: 2
               }}
             />
-            <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >PHONE NUMBER</text>
+            <p className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >PHONE NUMBER</p>
           </form>
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
@@ -154,7 +155,7 @@ export class profile extends Component {
                 height: 2
               }}
             />
-            <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</text>
+            <p className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</p>
             &nbsp;&nbsp;&nbsp;
             <input onChange={name => this.handlePreferredName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder={this.state.preferredName}></input>
             <hr
@@ -164,7 +165,7 @@ export class profile extends Component {
                 height: 2
               }}
             />
-            <text className={"text-sm block font-bold text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >PREFERRED NAME</text>
+            <p className={"text-sm block font-bold text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >PREFERRED NAME</p>
                   &nbsp;&nbsp;&nbsp;
                   <DropDown name="INFORMATION PUBLIC TO USERS" initalState={this.state.publicInfo} downlable={true} handleCallback={this.publicCallBack} option1="Yes" option2="No" border="border-coolGreen" />
             <div onClick={this.buildPost} className="w-full">
