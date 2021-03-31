@@ -47,7 +47,7 @@ export default function ControlledAccordions() {
           <Typography className={classes.secondaryHeading} variant="h4">Invitees</Typography>
         </AccordionSummary>
         <AccordionDetails className="w-full">
-          <Typography className="w-full">
+          <Typography className="w-full" component={'span'}>
             <div className="md:w-full">
               < CreateEventInviteesList
                 users={users} />
