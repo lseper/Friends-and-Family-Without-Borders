@@ -72,7 +72,7 @@ const DiscreteSlider = ({ userNumber, callBack }) => {
         </MuiThemeProvider>
       </div >
       <div className="pb-3 px-6 flex items-end inline-block">
-        <p className="text-5xl text-coolGreen">{num}</p>
+        <p className="text-4xl text-coolGreen">{num}</p>
       </div>
     </div>
   );

@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import CreatedEventButton from '../components/createdEventsButton';
 import NavBar from '../components/navBar';
+import axios from 'axios';
+import Loading from '../components/loading';
+
 
 import { NavLink } from 'react-router-dom';
 
 
 //react function component
-const EventCard = ({name, date, location, details}) => {
-    return(
-    <div className="flex grid grid-cols-1 flex place-items-left py-4">
-        <CreatedEventButton 
-        name={name}
-        dateString={date}
-        location={location}
-        details={details} />
-    </div>
+const EventCard = ({ name, date, location, details }) => {
+    return (
+        <div className="flex grid grid-cols-1 flex place-items-left py-4">
+            <CreatedEventButton
+                name={name}
+                dateString={date}
+                location={location}
+                details={details} />
+        </div>
     )
 }
 
@@ -23,41 +26,53 @@ export class createdEvents extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            createdEvents: true,
-            eventList: []
+            eventList: [],
+            loading: true,
         };
     }
 
     componentDidMount() {
-        const fakeArray = 
-            [
-                {name: 'Birthday', date: '04/28,2021', location: 'Holmes', details: 'Come to Holmes Lake!' },
-                {name: 'Dan', date: '04/28,2021', location: 'Lincoln', details: 'Come to Holmes Holmesmalsdkfjas;dkfjas!' },
-                {name: 'Emily', date: '04/28,2021', location: 'Omaha', details: 'Come to Holmes home I think this is going to make things look weird!' },
-                {name: 'Michael', date: '04/28,2021', location: 'AZ', details: 'Come to Holmes Pary!' }
-            ]
 
         // if a user is not logged in, brings them to the login page
         if (!localStorage['user_id'] && !localStorage['authToken']) {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
-        const eventsFromArray = fakeArray.map(event => {
-            return (<EventCard 
-                        name={event.name} 
-                        date={event.date}
-                        location={event.location}
-                        details={event.details}
-                        />)
+        const authorization = localStorage.getItem('authToken');
+        axios.get(`/users/${localStorage['user_id']}/events`, {
+            headers: {
+                'Authorization': authorization
+            }
         })
-
-        this.setState({eventList: eventsFromArray})
+            .then(res => {
+                this.setState({
+                    eventList: res.data.map(event => {
+                        return (<EventCard
+                            name={event.name}
+                            date={event.start_time}
+                            location="temp"
+                            details={event.description}
+                            creator="temp"
+                        />)
+                    }),
+                    loading: false,
+                })
+            }).then(() => {
+                console.log(this.state);
+            }).catch(err => {
+                console.log(err);
+                this.setState({ loading: false })
+            })
     }
 
     render() {
         return (
             <div>
                 <NavBar />
+                {this.state.loading ?
+                <Loading /> :
+                null
+                }
                 <div>
                     <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-full">
                         <div className="px-1 pb-1">
@@ -71,7 +86,7 @@ export class createdEvents extends Component {
                         <div>
 
                         </div>
-                        {this.state.createdEvents === false ?
+                        {this.state.eventList.length === 0 ?
                             <div>
                                 <div className="flex flex-grow align-start items-start py-4 w-full" >
                                     <form action="" className="flex flex-grow grid grid-cols-1 justify-start align-left items-left bg-white shadow-lg rounded px-5 py-4 container bg-white">
@@ -84,12 +99,11 @@ export class createdEvents extends Component {
                         }
                     </section>
 
-                    {this.state.createdEvents ?
-                    <div>
-                        {this.state.eventList}
-                    </div>
-                        : null
-                    }
+
+                        <div>
+                            {this.state.eventList}
+                        </div>
+
 
                 </div>
             </div>
