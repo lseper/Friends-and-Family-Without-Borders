@@ -41,16 +41,16 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user_exists = User.find_by(phone: params[:phone])
+    @user_exists = User.find_by(email: params[:email])
 
     if @user_exists
-      render json: { message: "User with the phone already exists!" }, status: 500
+      render json: { message: "User with the email already exists!" }, status: 500
     else
       @user = User.new(
         username: params[:username],
         password: params[:password],
         password_confirmation: params[:password], 
-        phone: params[:phone],
+        email: params[:email],
         name: params[:name],
         privacy: params[:privacy]
       )
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
         id: user.id,
         username: user.username,
         name: user.name,
-        phone: user.phone,
+        email: user.email,
         privacy: user.privacy,
         comfort_metric: comfort_metric(user_questionnaire)
       }
@@ -105,6 +105,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :password, :phone, :name, :privacy)
+      params.require(:user).permit(:username, :password, :email, :name, :privacy)
     end
 end
