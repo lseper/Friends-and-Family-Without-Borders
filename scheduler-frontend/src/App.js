@@ -9,7 +9,6 @@ import Questionnaire from './pages/questionnaire';
 import Profile from './pages/profile';
 import CreatedEvents from './pages/createdEvents';
 
-import './App.css';
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:3000';
 
@@ -17,9 +16,7 @@ export class App extends Component {
   
   render() {
     return (
-
       <BrowserRouter >
-        <div>
           <Switch>
             <Route path="/" component={Login} exact />
             <Route path="/createAccount" component={CreateAccount} />
@@ -29,7 +26,6 @@ export class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path="/createdEvents" component={CreatedEvents} />
           </Switch>
-        </div>
       </BrowserRouter>
     );
   }

@@ -7,6 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const useStyles = makeStyles({
     table: {
@@ -17,8 +21,8 @@ const useStyles = makeStyles({
 export default function BasicTable({ users }) {
     const classes = useStyles();
 
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
+    function createData(name, comfort, attendance) {
+        return { name, comfort, attendance };
     }
 
     const rows = [
@@ -43,8 +47,16 @@ export default function BasicTable({ users }) {
                             <TableCell component="th" scope="row">
                                 {row.name}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
+                            <TableCell align="right"> {row.comfort}</TableCell>
+                            <TableCell align="right">{row.attendance ?
+                                <div className="text-brightPink">
+                                    <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCheckCircle} />
+                                </div>
+                                :
+                                <div className="text-brightPink">
+                                    <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faTimesCircle} />
+                                </div>
+                            }</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

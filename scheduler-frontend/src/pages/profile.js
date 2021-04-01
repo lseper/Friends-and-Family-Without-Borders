@@ -119,35 +119,21 @@ export class profile extends Component {
           null
         }
         <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-          <div className="px-1 pb-1">
-            <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> YOUR PROFILE</label>
-          </div>
-          <div className="px-1 pb-1 flex">
-            <label htmlFor="title" className="text-xl text-left block font-bold pb-2 text-coolGrey-dark border-l-2 border-coolGrey"> COMFORT </label>
-            <div className="px-1 pb-1 flex">
-              {comfort}
+          <div className="px-1">
+            <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> Your Profile</label>
+            <div className="flex">
+              <label htmlFor="title" className="text-lg text-left block pb-2 pt-1 text-coolGrey-dark border-coolGrey"> Comfort </label>
+              <div className="px-1 pb-1 flex">
+                {comfort}
+              </div>
             </div>
-
-
           </div>
-        </section>
 
-        <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
-          <form action="" className="flex grid grid-cols-1 w-1/2 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-            <p className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >{this.state.phoneNumber}</p>
-            <hr
-              style={{
-                color: "#A4969B",
-                backgroundColor: "#A4969B",
-                height: 2
-              }}
-            />
-            <p className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >PHONE NUMBER</p>
-          </form>
+
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
-          <form action="" className="flex grid grid-cols-1 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-            <input onChange={name => this.handleUserName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left bg-grey-100"} placeholder={this.state.userName}></input>
+          <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
+            <p className={"text-lg block font-bold text-coolGrey-dark text-left bg-grey-100"} >{this.state.userName}</p>
             <hr
               style={{
                 color: "#BDE4A7",
@@ -155,9 +141,9 @@ export class profile extends Component {
                 height: 2
               }}
             />
-            <p className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</p>
+            <p className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</p>
             &nbsp;&nbsp;&nbsp;
-            <input onChange={name => this.handlePreferredName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder={this.state.preferredName}></input>
+            <p className={"text-lg block font-bold text-coolGrey-dark text-left bg-grey-100"} >{this.state.phoneNumber}</p>
             <hr
               style={{
                 color: "#BDE4A7",
@@ -165,7 +151,17 @@ export class profile extends Component {
                 height: 2
               }}
             />
-            <p className={"text-sm block font-bold text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >PREFERRED NAME</p>
+            <p className={"text-xs block font-bold text-coolGrey-dark text-left bg-grey-100"} >PHONE NUMBER</p>
+            &nbsp;&nbsp;&nbsp;
+            <input onChange={name => this.handlePreferredName(name)} type="text" className={"text-lg focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder={this.state.preferredName}></input>
+            <hr
+              style={{
+                color: "#BDE4A7",
+                backgroundColor: "#BDE4A7",
+                height: 2
+              }}
+            />
+            <p className={"text-xs block font-bold text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >PREFERRED NAME</p>
                   &nbsp;&nbsp;&nbsp;
                   <DropDown name="INFORMATION PUBLIC TO USERS" initalState={this.state.publicInfo} downlable={true} handleCallback={this.publicCallBack} option1="Yes" option2="No" border="border-coolGreen" />
             <div onClick={this.buildPost} className="w-full">
