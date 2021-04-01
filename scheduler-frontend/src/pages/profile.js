@@ -4,7 +4,8 @@ import DropDown from '../components/dropDown';
 import Button from '../components/button';
 import axios from 'axios';
 import Loading from '../components/loading';
-
+import InputTextFormGreen from '../components/inputTextFormGreen';
+import ShowText from '../components/showText'
 
 export class profile extends Component {
 
@@ -69,11 +70,12 @@ export class profile extends Component {
       })
   }
 
-  handleUserName = (inputText) => {
-    this.setState({ userName: inputText.target.value })
-  }
   handlePreferredName = (inputText) => {
-    this.setState({ preferredName: inputText.target.value })
+    this.setState({ preferredName: inputText })
+  }
+
+  handleNothing = (inputText) => {
+    
   }
 
   buildPost = (event) => {
@@ -129,41 +131,16 @@ export class profile extends Component {
             </div>
           </div>
 
-
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <p className={"text-lg block font-bold text-coolGrey-dark text-left bg-grey-100"} >{this.state.userName}</p>
-            <hr
-              style={{
-                color: "#BDE4A7",
-                backgroundColor: "#BDE4A7",
-                height: 2
-              }}
-            />
-            <p className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >USERNAME</p>
+            <ShowText label="USERNAME" placeholder={this.state.userName}/>
             &nbsp;&nbsp;&nbsp;
-            <p className={"text-lg block font-bold text-coolGrey-dark text-left bg-grey-100"} >{this.state.phoneNumber}</p>
-            <hr
-              style={{
-                color: "#BDE4A7",
-                backgroundColor: "#BDE4A7",
-                height: 2
-              }}
-            />
-            <p className={"text-xs block font-bold text-coolGrey-dark text-left bg-grey-100"} >PHONE NUMBER</p>
+            <ShowText label="PHONE NUMBER" placeholder={this.state.phoneNumber}/>
             &nbsp;&nbsp;&nbsp;
-            <input onChange={name => this.handlePreferredName(name)} type="text" className={"text-lg focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder={this.state.preferredName}></input>
-            <hr
-              style={{
-                color: "#BDE4A7",
-                backgroundColor: "#BDE4A7",
-                height: 2
-              }}
-            />
-            <p className={"text-xs block font-bold text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >PREFERRED NAME</p>
-                  &nbsp;&nbsp;&nbsp;
-                  <DropDown name="INFORMATION PUBLIC TO USERS" initalState={this.state.publicInfo} downlable={true} handleCallback={this.publicCallBack} option1="Yes" option2="No" border="border-coolGreen" />
+            <InputTextFormGreen handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
+            &nbsp;&nbsp;&nbsp;
+            <DropDown name="INFORMATION PUBLIC TO USERS" initalState={this.state.publicInfo} downlable={true} handleCallback={this.publicCallBack} option1="Yes" option2="No" border="border-coolGreen" />
             <div onClick={this.buildPost} className="w-full">
               <Button name="Update" bgColor="bg-coolGreen" />
             </div>

@@ -3,7 +3,20 @@ import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
 import Alert from '../components/alert';
 
-export class homePage extends Component {
+// will need when getting an invitations for a user from the database
+// const EventCard = ({ name, date, location, details }) => {
+//     return (
+//         <div className="flex grid grid-cols-1 flex place-items-left py-4">
+//             <EventInvitationsButton
+//                 name={name}
+//                 dateString={date}
+//                 location={location}
+//                 details={details} />
+//         </div>
+//     )
+// }
+
+export class HomePage extends Component {
 
     constructor(props) {
         super(props);
@@ -14,12 +27,13 @@ export class homePage extends Component {
     }
 
     componentDidMount() {
+
         // if a user is not logged in, brings them to the login page
         if (!localStorage['user_id'] && !localStorage['authToken']) {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
-        console.log(localStorage.getItem('filledOutQuestionnaire'))
+
         const needPopup = localStorage.getItem('filledOutQuestionnaire') === "false";
         if (needPopup) {
             this.setState({ showPopup: true })
@@ -54,12 +68,12 @@ export class homePage extends Component {
                     </section>
                     {this.state.needFriends === false ?
                         <div className="flex grid grid-cols-1 flex place-items-left py-4">
+                            {/* current hardcoded -- will change when implemented in the backend  */}
                             <EventInvitationsButton name="Birthday Party" dateString='March 18th 2021' location="Holmes Lake" details="Get ready to party because jayden is turning 24! We are very excited to be celebrating in a covid-friendly way. Please make sure to bring a coat, this is outdoors!" comfort="green" creator="Emily" />
                             <EventInvitationsButton name="Family Gathering" dateString='March 20th 2021' location="Lazlos" details="Just a get together for everyone to get to catch up and eat some great food!" comfort="red" creator="emily" />
                         </div>
                         : null
                     }
-
                 </div>
                 <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-8 px-4">
                 </section>
@@ -69,4 +83,4 @@ export class homePage extends Component {
     }
 }
 
-export default homePage;
+export default HomePage;

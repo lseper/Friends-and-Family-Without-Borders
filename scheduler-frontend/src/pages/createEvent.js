@@ -1,61 +1,46 @@
 import { NavLink } from 'react-router-dom';
 import Modal from '../components/model';
-import Button from '../components/button';
 import React, { useState, useEffect } from 'react';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 import moment from "moment";
 import axios from 'axios';
-import NavBar from '../components/navBar'
+import NavBar from '../components/navBar';
+import InputTextFormBlue from '../components/inputTextFormBlue';
+import DateSelect from '../components/dateSelect';
+
 
 
 const CreateEvent = () => {
 
-    function testDateTimes() {
-        // made sure that dates and times are not equal 
-        let createEvent = true;
-        const startDateString = moment(startDate).format("MMMM Do YYYY hh:mm:ss");
-        const endDateString = moment(endDate).format("MMMM Do YYYY hh:mm:ss")
-        if (startDateString === endDateString) {
-            console.log("test")
-            createEvent = false;
-        }
-
-        // make sure start date is before end date
-        if (startDate > endDate) {
-            console.log("false");
-            createEvent = false;
-        }
-        
-        if(!createEvent){
-            alert("You must enter a valid start and end date!")
-        }
-            
-        return (createEvent);
-
-    }
+    const [name, setName] = useState();
+    const [details, setDetails] = useState();
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [location, setLocation] = useState();
+    const [activity, setActivity] = useState();
+    const [data, setData] = useState([]);
+    const [invitees, setInvitees] = useState([]);
+    const [priorities, setPriorities] = useState([]);
 
     useEffect(() => {
-        if(data.length === 0){
+        if (data.length === 0) {
 
-        
-        axios.get('/users').then(res => {
-            for (let i = 0; i < res.data.length; i++){
-                // console.log(localStorage['user_id']);
-                if (res.data[i].id !== parseInt(localStorage['user_id'])){
-                    data.push({
-                        "value":res.data[i].id, 
-                        "label": res.data[i].username
-                    });
+
+            axios.get('/users').then(res => {
+                for (let i = 0; i < res.data.length; i++) {
+                    // console.log(localStorage['user_id']);
+                    if (res.data[i].id !== parseInt(localStorage['user_id'])) {
+                        data.push({
+                            "value": res.data[i].id,
+                            "label": res.data[i].username
+                        });
+                    }
                 }
-            }
-        }).catch(err => {
-            console.log(err.response.data.message);
-        })
-    }
+            }).catch(err => {
+                console.log(err.response.data.message);
+            })
+        }
     });
 
     const buildPost = (event) => {
@@ -86,15 +71,37 @@ const CreateEvent = () => {
 
     };
 
-    const [name, setName] = useState();
-    const [details, setDetails] = useState();
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    const [location, setLocation] = useState();
-    const [activity, setActivity] = useState();
-    const [data, setData] = useState([]);
-    const [invitees, setInvitees] = useState([]);
-    const [priorities, setPriorities] = useState([]);
+    function testDateTimes() {
+        // made sure that dates and times are not equal 
+        let createEvent = true;
+        const startDateString = moment(startDate).format("MMMM Do YYYY hh:mm:ss");
+        const endDateString = moment(endDate).format("MMMM Do YYYY hh:mm:ss")
+        if (startDateString === endDateString) {
+            console.log("test")
+            createEvent = false;
+        }
+
+        // make sure start date is before end date
+        if (startDate > endDate) {
+            console.log("false");
+            createEvent = false;
+        }
+
+        if (!createEvent) {
+            alert("You must enter a valid start and end date!")
+        }
+
+        return (createEvent);
+
+    }
+
+    const handleStartDate = (newValue) => {
+        setStartDate(newValue);
+    }
+
+    const handleEndDate = (newValue) => {
+        setEndDate(newValue);
+    }
 
     const handlePrioritiesChange = (newValue) => {
         setPriorities(newValue);
@@ -105,11 +112,11 @@ const CreateEvent = () => {
     }
 
     const handleName = (event) => {
-        setName(event.target.value)
+        setName(event)
     }
 
     const handleDetails = (event) => {
-        setDetails(event.target.value)
+        setDetails(event)
     }
 
     const callBackLocation = (event) => {
@@ -134,73 +141,14 @@ const CreateEvent = () => {
             </section>
             <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
                 <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-                    <input onChange={name => handleName(name)} type="text" className={"text-lg focus:ring-2 focus:ring-coolBlue block pb-1 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
-                    <hr
-                        style={{
-                            color: '#98D2EB',
-                            backgroundColor: '#98D2EB',
-                            height: 2
-                        }}
-                    />
-                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >EVENT NAME</label>
-            &nbsp;&nbsp;&nbsp;
-            <input onChange={handleDetails} type="text" className={"text-lg focus:ring-2 focus:ring-coolBlue block pb-1 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
-                    <hr
-                        style={{
-                            color: '#98D2EB',
-                            backgroundColor: '#98D2EB',
-                            height: 2
-                        }}
-                    />
-                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</label>
-                  &nbsp;&nbsp;&nbsp;
-                <div className="inline mb-1">
-                        <label className="text-coolGrey-dark">
-                            <FontAwesomeIcon className="inline fa-sm mr-2" icon={faCalendarDay} />
-                            <DatePicker
-                                className="text-lg text-coolGrey-dark focus:outline-none"
-                                selected={startDate}
-                                onChange={date => setStartDate(date)}
-                                showTimeSelect
-                                dateFormat="Pp"
-                                minDate={new Date()} />
-
-                            <hr
-                                style={{
-                                    color: '#98D2EB',
-                                    backgroundColor: '#98D2EB',
-                                    height: 2
-                                }}
-                            />
-                        </label>
-                    </div>
-                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START</label>
-                  &nbsp;&nbsp;&nbsp;
-                  <div className="inline mb-1">
-                        <label className="text-coolGrey-dark">
-                            <FontAwesomeIcon className="inline fa-sm mr-2 " icon={faCalendarDay} />
-                            <DatePicker
-                                className="text-lg text-coolGrey-dark focus:outline-none"
-                                selected={endDate}
-                                onChange={date => setEndDate(date)}
-                                showTimeSelect
-                                dateFormat="Pp"
-                                minDate={new Date()} />
-
-                            <hr
-                                style={{
-                                    color: '#98D2EB',
-                                    backgroundColor: '#98D2EB',
-                                    height: 2
-                                }}
-                            />
-                        </label>
-                    </div>
-                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END</label>
-            &nbsp;&nbsp;&nbsp;
-                    <div className="inline mb-1">
-                        <label className={"inline text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</label>
-                    </div>
+                    <InputTextFormBlue handleCallBack={handleName} type="text" label="EVENT NAME" placeholder="example" />
+                    &nbsp;&nbsp;&nbsp;
+                    <InputTextFormBlue handleCallBack={handleDetails} type="text" label="EVENT DESCRIPTION" placeholder="example" />
+                    &nbsp;&nbsp;&nbsp;
+                    <DateSelect handleCallback={handleStartDate} label="EVENT START" />
+                    &nbsp;&nbsp;&nbsp;
+                    <DateSelect handleCallback={handleEndDate} label="EVENT END" />
+                    &nbsp;&nbsp;&nbsp;
                     <div className="w-full bg-grey-100">
                         <Select
                             isMulti
@@ -220,10 +168,11 @@ const CreateEvent = () => {
                             })}
                         />
                     </div>
+                    <label className={"inline text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</label>
+
                     {invitees.length !== 0 && (
                         <span>
                             <div className="inline mb-1">
-                                {/* <FontAwesomeIcon className="inline fa-sm mr-2" icon={faSearch} /> */}
                                 <label className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SET PRIORITY INVITEES</label>
                             </div>
                             <div className="w-full pb-4 bg-grey-100">
@@ -250,7 +199,7 @@ const CreateEvent = () => {
                 </form>
             </section>
 
-            <section className="App min-h-0 w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
+            <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
                 <Modal first="Zoom" second="Indoors" third="Outdoors" callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} />
                 <NavLink to="/createdEvents" className="ml-4 font-bold text-brightPink text-xl inline mt-2.5">
                     Cancel

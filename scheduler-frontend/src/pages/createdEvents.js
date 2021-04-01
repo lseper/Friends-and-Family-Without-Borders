@@ -34,7 +34,7 @@ export class createdEvents extends Component {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
-        
+
         const authorization = localStorage.getItem('authToken');
         axios.get(`/users/${localStorage['user_id']}/events`, {
             headers: {
@@ -77,18 +77,13 @@ export class createdEvents extends Component {
                     null
                 }
                 <div>
-                    <section className="py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-full">
-                        <div className="px-1">
-                            <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Created Events</label>
-                            <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Create and view your events</label>
-                            <NavLink to="/createEvent">
-                                <button className=" bg-coolBlue py-2 px-5 text-left rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl ">+ CREATE EVENT</button>
-                            </NavLink>
-                        </div>
-                        <div>
-
-                        </div>
-                    </section>
+                    <div className="py-5 px-6 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-full">
+                        <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Created Events</label>
+                        <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Create and view your events</label>
+                        <NavLink to="/createEvent">
+                            <button className=" bg-coolBlue py-2 px-5 text-left rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl ">+ CREATE EVENT</button>
+                        </NavLink>
+                    </div>
                     <div>
                         {this.state.eventList}
                     </div>
