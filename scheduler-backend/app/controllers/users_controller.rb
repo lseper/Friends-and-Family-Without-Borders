@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    render json: @users
+    users = []
+    for user in @users
+      users.append(profile_info(user))
+    end
+    render json: users
   end
 
   # also return questionnaire comfort metric

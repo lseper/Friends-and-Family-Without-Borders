@@ -2,12 +2,13 @@ class ApplicationController < ActionController::API
 
     QUESTIONNAIRE_TOTAL = 120.0
 
-    # Individual comfort metric calculation
+    # Individual comfort metric calculation -- refactor for new questionnaire 
     def comfort_metric(questionnaire)
-        answers = [questionnaire[:q1answer], questionnaire[:q2answer], questionnaire[:q3answer], questionnaire[:q4answer], questionnaire[:q5answer],
-        questionnaire[:q6answer], questionnaire[:q7answer], questionnaire[:q8answer], questionnaire[:q9answer], questionnaire[:q10answer], questionnaire[:q11answer],
-        questionnaire[:q12answer]]
-        answers.sum / QUESTIONNAIRE_TOTAL
+        # answers = [questionnaire[:q1answer], questionnaire[:q2answer], questionnaire[:q3answer], questionnaire[:q4answer], questionnaire[:q5answer],
+        # questionnaire[:q6answer], questionnaire[:q7answer], questionnaire[:q8answer], questionnaire[:q9answer], questionnaire[:q10answer], questionnaire[:q11answer],
+        # questionnaire[:q12answer]]
+        # answers.sum / QUESTIONNAIRE_TOTAL
+        return 0.0
     end
 
     # ------------ Encryption and user authentication stuff ----------

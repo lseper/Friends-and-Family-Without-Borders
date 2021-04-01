@@ -14,7 +14,8 @@ export class createAccount extends Component {
       userName: '',
       password: '',
       phoneNumber: '',
-      publicInfo: false
+      publicInfo: false,
+      errors: '',
     };
   }
 
@@ -44,8 +45,10 @@ export class createAccount extends Component {
         this.props.history.push('/');
       }).catch(err => {
         console.log("We ran into an issue");
-        window.location.reload();
-        localStorage.setItem('SignupErrors', err.response.data.message);
+        this.setState({
+          errors: err.response.data.message
+        })
+        
         console.log(err.response.data.message);
       })
     localStorage.setItem('filledOutQuestionnaire', false);
@@ -96,9 +99,9 @@ export class createAccount extends Component {
             <InputTextFormGreen handleCallBack={this.nameCallBack} type="text" label="PREFERRED NAME" placeholder="Name Example" />
             &nbsp;&nbsp;&nbsp;
             <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" downlable={true} />
-            {localStorage['SignupErrors'] !== 'None' && (
+            {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
-                {localStorage['SignupErrors']}
+                {this.state.errors}
               </span>
             )}
           </form>

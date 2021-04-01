@@ -50,6 +50,7 @@ export class createdEvents extends Component {
                             location="temp"
                             details={event.description}
                             creator="temp"
+                            key={event.id}
                         />)
                     }),
                     loading: false,
