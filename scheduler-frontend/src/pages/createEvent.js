@@ -58,7 +58,7 @@ const CreateEvent = () => {
     }
     });
 
-    const buildPost = (event) => {
+    async function buildPost(event) {
         let eventInfo = {
             name: name,
             description: details,
@@ -71,17 +71,18 @@ const CreateEvent = () => {
         }
 
         const authorization = localStorage.getItem('authToken');
-        axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
+        await axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
             headers: {
                 'Authorization': authorization
             }
         })
             .then(res => {
                 console.log(res);
-                window.location.reload();
+                // window.location.reload();
+                
             }).catch(err => {
                 console.log("Something went wrong when creating an event");
-                console.log(err.response.data)
+                console.log(err.response.data.message);
             })
 
     };
@@ -95,6 +96,7 @@ const CreateEvent = () => {
     const [data, setData] = useState([]);
     const [invitees, setInvitees] = useState([]);
     const [priorities, setPriorities] = useState([]);
+    const [eventId, setEventId] = useState();
 
     const handlePrioritiesChange = (newValue) => {
         setPriorities(newValue);
