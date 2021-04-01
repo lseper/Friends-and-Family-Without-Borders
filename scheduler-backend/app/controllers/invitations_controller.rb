@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :update, :destroy]
-    before_action :authorized, only: [:index, :create, :destroy, :show, :update]
+    # before_action :authorized, only: [:index, :create]
     # Controller for Invitations
     
     # GET /user/:id/invitations
@@ -21,13 +21,23 @@ class InvitationsController < ApplicationController
 
     # POST /user/:id/invitations
     def create
-    @invitation = invitation.new(invitation_params)
-    
-    if @invitation.save
-        render json: @invitation, status: :created, location: @invitation
-    else
-        render json: @invitation.errors, status: :unprocessable_entity
-    end
+        errors = []
+        invitees = []
+        invitations = params[:invitees]
+        for invitee in invitations do
+            @invitee = Invitation.new(event_id: invitee[:event_id], user_id: invitee[:user_id], 
+                priority: invitee[:priority], confirmed: false, comfort_level: 0)
+            if @invitee.save
+                invitees.append(invitee)
+            else
+                errors.append(invitee.errors)
+            end
+        end
+        # TODO: fetch all invitee questionnaires
+        # TODO: get all location-activity pairings
+        # TODO: match each user up with each potential pairing
+        # TODO: generate cumulative score for each pairing
+        render json: { invitations: invitees, errors: errors } , status: :unprocessable_entity
     end
 
     # PATCH/PUT /invitations/1/edit
@@ -62,6 +72,6 @@ class InvitationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invitation_params
-        params.require(:invitation).permit(:event_id, :user_id)
+        params.require(:invitation).permit(:event_id, :user_id, :priority)
     end
 end
