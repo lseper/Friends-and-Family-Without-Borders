@@ -31,9 +31,9 @@ export default function ControlledAccordions() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const users = [{ username: "mike", comfort: "very comfortable", attendance: "going" },
-  { username: "Em", comfort: "very comfortable", attendance: "going" },
-  { username: "Parker", comfort: "very comfortable", attendance: "going" }
+  const users = [{ username: "mike", comfort: "very comfortable", attendance: true },
+  { username: "Em", comfort: "very comfortable", attendance: true },
+  { username: "Parker", comfort: "very comfortable", attendance: false }
   ]
 
   return (
@@ -44,7 +44,7 @@ export default function ControlledAccordions() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.secondaryHeading} variant="h6">Invitees</Typography>
+          <Typography className={classes.secondaryHeading} variant="h4">Invitees</Typography>
         </AccordionSummary>
         <AccordionDetails className="w-full">
           <Typography className="w-full" component={'span'}>

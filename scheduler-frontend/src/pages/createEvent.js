@@ -14,29 +14,47 @@ import axios from 'axios';
 const CreateEvent = () => {
 
     const buildPost = (event) => {
-        console.log(name);
-        console.log(details)
-        console.log(moment(startDate).format("YYYY-MM-DD HH:mm:ss"))
-        console.log(moment(endDate).format("YYYY-MM-DD HH:mm:ss"))
-        console.log(invitees);
+        let eventInfo = {
+            name: name,
+            description: details,
+            start_time: startDate,
+            ending_at: endDate,
+            //not implemented yet
+            //invitees: invitees,
+          }
 
-        // let eventInfo = {
-        //     //change database names
-        //     name: name,
-        //     details: details,
-        //     startDate: startDate,
-        //     endDate: endDate,
-        //     //not implemented yet
-        //     //invitees: this.state.q5,
-        //   }
-      
-        //   axios.post(`/users/${localStorage['user_id']}/events`, eventInfo)
-        //     .then(res => {
-        //       console.log(res);
-        //     }).catch(err => {
-        //       console.log("Something went wrong when creating an event");
-        //       console.log(err.response.data)
-        //     })
+          // made sure that dates and times are not equal 
+          let createEvent = true;
+          const startDateString = moment(startDate).format("MMMM Do YYYY hh:mm:ss");
+          const endDateString = moment(endDate).format("MMMM Do YYYY hh:mm:ss")
+          if (startDateString === endDateString){
+              console.log("test")
+              createEvent = false;
+          }
+
+          // make sure start date is before end date
+          if (startDate > endDate){
+              console.log("false");
+              createEvent = false;
+          }
+
+          if (createEvent){
+            const authorization = localStorage.getItem('authToken');
+            axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
+              headers: {
+                'Authorization': authorization
+              }
+            })
+              .then(res => {
+                console.log(res);
+                window.location.reload();
+              }).catch(err => {
+                console.log("Something went wrong when creating an event");
+                console.log(err.response.data)
+              })
+          } else {
+            alert("Enter a valid start and end date!");
+          }
     };
 
     const [name, setName] = useState();
@@ -46,7 +64,7 @@ const CreateEvent = () => {
     const data = [{
         // will map values 
         // value will be id of user 
-        // lable will be username 
+        // label will be username 
         value: 1,
         label: "user 1"
     },
@@ -70,16 +88,13 @@ const CreateEvent = () => {
     const [invitees, setInvitees] = useState([]);
 
     const handleSelectChange = (newValue) => {
-        //console.log('new array', newValue)
         setInvitees(newValue);
     }
 
     const handleName = (event) => {
-        //console.log(event.target.value)
         setName(event.target.value)
     }
     const handleDetails = (event) => {
-        //console.log(event.target.value)
         setDetails(event.target.value)
     }
 

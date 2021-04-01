@@ -49,8 +49,8 @@ export class homePage extends Component {
                     </section>
                     {this.state.needFriends === false ?
                         <div className="flex grid grid-cols-1 flex place-items-left py-4">
-                            <EventInvitationsButton name="Birthday Party" dateString='March 18th 2021' location="Holmes Lake" details="Get ready to party because jayden is turning 24! We are very excited to be celebrating in a covid-friendly way. Please make sure to bring a coat, this is outdoors!" comfort="green" />
-                            <EventInvitationsButton name="Family Gathering" dateString='March 20th 2021' location="Lazlos" details="Just a get together for everyone to get to catch up and eat some great food!" comfort="red" />
+                            <EventInvitationsButton name="Birthday Party" dateString='March 18th 2021' location="Holmes Lake" details="Get ready to party because jayden is turning 24! We are very excited to be celebrating in a covid-friendly way. Please make sure to bring a coat, this is outdoors!" comfort="green" creator = "Emily"/>
+                            <EventInvitationsButton name="Family Gathering" dateString='March 20th 2021' location="Lazlos" details="Just a get together for everyone to get to catch up and eat some great food!" comfort="red" creator = "emily"/>
                             {/* <EventInvitationsButton name = "Family Gathering" dateString = 'March 20th 2021' location = 'Lazlos'/>
                                 <EventInvitationsButton name = "Sand VolleyBall" dateString = 'March 24th 2021' location = "Holmes Lake" /> */}
                         </div>
