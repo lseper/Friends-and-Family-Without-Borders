@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class inputText extends Component {
+export class InputText extends Component {
 
     constructor(props) {
         super(props);
@@ -27,10 +27,9 @@ export class inputText extends Component {
                         <input onChange={this.handleCallback} type={this.props.type} name={this.props.type} className={"shadow bg-white appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-coolGrey-dark " + this.props.borderColor} placeholder={this.props.placeholder} />
                     </div>
                 }
-
             </div>
         )
     }
 }
 
-export default inputText;
+export default InputText;

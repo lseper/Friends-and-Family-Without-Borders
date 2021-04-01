@@ -9,7 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -23,7 +22,7 @@ export default function BasicTable({ users }) {
     const classes = useStyles();
 
     function createData(name, comfort, attendance) {
-        return {name, comfort, attendance };
+        return { name, comfort, attendance };
     }
 
     const rows = [
@@ -50,14 +49,14 @@ export default function BasicTable({ users }) {
                             </TableCell>
                             <TableCell align="right"> {row.comfort}</TableCell>
                             <TableCell align="right">{row.attendance ?
-                                    <div className = "text-brightPink">
-                                        <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCheckCircle} /> 
-                                    </div>
-                                    : 
-                                    <div className = "text-brightPink">
-                                        <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faTimesCircle} />
-                                    </div>
-                                                    }</TableCell>
+                                <div className="text-brightPink">
+                                    <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCheckCircle} />
+                                </div>
+                                :
+                                <div className="text-brightPink">
+                                    <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faTimesCircle} />
+                                </div>
+                            }</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
