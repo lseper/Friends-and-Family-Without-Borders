@@ -27,10 +27,6 @@ class QuestionnairesController < ApplicationController
       q6answer: questionnaire_params[:q6answer],
       q7answer: questionnaire_params[:q7answer],
       q8answer: questionnaire_params[:q8answer],
-      q9answer: questionnaire_params[:q9answer],
-      q10answer: questionnaire_params[:q10answer],
-      q11answer: questionnaire_params[:q11answer],
-      q12answer: questionnaire_params[:q12answer],
       user_id: params[:user_id]
     )
 
@@ -63,6 +59,6 @@ class QuestionnairesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def questionnaire_params
-      params.require(:questionnaire).permit(:q1answer, :q2answer, :q3answer, :q4answer, :q5answer, :q6answer, :q7answer, :q8answer, :q9answer, :q10answer, :q11answer, :q12answer)
+      params.require(:questionnaire).permit(:q1answer, :q2answer, :q3answer, :q4answer, :q5answer, :q6answer, :q7answer, :q8answer)
     end
 end
