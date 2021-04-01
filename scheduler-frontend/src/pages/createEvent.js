@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import Button from '../components/button';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,26 @@ import axios from 'axios';
 
 
 const CreateEvent = () => {
+
+    useEffect(() => {
+        if(data.length === 0){
+
+        
+        axios.get('/users').then(res => {
+            for (let i = 0; i < res.data.length; i++){
+                // console.log(localStorage['user_id']);
+                if (res.data[i].id !== parseInt(localStorage['user_id'])){
+                    data.push({
+                        "value":res.data[i].id, 
+                        "label": res.data[i].username
+                    });
+                }
+            }
+        }).catch(err => {
+            console.log(err.response.data.message);
+        })
+    }
+    });
 
     const buildPost = (event) => {
         let eventInfo = {
@@ -61,31 +81,13 @@ const CreateEvent = () => {
     const [details, setDetails] = useState();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const data = [{
-        // will map values 
-        // value will be id of user 
-        // label will be username 
-        value: 1,
-        label: "user 1"
-    },
-    {
-        value: 2,
-        label: "user 2"
-    },
-    {
-        value: 3,
-        label: "user 3"
-    },
-    {
-        value: 4,
-        label: "user 4"
-    },
-    {
-        value: 5,
-        label: "user 5"
-    }];
-
+    const [data, setData] = useState([]);
     const [invitees, setInvitees] = useState([]);
+    const [priorities, setPriorities] = useState([]);
+
+    const handlePrioritiesChange = (newValue) => {
+        setPriorities(newValue);
+    }
 
     const handleSelectChange = (newValue) => {
         setInvitees(newValue);
@@ -217,6 +219,35 @@ const CreateEvent = () => {
                             })}
                         />
                     </div>
+
+                    {invitees.length !== 0 && (
+                        <span>
+                            <div className="inline mb-1">
+                                <FontAwesomeIcon className="inline fa-sm mr-2" icon={faSearch} />
+                                <label className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SET PRIORITY INVITEES</label>
+                            </div>
+                            <div className="w-full pb-4 bg-grey-100">
+                                <Select
+                                    isMulti
+                                    name="colors"
+                                    options={invitees}
+                                    onChange={(newValue) => handlePrioritiesChange(newValue)}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    theme={theme => ({
+                                        ...theme,
+                                        borderRadius: 0,
+                                        colors: {
+                                            ...theme.colors,
+                                            primary25: '#BDE4A7',
+                                            primary: '#A4969B',
+                                        }
+                                    })}
+                                />
+                            </div>
+                        </span>
+                    )}
+
                 </form>
             </section>
             <section className="App min-h-0 w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
