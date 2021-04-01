@@ -27,6 +27,7 @@ export class Questionnaire extends Component {
   }
 
   componentDidMount() {
+    
     // if a user is not logged in, brings them to the login page
     if (!localStorage['user_id'] && !localStorage['authToken']) {
       this.props.history.push('/');
@@ -141,29 +142,28 @@ export class Questionnaire extends Component {
           <Loading /> :
           null
         }
-        <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-          <div className="px-1 mt-3">
+
+        <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
             <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
             <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
-          </div>
-        </section>
+        </div>
         <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
-          <Question className="" question="Indoor in-person event with relatives:" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Indoor in-person event with friends:" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Indoor event without social distancing:" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Indoor event with 10+ people:" userNumber={this.state.q4} qNum={4} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Indoor event with 30+ people:" userNumber={this.state.q5} qNum={5} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="People being unmasked at an event:" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="People eating food at an event:" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Using public restrooms:" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Eating public food:" userNumber={this.state.q9} qNum={9} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Sharing physical objects:" userNumber={this.state.q10} qNum={10} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Event without handsanitizer available:" userNumber={this.state.q11} qNum={11} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="Attending event where invitee has been exposed:" userNumber={this.state.q12} qNum={12} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How comfortable are you with events hosted outside?" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How comfortable are you with events hosted inside, with room for social distancing?" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How comfortable are you with events hosted inside, not large enough for social distancing?" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How comfortable are you with online events?" userNumber={this.state.q4} qNum={4} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How comfortable are you with eating or drinking around people?" userNumber={this.state.q5} qNum={5} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How important is social distancing to you?" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How important is it that people are wearing masks at an event?" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How many people do you feel comfortable being around at an event?" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="filler rn" userNumber={this.state.q9} qNum={9} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="filler rn" userNumber={this.state.q10} qNum={10} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="filler rn" userNumber={this.state.q11} qNum={11} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="filler rn" userNumber={this.state.q12} qNum={12} totalCallBack={this.handleTotalCallBack} />
         </div>
 
-        <section className="App min-h-0 w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
-          <div className="px-1 pb-1" onClick={this.buildPost}>
+        <section className="">
+          <div className="px-5 pb-2" onClick={this.buildPost}>
             <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" />
           </div>
         </section>
