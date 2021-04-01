@@ -20,6 +20,10 @@ class InvitationsController < ApplicationController
     end
 
     # POST /user/:id/invitations
+    # TODO: Add authorization to this
+    # Only the creator of an event should be able to add invitees to it
+    # do this by checking that the owner of the event signalled by ":event_id"
+    # matches the auth_token sent in the header by the user.
     def create
         errors = []
         invitees = []
@@ -34,6 +38,7 @@ class InvitationsController < ApplicationController
             end
         end
         # TODO: fetch all invitee questionnaires
+        
         # TODO: get all location-activity pairings
         # TODO: match each user up with each potential pairing
         # TODO: generate cumulative score for each pairing
