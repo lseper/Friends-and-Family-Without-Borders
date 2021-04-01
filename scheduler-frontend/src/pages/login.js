@@ -10,7 +10,8 @@ export class login extends Component {
     super(props);
     this.state = {
       userName: '',
-      password: ''
+      password: '',
+      errors: ''
     };
   }
 
@@ -30,7 +31,6 @@ export class login extends Component {
 
     axios.post('/login', loginInfo)
       .then(res => {
-        localStorage.setItem('LoginErrors', "None");
         const authorization = `Bearer ${res.data.auth_token}`;
         localStorage.setItem('authToken', authorization);
         const userId = res.data.user_id;
@@ -42,8 +42,9 @@ export class login extends Component {
         this.props.history.push('/homePage');
       }).catch(err => {
         console.log("We ran into an issue");
-        window.location.reload();
-        localStorage.setItem('LoginErrors', err.response.data.message);
+        this.setState({
+          errors: err.response.data.message
+        })
       })
   }
 
@@ -69,9 +70,9 @@ export class login extends Component {
             <InputText login={true} handleCallback={this.passwordCallBack} type="password" border="coolGreen" placeholder="examplePassword" label="PASSWORD" />
             
             {/* log in error messages */}
-            {localStorage['LoginErrors'] !== 'None' && (
+            {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-brightPink text-xs mt-1 ml-1">
-                {localStorage['LoginErrors']}
+                {this.state.errors}
               </span>
             )}
             <NavLink to="/homePage">

@@ -24,26 +24,66 @@ const CreateEvent = () => {
     const [priorities, setPriorities] = useState([]);
 
     useEffect(() => {
-        if (data.length === 0) {
-
-
+        if(data.length === 0){
             axios.get('/users').then(res => {
-                for (let i = 0; i < res.data.length; i++) {
-                    // console.log(localStorage['user_id']);
-                    if (res.data[i].id !== parseInt(localStorage['user_id'])) {
+                for (let i = 0; i < res.data.length; i++){
+                    if (res.data[i].id !== parseInt(localStorage['user_id'])){
                         data.push({
-                            "value": res.data[i].id,
+                            "value":res.data[i].id, 
                             "label": res.data[i].username
                         });
                     }
                 }
             }).catch(err => {
-                console.log(err.response.data.message);
+                console.log(err.response.data);
             })
         }
     });
 
-    const buildPost = (event) => {
+    function addInvitees(eventId) {
+        // get indexes of invitees who are priority
+        let priorityIndexes = [];
+        for (let i = 0; i < invitees.length; i++){
+            for (let j = 0; j < priorities.length; j++){
+                if(invitees[i] === priorities[j]){
+                    priorityIndexes.push(i);
+                }
+            }
+        }
+
+        let finalInviteesList = [];
+        for (let i = 0; i < invitees.length; i++) {
+            if (priorityIndexes.includes(i)) {
+                finalInviteesList.push({
+                    user_id: invitees[i].value,
+                    priority: true
+                })
+            } else {
+                finalInviteesList.push({
+                    user_id: invitees[i].value,
+                    priority: false
+                })
+            }
+        }
+        let finalInvitees = ({
+            event_id: eventId,
+            invitees: finalInviteesList
+        })
+
+        console.log(finalInvitees);
+
+        // console.log(finalInviteesList);
+        axios.post(`/users/${localStorage['user_id']}/invitations`, finalInvitees)
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err.response.data);
+        })
+        
+
+    }
+
+    async function buildPost() {
         let eventInfo = {
             name: name,
             description: details,
@@ -54,21 +94,26 @@ const CreateEvent = () => {
             //location: location,
             //activity: activity
         }
+        let eventId = -1;
 
         const authorization = localStorage.getItem('authToken');
-        axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
+        await axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
             headers: {
                 'Authorization': authorization
             }
         })
             .then(res => {
-                console.log(res);
-                window.location.reload();
+                eventId = res.data.id;
+                
+                addInvitees(eventId)
+                // window.location.reload();
+                
             }).catch(err => {
                 console.log("Something went wrong when creating an event");
-                console.log(err.response.data)
+                console.log(err.response.data);
             })
 
+        
     };
 
     function testDateTimes() {
