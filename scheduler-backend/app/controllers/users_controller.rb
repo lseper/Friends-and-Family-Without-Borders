@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     for user in @users
       users.append(profile_info(user))
     end
-    render json: user
+    render json: users
   end
 
   # also return questionnaire comfort metric
