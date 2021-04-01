@@ -44,6 +44,22 @@ class ApplicationController < ActionController::API
         !! logged_in_user
     end
 
+    # modified authentication -- done so that only the owner of an event can mess with it
+    # only use this method for checking authorization for EVENT ORGANIZER related actions
+    # check to make sure the requester is the owner of the event 
+    def is_owner?
+        decoded = decode_token
+        if decoded
+            @id = decoded[0]['user_id']
+            @event = Event.find_by(user_id: @id)
+        end
+    end
+
+    # before_action for actions that only the OWNER of an event can do
+    def authorized_as_owner
+        render json: { message: 'You are not the owner of this event' }, status: :unauthorized unless is_owner? 
+    end
+
     def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
