@@ -1,189 +1,209 @@
 import { NavLink } from 'react-router-dom';
+import Modal from '../components/model';
 import Button from '../components/button';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 import moment from "moment";
 import axios from 'axios';
+import NavBar from '../components/navBar'
 
 
 const CreateEvent = () => {
 
-    const buildPost = (event) => {
-        console.log(name);
-        console.log(details)
-        console.log(moment(startDate).format("YYYY-MM-DD HH:mm:ss"))
-        console.log(moment(endDate).format("YYYY-MM-DD HH:mm:ss"))
-        console.log(invitees);
+    function testDateTimes() {
+        // made sure that dates and times are not equal 
+        let createEvent = true;
+        const startDateString = moment(startDate).format("MMMM Do YYYY hh:mm:ss");
+        const endDateString = moment(endDate).format("MMMM Do YYYY hh:mm:ss")
+        if (startDateString === endDateString) {
+            console.log("test")
+            createEvent = false;
+        }
 
-        // let eventInfo = {
-        //     //change database names
-        //     name: name,
-        //     details: details,
-        //     startDate: startDate,
-        //     endDate: endDate,
-        //     //not implemented yet
-        //     //invitees: this.state.q5,
-        //   }
-      
-        //   axios.post(`/users/${localStorage['user_id']}/events`, eventInfo)
-        //     .then(res => {
-        //       console.log(res);
-        //     }).catch(err => {
-        //       console.log("Something went wrong when creating an event");
-        //       console.log(err.response.data)
-        //     })
+        // make sure start date is before end date
+        if (startDate > endDate) {
+            console.log("false");
+            createEvent = false;
+        }
+        
+        if(!createEvent){
+            alert("You must enter a valid start and end date!")
+        }
+            
+        return (createEvent);
+
+    }
+
+    useEffect(() => {
+        if(data.length === 0){
+
+        
+        axios.get('/users').then(res => {
+            for (let i = 0; i < res.data.length; i++){
+                // console.log(localStorage['user_id']);
+                if (res.data[i].id !== parseInt(localStorage['user_id'])){
+                    data.push({
+                        "value":res.data[i].id, 
+                        "label": res.data[i].username
+                    });
+                }
+            }
+        }).catch(err => {
+            console.log(err.response.data.message);
+        })
+    }
+    });
+
+    async function buildPost(event) {
+        let eventInfo = {
+            name: name,
+            description: details,
+            start_time: startDate,
+            ending_at: endDate,
+            //not implemented yet
+            //invitees: invitees,
+            //location: location,
+            //activity: activity
+        }
+
+        const authorization = localStorage.getItem('authToken');
+        await axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
+            headers: {
+                'Authorization': authorization
+            }
+        })
+            .then(res => {
+                console.log(res);
+                // window.location.reload();
+                
+            }).catch(err => {
+                console.log("Something went wrong when creating an event");
+                console.log(err.response.data.message);
+            })
+
     };
 
     const [name, setName] = useState();
     const [details, setDetails] = useState();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const data = [{
-        // will map values 
-        // value will be id of user 
-        // lable will be username 
-        value: 1,
-        label: "user 1"
-    },
-    {
-        value: 2,
-        label: "user 2"
-    },
-    {
-        value: 3,
-        label: "user 3"
-    },
-    {
-        value: 4,
-        label: "user 4"
-    },
-    {
-        value: 5,
-        label: "user 5"
-    }];
-
+    const [location, setLocation] = useState();
+    const [activity, setActivity] = useState();
+    const [data, setData] = useState([]);
     const [invitees, setInvitees] = useState([]);
+    const [priorities, setPriorities] = useState([]);
+    const [eventId, setEventId] = useState();
+
+    const handlePrioritiesChange = (newValue) => {
+        setPriorities(newValue);
+    }
 
     const handleSelectChange = (newValue) => {
-        //console.log('new array', newValue)
         setInvitees(newValue);
     }
 
     const handleName = (event) => {
-        //console.log(event.target.value)
         setName(event.target.value)
     }
+
     const handleDetails = (event) => {
-        //console.log(event.target.value)
         setDetails(event.target.value)
     }
 
+    const callBackLocation = (event) => {
+        setLocation(event.target.value)
+        console.log(event.target.value)
+    }
+
+    const callBackActivity = (event) => {
+        setActivity(event.target.value)
+        console.log(event.target.value)
+    }
+
+
     return (
         <div>
-            <div className="bg-coolGrey flex px-2 py-3 text-white justify-between text-2xl shadow-xl hover:shadow-md">
-                <NavLink to="/createdEvents">
-                    <button className="ml-5 hover:text-gray-300">←</button>
-                </NavLink>
-                <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-                    <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-                        <a
-                            className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white"
-                            href="#pablo"
-                        >
-                            CREATE EVENT
-                            </a>
-                    </div>
-                </div>
-            </div>
+            <NavBar />
             <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-                <div className="px-1 pb-1">
-                    <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> CREATE EVENT</label>
-                </div>
                 <div className="px-1">
-                    <label htmlFor="title" className="text-xl text-left block font-bold pb-2 text-coolGrey-dark border-l-2 border-coolGrey"> Fill out the following information</label>
+                    <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Create Event</label>
+                    <label htmlFor="title" className="text-lg text-left block pb-2 text-coolGrey-dark"> Fill out the following information</label>
                 </div>
             </section>
             <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
-                <form action="" className="flex grid grid-cols-1 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-                    <input onChange={name => handleName(name)} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
+                <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
+                    <input onChange={name => handleName(name)} type="text" className={"text-lg focus:ring-2 focus:ring-coolBlue block pb-1 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
                     <hr
                         style={{
-                            color: "#BDE4A7",
-                            backgroundColor: "#BDE4A7",
+                            color: '#98D2EB',
+                            backgroundColor: '#98D2EB',
                             height: 2
                         }}
                     />
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >EVENT NAME</text>
+                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100"} >EVENT NAME</label>
             &nbsp;&nbsp;&nbsp;
-            <input onChange={handleDetails} type="text" className={"text-sm focus:ring-2 focus:ring-coolGreen block font-bold pb-2 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
+            <input onChange={handleDetails} type="text" className={"text-lg focus:ring-2 focus:ring-coolBlue block pb-1 text-coolGrey-dark focus:outline-none text-left"} placeholder="example"></input>
                     <hr
                         style={{
-                            color: "#BDE4A7",
-                            backgroundColor: "#BDE4A7",
+                            color: '#98D2EB',
+                            backgroundColor: '#98D2EB',
                             height: 2
                         }}
                     />
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</text>
+                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT DESCRIPTION</label>
                   &nbsp;&nbsp;&nbsp;
                 <div className="inline mb-1">
-                <label className = "text-coolGrey-dark">
-                <FontAwesomeIcon className="inline fa-sm mr-2" icon={faCalendarDay} />
-                <DatePicker
-                        className="font-bold text-coolGrey-dark focus:outline-none"
-                        selected={startDate}
-                        onChange={date => setStartDate(date)}
-                        showTimeSelect
-                        dateFormat="Pp"
-                        minDate={new Date()} />
+                        <label className="text-coolGrey-dark">
+                            <FontAwesomeIcon className="inline fa-sm mr-2" icon={faCalendarDay} />
+                            <DatePicker
+                                className="text-lg text-coolGrey-dark focus:outline-none"
+                                selected={startDate}
+                                onChange={date => setStartDate(date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                minDate={new Date()} />
 
-                    <hr
-                        style={{
-                            color: "#BDE4A7",
-                            backgroundColor: "#BDE4A7",
-                            height: 2
-                        }}
-                    />
-                    </label> 
-                    </div> 
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START</text>
+                            <hr
+                                style={{
+                                    color: '#98D2EB',
+                                    backgroundColor: '#98D2EB',
+                                    height: 2
+                                }}
+                            />
+                        </label>
+                    </div>
+                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT START</label>
                   &nbsp;&nbsp;&nbsp;
                   <div className="inline mb-1">
-                  <label className = "text-coolGrey-dark">
-                    <FontAwesomeIcon className="inline fa-sm mr-2 " icon={faCalendarDay} />
-                  <DatePicker
-                        className="font-bold text-coolGrey-dark focus:outline-none"
-                        selected={endDate}
-                        onChange={date => setEndDate(date)}
-                        showTimeSelect
-                        dateFormat="Pp"
-                        minDate={new Date()} />
+                        <label className="text-coolGrey-dark">
+                            <FontAwesomeIcon className="inline fa-sm mr-2 " icon={faCalendarDay} />
+                            <DatePicker
+                                className="text-lg text-coolGrey-dark focus:outline-none"
+                                selected={endDate}
+                                onChange={date => setEndDate(date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                minDate={new Date()} />
 
-                    <hr
-                        style={{
-                            color: "#BDE4A7",
-                            backgroundColor: "#BDE4A7",
-                            height: 2
-                        }}
-                    />
-                    </label>
+                            <hr
+                                style={{
+                                    color: '#98D2EB',
+                                    backgroundColor: '#98D2EB',
+                                    height: 2
+                                }}
+                            />
+                        </label>
                     </div>
-                    <text className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END</text>
+                    <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >EVENT END</label>
             &nbsp;&nbsp;&nbsp;
-                </form>
-            </section>
-            <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
-                <form action="" className="flex grid grid-cols-1 flex-grow bg-white shadow-lg rounded px-8 py-8 pt-8">
-
                     <div className="inline mb-1">
-                        <FontAwesomeIcon className="inline fa-sm mr-2" icon={faSearch} />
-                        <text className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</text>
+                        <label className={"inline text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</label>
                     </div>
-                    <div className="w-full pb-4 bg-grey-100">
+                    <div className="w-full bg-grey-100">
                         <Select
                             isMulti
                             name="colors"
@@ -196,18 +216,47 @@ const CreateEvent = () => {
                                 borderRadius: 0,
                                 colors: {
                                     ...theme.colors,
-                                    primary25: '#BDE4A7',
+                                    primary25: '#98D2EB',
                                     primary: '#A4969B',
                                 }
                             })}
                         />
                     </div>
+                    {invitees.length !== 0 && (
+                        <span>
+                            <div className="inline mb-1">
+                                {/* <FontAwesomeIcon className="inline fa-sm mr-2" icon={faSearch} /> */}
+                                <label className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SET PRIORITY INVITEES</label>
+                            </div>
+                            <div className="w-full pb-4 bg-grey-100">
+                                <Select
+                                    isMulti
+                                    name="colors"
+                                    options={invitees}
+                                    onChange={(newValue) => handlePrioritiesChange(newValue)}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    theme={theme => ({
+                                        ...theme,
+                                        borderRadius: 0,
+                                        colors: {
+                                            ...theme.colors,
+                                            primary25: '#BDE4A7',
+                                            primary: '#A4969B',
+                                        }
+                                    })}
+                                />
+                            </div>
+                        </span>
+                    )}
                 </form>
             </section>
+
             <section className="App min-h-0 w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
-                <div onClick={buildPost} className="px-1 pb-1" >
-                    <Button name="Create Event" bgColor="bg-coolGreen" />
-                </div>
+                <Modal first="Zoom" second="Indoors" third="Outdoors" callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} />
+                <NavLink to="/createdEvents" className="ml-4 font-bold text-brightPink text-xl inline mt-2.5">
+                    Cancel
+                </NavLink>
             </section>
 
         </div>

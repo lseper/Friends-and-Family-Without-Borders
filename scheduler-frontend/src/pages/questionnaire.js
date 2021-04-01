@@ -5,7 +5,7 @@ import Button from '../components/button';
 import Loading from '../components/loading';
 import axios from 'axios';
 
-export class questionnaire extends Component {
+export class Questionnaire extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,7 +24,6 @@ export class questionnaire extends Component {
       q12: 0,
       quesitonnaireId: '1'
     };
-
   }
 
   componentDidMount() {
@@ -60,12 +59,11 @@ export class questionnaire extends Component {
         console.log(this.state);
       }).catch(err => {
         console.log(err);
-        this.setState({loading: false})
+        this.setState({ loading: false })
       })
   }
 
   buildPost = () => {
-    localStorage.setItem('filledOutQuestionnaire', true);
 
     let questionnaireInfo = {
       q1answer: this.state.q1,
@@ -85,6 +83,7 @@ export class questionnaire extends Component {
 
     axios.post(`/users/${localStorage['user_id']}/questionnaires`, questionnaireInfo)
       .then(res => {
+        localStorage.setItem('filledOutQuestionnaire', true);
         console.log(res);
       }).catch(err => {
         console.log("Something went wrong when making questionnaire");
@@ -142,16 +141,13 @@ export class questionnaire extends Component {
           <Loading /> :
           null
         }
-
         <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-          <div className="px-1 pb-1">
-            <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> QUESTIONNAIRE</label>
-          </div>
-          <div className="px-1">
-            <label htmlFor="title" className="text-xl text-left block font-bold pb-2 text-coolGrey-dark border-l-2 border-coolGrey"> Rate your comfort for the following scenarios (10 is most comfortable)</label>
+          <div className="px-1 mt-3">
+            <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
+            <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
           </div>
         </section>
-        <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-4">
+        <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
           <Question className="" question="Indoor in-person event with relatives:" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} />
           <Question className="" question="Indoor in-person event with friends:" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} />
           <Question className="" question="Indoor event without social distancing:" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} />
@@ -172,10 +168,8 @@ export class questionnaire extends Component {
           </div>
         </section>
       </div>
-
-
     )
   }
 }
 
-export default questionnaire
+export default Questionnaire;

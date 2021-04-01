@@ -5,7 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    width: 240,
+    width: 270,
   },
 });
 
@@ -71,9 +71,6 @@ const DiscreteSlider = ({ userNumber, callBack }) => {
           </div>
         </MuiThemeProvider>
       </div >
-      <div className="pb-3 px-6 flex items-end inline-block">
-        <p className="text-5xl text-coolGreen">{num}</p>
-      </div>
     </div>
   );
 }

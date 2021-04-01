@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import DropDown from '../components/dropDown';
-import InputText from '../components/inputText';
 import Button from '../components/button';
+import InputTextFormGreen from '../components/inputTextFormGreen'
 import axios from 'axios';
 
 export class createAccount extends Component {
@@ -19,6 +19,7 @@ export class createAccount extends Component {
   }
 
   buildPost = (event) => {
+    console.log("test if build post is getting hit");
     event.preventDefault();
     let accountInformation = {
       username: this.state.userName,
@@ -34,7 +35,6 @@ export class createAccount extends Component {
         localStorage.setItem('SignupErrors', "None");
         const authorization = `Bearer ${res.data.auth_token}`;
         localStorage.setItem('authToken', authorization);
-        //console.log(res.data.user_id);
         const userId = res.data.user_id;
         localStorage.setItem('user_id', userId)
         axios.defaults.headers.common['Authorization'] = authorization;
@@ -42,10 +42,11 @@ export class createAccount extends Component {
         console.log("Authorization token is for the sign in page:", localStorage['authToken']);
         console.log("User id is for the sign in page:", localStorage['user_id']);
         this.props.history.push('/');
-      }).catch(() => {
+      }).catch(err => {
         console.log("We ran into an issue");
         window.location.reload();
-        localStorage.setItem('SignupErrors', "User already registered with this phone number");
+        localStorage.setItem('SignupErrors', err.response.data.message);
+        console.log(err.response.data.message);
       })
     localStorage.setItem('filledOutQuestionnaire', false);
   }
@@ -55,6 +56,7 @@ export class createAccount extends Component {
   }
 
   userNameCallBack = (inputText) => {
+    console.log(inputText);
     this.setState({ userName: inputText })
   }
 
@@ -68,7 +70,6 @@ export class createAccount extends Component {
     } else {
       this.setState({ publicInfo: false });
     }
-
   }
 
   numberCallBack = (inputText) => {
@@ -78,33 +79,39 @@ export class createAccount extends Component {
   render() {
     return (
       <div >
-        <section className="App py-10 w-full flex justify-center items-coolGrey">
-          <div className="px-1 pb-1 align-middle">
-            <label htmlFor="title" className="text-3xl block font-bold  pb-2 text-coolGrey-dark">ENTER PROFILE INFORMATION</label>
+        <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
+          <div className="px-1">
+            <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Create Account</label>
+            <label htmlFor="title" className="text-lg text-left block pb-2 text-coolGrey-dark"> Fill out the following information</label>
           </div>
         </section>
-        <section className="App h-2/3 w-full flex justify-center bg-white py-4 px-4">
-          <form action="" className=" sm:w-3/4 md:w-1/3 shadow-lg rounded px-8 py-8 pt-8">
-            <InputText login={true} handleCallback={this.userNameCallBack} type="text" border="coolGreen" borderColor="border border-coolGreen" placeholder="exampleUsername" label="USERNAME" />
-            <InputText login={true} handleCallback={this.passwordCallBack} type="password" border="coolGreen" borderColor="border border-coolGreen" placeholder="examplePassword" label="PASSWORD" />
-            <InputText login={true} handleCallback={this.numberCallBack} type="phoneNumber" border="coolGreen" borderColor="border border-coolGreen" placeholder="123456789" label="PHONE NUMBER" />
-            <InputText login={true} handleCallback={this.nameCallBack} type="text" border="coolGreen" borderColor="border border-#E8E8E8" placeholder="Name" label="PREFERRED NAME" />
-            <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" />
+        <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
+          <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
+            <InputTextFormGreen handleCallBack={this.userNameCallBack} type="email" label="USERNAME" placeholder="example@gmail.com" />
+            &nbsp;&nbsp;&nbsp;
+            <InputTextFormGreen handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
+            &nbsp;&nbsp;&nbsp;
+            <InputTextFormGreen handleCallBack={this.numberCallBack} type="text" label="PHONE NUMBER" placeholder="4021345678" />
+            &nbsp;&nbsp;&nbsp;
+            <InputTextFormGreen handleCallBack={this.nameCallBack} type="text" label="PREFERRED NAME" placeholder="Name Example" />
+            &nbsp;&nbsp;&nbsp;
+            <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" downlable={true} />
             {localStorage['SignupErrors'] !== 'None' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
                 {localStorage['SignupErrors']}
               </span>
             )}
-                    &nbsp;&nbsp;&nbsp;
-
-                    <NavLink to="/">
-              <div onClick={this.buildPost} className="flex w-full">
-                <Button name="Create Account" bgColor="bg-coolGreen" />
-              </div>
+          </form>
+        </section>
+        <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
+          <div className="flex">
+            <div onClick={this.buildPost}>
+              <Button name="CREATE ACCOUNT" bgColor="bg-coolGreen" />
+            </div>
+            <NavLink to="/" className="ml-4 font-bold text-coolGrey-dark text-xl inline mt-2.5 flex">
+              Cancel
             </NavLink>
-
-                    &nbsp;&nbsp;&nbsp;
-                  </form>
+          </div>
         </section>
       </div>
 
