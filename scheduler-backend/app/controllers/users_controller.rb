@@ -30,7 +30,11 @@ class UsersController < ApplicationController
       # hash the password sent by the user to match with the one in the database
       if @user.authenticate(params[:password])
         token = encode( { user_id: @user.id } )
-        render json: { auth_token: token, user_id: @user.id }
+        has_filled_out_questionnaire = true
+        if get_questionnaire(@user) == 0
+          has_filled_out_questionnaire = false
+        end
+        render json: { auth_token: token, user_id: @user.id, filled_out: has_filled_out_questionnaire }
       else
         render json: { message: "password incorrect" }, status: 422 # Unprocessable Entity (good for faulty usernames / passwords)
       end
@@ -95,7 +99,12 @@ class UsersController < ApplicationController
     end
 
     def get_questionnaire(user)
-      user_questionnaire = Questionnaire.where(user_id: user.id).order(created_at: :desc)[0]
+      user_questionnaires = Questionnaire.where(user_id: user.id).order(created_at: :desc)
+      if user_questionnaires.length() == 0
+        return 0;
+      else
+        return user_questionnaires[0]
+      end
     end
 
     # Use callbacks to share common setup or constraints between actions.
