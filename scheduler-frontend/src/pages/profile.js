@@ -16,7 +16,7 @@ export class profile extends Component {
       preferredName: '',
       userName: '',
       password: '',
-      phoneNumber: '',
+      email: '',
       publicInfo: '',
       comfortNum: 0,
       comfort: ''
@@ -50,7 +50,7 @@ export class profile extends Component {
         this.setState({
           preferredName: res.data.name,
           userName: res.data.username,
-          phoneNumber: res.data.phone,
+          email: res.data.email,
           publicInfo: res.data.privacy,
           comfortNum: res.data.comfort_metric,
           loading: false
@@ -74,8 +74,8 @@ export class profile extends Component {
     this.setState({ preferredName: inputText })
   }
 
-  handleNothing = (inputText) => {
-    
+  handleEmail= (inputText) => {
+    this.setState({ email: inputText })
   }
 
   buildPost = (event) => {
@@ -83,6 +83,7 @@ export class profile extends Component {
     let accountInformation = {
       username: this.state.userName,
       name: this.state.preferredName,
+      email: this.state.email,
       privacy: this.state.publicInfo
     }
     console.log(accountInformation);
@@ -136,7 +137,8 @@ export class profile extends Component {
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
             <ShowText label="USERNAME" placeholder={this.state.userName}/>
             &nbsp;&nbsp;&nbsp;
-            <ShowText label="PHONE NUMBER" placeholder={this.state.phoneNumber}/>
+            {/* <ShowText label="EMAIL" placeholder={this.state.phoneNumber}/> */}
+            <InputTextFormGreen handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
             &nbsp;&nbsp;&nbsp;
             <InputTextFormGreen handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
             &nbsp;&nbsp;&nbsp;

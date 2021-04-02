@@ -27,7 +27,7 @@ export class Questionnaire extends Component {
   }
 
   componentDidMount() {
-    
+
     // if a user is not logged in, brings them to the login page
     if (!localStorage['user_id'] && !localStorage['authToken']) {
       this.props.history.push('/');
@@ -135,6 +135,57 @@ export class Questionnaire extends Component {
   }
 
   render() {
+
+    const marks10 = [
+      {
+        value: 2,
+        label: 2,
+      },
+      {
+        value: 4,
+        label: 4,
+      },
+      {
+        value: 6,
+        label: 6,
+      },
+      {
+        value: 8,
+        label: 8,
+      },
+      {
+        value: 10,
+        label: 10,
+      },
+    ];
+
+    const marks50 = [
+      {
+        value: 5,
+        label: 5,
+      },
+      {
+        value: 10,
+        label: 10,
+      },
+      {
+        value: 15,
+        label: 15,
+      },
+      {
+        value: 20,
+        label: 20,
+      },
+      {
+        value: 25,
+        label: 25,
+      },
+      {
+        value: 30,
+        label: 30,
+      },
+    ];
+
     return (
       <div>
         <NavBar />
@@ -148,14 +199,14 @@ export class Questionnaire extends Component {
             <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
         </div>
         <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
-          <Question className="" question="How comfortable are you with events hosted outside?" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How comfortable are you with events hosted inside, with room for social distancing?" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How comfortable are you with events hosted inside, not large enough for social distancing?" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How comfortable are you with online events?" userNumber={this.state.q4} qNum={4} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How comfortable are you with eating or drinking around people?" userNumber={this.state.q5} qNum={5} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How important is social distancing to you?" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How important is it that people are wearing masks at an event?" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="How many people do you feel comfortable being around at an event?" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} />
+          <Question className="" question="How comfortable are you with events hosted outside?" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How comfortable are you with events hosted inside, with room for social distancing?" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How comfortable are you with events hosted inside, not large enough for social distancing?" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How comfortable are you with online events?" userNumber={this.state.q4} qNum={4} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How comfortable are you with eating or drinking around people?" userNumber={this.state.q5} qNum={5} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How important is social distancing to you?" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How important is it that people are wearing masks at an event?" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
+          <Question className="" question="How many people do you feel comfortable being around at an event?" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} maxPeople = {30} marks = {marks50}/>
           <Question className="" question="filler rn" userNumber={this.state.q9} qNum={9} totalCallBack={this.handleTotalCallBack} />
           <Question className="" question="filler rn" userNumber={this.state.q10} qNum={10} totalCallBack={this.handleTotalCallBack} />
           <Question className="" question="filler rn" userNumber={this.state.q11} qNum={11} totalCallBack={this.handleTotalCallBack} />

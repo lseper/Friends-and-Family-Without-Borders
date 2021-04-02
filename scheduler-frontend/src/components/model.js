@@ -48,7 +48,7 @@ export default function Modal({first, second, third, callBackLocation, callBackA
         type="button"
         onClick={() => {
             if(testDateTimes()){
-              handleActivity();
+              //handleActivity();
               setShowModal(true);
             }
         }}

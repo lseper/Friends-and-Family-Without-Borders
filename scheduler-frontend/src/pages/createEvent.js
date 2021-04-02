@@ -8,7 +8,7 @@ import axios from 'axios';
 import NavBar from '../components/navBar';
 import InputTextFormBlue from '../components/inputTextFormBlue';
 import DateSelect from '../components/dateSelect';
-
+import SearchSelect from '../components/searchSelect';
 
 
 const CreateEvent = () => {
@@ -66,21 +66,23 @@ const CreateEvent = () => {
             }
         }
         let finalInvitees = ({
+            user_id: localStorage.get('user_id'),
             event_id: eventId,
             invitees: finalInviteesList
         })
 
-        console.log(finalInvitees);
+        //console.log(finalInvitees);
 
-        // console.log(finalInviteesList);
-        axios.post(`/users/${localStorage['user_id']}/invitations`, finalInvitees)
+        // post request for invitees 
+        //axios.post(`/users/${localStorage['user_id']}/invitations`, finalInvitees)
+        axios.post(`/users/invitations`, finalInvitees)
         .then(res => {
+            console.log("You correctly added invitees!")
             console.log(res);
         }).catch(err => {
+            console.log("There was an error!")
             console.log(err.response.data);
         })
-        
-
     }
 
     async function buildPost() {
@@ -89,10 +91,6 @@ const CreateEvent = () => {
             description: details,
             start_time: startDate,
             ending_at: endDate,
-            //not implemented yet
-            //invitees: invitees,
-            //location: location,
-            //activity: activity
         }
         let eventId = -1;
 
@@ -103,18 +101,36 @@ const CreateEvent = () => {
             }
         })
             .then(res => {
-                eventId = res.data.id;
-                
+                eventId = res.data.id;      
+                //then add invites and submit another post request 
                 addInvitees(eventId)
-                // window.location.reload();
-                
             }).catch(err => {
                 console.log("Something went wrong when creating an event");
                 console.log(err.response.data);
-            })
-
-        
+            }) 
     };
+
+    // function addLocationActivity(eventId) {
+    //     let finalLocationAcitivty = ({
+    //         event_id: eventId,
+    //         location: "",
+    //         activity: ""
+    //     })
+
+    //     const authorization = localStorage.getItem('authToken');
+
+    //     await axios.put(`/users/${localStorage['user_id']}/events`, eventInfo, {
+    //         headers: {
+    //             'Authorization': authorization
+    //         }
+    //     })
+    //         .then(res => {   
+    //             console.log("You successfuly choose a location and activity");
+    //         }).catch(err => {
+    //             console.log("Something went wrong when creating an event");
+    //             console.log(err.response.data);
+    //         }) 
+    // }
 
     function testDateTimes() {
         // made sure that dates and times are not equal 
@@ -194,52 +210,9 @@ const CreateEvent = () => {
                     &nbsp;&nbsp;&nbsp;
                     <DateSelect handleCallback={handleEndDate} label="EVENT END" />
                     &nbsp;&nbsp;&nbsp;
-                    <div className="w-full bg-grey-100">
-                        <Select
-                            isMulti
-                            name="colors"
-                            options={data}
-                            onChange={(newValue) => handleSelectChange(newValue)}
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                            theme={theme => ({
-                                ...theme,
-                                borderRadius: 0,
-                                colors: {
-                                    ...theme.colors,
-                                    primary25: '#98D2EB',
-                                    primary: '#A4969B',
-                                }
-                            })}
-                        />
-                    </div>
-                    <label className={"inline text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</label>
-
+                    <SearchSelect handleCallback={handleSelectChange} label="SEACH AND ADD INVITEES" data = {data}/>
                     {invitees.length !== 0 && (
-                        <span>
-                            <div className="inline mb-1">
-                                <label className={"inline text-sm block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SET PRIORITY INVITEES</label>
-                            </div>
-                            <div className="w-full pb-4 bg-grey-100">
-                                <Select
-                                    isMulti
-                                    name="colors"
-                                    options={invitees}
-                                    onChange={(newValue) => handlePrioritiesChange(newValue)}
-                                    className="basic-multi-select"
-                                    classNamePrefix="select"
-                                    theme={theme => ({
-                                        ...theme,
-                                        borderRadius: 0,
-                                        colors: {
-                                            ...theme.colors,
-                                            primary25: '#BDE4A7',
-                                            primary: '#A4969B',
-                                        }
-                                    })}
-                                />
-                            </div>
-                        </span>
+                        <SearchSelect handleCallback={handlePrioritiesChange} label="SET PRIORITY INVITEES" data = {invitees}/>
                     )}
                 </form>
             </section>

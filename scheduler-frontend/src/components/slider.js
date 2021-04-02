@@ -18,7 +18,7 @@ const theme = createMuiTheme({
 });
 
 
-const DiscreteSlider = ({ userNumber, callBack }) => {
+const DiscreteSlider = ({ userNumber, callBack, maxPeople, marks }) => {
   const classes = useStyles();
 
 
@@ -30,28 +30,28 @@ const DiscreteSlider = ({ userNumber, callBack }) => {
     callBack(newValue);
   };
 
-  const marks = [
-    {
-      value: 2,
-      label: 2,
-    },
-    {
-      value: 4,
-      label: 4,
-    },
-    {
-      value: 6,
-      label: 6,
-    },
-    {
-      value: 8,
-      label: 8,
-    },
-    {
-      value: 10,
-      label: 10,
-    },
-  ];
+  // const marks = [
+  //   {
+  //     value: 2,
+  //     label: 2,
+  //   },
+  //   {
+  //     value: 4,
+  //     label: 4,
+  //   },
+  //   {
+  //     value: 6,
+  //     label: 6,
+  //   },
+  //   {
+  //     value: 8,
+  //     label: 8,
+  //   },
+  //   {
+  //     value: 10,
+  //     label: 10,
+  //   },
+  // ];
 
   return (
     <div className="flex items-stretch static ">
@@ -65,7 +65,7 @@ const DiscreteSlider = ({ userNumber, callBack }) => {
               step={1}
               marks={marks}
               min={1}
-              max={10}
+              max={maxPeople}
               onChangeCommitted={handleChange}
             />
           </div>

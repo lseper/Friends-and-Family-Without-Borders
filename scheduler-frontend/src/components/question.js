@@ -16,7 +16,7 @@ export class question extends Component {
             <label htmlFor="title" className="text-left text-md block font-bold pb-3 text-coolGrey-dark mb-2">{this.props.question} </label>
           </div>
           <div>
-            <Slider color="bg-coolGreen" userNumber={this.props.userNumber || 0} callBack={this.handleCallback} />
+            <Slider color="bg-coolGreen" userNumber={this.props.userNumber || 0} callBack={this.handleCallback} maxPeople = {this.props.maxPeople} marks = {this.props.marks}/>
           </div>
         </form>
       </div>

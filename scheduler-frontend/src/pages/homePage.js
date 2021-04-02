@@ -3,18 +3,18 @@ import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
 import Alert from '../components/alert';
 
-// will need when getting an invitations for a user from the database
-// const EventCard = ({ name, date, location, details }) => {
-//     return (
-//         <div className="flex grid grid-cols-1 flex place-items-left py-4">
-//             <EventInvitationsButton
-//                 name={name}
-//                 dateString={date}
-//                 location={location}
-//                 details={details} />
-//         </div>
-//     )
-// }
+//will need when getting an invitations for a user from the database
+const EventCard = ({ name, date, location, details }) => {
+    return (
+        <div className="flex grid grid-cols-1 flex place-items-left py-4">
+            <EventInvitationsButton
+                name={name}
+                dateString={date}
+                location={location}
+                details={details} />
+        </div>
+    )
+}
 
 export class HomePage extends Component {
 

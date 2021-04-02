@@ -13,7 +13,7 @@ export class createAccount extends Component {
       name: '',
       userName: '',
       password: '',
-      phoneNumber: '',
+      email: '',
       publicInfo: false,
       errors: '',
     };
@@ -26,7 +26,7 @@ export class createAccount extends Component {
       username: this.state.userName,
       password: this.state.password,
       name: this.state.name,
-      phone: this.state.phoneNumber,
+      email: this.state.email,
       privacy: this.state.publicInfo
     }
     console.log(accountInformation);
@@ -75,8 +75,8 @@ export class createAccount extends Component {
     }
   }
 
-  numberCallBack = (inputText) => {
-    this.setState({ phoneNumber: inputText })
+  emailCallBack = (inputText) => {
+    this.setState({ email: inputText })
   }
 
   render() {
@@ -90,11 +90,11 @@ export class createAccount extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <InputTextFormGreen handleCallBack={this.userNameCallBack} type="email" label="USERNAME" placeholder="example@gmail.com" />
+            <InputTextFormGreen handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
             &nbsp;&nbsp;&nbsp;
             <InputTextFormGreen handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextFormGreen handleCallBack={this.numberCallBack} type="text" label="PHONE NUMBER" placeholder="4021345678" />
+            <InputTextFormGreen handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
             <InputTextFormGreen handleCallBack={this.nameCallBack} type="text" label="PREFERRED NAME" placeholder="Name Example" />
             &nbsp;&nbsp;&nbsp;

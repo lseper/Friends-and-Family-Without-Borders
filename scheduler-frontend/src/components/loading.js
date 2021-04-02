@@ -8,7 +8,7 @@ export class loading extends Component {
         return (
             <div>
                 <div className="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
-                    <span className="text-coolGrey opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0">
+                    <span className="text-coolGrey-dark opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0">
                         <div>
                             <FontAwesomeIcon className="fa-4x fa-spin" icon={faCircleNotch} />
                         </div>
