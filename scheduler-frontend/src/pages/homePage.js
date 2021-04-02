@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
 import Alert from '../components/alert';
+import CreatedEventButton from '../components/createdEventsButton';
+import axios from 'axios';
 
 // will need when getting an invitations for a user from the database
 // const EventCard = ({ name, date, location, details }) => {
@@ -15,6 +17,17 @@ import Alert from '../components/alert';
 //         </div>
 //     )
 // }
+const EventCard = ({ name, date, location, details }) => {
+    return (
+        <div className="flex grid grid-cols-1 flex place-items-left py-4">
+            <CreatedEventButton
+                name={name}
+                dateString={date}
+                location={location}
+                details={details} />
+        </div>
+    )
+}
 
 export class HomePage extends Component {
 
@@ -22,7 +35,8 @@ export class HomePage extends Component {
         super(props);
         this.state = {
             showPopup: false,
-            needFriends: true
+            needFriends: true,
+            eventList: []
         };
     }
 
@@ -41,6 +55,36 @@ export class HomePage extends Component {
         else {
             this.setState({ showPopup: false })
         }
+
+        const authorization = localStorage.getItem('authToken');
+        axios.get(`/users/${localStorage['user_id']}/invitations`, {
+            headers: {
+                'Authorization': authorization
+            }
+        })
+            .then(res => {
+                console.log(res);
+                this.setState({
+                    eventList: res.data.map(event => {
+                        return (<EventCard
+                            name={event.name}
+                            date={event.start_time}
+                            location="temp"
+                            details={event.description}
+                            creator="temp"
+                            key={event.id}
+                        />)
+                    }),
+                    loading: false,
+                })
+            }).then(() => {
+                console.log(this.state);
+            }).catch(err => {
+                console.log(err);
+                this.setState({ loading: false })
+            })
+
+            console.log(this.state.eventList);
     }
 
     render() {
@@ -74,6 +118,9 @@ export class HomePage extends Component {
                         </div>
                         : null
                     }
+                    <div>
+                        {this.state.eventList}
+                    </div>
                 </div>
                 <section className="App min-h-0 w-full flex justify-evenly align-bottom items-center bg-grey-500 py-8 px-4">
                 </section>
