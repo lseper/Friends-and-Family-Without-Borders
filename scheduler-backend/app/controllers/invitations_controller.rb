@@ -28,17 +28,17 @@ class InvitationsController < ApplicationController
             @invitee = Invitation.new(event_id: params[:event_id], user_id: invitee[:user_id], 
                 priority: invitee[:priority], confirmed: false, comfort_level: 0)
             if @invitee.save
-                invitees.append(@invitee)
+                invitees.append(setup_invitee(@invitee))
             else
                 errors.append(@invitee.errors)
             end
         end
-        # TODO: fetch all invitee questionnaires
+        # TODO: fetch all invitee questionnaires [DONE]
         # TODO: get all location-activity pairings
         # TODO: match each user up with each potential pairing
         # TODO: generate cumulative score for each pairing
         # TODO: return ranked list of pairings based on score
-        render json: { invitations: invitees } , status: :created
+        render json: { invitations: invitees, errors: errors } , status: :created
     end
 
     # PATCH/PUT /invitations/1/edit
@@ -56,6 +56,13 @@ class InvitationsController < ApplicationController
     end
 
     private
+
+    def setup_invitee(invitee)
+        {
+            user: User.find(invitee[:user_id]),
+            questionnaire: Questionnaire.find_by(user_id: invitee[:user_id])
+        }
+    end
 
     def extract_invitation_info(invite)
         event = Event.find(invite[:event_id])
