@@ -1,9 +1,10 @@
 class InvitationsController < ApplicationController
     before_action :set_invitation, only: [:show, :update, :destroy]
-    before_action :authorized_as_owner, only: [:index, :create] # also :create, but need to do a hacky fix
+    before_action :authorized_as_owner, only: [:create] # also :create, but need to do a hacky fix
+    before_action :authorized, only: [:index]
     # Controller for Invitations
     
-    # GET /user/:id/invitations
+    # GET /invitations
     def index
     @invitations = User.find(params[:user_id]).invitations
     invited_events = []
