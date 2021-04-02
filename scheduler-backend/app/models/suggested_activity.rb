@@ -1,2 +1,0 @@
-class SuggestedActivity < ApplicationRecord
-end

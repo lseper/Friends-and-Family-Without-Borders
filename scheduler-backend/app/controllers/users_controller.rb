@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
 
-    if @user.update_columns(username: params[:username], name: params[:name], privacy: params[:privacy])
+    if @user.update_columns(name: params[:name], privacy: params[:privacy], email: params[:email])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
