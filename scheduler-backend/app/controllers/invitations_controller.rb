@@ -24,7 +24,7 @@ class InvitationsController < ApplicationController
     def create
         errors = []
         invitees = []
-        invitations = params[:invitees]
+        invitations = invitation_params[:invitees]
         for invitee in invitations 
             @invitee = Invitation.new(event_id: params[:event_id], user_id: invitee[:user_id], 
                 priority: invitee[:priority], confirmed: false, comfort_level: 0)
