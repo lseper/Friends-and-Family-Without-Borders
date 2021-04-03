@@ -39,7 +39,9 @@ class InvitationsController < ApplicationController
         # TODO: fetch all invitee questionnaires [DONE]
         # TODO: get all location-activity pairings
         pairs = LocationActivitySuggestion.all
+        setup_pairs(pairs)
         # TODO: match each user up with each potential pairing
+        threshold = 0.8
         for invitee in invitees
             num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
             mask_score = calc_mask_score(event[:masks_required], invitee)
@@ -47,14 +49,27 @@ class InvitationsController < ApplicationController
                 location_score = calc_location_score(pair.location, invitee)
                 eating_score = calc_eating_score(pair.activity, invitee)
                 social_distance_score = calc_social_distance_score(pair.activity, invitee)
-                invitee[:matches].append(1 - location_score - eating_score - social_distance_score - num_attendees_score - mask_score)
+                total_suggestion_comfort = 1 - location_score - eating_score - social_distance_score - num_attendees_score - mask_score
+                invitee[:matches].append(total_suggestion_comfort)
+                puts invitee
+                puts "the priority is above"
+                if total_suggestion_comfort >= threshold
+                    if invitee[:priority]
+                        pair.set_priority_passed(pair.get_priority_passed() + 1)
+                    else
+                        pair.set_others_passed(pair.get_others_passed() + 1)
+                    end
+                end
+
+                pair.set_average_comfort(pair.get_average_comfort + total_suggestion_comfort)
 
             end
         end
-                
+        
+        pairs = pairs.sort_by{|p| [p.get_priority_passed, p.get_others_passed, p.get_average_comfort]}.reverse!
         # TODO: generate cumulative score for each pairing
         # TODO: return ranked list of pairings based on score
-        render json: { invitations: invitees, errors: errors } , status: :created
+        render json:  {pairs: prepare_pairs_jsons(pairs)}, status: :created
     end
 
     # PATCH/PUT /invitations/1/edit
@@ -77,10 +92,38 @@ class InvitationsController < ApplicationController
         {
             user: User.find(invitee[:user_id]),
             questionnaire: Questionnaire.find_by(user_id: invitee[:user_id]),
+            priority: invitee[:priority],
             matches: []
         }
     end
 
+    def setup_pairs(pairs)
+        for pair in pairs
+            pair.set_priority_passed(0)
+            pair.set_others_passed(0)
+            pair.set_average_comfort(0)
+        end
+    end
+
+    def prepare_pair_json(pair)
+        {
+            id: pair[:id],
+            locaiton: pair.location,
+            activity: pair.activity,
+            priority_passed: pair.get_priority_passed(),
+            others_passed: pair.get_others_passed(),
+            average_comfort: pair.get_average_comfort()
+        }
+    end
+
+    def prepare_pairs_jsons(pairs)
+        new_pairs = []
+        for pair in pairs
+            new_pairs.push(prepare_pair_json(pair))
+        end
+        return new_pairs
+    end
+    
     def extract_invitation_info(invite)
         event = Event.find(invite[:event_id])
         organizer = User.find(event[:user_id])
