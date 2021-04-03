@@ -36,7 +36,19 @@ class InvitationsController < ApplicationController
         end
         # TODO: fetch all invitee questionnaires [DONE]
         # TODO: get all location-activity pairings
+        pairs = LocationActivitySuggestion.all
         # TODO: match each user up with each potential pairing
+        for invitee in invitees
+            num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
+            for pair in pairs
+                location_score = calc_location_score(pair.location, invitee)
+                eating_score = calc_eating_score(pair.activity, invitee)
+                social_distance_score = calc_social_distance_score(pair.activity, invitee)
+                invitee[:matches].append(1 - location_score - eating_score - social_distance_score - num_attendees_score)
+
+            end
+        end
+                
         # TODO: generate cumulative score for each pairing
         # TODO: return ranked list of pairings based on score
         render json: { invitations: invitees, errors: errors } , status: :created
@@ -61,7 +73,8 @@ class InvitationsController < ApplicationController
     def setup_invitee(invitee)
         {
             user: User.find(invitee[:user_id]),
-            questionnaire: Questionnaire.find_by(user_id: invitee[:user_id])
+            questionnaire: Questionnaire.find_by(user_id: invitee[:user_id]),
+            matches: []
         }
     end
 
@@ -81,6 +94,64 @@ class InvitationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invitation_params
-        params.require(:invitation).permit(:event_id, :user_id, :priority)
+        params.require(:invitation).permit(:event_id, :invitees)
+    end
+
+    def calc_location_score(location, invitee)
+        location_type = location[:location_type]
+        base_location_score = 10
+        questionnaire_location_score = 0
+        if location_type == "Outside"
+            questionnaire_location_score = invitee[:questionnaire][:q1answer]
+        elsif location_type == "Large Inside"
+            questionnaire_location_score = invitee[:questionnaire][:q2answer]
+        elsif location_type == "Small Inside"
+            questionnaire_location_score = invitee[:questionnaire][:q3answer]
+        else
+            questionnaire_location_score = invitee[:questionnaire][:q4answer]
+        end
+
+        location_score = (base_location_score - questionnaire_location_score) / 100.0
+
+        return location_score
+
+    end
+
+    def calc_eating_score(activity, invitee)
+        base_eating_score = 0
+        if activity[:hasFood] == false
+            return base_eating_score
+        else
+            base_eating_score = 10
+            questionnaire_eating_score = invitee[:questionnaire][:q5answer]
+            eating_score = (base_eating_score - questionnaire_eating_score) / 100.0
+            return eating_score
+        end
+    end
+
+    def calc_social_distance_score(activity, invitee)
+        base_social_score = activity[:socialDistanceScore]
+        questionnaire_social_score = invitee[:questionnaire][:q6answer]
+
+        social_score = questionnaire_social_score - base_social_score
+
+        if social_score <= 0
+            social_score = social_score.abs() * 0.5 
+        end
+
+        return social_score / 100.0
+    end
+
+    def calc_num_attendees_score(num_attendees, invitee)
+        puts num_attendees
+        questionnaire_num_attendees_comfort = invitee[:questionnaire][:q7answer]
+        puts questionnaire_num_attendees_comfort.class
+        num_attendees_score = num_attendees - questionnaire_num_attendees_comfort
+
+        if num_attendees_score <= 0
+            return 0
+        else
+            return num_attendees_score / 100.0
+        end
     end
 end
