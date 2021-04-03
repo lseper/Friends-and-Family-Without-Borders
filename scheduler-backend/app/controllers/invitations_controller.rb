@@ -24,7 +24,9 @@ class InvitationsController < ApplicationController
     def create
         errors = []
         invitees = []
-        invitations = invitation_params[:invitees]
+        invitations = params[:invitees]
+        event = Event.find(invitation_params[:event_id])
+
         for invitee in invitations 
             @invitee = Invitation.new(event_id: params[:event_id], user_id: invitee[:user_id], 
                 priority: invitee[:priority], confirmed: false, comfort_level: 0)
@@ -40,11 +42,12 @@ class InvitationsController < ApplicationController
         # TODO: match each user up with each potential pairing
         for invitee in invitees
             num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
+            mask_score = calc_mask_score(event[:masks_required], invitee)
             for pair in pairs
                 location_score = calc_location_score(pair.location, invitee)
                 eating_score = calc_eating_score(pair.activity, invitee)
                 social_distance_score = calc_social_distance_score(pair.activity, invitee)
-                invitee[:matches].append(1 - location_score - eating_score - social_distance_score - num_attendees_score)
+                invitee[:matches].append(1 - location_score - eating_score - social_distance_score - num_attendees_score - mask_score)
 
             end
         end
@@ -97,6 +100,7 @@ class InvitationsController < ApplicationController
         params.require(:invitation).permit(:event_id, :invitees)
     end
 
+    #calculates the comfort the user
     def calc_location_score(location, invitee)
         location_type = location[:location_type]
         base_location_score = 10
@@ -143,15 +147,23 @@ class InvitationsController < ApplicationController
     end
 
     def calc_num_attendees_score(num_attendees, invitee)
-        puts num_attendees
         questionnaire_num_attendees_comfort = invitee[:questionnaire][:q7answer]
-        puts questionnaire_num_attendees_comfort.class
         num_attendees_score = num_attendees - questionnaire_num_attendees_comfort
 
         if num_attendees_score <= 0
             return 0
         else
             return num_attendees_score / 100.0
+        end
+    end
+
+    def calc_mask_score(mask_required, invitee)
+      
+        if !mask_required
+            questionnaire_mask_score = invitee[:questionnaire][:q8answer]
+            return (10 - questionnaire_mask_score) / 100.0
+        else
+            return 0
         end
     end
 end
