@@ -7,14 +7,14 @@ import axios from 'axios';
 import moment from "moment";
 
 
-const EventCard = ({ name, date, location, details,creator }) => {
-    console.log(date);
+const EventCard = ({ name, dateStart, dateEnd, location, details,creator }) => {
     return (
         
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <EventInvitationsButton
                 name={name}
-                dateString={date}
+                dateStringStart={dateStart}
+                dateStringEnd={dateEnd}
                 location={location}
                 details={details}
                 comfort="red" 
@@ -63,7 +63,8 @@ export class HomePage extends Component {
                     eventList: res.data.map(event => {
                         return (<EventCard
                             name={event.event_details.name}
-                            date={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
+                            dateStart={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
+                            dateEnd = {moment(event.event_details.ending_at).format("MMMM Do YYYY h:mm:ss a")}
                             location="temp"
                             details={event.event_details.description}
                             creator={event.organizer.username}

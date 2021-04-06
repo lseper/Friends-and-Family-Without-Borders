@@ -11,7 +11,8 @@ export class CreatedEventsButton extends Component {
     super(props);
     this.state = {
       name: '',
-      dateString: '',
+      dateStringStart: '',
+      dateStringEnd: '',
       location: '',
       organizer: '',
     };
@@ -54,7 +55,7 @@ export class CreatedEventsButton extends Component {
             <div className="flex text-coolGrey-dark">
               <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
               <div className="flex">
-                <h3 className="font-bold text-coolGrey-dark">{this.props.dateString}</h3>
+                <h3 className="font-bold text-coolGrey-dark">{this.props.dateStringStart} to {this.props.dateStringEnd}</h3>
               </div>
             </div>
             <div className="flex text-coolGrey-dark">
