@@ -44,6 +44,7 @@ class InvitationsController < ApplicationController
         for invitee in invitees
             # how comfortable are you with the number of attendees at the event?
             num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
+            # how comfortable are you with the mask requirement at the event?
             mask_score = calc_mask_score(event[:masks_required], invitee)
             for pair in pairs
                 # how comfortable are you with the location type?
@@ -52,10 +53,12 @@ class InvitationsController < ApplicationController
                 eating_score = calc_eating_score(pair.activity, invitee)
                 # how comfortable are you with the social distancing at this event?
                 social_distance_score = calc_social_distance_score(pair.activity, invitee)
+                # aggregate all of those metrics into one metric. The higher this score = more comfortable you are with this pair
                 total_suggestion_comfort = 1 - location_score - eating_score - social_distance_score - num_attendees_score - mask_score
+                # add this score to the invitee object
                 invitee[:matches].append(total_suggestion_comfort)
-                puts invitee
-                puts "the priority is above"
+
+                # see if this invitee is comfortable enough to attend this event
                 if total_suggestion_comfort >= threshold
                     if invitee[:priority]
                         pair.set_priority_passed(pair.get_priority_passed() + 1)
@@ -63,8 +66,8 @@ class InvitationsController < ApplicationController
                         pair.set_others_passed(pair.get_others_passed() + 1)
                     end
                 end
-
-                pair.set_average_comfort(pair.get_average_comfort + total_suggestion_comfort)
+                # update the overall average comfort metric for this location-activity pair
+                pair.set_average_comfort((pair.get_average_comfort + total_suggestion_comfort) / invitees.length)
 
             end
         end
