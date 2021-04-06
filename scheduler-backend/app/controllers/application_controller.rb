@@ -1,5 +1,27 @@
 class ApplicationController < ActionController::API
 
+    # ----- methods used in multiple controllers
+
+    def get_invitations_for_event(event)
+        invitees = Invitation.where(event_id: event[:id])
+        invites = []
+        for invite in invitees
+            invites.append(get_invitee_info(invite))
+        end
+        return invites
+    end
+
+    def get_invitee_info(invite)
+        user = User.find(invite[:user_id])
+        {
+            username: user[:username],
+            confirmed: invite[:confirmed],
+            comfort_level: invite[:confirmed]
+        }
+    end
+
+    # ------------------------------------------------------
+
     QUESTIONNAIRE_TOTAL = 120.0
 
     # Individual comfort metric calculation -- refactor for new questionnaire 
