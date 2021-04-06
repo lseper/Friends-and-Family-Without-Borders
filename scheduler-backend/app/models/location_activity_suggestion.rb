@@ -3,6 +3,9 @@ class LocationActivitySuggestion < ApplicationRecord
     belongs_to :location
     belongs_to :activity
 
+    # make pairs of (location_id, activity_id) unique
+    validates_uniqueness_of :location_id, :scope => [:activity_id]
+
     @priority_passed = 0
     @others_passed = 0
     @average_comfort = 0

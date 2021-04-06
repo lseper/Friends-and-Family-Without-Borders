@@ -7,7 +7,11 @@ class EventsController < ApplicationController
   # AUTHORIZATION NEEDED -- only user who created the event should be allowed to view it
   def index
     @events = Event.where(user_id: params[:user_id])
-    render json: @events
+    events_to_return = []
+    for event in @events.to_ary
+      events_to_return.append({ event: event, invitees: get_invitations_for_event(event) })
+    end
+    render json: events_to_return
   end
 
   # POST /user/:id/events

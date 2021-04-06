@@ -7,18 +7,21 @@ import axios from 'axios';
 import moment from "moment";
 
 
-const EventCard = ({ name, date, location, details,creator }) => {
-    console.log(date);
+const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending }) => {
     return (
         
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <EventInvitationsButton
                 name={name}
-                dateString={date}
+                dateStringStart={dateStart}
+                dateStringEnd={dateEnd}
                 location={location}
                 details={details}
                 comfort="red" 
-                creator={creator} />
+                creator={creator} 
+                //add if a user is currently attending or not
+                attending = {attending}
+                />
         </div>
     )
 }
@@ -63,11 +66,13 @@ export class HomePage extends Component {
                     eventList: res.data.map(event => {
                         return (<EventCard
                             name={event.event_details.name}
-                            date={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
+                            dateStart={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
+                            dateEnd = {moment(event.event_details.ending_at).format("MMMM Do YYYY h:mm:ss a")}
                             location="temp"
                             details={event.event_details.description}
                             creator={event.organizer.username}
                             key={event.event_details.Authorizationid}
+                            attending = {false}
                         />)
                     }),
                     loading: false,
@@ -100,14 +105,6 @@ export class HomePage extends Component {
                             <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark">Accept or decline your invitations</label>
                         </div>
                     </section>
-                    {this.state.needFriends === false ?
-                        <div className="flex grid grid-cols-1 flex place-items-left py-4">
-                            {/* current hardcoded -- will change when implemented in the backend  */}
-                            <EventInvitationsButton name="Birthday Party" dateString='March 18th 2021' location="Holmes Lake" details="Get ready to party because jayden is turning 24! We are very excited to be celebrating in a covid-friendly way. Please make sure to bring a coat, this is outdoors!" comfort="green" creator="Emily" />
-                            <EventInvitationsButton name="Family Gathering" dateString='March 20th 2021' location="Lazlos" details="Just a get together for everyone to get to catch up and eat some great food!" comfort="red" creator="emily" />
-                        </div>
-                        : null
-                    }
                     <div>
                         {this.state.eventList}
                     </div>

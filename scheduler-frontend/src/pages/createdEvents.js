@@ -46,7 +46,8 @@ export class createdEvents extends Component {
                     eventList: res.data.map(event => {
                         return (<EventCard
                             name={event.name}
-                            date={event.start_time}
+                            dateStart={event.start_time}
+                            dateEnd={event.ending_at}
                             location="temp"
                             details={event.description}
                             creator="temp"
