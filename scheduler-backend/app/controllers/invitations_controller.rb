@@ -36,18 +36,21 @@ class InvitationsController < ApplicationController
                 errors.append(@invitee.errors)
             end
         end
-        # TODO: fetch all invitee questionnaires [DONE]
-        # TODO: get all location-activity pairings
+        # get all pairs
         pairs = LocationActivitySuggestion.all
         setup_pairs(pairs)
         # TODO: match each user up with each potential pairing
         threshold = 0.8
         for invitee in invitees
+            # how comfortable are you with the number of attendees at the event?
             num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
             mask_score = calc_mask_score(event[:masks_required], invitee)
             for pair in pairs
+                # how comfortable are you with the location type?
                 location_score = calc_location_score(pair.location, invitee)
+                # how comfrotable are you with eating at an event?
                 eating_score = calc_eating_score(pair.activity, invitee)
+                # how comfortable are you with the social distancing at this event?
                 social_distance_score = calc_social_distance_score(pair.activity, invitee)
                 total_suggestion_comfort = 1 - location_score - eating_score - social_distance_score - num_attendees_score - mask_score
                 invitee[:matches].append(total_suggestion_comfort)

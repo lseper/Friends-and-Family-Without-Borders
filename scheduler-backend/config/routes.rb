@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     # getting all events for a user -- /users/1/events
     resources :questionnaires
     resources :invitations, only: [:index]
-    resources :events, only: [:index, :create]
+    resources :events, only: [:index, :create, :update]
   end
   resources :invitations, only: [:create, :show, :destroy, :update]
   # getting one specific event -- /events/1

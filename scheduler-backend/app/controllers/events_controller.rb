@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
-  before_action :authorized, only: [:index, :create, :destroy, :show, :update]
+  before_action :authorized, only: [:index, :create, :update]
 
   # GET /user/:id/events
   # return JSON of all events that this user is the owner of
@@ -8,13 +8,6 @@ class EventsController < ApplicationController
   def index
     @events = Event.where(user_id: params[:user_id])
     render json: @events
-  end
-
-  # GET user/:id/events/:id
-  def show
-    render json: @event
-    # get all the invited users
-      # display their comfort metric for the event, if they're attending 
   end
 
   # POST /user/:id/events
@@ -26,7 +19,7 @@ class EventsController < ApplicationController
       name: event_params[:name],
       comfort_metric: 0,
       user_id: params[:user_id],
-      start_time: event_params[:start_time]
+      start_time: event_params[:start_time],
       masks_required: event_params[:masks_required]
     )
 
@@ -44,13 +37,6 @@ class EventsController < ApplicationController
     else
       render json: @event.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE user/:id/events/:id
-  # AUTHORIZATION NEEDED -- only the creator of this event should be able to delete it
-  def destroy
-    @event.destroy
-    # going to need to implement deleting all invite references to this too
   end
 
   private
