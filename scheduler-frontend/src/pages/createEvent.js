@@ -22,6 +22,8 @@ const CreateEvent = () => {
     const [data, setData] = useState([]);
     const [invitees, setInvitees] = useState([]);
     const [priorities, setPriorities] = useState([]);
+    const [locationInfo, setLocationInfo] = useState([]);
+    //let locationInfo = [];
 
     useEffect(() => {
         if(data.length === 0){
@@ -40,7 +42,7 @@ const CreateEvent = () => {
         }
     });
 
-    function addInvitees(eventId) {
+    function addInvitees (eventId) {
         // get indexes of invitees who are priority
         let priorityIndexes = [];
         for (let i = 0; i < invitees.length; i++){
@@ -85,7 +87,9 @@ const CreateEvent = () => {
         })
         .then(res => {
             console.log("You correctly added invitees!")
-            console.log(res);
+            setLocationInfo(res.data.pairs);
+            //locationInfo = res.data.pairs;
+            // console.log(res.data.pairs);
         }).catch(err => {
             console.log("There was an error!")
             console.log(err.response.data);
@@ -227,7 +231,7 @@ const CreateEvent = () => {
             </section>
 
             <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
-                <Modal first="Zoom" second="Indoors" third="Outdoors" callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} />
+                <Modal locationInfo={locationInfo} callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} />
                 <NavLink to="/createdEvents" className="ml-4 font-bold text-brightPink text-xl inline mt-2.5">
                     Cancel
                 </NavLink>
