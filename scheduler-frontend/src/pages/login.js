@@ -35,10 +35,13 @@ export class login extends Component {
         localStorage.setItem('authToken', authorization);
         const userId = res.data.user_id;
         localStorage.setItem('user_id', userId)
+        console.log(res);
+        const filledOut = res.data.filled_out;
+        localStorage.setItem('filledOutQuestionnaire', filledOut)
         axios.defaults.headers.common['Authorization'] = authorization;
-        console.log("We have successfully logged in!");
-        console.log("Authorization token is:", localStorage['authToken']);
-        console.log("User id is:", localStorage['user_id']);
+        //console.log("We have successfully logged in!");
+        //console.log("Authorization token is:", localStorage['authToken']);
+        //console.log("User id is:", localStorage['user_id']);
         this.props.history.push('/homePage');
       }).catch(err => {
         console.log("We ran into an issue");

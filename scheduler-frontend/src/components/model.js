@@ -111,7 +111,7 @@ export default function Modal({first, second, third, callBackLocation, callBackA
                   >
                     Go back
                   </button>
-                  <NavLink to="/createdEvents">
+                  {/* <NavLink to="/createdEvents"> */}
                     <button
                         className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
@@ -123,7 +123,7 @@ export default function Modal({first, second, third, callBackLocation, callBackA
                     >
                         Create Event
                     </button>
-                  </NavLink>
+                  {/* </NavLink> */}
                 </div>
               </div>
             </div>

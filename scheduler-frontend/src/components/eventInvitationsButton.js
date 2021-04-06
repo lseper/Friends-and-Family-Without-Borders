@@ -5,7 +5,7 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export class createdEventsButton extends Component {
+export class CreatedEventsButton extends Component {
 
   constructor(props) {
     super(props);
@@ -54,7 +54,7 @@ export class createdEventsButton extends Component {
             <div className="flex text-coolGrey-dark">
               <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
               <div className="flex">
-                <h3 className="font-bold text-coolGrey-dark">{this.props.dateString} - {this.props.dateString}</h3>
+                <h3 className="font-bold text-coolGrey-dark">{this.props.dateString}</h3>
               </div>
             </div>
             <div className="flex text-coolGrey-dark">
@@ -80,4 +80,4 @@ export class createdEventsButton extends Component {
   }
 }
 
-export default createdEventsButton
+export default CreatedEventsButton
