@@ -16,6 +16,7 @@ class ApplicationController < ActionController::API
         {
             username: user[:username],
             confirmed: invite[:confirmed],
+            priority: invite[:priority],
             comfort_level: invite[:confirmed]
         }
     end
