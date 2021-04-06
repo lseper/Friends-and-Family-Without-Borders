@@ -27,6 +27,7 @@ class EventsController < ApplicationController
       comfort_metric: 0,
       user_id: params[:user_id],
       start_time: event_params[:start_time]
+      masks_required: event_params[:masks_required]
     )
 
     if @event.save
@@ -60,6 +61,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:description, :ending_at, :name, :start_time)
+      params.require(:event).permit(:description, :ending_at, :name, :start_time, :masks_required)
     end
 end
