@@ -15,7 +15,13 @@ export class CreatedEventsButton extends Component {
       dateStringEnd: '',
       location: '',
       organizer: '',
+      attending: this.props.attending
     };
+  }
+
+  updateAttendance(status) {
+      this.setState({attending: status});
+      //update with put request? need to probably pass event id to this prop to do that?
   }
 
   render() {
@@ -65,13 +71,19 @@ export class CreatedEventsButton extends Component {
               </div>
             </div>
             <div className="flex w-full text-brightPink py-2">
-              <button className="focus:outline-none">
-                <FontAwesomeIcon className="inline fa-2x mr-2 " icon={faCheckCircle} />
+              <button onClick = {() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
+                <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
               </button>
-              <div className="px-5 flex">
-                <button className="focus:outline-none">
-                  <FontAwesomeIcon className="inline fa-2x mr-2 " icon={faTimesCircle} />
+              <div className="px-5 flex ">
+                <button onClick = {() => this.updateAttendance(false)} className="focus:outline-none hover:text-brightPink-dark">
+                  <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faTimesCircle} />
                 </button>
+              </div>
+              <div className="flex text-coolGrey-dark text-bold pt-1">
+                  {!this.state.attending ?
+                  <div>Not Going</div> :
+                  <div>Going</div>
+                    }
               </div>
             </div>
           </div>
