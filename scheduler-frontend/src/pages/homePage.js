@@ -4,16 +4,21 @@ import NavBar from '../components/navBar';
 import Alert from '../components/alert';
 import CreatedEventButton from '../components/createdEventsButton';
 import axios from 'axios';
+import moment from "moment";
 
 
-const EventCard = ({ name, date, location, details }) => {
+const EventCard = ({ name, date, location, details,creator }) => {
+    console.log(date);
     return (
+        
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
-            <CreatedEventButton
+            <EventInvitationsButton
                 name={name}
                 dateString={date}
                 location={location}
-                details={details} />
+                details={details}
+                comfort="red" 
+                creator={creator} />
         </div>
     )
 }
@@ -25,6 +30,7 @@ export class HomePage extends Component {
         this.state = {
             showPopup: false,
             needFriends: true,
+            loading: true,
             eventList: []
         };
     }
@@ -56,12 +62,12 @@ export class HomePage extends Component {
                 this.setState({
                     eventList: res.data.map(event => {
                         return (<EventCard
-                            name={event.name}
-                            date={event.start_time}
+                            name={event.event_details.name}
+                            date={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
                             location="temp"
-                            details={event.description}
-                            creator="temp"
-                            key={event.id}
+                            details={event.event_details.description}
+                            creator={event.organizer.username}
+                            key={event.event_details.Authorizationid}
                         />)
                     }),
                     loading: false,
@@ -73,22 +79,17 @@ export class HomePage extends Component {
                 this.setState({ loading: false })
             })
 
-            console.log(this.state.eventList);
+            //console.log(this.state.eventList);
     }
 
     render() {
         return (
             <div>
                 <NavBar />
-                {this.state.showPopup ?
+                {this.state.eventList.length === 0 ?
+        
                     <div>
-                        <Alert color="brightPink" message="You must fill out a questionaire" />
-                    </div>
-                    : null
-                }
-                {this.state.needFriends ?
-                    <div>
-                        <Alert color="brightPink" message="You currently do not have an event invitations, you should make some friends :)" />
+                        <Alert color="brightPink" message="You currently have no event invitations, you should make some friends:)" />
                     </div>
                     : null
                 }

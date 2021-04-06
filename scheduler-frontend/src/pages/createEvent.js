@@ -65,17 +65,24 @@ const CreateEvent = () => {
                 })
             }
         }
+        console.log("test before");
         let finalInvitees = ({
-            user_id: localStorage.get('user_id'),
+            user_id: localStorage.getItem('user_id'),
             event_id: eventId,
             invitees: finalInviteesList
         })
 
+        console.log("test");
         //console.log(finalInvitees);
 
         // post request for invitees 
         //axios.post(`/users/${localStorage['user_id']}/invitations`, finalInvitees)
-        axios.post(`/users/invitations`, finalInvitees)
+        const authorization = localStorage.getItem('authToken');
+        axios.post(`/invitations`, finalInvitees, {
+            headers: {
+                'Authorization': authorization
+            }
+        })
         .then(res => {
             console.log("You correctly added invitees!")
             console.log(res);
@@ -101,7 +108,9 @@ const CreateEvent = () => {
             }
         })
             .then(res => {
-                eventId = res.data.id;      
+                console.log(res)
+                eventId = res.data.id;    
+                console.log(eventId);  
                 //then add invites and submit another post request 
                 addInvitees(eventId)
             }).catch(err => {
