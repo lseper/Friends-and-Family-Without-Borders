@@ -7,14 +7,18 @@ default: &default
   timeout: 5000
   username: emilykraai
   host: localhost
+<<<<<<< Updated upstream
   password: Coldcuts44 # (password)
 
+=======
+  password: password # (password)
+>>>>>>> Stashed changes
 
 development:
   <<: *default
   host: localhost
   database: postgres # (database for development)
-  password: postgres # (password)
+  password: password # (password)
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

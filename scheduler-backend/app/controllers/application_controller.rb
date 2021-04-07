@@ -1,5 +1,91 @@
 class ApplicationController < ActionController::API
 
+    # ------- comfort metric calculation ------
+
+    def setup_invitee(invitee)
+        {
+            user: User.find(invitee[:user_id]),
+            questionnaire: Questionnaire.find_by(user_id: invitee[:user_id]),
+            priority: invitee[:priority],
+            matches: []
+        }
+    end
+
+    THRESHOLD = 0.8
+
+    def calc_location_score(location, invitee)
+        location_type = location[:location_type]
+        base_location_score = 10
+        questionnaire_location_score = 0
+        if location_type == "Outside"
+            questionnaire_location_score = invitee[:questionnaire][:q1answer]
+        elsif location_type == "Large Inside"
+            questionnaire_location_score = invitee[:questionnaire][:q2answer]
+        elsif location_type == "Small Inside"
+            questionnaire_location_score = invitee[:questionnaire][:q3answer]
+        else
+            questionnaire_location_score = invitee[:questionnaire][:q4answer]
+        end
+        location_score = (base_location_score - questionnaire_location_score) / 100.0
+        return location_score
+    end
+
+    def calc_pair_scores(pair, invitee)
+        location = pair[:location]
+        activity = pair[:activity]
+
+        location_score = calc_location_score(location, invitee)
+        eating_score = calc_eating_score(activity, invitee)
+        social_dist_score = calc_social_distance_score(activity, invitee)
+        return (location_score + eating_score + social_dist_score)
+    end
+
+    def calc_eating_score(activity, invitee)
+        base_eating_score = 0
+        if activity[:hasFood] == false
+            return base_eating_score
+        else
+            base_eating_score = 10
+            questionnaire_eating_score = invitee[:questionnaire][:q5answer]
+            eating_score = (base_eating_score - questionnaire_eating_score) / 100.0
+            return eating_score
+        end
+    end
+
+    def calc_social_distance_score(activity, invitee)
+        base_social_score = activity[:socialDistanceScore]
+        questionnaire_social_score = invitee[:questionnaire][:q6answer]
+
+        social_score = questionnaire_social_score - base_social_score
+
+        if social_score <= 0
+            social_score = social_score.abs() * 0.5 
+        end
+
+        return social_score / 100.0
+    end
+
+    def calc_num_attendees_score(num_attendees, invitee)
+        questionnaire_num_attendees_comfort = invitee[:questionnaire][:q7answer]
+        num_attendees_score = num_attendees - questionnaire_num_attendees_comfort
+
+        if num_attendees_score <= 0
+            return 0
+        else
+            return num_attendees_score / 100.0
+        end
+    end
+
+    def calc_mask_score(mask_required, invitee)
+      
+        if !mask_required
+            questionnaire_mask_score = invitee[:questionnaire][:q8answer]
+            return (10 - questionnaire_mask_score) / 100.0
+        else
+            return 0
+        end
+    end
+
     # ----- methods used in multiple controllers
 
     def get_invitations_for_event(event)
@@ -14,10 +100,11 @@ class ApplicationController < ActionController::API
     def get_invitee_info(invite)
         user = User.find(invite[:user_id])
         {
+            id: user[:id],
             username: user[:username],
             confirmed: invite[:confirmed],
             priority: invite[:priority],
-            comfort_level: invite[:confirmed]
+            comfort_level: invite[:comfort_level]
         }
     end
 
@@ -74,7 +161,12 @@ class ApplicationController < ActionController::API
         decoded = decode_token
         if decoded
             @id = decoded[0]['user_id']
-            @event = Event.find_by(user_id: @id)
+            if params[:event_id]
+                @event = Event.find(params[:event_id])
+            else
+                @event = Event.find(params[:id])
+            end
+            is_owner = @id == @event[:user_id] # true if owner matches, false if not
         end
     end
 
