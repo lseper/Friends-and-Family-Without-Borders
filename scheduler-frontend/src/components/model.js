@@ -5,12 +5,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
-import OtherRadio from "../components/otherRadio";
-import RadioGroup2 from "../components/radioGroup";
 
 const ShowLocationSuggestions = ({ value, number, activity }) => {
-
   return (
       <div>
               <FormControlLabel 
@@ -22,10 +18,6 @@ const ShowLocationSuggestions = ({ value, number, activity }) => {
 }
 
 export class Modal extends Component {
-  // const [showModal, setShowModal] = React.useState(false);
-  // const [location, setLocation] = React.useState();
-  // const [activity, setActivity] = React.useState("eat");
-  // const [otherActivites, setOtherActivites] = React.useState();
   constructor(props) {
     super(props);
       this.state = {
@@ -37,28 +29,8 @@ export class Modal extends Component {
         wait: true,
       };
   }
-  
-  // componentDidMount() {
-  //   console.log(this.props.locationInfo);
-  //   console.log("Modal loading");
-  //   // for(let i = 0; i < this.props.locationInfo.length; i++) {
-  //     // console.log(this.props.locationInfo.locaiton.location_type);
-  //     // showLocationSuggestions(this.props.locationInfo[i].locaiton.location_type, i + 1);
-  //   //   this.setState({
-  //   //     locationList: this.props.locationInfo.map(location => {
-  //   //         return (<ShowLocationSuggestions
-  //   //             value={location.locaiton.location_type}
-  //   //             activity={location.activity.name}
-  //   //             number={1}
-  //   //         />)
-  //   //     })
-  //   // })
-  //   // // }
-  //   // console.log(this.state.locationList);
-  // }
 
   handleChange = (event) => {
-    // setLocation(event.target.value);  
     this.setState({
       location: event.target.value
     });
@@ -66,7 +38,6 @@ export class Modal extends Component {
   };
 
   handleLocation = (event) => {
-    // setActivity(event.target.value);  
     this.setState({
       activity: event.target.value
     });
@@ -74,7 +45,6 @@ export class Modal extends Component {
   };
 
   handleOtherActivites = (event) => {
-    // setOtherActivites(event.target.value);  
     this.setState({
       otherActivites: event.target.value
     });
@@ -98,7 +68,6 @@ export class Modal extends Component {
       ),
       wait: false
   })
-  // }
   console.log(this.state.locationList);
   return(true);
   }
@@ -153,41 +122,12 @@ export class Modal extends Component {
                       <MuiThemeProvider theme={this.theme}>
                       <FormLabel component="legend">Location-Activity</FormLabel>
                           <RadioGroup aria-label="location" name="location1" value={this.state.location} onChange={this.handleChange}>
-
-
-
-                              {/* <FormControlLabel value={first} control={<Radio color="primary"/>} label={"1. "+first} />
-                              <FormControlLabel value={second} control={<Radio color="primary"/>} label={"2. "+second} />
-                              <FormControlLabel value={third} control={<Radio color="primary"/>} label={"3. "+third} /> */}
-
-                            {this.state.locationList}
-                            
-                              
+                            {this.state.locationList}  
                           </RadioGroup>
                           </MuiThemeProvider>
                       </FormControl>
                       
                   </div>
-
-                  {/* <div className="relative p-6 flex-auto text-left">
-                      <FormControl component="fieldset">
-                      <MuiThemeProvider theme={this.theme}>
-                      <FormLabel component="legend">Activities</FormLabel>
-                          <RadioGroup aria-label="location" name="location1" value={this.state.activity} onChange={this.handleLocation}>
-                              <FormControlLabel value="eat" control={<Radio color="primary"/>} label={"1. eat"} />
-                              <FormControlLabel value="physical activity" control={<Radio color="primary"/>} label={"2. physical activity"} />
-                              <FormControlLabel value="general solcializing" control={<Radio color="primary"/>} label={"3. general solcializing"} />
-                              <OtherRadio
-                                  control={<Radio color="primary"/>} 
-                                  onTextChange={this.handleOtherActivites}
-                                  value={this.state.otherActivites}
-                                  placeholder="other..."
-                              />
-                          </RadioGroup>
-                          </MuiThemeProvider>
-                      </FormControl>
-                      
-                  </div> */}
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
@@ -205,11 +145,9 @@ export class Modal extends Component {
                           className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                           type="button"
                           onClick={() => {
-                              // setShowModal(false)
                               this.setState({
                                 showModal: false
                               })
-                              // handleActivity()
                               }
                           }
                       >
@@ -228,4 +166,4 @@ export class Modal extends Component {
   }
 }
 
-export default Modal
+export default Modal;

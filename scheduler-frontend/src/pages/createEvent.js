@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import Modal from '../components/model';
 import React, { useState, useEffect } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
-import Select from 'react-select';
 import moment from "moment";
 import axios from 'axios';
 import NavBar from '../components/navBar';
@@ -23,7 +22,6 @@ const CreateEvent = () => {
     const [invitees, setInvitees] = useState([]);
     const [priorities, setPriorities] = useState([]);
     const [locationInfo, setLocationInfo] = useState([]);
-    //let locationInfo = [];
 
     useEffect(() => {
         if(data.length === 0){
@@ -75,10 +73,8 @@ const CreateEvent = () => {
         })
 
         console.log("test");
-        //console.log(finalInvitees);
 
         // post request for invitees 
-        //axios.post(`/users/${localStorage['user_id']}/invitations`, finalInvitees)
         const authorization = localStorage.getItem('authToken');
         axios.post(`/invitations`, finalInvitees, {
             headers: {
@@ -88,8 +84,6 @@ const CreateEvent = () => {
         .then(res => {
             console.log("You correctly added invitees!")
             setLocationInfo(res.data.pairs);
-            //locationInfo = res.data.pairs;
-            // console.log(res.data.pairs);
         }).catch(err => {
             console.log("There was an error!")
             console.log(err.response.data);

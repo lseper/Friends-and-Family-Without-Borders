@@ -7,6 +7,8 @@ import Alert from '../components/alert';
 import { NavLink } from 'react-router-dom';
 
 const EventCard = ({ name, date, location, details }) => {
+    console.log(name)
+    console.log(date)
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
@@ -42,16 +44,17 @@ export class createdEvents extends Component {
             }
         })
             .then(res => {
+                console.log(res);
+                console.log(res.data);
                 this.setState({
                     eventList: res.data.map(event => {
                         return (<EventCard
-                            name={event.name}
-                            dateStart={event.start_time}
-                            dateEnd={event.ending_at}
+                            name={event.event.name}
+                            dateStart={event.event.start_time}
+                            dateEnd={event.event.ending_at}
                             location="temp"
-                            details={event.description}
-                            creator="temp"
-                            key={event.id}
+                            details={event.event.description}
+                            key={event.event.id}
                         />)
                     }),
                     loading: false,
