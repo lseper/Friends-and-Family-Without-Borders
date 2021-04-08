@@ -6,7 +6,7 @@ Activity.create( name: "movies", socialDistanceScore: 10, hasFood: true, minPeop
 
 
 # create all locations for testing
-Location.create( location_type: "Outdoor" )
+Location.create( location_type: "Outside" )
 Location.create( location_type: "Large Inside" )
 Location.create( location_type: "Small Inside" )
 Location.create( location_type: "Online" )

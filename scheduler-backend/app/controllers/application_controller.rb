@@ -51,7 +51,8 @@ class ApplicationController < ActionController::API
     # ------------ Encryption and user authentication stuff ----------
 
     # change this to something actually meaningful before code review lol
-    ENCODE_TOKEN = 'test'
+    # ENCODE_TOKEN = SHA256 encryption of the string "team melon"
+    ENCODE_TOKEN = '001253eed5e74fcf1d9d119efb2aa2e603cad83ea11c3b67a686f7df5b591c85'
 
     def encode(payload)
         JWT.encode(payload, ENCODE_TOKEN)
@@ -76,7 +77,7 @@ class ApplicationController < ActionController::API
         decoded = decode_token
         if decoded
             @id = decoded[0]['user_id']
-            @user = User.find_by(id: @id)
+            return params[:user_id].to_i == @id
         end
     end
 

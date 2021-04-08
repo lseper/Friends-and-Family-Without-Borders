@@ -9,7 +9,6 @@ default: &default
   host: localhost
   password: Coldcuts44 # (password)
 
-
 development:
   <<: *default
   host: localhost
