@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   resources :users do
     # getting all events for a user -- /users/1/events
     resources :questionnaires
-    resources :invitations, only: [:index]
+    resources :invitations, only: [:index, :update]
     resources :events, only: [:index, :create]
   end
   resources :events, only: [:update]
-  resources :invitations, only: [:create, :show, :destroy, :update]
+  resources :invitations, only: [:create, :show, :destroy]
   # getting one specific event -- /events/1
 
   post '/login', to: "users#login" 

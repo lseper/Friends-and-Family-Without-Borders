@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+  # importing ComfortCalculation methods
+  include ComfortCalculation
+
   before_action :set_event, only: [:show, :update, :destroy]
   before_action :authorized, only: [:index, :create]
   before_action :authorized_as_owner, only: [:update]
@@ -22,7 +25,6 @@ class EventsController < ApplicationController
       description: event_params[:description],
       ending_at: event_params[:ending_at],
       name: event_params[:name],
-      comfort_metric: 0,
       user_id: params[:user_id],
       start_time: event_params[:start_time],
       masks_required: event_params[:masks_required]
