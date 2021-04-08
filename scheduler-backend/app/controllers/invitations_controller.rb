@@ -1,7 +1,9 @@
 class InvitationsController < ApplicationController
+    include ComfortCalculation
+
     before_action :set_invitation, only: [:show, :update, :destroy]
-    before_action :authorized_as_owner, only: [:create] # also :create, but need to do a hacky fix
-    before_action :authorized, only: [:index]
+    before_action :authorized_as_owner, only: [:create]
+    before_action :authorized, only: [:index, :update]
     # Controller for Invitations
     
     # GET /invitations
@@ -33,12 +35,13 @@ class InvitationsController < ApplicationController
             if @invitee.save
                 invitees.append(setup_invitee(@invitee))
             else
-                errors.append(@invitee.errors)
+                render json: { message: "You cannot invite yourself nor another user more than once to the same event!" }, status: :unprocessable_entity
             end
         end
         # get all pairs
         pairs = LocationActivitySuggestion.all
-        setup_pairs(pairs)
+        puts 
+        pairs = setup_pairs(pairs)
         # TODO: match each user up with each potential pairing
         for invitee in invitees
             # how comfortable are you with the number of attendees at the event?
@@ -55,30 +58,30 @@ class InvitationsController < ApplicationController
                 # see if this invitee is comfortable enough to attend this event
                 if total_suggestion_comfort >= THRESHOLD
                     if invitee[:priority]
-                        pair.set_priority_passed(pair.get_priority_passed() + 1)
+                        pair[:priority_passed] += 1
                     else
-                        pair.set_others_passed(pair.get_others_passed() + 1)
+                        pair[:others_passed] += 1
                     end
                 end
                 # update the overall average comfort metric for this location-activity pair
-                pair.set_average_comfort((pair.get_average_comfort + total_suggestion_comfort) / invitees.length)
+                pair[:average_comfort] += (total_suggestion_comfort / invitees.length)
 
             end
         end
         
-        pairs = pairs.sort_by{|p| [p.get_priority_passed, p.get_others_passed, p.get_average_comfort]}.reverse!
+        pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse!
         # TODO: generate cumulative score for each pairing
         # TODO: return ranked list of pairings based on score
-        render json:  {pairs: prepare_pairs_jsons(pairs)}, status: :created
+        render json: { pairs: pairs }, status: :created
     end
 
-    # PATCH/PUT /invitations/1/edit
+    # PATCH/PUT users/[:id]/invitations/1/edit
     def update
-    if @invitation.update(invitation_params)
-        render json: @invitation
-    else
-        render json: @invitation.errors, status: :unprocessable_entity
-    end
+        if @invitation.update(confirmed: params[:confirmed])
+            render json: @invitation
+        else
+            render json: @invitation.errors, status: :unprocessable_entity
+        end
     end
 
     # DELETE /invitations/1
@@ -89,23 +92,34 @@ class InvitationsController < ApplicationController
     private
 
     def setup_pairs(pairs)
+        new_pairs = []
         for pair in pairs
-            pair.set_priority_passed(0)
-            pair.set_others_passed(0)
-            pair.set_average_comfort(0)
+            new_pairs.append(setup_pair(pair))
         end
+        return new_pairs
     end
 
-    def prepare_pair_json(pair)
+    def setup_pair(pair)
         {
             id: pair[:id],
             location: pair.location,
             activity: pair.activity,
-            priority_passed: pair.get_priority_passed(),
-            others_passed: pair.get_others_passed(),
-            average_comfort: pair.get_average_comfort()
+            priority_passed: 0,
+            others_passed: 0,
+            average_comfort: 0.0
         }
     end
+
+    # def prepare_pair_json(pair)
+    #     {
+    #         id: pair[:id],
+    #         location: pair.location,
+    #         activity: pair.activity,
+    #         priority_passed: pair.get_priority_passed(),
+    #         others_passed: pair.get_others_passed(),
+    #         average_comfort: pair.get_average_comfort()
+    #     }
+    # end
 
     def prepare_pairs_jsons(pairs)
         new_pairs = []
