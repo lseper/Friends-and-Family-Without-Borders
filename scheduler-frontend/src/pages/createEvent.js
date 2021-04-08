@@ -75,6 +75,7 @@ const CreateEvent = () => {
         console.log("test");
 
         // post request for invitees 
+        //DID SOMETHING CHANGE?
         const authorization = localStorage.getItem('authToken');
         axios.post(`/invitations`, finalInvitees, {
             headers: {

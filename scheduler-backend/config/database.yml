@@ -7,12 +7,8 @@ default: &default
   timeout: 5000
   username: emilykraai
   host: localhost
-<<<<<<< Updated upstream
   password: Coldcuts44 # (password)
 
-=======
-  password: password # (password)
->>>>>>> Stashed changes
 
 development:
   <<: *default
