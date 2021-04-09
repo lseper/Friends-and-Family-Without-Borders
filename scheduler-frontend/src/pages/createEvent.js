@@ -97,6 +97,7 @@ const CreateEvent = () => {
             description: details,
             start_time: startDate,
             ending_at: endDate,
+            masks_required: false
         }
         let eventId = -1;
 
