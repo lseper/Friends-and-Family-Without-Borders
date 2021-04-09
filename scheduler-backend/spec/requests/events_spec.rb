@@ -18,6 +18,10 @@ RSpec.describe "events requests", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it
+    it "gets all of the events for the logged in user when the index action is triggered" do
+      get '/users/1/events', headers: {'Authorization' => 'Bearer ' + @token}
+      puts response
+      expect(response)
+    end
   end
 end

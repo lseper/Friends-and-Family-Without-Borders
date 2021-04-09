@@ -32,8 +32,8 @@ User.create( username: "billbob", password: "billbob", password_confirmation: "b
 User.create( username: "janedoe", password: "janedoe", password_confirmation: "janedoe", name: "Jane Doe", email: "janedoe@gmail.com", privacy: true )
 
 # create all events for testing
-Event.create( name: "test event 1", description: "for testing event 1", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1 )
-Event.create( name: "test event 2", description: "for testing event 2", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1 )
+Event.create( name: "test event 1", description: "for testing event 1", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1, masks_required: true)
+Event.create( name: "test event 2", description: "for testing event 2", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1, masks_required: false)
 
 # creating all event_la for testing
 EventLa.create(location_activity_suggestion_id: 1, event_id: 1, overall_comfort_metric: 0.98, people_comfortable: 8)
