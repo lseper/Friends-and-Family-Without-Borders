@@ -43,4 +43,5 @@ Invitation.create( event_id: 1, user_id: 2, comfort_level: 0.95, confirmed: fals
 
 # create all questionnaires for testing
 Questionnaire.create(q1answer: 1, q2answer: 2, q3answer: 3, q4answer: 4, q5answer: 5, q6answer: 6, q7answer: 7, q8answer: 8, user_id: 3)
+Questionnaire.create(q1answer: 1, q2answer: 2, q3answer: 3, q4answer: 4, q5answer: 5, q6answer: 6, q7answer: 7, q8answer: 8, user_id: 2)
 EventLa.create(location_activity_suggestion_id: 1, event_id: 1, overall_comfort_metric: 0.98, people_comfortable: 8)
