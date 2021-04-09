@@ -63,7 +63,7 @@ export class Modal extends Component {
           return (<ShowLocationSuggestions
               value={location.location.location_type}
               activity={location.activity.name}
-              number={1}
+              key={location.location.location_type + '' + location.activity.name}
           />)
       }
       ),
