@@ -45,8 +45,8 @@ module ComfortCalculation
 
     # calculate the score for this invitee given the amount of social distancing at this event
     def calc_social_distance_score(activity, invitee)
-        base_social_score = activity[:socialDistanceScore]
-        questionnaire_social_score = invitee[:questionnaire][:q6answer]
+        base_social_score = activity[:socialDistanceScore].to_i
+        questionnaire_social_score = invitee[:questionnaire][:q6answer].to_i
 
         social_score = questionnaire_social_score - base_social_score
 

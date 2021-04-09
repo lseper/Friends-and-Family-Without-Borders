@@ -7,7 +7,7 @@ default: &default
   timeout: 5000
   username: emilykraai
   host: localhost
-  password: Coldcuts44 # (password)
+  password: password # (password)
 
 development:
   <<: *default

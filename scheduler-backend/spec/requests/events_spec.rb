@@ -80,7 +80,7 @@ RSpec.describe "events requests", type: :request do
     end
 
     it "is authorized when the user requesting the events for themself" do
-      put '/events/2', params: { pair: {
+      put '/events/1', params: { pair: {
         id: 1,
         location: {
             id: 1,
