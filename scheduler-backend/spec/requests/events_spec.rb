@@ -6,7 +6,7 @@ RSpec.describe "events requests", type: :request do
     # token for user_id = 1
     @token = JSON.parse(response.body)["auth_token"]
   end
-  describe "GET #index" do
+  describe "GET #index (general)" do
 
     it "is unauthorized when the user requesting the events for this user" do
       get '/users/3/events', headers: {'Authorization' => 'Bearer ' + @token}
@@ -20,10 +20,26 @@ RSpec.describe "events requests", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it "gets all of the events for the logged in user when the index action is triggered" do
+    before(:context) do 
       get '/users/1/events', headers: {'Authorization' => 'Bearer ' + @token}
-      response_hash = JSON.parse(response.body)
-      expect(response_hash.length).to == 
+      @response_hash = JSON.parse(response.body)
+      # puts @response_hash[0].keys[1] == 'invitees'
+      # # puts @response_hash[1]
+    end
+    describe "GET #index (specific)" do
+
+      it "returns two events for the logged in user" do
+        expect(@response_hash.length).to eq(2)
+      end
+
+      it "returns one invitee for the first event" do
+        expect(@response_hash[0]['invitees'].length).to eq(1)
+      end
+
+      it "returns zero invitees for the second event" do
+        expect(@response_hash[1]['invitees'].length).to eq(0)
+      end
+      
     end
   end
 
@@ -32,6 +48,8 @@ RSpec.describe "events requests", type: :request do
   end
 
   describe "PUT #update" do
+
+    
     # update testing here
   end
 end

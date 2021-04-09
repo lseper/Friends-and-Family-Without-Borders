@@ -51,11 +51,7 @@ class EventsController < ApplicationController
       masks_req_score = calc_mask_score(@event[:masks_required], invitee_info)
       pair_score = calc_pair_scores(pair, invitee_info)
       comfort_score = 1 - pair_score - masks_req_score - num_attendees_score
-      if invitee.update(comfort_level: comfort_score) 
-        puts "--- success ---"
-      else
-        puts "--- something went wrong ---"
-      end # TODO: Actual error handling here
+      invitee.update!(comfort_level: comfort_score) # will throw an error if unprocessable (internal server error)
     end
 
     # add the chosen pair to the event via the event_las table
