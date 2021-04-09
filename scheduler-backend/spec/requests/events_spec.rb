@@ -23,7 +23,7 @@ RSpec.describe "events requests", type: :request do
     it "gets all of the events for the logged in user when the index action is triggered" do
       get '/users/1/events', headers: {'Authorization' => 'Bearer ' + @token}
       response_hash = JSON.parse(response.body)
-      expect(response_hash.length).to == 
+      expect(response_hash.length).to eq(2)
     end
   end
 
