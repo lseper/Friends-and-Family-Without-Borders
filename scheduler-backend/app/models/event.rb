@@ -8,4 +8,14 @@ class Event < ApplicationRecord
     validates :user, presence: true
     validates :masks_required, inclusion: [true, false]
     validates :masks_required, exclusion: [nil]
+
+    # end date must be after start date
+    validate :end_after_start
+
+    private 
+    def end_after_start
+        if ending_at <= start_time
+            errors.add(:ending_at, "must be after the start time")
+        end
+    end
 end
