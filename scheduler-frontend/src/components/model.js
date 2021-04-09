@@ -27,6 +27,7 @@ export class Modal extends Component {
         otherActivities: '',
         locationList: [],
         wait: true,
+        locationInfo: this.props.locationInfo
       };
   }
 
@@ -60,7 +61,7 @@ export class Modal extends Component {
     this.setState({
       locationList: this.props.locationInfo.map(location => {
           return (<ShowLocationSuggestions
-              value={location.locaiton.location_type}
+              value={location.location.location_type}
               activity={location.activity.name}
               number={1}
           />)
@@ -68,8 +69,8 @@ export class Modal extends Component {
       ),
       wait: false
   })
-  console.log(this.state.locationList);
-  return(true);
+    console.log(this.props.locationList)
+    return(true);
   }
 
   theme = createMuiTheme({
