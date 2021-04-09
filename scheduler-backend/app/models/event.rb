@@ -14,8 +14,6 @@ class Event < ApplicationRecord
 
     private 
     def end_after_start
-        puts ending_at
-        puts start_time
         if ending_at <= start_time
             errors.add(:ending_at, "must be after the start time")
         end
