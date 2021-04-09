@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   # (total responses) / (total max scores for each thing)
   # GET /users/1
   def show
+    
     render json: profile_info(@user) 
   end
 
