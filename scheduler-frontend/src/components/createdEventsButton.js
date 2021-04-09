@@ -38,7 +38,7 @@ export class createdEventsButton extends Component {
                         <div className="flex text-coolGrey-dark pt-2">
                             <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
                             <div className="flex">
-                                <h3 className="text-coolGrey-dark">{this.formatDate(this.props.dateString)}</h3>
+                                <h3 className="text-coolGrey-dark">{this.formatDate(this.props.dateStart) + " - " + this.formatDate(this.props.dateEnd)}</h3>
                             </div>
                         </div>
                         <div className="flex text-coolGrey-dark">

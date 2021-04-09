@@ -6,14 +6,13 @@ import Loading from '../components/loading';
 import Alert from '../components/alert';
 import { NavLink } from 'react-router-dom';
 
-const EventCard = ({ name, date, location, details }) => {
-    console.log(name)
-    console.log(date)
+const EventCard = ({ name, dateStart, dateEnd, location, details }) => {
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
                 name={name}
-                dateString={date}
+                dateStart = {dateStart}
+                dateEnd = {dateEnd}
                 location={location}
                 details={details} />
         </div>
