@@ -8,6 +8,7 @@ gem 'rails', '~> 6.1.1'
 # testing gems
 gem 'rspec-rails'
 gem 'database_cleaner-active_record'
+gem 'simplecov', require: false, group: :test
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server

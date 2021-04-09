@@ -40,7 +40,6 @@ class InvitationsController < ApplicationController
         end
         # get all pairs
         pairs = LocationActivitySuggestion.all
-        puts 
         pairs = setup_pairs(pairs)
         # TODO: match each user up with each potential pairing
         for invitee in invitees
