@@ -5,18 +5,9 @@ default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: postgres
+  username: michaelkelly
   host: localhost
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-  password: Coldcuts44 # (password)
-
-=======
   password: GoIrish19! # (password)
->>>>>>> 88058dd3c4db1abee3876a5e2c42ad83d26eb54b
-=======
-  password: password # (password)
->>>>>>> Stashed changes
 
 development:
   <<: *default

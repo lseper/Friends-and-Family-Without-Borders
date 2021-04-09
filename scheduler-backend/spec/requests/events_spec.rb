@@ -11,6 +11,8 @@ RSpec.describe "events requests", type: :request do
     it "is unauthorized when the user requesting the events for this user" do
       get '/users/3/events', headers: {'Authorization' => 'Bearer ' + @token}
       expect(response).to have_http_status(:unauthorized)
+
+      
     end
 
     it "is authorized when the user requesting the events for themself" do
@@ -18,6 +20,6 @@ RSpec.describe "events requests", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it
+    
   end
 end
