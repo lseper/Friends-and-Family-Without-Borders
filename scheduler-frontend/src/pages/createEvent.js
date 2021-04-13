@@ -5,21 +5,9 @@ import NavBar from '../components/navBar';
 import InputTextForm from '../components/inputTextForm';
 import DateSelect from '../components/dateSelect';
 import SearchSelect from '../components/searchSelect';
-
 import Button from '../components/button'
 import LocationSuggestion from '../components/locationSuggestions'
 import DropDown from '../components/dropDown'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-
-// const ShowLocationSuggestions = ({ location, activity, handleLocation }) => {
-//     return (
-//         <div>    
-//             <button onClick={() => handleLocation(location, activity)} className="ml-4 bg-coolGreen text-black active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg mb-2 align-start md:w-3/4 w-3/4">{location + " - " + activity}</button>
-//         </div>
-//     )
-// }
 
 const SetErrors = ({ error }) => {
     return (
@@ -28,8 +16,6 @@ const SetErrors = ({ error }) => {
         </div>
     )
 }
-
-
 
 const ShowLocationSuggestions = ({ value, activity, avgComfort, comfortableAttendees, comfortablePriority, totalAttendees, totalPriority }) => {
     console.log("test please hit here");
@@ -63,12 +49,9 @@ const CreateEvent = () => {
     const [first, setFirst] = useState([]);
     const [second, setSecond] = useState([]);
     const [third, setThird] = useState([]);
-    const [showLocations, setShowLocations] = useState([]);
     const [dropDownLocations, setDropDownLocations] = useState([]);
-    const [showButton, setShowButton] = useState(false);
     const [showAddLocationButton, setShowAddLocationButton] = useState(false)
-
-    // const [locationList, setLocationList] = useState([]);
+    const [locationList, setLocationList] = useState([]);
     const [error, setError] = useState();
     const [showError, setShowError] = useState([]);
 
@@ -89,20 +72,36 @@ const CreateEvent = () => {
         }
     }, [data]);
 
-    // useEffect(() => {
-    //     // setLocationList(
-    //     //   locationInfo.map(location => {
-    //     //       return (<ShowLocationSuggestions
-    //     //           location={location.location.location_type}
-    //     //           activity={location.activity.name}
-    //     //           handleLocation={handleLocation}
-    //     //           key={location.location.location_type + '' + location.activity.name}
-    //     //       />
-    //     //       )
-    //     //   }
-    //     //   )
-    //     // )
-    // }, [locationInfo]);
+    useEffect(() => {
+        setLocationList(
+          locationInfo.map(location => {
+              return (<ShowLocationSuggestions
+                value={location.location.location_type}
+                activity={location.activity.name}
+                key={location.location.location_type + '' + location.activity.name}
+                id={location.id}
+                avgComfort={location.average_comfort}
+                comfortableAttendees={location.others_passed}
+                comfortablePriority={location.priority_passed}
+                totalAttendees={invitees.length}
+                totalPriority={priorities.length}
+            />
+              )
+          }
+          )
+        )
+    }, [locationInfo]);
+
+    useEffect(() => {
+        console.log(locationInfo)
+        for (let i = 0; i < locationInfo.length; i++) {
+            console.log(locationInfo[i].id)
+            dropDownLocations.push({
+                "value": locationInfo[i].id,
+                "label": locationInfo[i].location.location_type + " " + locationInfo[i].activity.name
+            });
+        }
+    }, [locationInfo])
 
     useEffect(() => {
         setShowError( <SetErrors error={error} /> )
@@ -150,7 +149,6 @@ const CreateEvent = () => {
                 console.log("You correctly added invitees!")
                 console.log(res.data.pairs);
                 setLocationInfo(res.data.pairs);
-                setShowButton(true)
                 setFirst(res.data.pairs[0]);
                 setSecond(res.data.pairs[1]);
                 setThird(res.data.pairs[2]);
@@ -161,39 +159,6 @@ const CreateEvent = () => {
                 setError(err.response.data.name[0]);
             })
 
-    }
-
-    function setDropDownData() {
-        console.log(locationInfo)
-        for (let i = 0; i < locationInfo.length; i++) {
-            console.log(locationInfo[i].id)
-            dropDownLocations.push({
-
-                "value": locationInfo[i].id,
-                "label": locationInfo[i].location.location_type + " " + locationInfo[i].activity.name
-            });
-        }
-    }
-
-    function showLocationToUser() {
-
-        setShowButton(false);
-        console.log("test");
-        setShowLocations(locationInfo.map(location => {
-            return (<ShowLocationSuggestions
-                value={location.location.location_type}
-                activity={location.activity.name}
-                key={location.location.location_type + '' + location.activity.name}
-                id={location.id}
-                avgComfort={location.average_comfort}
-                comfortableAttendees={location.others_passed}
-                comfortablePriority={location.priority_passed}
-                totalAttendees={invitees.length}
-                totalPriority={priorities.length}
-
-            />)
-        }
-        ))
     }
 
     function buildPost() {
@@ -216,6 +181,7 @@ const CreateEvent = () => {
                 eventId = res.data.id;
                 console.log(eventId)
                 setEventId(eventId);
+
                 //then add invites and submit another post request 
                 addInvitees(eventId);
                 setError(undefined);
@@ -230,10 +196,10 @@ const CreateEvent = () => {
 
         //send entire suggestion-activity location
         let pair = [];
-        if (location === first.id.toString()) {
+        if (location === first.id) {
             pair = first;
         }
-        else if (location === second.id.toString()) {
+        else if (location === second.id) {
             pair = second;
         } else {
             pair = third;
@@ -242,8 +208,7 @@ const CreateEvent = () => {
         const locationFinal = {
             pair: pair 
         }
-        console.log("Location final");
-        console.log(locationFinal);
+
         const authorization = localStorage.getItem('authToken');
         axios.put(`/events/${eventId}`, locationFinal, {
             headers: {
@@ -282,14 +247,8 @@ const CreateEvent = () => {
         setDetails(event)
     }
 
-    // const handleLocation = (location, activity) => {
-    //     setLocation(location)
-    //     setActivity(activity)
-    // }
-
     const callBackLocation = (event) => {
         setLocation(event)
-        console.log(event)
         setShowAddLocationButton(true);
     }
 
@@ -313,33 +272,12 @@ const CreateEvent = () => {
                     <DateSelect handleCallback={handleEndDate} label="EVENT END" />
                     &nbsp;&nbsp;&nbsp;
                     <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={data} />
-                    {/* {invitees.length !== 0 && ( */}
                         &nbsp;&nbsp;&nbsp;
                     <SearchSelect handleCallback={handlePrioritiesChange} label="SET PRIORITY INVITEES" data={invitees} />
-                    {/* )} */}
                     &nbsp;&nbsp;&nbsp;
-                    {locationInfo.length > 0 && showButton ?
-                        <div
-                            className=" py-3"
-                            onClick={() => {
-                                setDropDownData();
-                                showLocationToUser();
-                            }}
-                        >
-                            <div className="flex items-left justify-start rounded-b">
-                                <div className="text-coolGrey-dark inline-block mr-3 align-middle">
-                                    <FontAwesomeIcon className="inline fa-lg " icon={faAngleDown} />
-                                </div>
-                                <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 pt-1"} >VIEW LOCATION SUGGESTIONS</label>
-
-                            </div>
-
-                        </div> :
-                        null
-                    }
-                    {showLocations.length > 0 ?
+                    {locationList.length > 0 ?
                         <div>
-                            {showLocations}
+                            {locationList}
                         &nbsp;&nbsp;&nbsp;
                         <DropDown handleCallback={callBackLocation} name="SELECT LOCATION AND ACTIVITY" data={dropDownLocations} border="bg-coolBlue" downlable={true} primaryColor='#98D2EB' />
                         </div>
@@ -348,41 +286,24 @@ const CreateEvent = () => {
                 </form>
             </section>
             <div className="flex items-left justify-start rounded-b py-4">
-                <div onClick={buildPost} className="px-6">
-                    <Button name="Create Event" bgColor="bg-coolBlue" type="text" />
-                </div>
-                {showAddLocationButton ?
+            <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
+            {showAddLocationButton ?
                     <div
-                        className="flex px-4"
                         onClick={addEventLocation}
                     >
                         <Button name="Add Location to Event" bgColor="bg-coolBlue" type="text" />
                     </div> :
                     null
-                }
-
-            {/* <div className="">
-                {locationList}
-            </div> */}
-
-            <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
-                {/* <Modal locationInfo={locationInfo} callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} /> */}
-                
-                {/* <button
+            }
+                <button
                     className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
                         buildPost();
-                        setDropDownData();
-                        showLocationToUser();
                     }}
                 >
-                    {showLocations.length >= 0 ? 'Generate Location' : 'Create Event'}
-                    
-                </button> */}
-                {/* <NavLink to="/createdEvents" className="ml-4 font-bold text-brightPink text-xl inline mt-2.5">
-                    Cancel
-                </NavLink> */}
+                    Create Event  
+                </button> 
             </section>
             
             </div>

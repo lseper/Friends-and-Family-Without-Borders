@@ -18,8 +18,6 @@ export class profile extends Component {
       password: '',
       email: '',
       publicInfo: '',
-      // comfortNum: 0,
-      // comfort: ''
     };
   }
 
@@ -29,7 +27,6 @@ export class profile extends Component {
     } else {
       this.setState({ publicInfo: false });
     }
-
   }
 
   async componentDidMount() {
@@ -55,14 +52,6 @@ export class profile extends Component {
           comfortNum: res.data.comfort_metric,
           loading: false
         })
-        // set the color of the comfort metric
-        // if (this.state.comfortNum < (1 / 3)) {
-        //   this.setState({ comfort: "red" });
-        // } else if (this.state.comfortNum >= (1 / 3) & this.state.comfortNum < (2 / 3)) {
-        //   this.setState({ comfort: "yellow" });
-        // } else {
-        //   this.setState({ comfort: "green" });
-        // }
       }).then(() => {
         console.log(this.state);
       }).catch(err => {
@@ -103,14 +92,6 @@ export class profile extends Component {
   }
 
   render() {
-    // let comfort;
-    // if (this.state.comfort === "green") {
-    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-coolGreen py-2 px-2"></div>;
-    // } else if (this.state.comfort === "yellow") {
-    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-yellow-500 py-2 px-2"></div>
-    // } else {
-    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-red-500 py-2 px-2"></div>
-    // }
     if (this.state.publicInfo === '') {
       return (<Loading />)
     }
@@ -126,9 +107,6 @@ export class profile extends Component {
             <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> Your Profile</label>
             <div className="flex">
               <label htmlFor="title" className="text-lg text-left block pb-2 pt-1 text-coolGrey-dark border-coolGrey"> View and Update Information</label>
-              {/* <div className="px-1 pb-1 flex">
-                {comfort}
-              </div> */}
             </div>
           </div>
 
