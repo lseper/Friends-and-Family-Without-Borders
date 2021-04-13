@@ -31,11 +31,6 @@ export default function ControlledAccordions(invitees) {
     setExpanded(isExpanded ? panel : false);
   };
 
-  // const users = [{ username: "mike", comfort: "very comfortable", attendance: true },
-  // { username: "Em", comfort: "very comfortable", attendance: true },
-  // { username: "Parker", comfort: "very comfortable", attendance: false }
-  // ]
-
   const users = invitees;
 
   return (

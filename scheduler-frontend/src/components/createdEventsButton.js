@@ -62,12 +62,10 @@ export class createdEventsButton extends Component {
                             <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faMapMarkerAlt} />
                             <div className="flex">
                                 <h3 className="text-coolGrey-dark pb-2">{this.props.location}</h3>
-                                {/* <h1>{this.props.invitees[0].username}</h1> */}
                             </div>
                         </div>
                     </div>
                     <div className="py-2 w-full">
-                        {/* <h1>{this.props.invitees[0].username}</h1> */}
                         <ControlledAccordions invitees={this.props.invitees}/>
 
                     </div>
