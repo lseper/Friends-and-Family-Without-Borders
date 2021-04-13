@@ -384,8 +384,9 @@ const CreateEvent = () => {
                     Cancel
                 </NavLink> */}
             </section>
-            {showError}
+            
             </div>
+            {showError}
         </div>
     )
 }
