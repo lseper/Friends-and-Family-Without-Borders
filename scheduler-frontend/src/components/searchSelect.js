@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
 
 const SearchSelect = ({ handleCallback, label, data }) => {
 
-    const [invitee, setInvitees] = useState([]);
-
     const handleSelectChange = (event) => {
-        setInvitees(event)
         handleCallback(event);
     }
 
@@ -29,10 +26,9 @@ const SearchSelect = ({ handleCallback, label, data }) => {
                     }
                 })}
             />
-            <label className={"inline text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >SEARCH AND ADD INVITEES</label>
+            <label className={"inline text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 focus:outline-none"} >{label}</label>
         </>
     )
 }
-
 
 export default SearchSelect;

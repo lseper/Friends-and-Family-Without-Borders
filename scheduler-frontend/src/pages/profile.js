@@ -4,7 +4,7 @@ import DropDown from '../components/dropDown';
 import Button from '../components/button';
 import axios from 'axios';
 import Loading from '../components/loading';
-import InputTextFormGreen from '../components/inputTextFormGreen';
+import InputTextForm from '../components/inputTextForm';
 import ShowText from '../components/showText'
 
 export class profile extends Component {
@@ -18,8 +18,8 @@ export class profile extends Component {
       password: '',
       email: '',
       publicInfo: '',
-      comfortNum: 0,
-      comfort: ''
+      // comfortNum: 0,
+      // comfort: ''
     };
   }
 
@@ -56,13 +56,13 @@ export class profile extends Component {
           loading: false
         })
         // set the color of the comfort metric
-        if (this.state.comfortNum < (1 / 3)) {
-          this.setState({ comfort: "red" });
-        } else if (this.state.comfortNum >= (1 / 3) & this.state.comfortNum < (2 / 3)) {
-          this.setState({ comfort: "yellow" });
-        } else {
-          this.setState({ comfort: "green" });
-        }
+        // if (this.state.comfortNum < (1 / 3)) {
+        //   this.setState({ comfort: "red" });
+        // } else if (this.state.comfortNum >= (1 / 3) & this.state.comfortNum < (2 / 3)) {
+        //   this.setState({ comfort: "yellow" });
+        // } else {
+        //   this.setState({ comfort: "green" });
+        // }
       }).then(() => {
         console.log(this.state);
       }).catch(err => {
@@ -103,14 +103,14 @@ export class profile extends Component {
   }
 
   render() {
-    let comfort;
-    if (this.state.comfort === "green") {
-      comfort = <div className="rounded-full h-10 w-10 flex items-left bg-coolGreen py-2 px-2"></div>;
-    } else if (this.state.comfort === "yellow") {
-      comfort = <div className="rounded-full h-10 w-10 flex items-left bg-yellow-500 py-2 px-2"></div>
-    } else {
-      comfort = <div className="rounded-full h-10 w-10 flex items-left bg-red-500 py-2 px-2"></div>
-    }
+    // let comfort;
+    // if (this.state.comfort === "green") {
+    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-coolGreen py-2 px-2"></div>;
+    // } else if (this.state.comfort === "yellow") {
+    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-yellow-500 py-2 px-2"></div>
+    // } else {
+    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-red-500 py-2 px-2"></div>
+    // }
     if (this.state.publicInfo === '') {
       return (<Loading />)
     }
@@ -125,10 +125,10 @@ export class profile extends Component {
           <div className="px-1">
             <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> Your Profile</label>
             <div className="flex">
-              <label htmlFor="title" className="text-lg text-left block pb-2 pt-1 text-coolGrey-dark border-coolGrey"> Comfort </label>
-              <div className="px-1 pb-1 flex">
+              <label htmlFor="title" className="text-lg text-left block pb-2 pt-1 text-coolGrey-dark border-coolGrey"> View and Update Information</label>
+              {/* <div className="px-1 pb-1 flex">
                 {comfort}
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -137,12 +137,27 @@ export class profile extends Component {
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
             <ShowText label="USERNAME" placeholder={this.state.userName}/>
             &nbsp;&nbsp;&nbsp;
-            {/* <ShowText label="EMAIL" placeholder={this.state.phoneNumber}/> */}
-            <InputTextFormGreen handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
             &nbsp;&nbsp;&nbsp;
-            <InputTextFormGreen handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
             &nbsp;&nbsp;&nbsp;
-            <DropDown name="INFORMATION PUBLIC TO USERS" initalState={this.state.publicInfo} downlable={true} handleCallback={this.publicCallBack} option1="Yes" option2="No" border="border-coolGreen" />
+            <DropDown name="INFORMATION PUBLIC TO USERS" 
+              initalState={this.state.publicInfo} 
+              downlable={true} 
+              handleCallback={this.publicCallBack} 
+              data = {[
+                {
+                  value: 1,
+                  label: "Yes"
+                },
+                {
+                  value: 2,
+                  label: "No"
+                }
+              ]}  
+              border="border-coolGreen"
+              backgroundColor = "bg-coolGreen"
+              primaryColor = '#BDE4A7' />
             <div onClick={this.buildPost} className="w-full">
               <Button name="Update" bgColor="bg-coolGreen" />
             </div>

@@ -8,7 +8,9 @@ class UsersController < ApplicationController
     @users = User.all
     users = []
     for user in @users
-      users.append(profile_info(user))
+      if get_questionnaire(user) != 0
+        users.append(profile_info(user))
+      end
     end
     render json: users
   end

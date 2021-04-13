@@ -4,6 +4,9 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export class CreatedEventsButton extends Component {
 
@@ -21,19 +24,40 @@ export class CreatedEventsButton extends Component {
 
   updateAttendance(status) {
       this.setState({attending: status});
+
+      let info =  {
+        'confirmed': status
+      }
+
+      const authorization = localStorage.getItem('authToken');
+      console.log(this.props.invitationId);
+      axios.put(`/users/${localStorage['user_id']}/invitations/${this.props.invitationId}`, info, {
+          headers: {
+              'Authorization': authorization
+          }
+      })
+      .then(res => {
+          console.log("Correctly updated attendance!")
+      }).catch(err => {
+          console.log("There was an error with updating attendance!")
+          console.log(err.response.data);
+      })
       //update with put request? need to probably pass event id to this prop to do that?
+      //user/{userid}/invitations/{invitationid}
+      //put request 
+      //confirmed: true
   }
 
   render() {
 
-    let comfort;
-    if (this.props.comfort === "green") {
-      comfort = <div className="rounded-full h-10 w-10 flex items-left bg-coolGreen py-2 px-2"></div>;
-    } else if (this.props.comfort === "yellow") {
-      comfort = <div className="rounded-full h-10 w-10 flex items-left bg-yellow-500 py-2 px-2"></div>
-    } else {
-      comfort = <div className="rounded-full h-10 w-10 flex items-left bg-red-500 py-2 px-2"></div>
-    }
+    // let comfort;
+    // if (this.props.comfort === "green") {
+    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-coolGreen py-2 px-2"></div>;
+    // } else if (this.props.comfort === "yellow") {
+    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-yellow-500 py-2 px-2"></div>
+    // } else {
+    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-red-500 py-2 px-2"></div>
+    // }
 
     return (
       <div className="flex flex-grow align-start items-start py-4 px-5 w-full md:w-3/4" >
@@ -41,14 +65,26 @@ export class CreatedEventsButton extends Component {
           <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white">
             <div className="text-sm font-bold text-coolGrey-dark">{this.props.creator} invites you to:</div>
             <div className="flex py-2">
-              <p className="text-2xl font-bold text-coolGrey-dark">{this.props.name}</p>
+              <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
               <div className="px-5 flex">
-                <h3 className="">{comfort}</h3>
+              <div className = "flex alight-right items-right pb-2" style={{ width: 70, height: 70 }}>
+                <CircularProgressbar value={70} text={`70%`}
+                styles={buildStyles({     
+                    // Text size
+                    textSize: '24px',
+                
+                    // Colors
+                    pathColor: '#CB4335',
+                    textColor: '#CB4335',
+                    trailColor: '#CD8B76',
+                    backgroundColor: '#3e98c7',
+                  })} />
+            </div>
               </div>
             </div>
 
             <h3 className="text-sm text-coolGrey-dark pb-2">{this.props.details}</h3>
-            <div className="flex felx-wrap content-center pb-4">
+            <div className="flex content-center pb-4">
               <hr className="text-center"
                 style={{
                   color: '#CD8B76',
