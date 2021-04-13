@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import EventInvitationsButton from '../components/eventInvitationsButton';
 import NavBar from '../components/navBar';
 import Alert from '../components/alert';
-import CreatedEventButton from '../components/createdEventsButton';
 import axios from 'axios';
 import moment from "moment";
+import Loading from '../components/loading'
 
 
-const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending }) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id }) => {
+    
     return (
-        
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <EventInvitationsButton
                 name={name}
@@ -19,8 +19,8 @@ const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attend
                 details={details}
                 comfort="red" 
                 creator={creator} 
-                //add if a user is currently attending or not
                 attending = {attending}
+                invitationId = {id}
                 />
         </div>
     )
@@ -34,7 +34,8 @@ export class HomePage extends Component {
             showPopup: false,
             needFriends: true,
             loading: true,
-            eventList: []
+            eventList: [], 
+            loading: true
         };
     }
 
@@ -45,8 +46,7 @@ export class HomePage extends Component {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
-
-        const needPopup = localStorage.getItem('filledOutQuestionnaire') === "false";
+        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
         if (needPopup) {
             this.setState({ showPopup: true })
         }
@@ -73,6 +73,7 @@ export class HomePage extends Component {
                             creator={event.organizer.username}
                             key={event.event_details.Authorizationid}
                             attending = {false}
+                            id = {event.event_details.id}
                         />)
                     }),
                     loading: false,
@@ -83,14 +84,25 @@ export class HomePage extends Component {
                 console.log(err);
                 this.setState({ loading: false })
             })
-
-            //console.log(this.state.eventList);
     }
+
+
 
     render() {
         return (
             <div>
+                {this.state.loading ?
+                    <Loading /> :
+                    null
+                }
                 <NavBar />
+                {this.state.showPopup ?
+        
+                <div>
+                    <Alert color="brightPink" message="Please must fill out a questionnaire!" />
+                </div>
+                : null
+                }
                 {this.state.eventList.length === 0 ?
         
                     <div>

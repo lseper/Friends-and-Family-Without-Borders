@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 import DropDown from '../components/dropDown';
 import Button from '../components/button';
-import InputTextFormGreen from '../components/inputTextFormGreen'
+import InputTextForm from '../components/inputTextForm'
 import axios from 'axios';
 
 export class createAccount extends Component {
@@ -59,7 +59,6 @@ export class createAccount extends Component {
   }
 
   userNameCallBack = (inputText) => {
-    console.log(inputText);
     this.setState({ userName: inputText })
   }
 
@@ -89,16 +88,31 @@ export class createAccount extends Component {
           </div>
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
-          <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <InputTextFormGreen handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+          <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 border-coolGreen rounded px-8 py-8 pt-8">
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextFormGreen handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextFormGreen handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextFormGreen handleCallBack={this.nameCallBack} type="text" label="PREFERRED NAME" placeholder="Name Example" />
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.nameCallBack} type="text" label="PREFERRED NAME" placeholder="Name Example" />
             &nbsp;&nbsp;&nbsp;
-            <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" downlable={true} />
+            {/* <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" downlable={true} /> */}
+            <DropDown handleCallback={this.publicCallBack} 
+              name="INFORMATION PUBLIC TO USERS" 
+              data = {[
+                {
+                  value: 1,
+                  label: "Yes"
+                },
+                {
+                  value: 2,
+                  label: "No"
+                }
+              ]} 
+              downlable={true}
+              backgroundColor = "bg-coolGreen"
+              primaryColor = '#BDE4A7' />
             {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
                 {this.state.errors}

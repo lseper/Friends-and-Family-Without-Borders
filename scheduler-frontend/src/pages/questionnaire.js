@@ -4,6 +4,7 @@ import Question from '../components/question';
 import Button from '../components/button';
 import Loading from '../components/loading';
 import axios from 'axios';
+import Alert from '../components/alert';
 
 export class Questionnaire extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ export class Questionnaire extends Component {
       q10: 0,
       q11: 0,
       q12: 0,
-      quesitonnaireId: '1'
+      quesitonnaireId: '1',
+      showPopup: false,
     };
   }
 
@@ -37,6 +39,16 @@ export class Questionnaire extends Component {
     const token = localStorage.getItem("authToken").toString();
     console.log("User token on questionnaire page: ", token);
     axios.defaults.headers.common['Authorization'] = token;
+
+        //console.log(localStorage.getItem('filledOutQuestionnaire'));
+        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
+        //console.log(needPopup);
+        if (needPopup) {
+            this.setState({ showPopup: true })
+        }
+        else {
+            this.setState({ showPopup: false })
+        }    
 
     console.log("User id on questionnaire page: ", localStorage['user_id']);
     axios.get(`/users/${localStorage['user_id']}/questionnaires`)
@@ -192,6 +204,12 @@ export class Questionnaire extends Component {
         {this.state.loading ?
           <Loading /> :
           null
+        }
+        {this.state.showPopup ?
+        <div>
+            <Alert color="brightPink" message="Please must fill out a questionnaire!" />
+        </div>
+        : null
         }
 
         <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
