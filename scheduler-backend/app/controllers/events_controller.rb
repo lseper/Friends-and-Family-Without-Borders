@@ -13,7 +13,12 @@ class EventsController < ApplicationController
     @events = Event.where(user_id: params[:user_id])
     events_to_return = []
     for event in @events.to_ary
-      events_to_return.append({ event: event, invitees: get_invitations_for_event(event) })
+      event_la = EventLa.find_by(event_id: event.id)
+      if event_la
+        events_to_return.append({ event: event, invitees: get_invitations_for_event(event), overall_comfort_metric: event_la[:overall_comfort_metric], people_comfortable: event_la[:people_comfortable]})
+      else
+        events_to_return.append({ event: event, invitees: get_invitations_for_event(event), overall_comfort_metric: 0, people_comfortable: 0})
+      end
     end
     render json: events_to_return
   end
@@ -21,6 +26,7 @@ class EventsController < ApplicationController
   # POST /user/:id/events
   # AUTHORIZATION NEEDED
   def create
+    puts Time.now
     @event = Event.new(
       description: event_params[:description],
       ending_at: event_params[:ending_at],
@@ -29,7 +35,6 @@ class EventsController < ApplicationController
       start_time: event_params[:start_time],
       masks_required: event_params[:masks_required]
     )
-
     if @event.save
       render json: { id: @event.id }, status: :created
     else

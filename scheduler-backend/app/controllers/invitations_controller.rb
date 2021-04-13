@@ -11,6 +11,7 @@ class InvitationsController < ApplicationController
     @invitations = User.find(params[:user_id]).invitations
     invited_events = []
     for invitation in @invitations
+        # TODO: filter invitations to only return ones that have NOT already happened yet
         invited_events.append(extract_invitation_info(invitation))
     end
     render json: invited_events
@@ -36,6 +37,7 @@ class InvitationsController < ApplicationController
                 invitees.append(setup_invitee(@invitee))
             else
                 render json: { message: "You cannot invite yourself nor another user more than once to the same event!" }, status: :unprocessable_entity
+                return # exit prematurely
             end
         end
         # get all pairs
@@ -131,9 +133,21 @@ class InvitationsController < ApplicationController
     def extract_invitation_info(invite)
         event = Event.find(invite[:event_id])
         organizer = User.find(event[:user_id])
+        event_la = EventLa.find_by(event_id: invite.event.id).location_activity_suggestion
+        if event_la
+            activity = event_la.activity
+            location = event_la.location
+        else
+            activity = nil
+            location = nil
+        end
         {
             organizer: organizer,
-            event_details: event
+            event_details: event,
+            confirmed: invite[:confirmed],
+            comfort_level: invite[:comfort_level],
+            activity: activity,
+            location: location
         }
     end
 

@@ -3,6 +3,9 @@ class Event < ApplicationRecord
     has_many :invitations
     has_many :event_la
 
+    # for events that have not yet started 
+    scope :future, -> { where('start_time > ?', Time.now.to_s)}
+
     # not nil or empty string (can be false for masks_required)
     validates :name, :start_time, :ending_at, presence: true
     validates :user, presence: true
@@ -14,6 +17,8 @@ class Event < ApplicationRecord
 
     private 
     def end_after_start
+        puts ending_at.class
+        puts start_time.class
         if ending_at <= start_time
             errors.add(:ending_at, "must be after the start time")
         end
