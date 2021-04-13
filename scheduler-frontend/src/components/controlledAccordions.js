@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ControlledAccordions() {
+export default function ControlledAccordions(invitees) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -31,10 +31,12 @@ export default function ControlledAccordions() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const users = [{ username: "mike", comfort: "very comfortable", attendance: true },
-  { username: "Em", comfort: "very comfortable", attendance: true },
-  { username: "Parker", comfort: "very comfortable", attendance: false }
-  ]
+  // const users = [{ username: "mike", comfort: "very comfortable", attendance: true },
+  // { username: "Em", comfort: "very comfortable", attendance: true },
+  // { username: "Parker", comfort: "very comfortable", attendance: false }
+  // ]
+
+  const users = invitees;
 
   return (
     <div className={classes.root}>

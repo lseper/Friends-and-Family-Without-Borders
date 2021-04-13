@@ -22,14 +22,25 @@ export default function BasicTable({ users }) {
     const classes = useStyles();
 
     function createData(name, comfort, attendance) {
-        return { name, comfort, attendance };
+        console.log("Users")
+        console.log(users.invitees);
+
+        let allUsers = []
+
+        for(let i = 0; i < users.invitees.length; i++) {
+            console.log(users.invitees[i].username);
+            allUsers.push({ name: users.invitees[i].username, comfort: users.invitees[i].comfort_level, attendance: users.invitees[i].confirmed })
+        }
+        
+        return allUsers;
     }
 
-    const rows = [
-        createData(users[0].username, users[0].comfort, users[0].attendance),
-        createData(users[1].username, users[1].comfort, users[1].attendance),
-        createData(users[2].username, users[2].comfort, users[2].attendance),
-    ];
+    // const rows = [
+    //     createData(users[0].username, users[0].comfort, users[0].attendance),
+    //     createData(users[1].username, users[1].comfort, users[1].attendance),
+    //     createData(users[2].username, users[2].comfort, users[2].attendance),
+    // ];
+    const rows = createData(users)
 
     return (
         <TableContainer component={Paper}>
