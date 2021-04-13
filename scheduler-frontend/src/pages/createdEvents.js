@@ -3,17 +3,16 @@ import CreatedEventButton from '../components/createdEventsButton';
 import NavBar from '../components/navBar';
 import axios from 'axios';
 import Loading from '../components/loading';
-import Alert from '../components/alert';
 import { NavLink } from 'react-router-dom';
+import Alert from '../components/alert';
 
-const EventCard = ({ name, date, location, details }) => {
-    console.log(name)
-    console.log(date)
+const EventCard = ({ name, dateStart, dateEnd, location, details }) => {
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
                 name={name}
-                dateString={date}
+                dateStart={dateStart}
+                dateEnd={dateEnd}
                 location={location}
                 details={details} />
         </div>
@@ -27,6 +26,7 @@ export class createdEvents extends Component {
         this.state = {
             eventList: [],
             loading: true,
+            showPopup: false,
         };
     }
 
@@ -35,6 +35,13 @@ export class createdEvents extends Component {
         if (!localStorage['user_id'] && !localStorage['authToken']) {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
+        }
+        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
+        if (needPopup) {
+            this.setState({ showPopup: true })
+        }
+        else {
+            this.setState({ showPopup: false })
         }
 
         const authorization = localStorage.getItem('authToken');
@@ -70,16 +77,22 @@ export class createdEvents extends Component {
     render() {
         return (
             <div>
+                {this.state.loading ?
+                    <Loading /> :
+                    null
+                }
                 <NavBar />
+                {this.state.showPopup ?
+                    <div>
+                        <Alert color="brightPink" message="Please must fill out a questionnaire!" />
+                    </div>
+                    : null
+                }
                 {this.state.eventList.length === 0 ?
                     <div>
                         <Alert color="brightPink" message="You currently have no created events" />
                     </div>
                     : null
-                }
-                {this.state.loading ?
-                    <Loading /> :
-                    null
                 }
                 <div>
                     <div className="py-5 px-6 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-full">
@@ -98,4 +111,4 @@ export class createdEvents extends Component {
     }
 }
 
-export default createdEvents
+export default createdEvents;

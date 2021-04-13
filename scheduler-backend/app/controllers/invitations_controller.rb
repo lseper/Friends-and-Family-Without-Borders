@@ -139,7 +139,8 @@ class InvitationsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_invitation
-        @invitation = Invitation.find(params[:id])
+        puts params[:id].to_i
+        @invitation = Invitation.find(params[:id].to_i)
     end
 
     # Only allow a list of trusted parameters through.

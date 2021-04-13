@@ -7,13 +7,14 @@ default: &default
   timeout: 5000
   username: postgres
   host: localhost
-  password: password # (password)
+  password: Coldcuts44 # (password)
+
 
 development:
   <<: *default
   host: localhost
   database: postgres # (database for development)
-  password: password # (password)
+  password: postgres # (password)
 
 test:
   <<: *default

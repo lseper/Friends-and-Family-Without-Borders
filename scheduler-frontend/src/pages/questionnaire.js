@@ -4,6 +4,7 @@ import Question from '../components/question';
 import Button from '../components/button';
 import Loading from '../components/loading';
 import axios from 'axios';
+import Alert from '../components/alert';
 
 export class Questionnaire extends Component {
   constructor(props) {
@@ -18,10 +19,6 @@ export class Questionnaire extends Component {
       q6: 0,
       q7: 0,
       q8: 0,
-      q9: 0,
-      q10: 0,
-      q11: 0,
-      q12: 0,
       quesitonnaireId: '1'
     };
   }
@@ -38,6 +35,16 @@ export class Questionnaire extends Component {
     console.log("User token on questionnaire page: ", token);
     axios.defaults.headers.common['Authorization'] = token;
 
+        //console.log(localStorage.getItem('filledOutQuestionnaire'));
+        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
+        //console.log(needPopup);
+        if (needPopup) {
+            this.setState({ showPopup: true })
+        }
+        else {
+            this.setState({ showPopup: false })
+        }    
+
     console.log("User id on questionnaire page: ", localStorage['user_id']);
     axios.get(`/users/${localStorage['user_id']}/questionnaires`)
       .then(res => {
@@ -50,10 +57,6 @@ export class Questionnaire extends Component {
           q6: res.data[0].q6answer,
           q7: res.data[0].q7answer,
           q8: res.data[0].q8answer,
-          q9: res.data[0].q9answer,
-          q10: res.data[0].q10answer,
-          q11: res.data[0].q11answer,
-          q12: res.data[0].q12answer,
           loading: false
         })
       }).then(() => {
@@ -75,10 +78,6 @@ export class Questionnaire extends Component {
       q6answer: this.state.q6,
       q7answer: this.state.q7,
       q8answer: this.state.q8,
-      q9answer: this.state.q9,
-      q10answer: this.state.q10,
-      q11answer: this.state.q11,
-      q12answer: this.state.q12,
       user_id: localStorage['user_id']
     }
 
@@ -117,18 +116,6 @@ export class Questionnaire extends Component {
         break;
       case 8:
         this.setState({ q8: questionData })
-        break;
-      case 9:
-        this.setState({ q9: questionData })
-        break;
-      case 10:
-        this.setState({ q10: questionData })
-        break;
-      case 11:
-        this.setState({ q11: questionData })
-        break;
-      case 12:
-        this.setState({ q12: questionData })
         break;
       default:
     }
@@ -193,6 +180,12 @@ export class Questionnaire extends Component {
           <Loading /> :
           null
         }
+        {this.state.showPopup ?
+        <div>
+            <Alert color="brightPink" message="Please must fill out a questionnaire!" />
+        </div>
+        : null
+        }
 
         <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
             <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
@@ -207,10 +200,6 @@ export class Questionnaire extends Component {
           <Question className="" question="How important is social distancing to you?" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
           <Question className="" question="How important is it that people are wearing masks at an event?" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
           <Question className="" question="How many people do you feel comfortable being around at an event?" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} maxPeople = {30} marks = {marks50}/>
-          <Question className="" question="filler rn" userNumber={this.state.q9} qNum={9} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="filler rn" userNumber={this.state.q10} qNum={10} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="filler rn" userNumber={this.state.q11} qNum={11} totalCallBack={this.handleTotalCallBack} />
-          <Question className="" question="filler rn" userNumber={this.state.q12} qNum={12} totalCallBack={this.handleTotalCallBack} />
         </div>
 
         <section className="">

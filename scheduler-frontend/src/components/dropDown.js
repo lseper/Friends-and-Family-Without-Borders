@@ -1,38 +1,22 @@
 import React from 'react';
 import Select from 'react-select';
 
-const DropDown = ({ name, option1, option2, handleCallback, initalState, border, downlable }) => {
-
-  const data = [
-    {
-      value: 1,
-      label: option1
-    },
-    {
-      value: 2,
-      label: option2
-    }
-  ];
+const DropDown = ({ name, data, handleCallback, initalState, border, downlable, backgroundColor, primaryColor }) => {
 
   let initalValue;
-
-  if (initalState) {
-    console.log("test")
-    initalValue = {
-      value: 1,
-      label: option1
+  if (initalState !== undefined){
+    if (initalState) {
+      console.log("test")
+      initalValue = data[0]
     }
-  }
-  else {
-    initalValue = {
-      value: 2,
-      label: option2
+    else {
+      initalValue = data[1]
     }
   }
 
   const selectedValue = React.useState(initalValue);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event) => {
     handleCallback(event.value)
   };
 
@@ -40,7 +24,7 @@ const DropDown = ({ name, option1, option2, handleCallback, initalState, border,
     <div className="w-full pb-4 bg-grey-100">
       {downlable ? null
         : < label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left"} >{name}</label>}
-      <Select className={"text-xs block pb-2 text-coolGrey-dark text-left bg-coolGreen border" + border}
+      <Select className={"pb-2 text-coolGrey-dark text-left border" + border + " " + backgroundColor}
         options={data}
         onChange={handleChange}
         value={data.find(obj => obj.value === selectedValue.value)}
@@ -50,7 +34,8 @@ const DropDown = ({ name, option1, option2, handleCallback, initalState, border,
           borderRadius: 0,
           colors: {
             ...theme.colors,
-            primary25: '#BDE4A7',
+            // set color
+            primary25: primaryColor,
             primary: '#454851',
           }
         })}

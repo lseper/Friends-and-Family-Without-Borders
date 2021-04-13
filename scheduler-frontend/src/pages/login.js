@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
-import InputText from '../components/inputText';
+import InputTextForm from '../components/inputTextForm';
 import Button from '../components/button';
 import axios from 'axios';
 
@@ -68,10 +68,11 @@ export class login extends Component {
           </div>
         </section>
         <section className="h-2/3 w-full flex justify-center items-start bg-white py-4">
-          <form action="" className=" sm:w-3/4 md:w-1/3 shadow-lg rounded px-8 py-8 pt-8">
-            <InputText login={true} handleCallback={this.userNameCallBack} type="text" border="coolGreen" placeholder="exampleUsername" label="USERNAME" />
-            <InputText login={true} handleCallback={this.passwordCallBack} type="password" border="coolGreen" placeholder="examplePassword" label="PASSWORD" />
-            
+          <form action="" className=" sm:w-3/4 md:w-1/3 border-2 border-coolGreen rounded px-8 py-8 pt-8">
+          <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+          &nbsp;&nbsp;&nbsp;
+          <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
+          &nbsp;&nbsp;&nbsp;      
             {/* log in error messages */}
             {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-brightPink text-xs mt-1 ml-1">

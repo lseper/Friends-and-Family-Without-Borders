@@ -95,7 +95,12 @@ class ApplicationController < ActionController::API
         decoded = decode_token
         if decoded
             @id = decoded[0]['user_id']
-            return params[:user_id].to_i == @id
+            params_id = params[:user_id]
+            if (params_id) == nil
+                params_id = params[:id]
+            end
+
+            return params_id.to_i == @id
         end
     end
 

@@ -2,7 +2,6 @@ class Invitation < ApplicationRecord
     belongs_to :user
     belongs_to :event
 
-
     # make sure both the user and event inviting to exist
     validates :user, :event, presence: true
 
