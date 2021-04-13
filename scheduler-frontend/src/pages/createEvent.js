@@ -90,18 +90,18 @@ const CreateEvent = () => {
     }, [data]);
 
     // useEffect(() => {
-    //     setLocationList(
-    //       locationInfo.map(location => {
-    //           return (<ShowLocationSuggestions
-    //               location={location.location.location_type}
-    //               activity={location.activity.name}
-    //               handleLocation={handleLocation}
-    //               key={location.location.location_type + '' + location.activity.name}
-    //           />
-    //           )
-    //       }
-    //       )
-    //     )
+    //     // setLocationList(
+    //     //   locationInfo.map(location => {
+    //     //       return (<ShowLocationSuggestions
+    //     //           location={location.location.location_type}
+    //     //           activity={location.activity.name}
+    //     //           handleLocation={handleLocation}
+    //     //           key={location.location.location_type + '' + location.activity.name}
+    //     //       />
+    //     //       )
+    //     //   }
+    //     //   )
+    //     // )
     // }, [locationInfo]);
 
     useEffect(() => {
@@ -229,19 +229,21 @@ const CreateEvent = () => {
     function addEventLocation() {
 
         //send entire suggestion-activity location
-        let locationTemp = [];
+        let pair = [];
         if (location === first.id.toString()) {
-            locationTemp = first;
+            pair = first;
         }
         else if (location === second.id.toString()) {
-            locationTemp = second;
+            pair = second;
         } else {
-            locationTemp = third;
+            pair = third;
         }
 
         const locationFinal = {
-            pair: { locationTemp }
+            pair: pair 
         }
+        console.log("Location final");
+        console.log(locationFinal);
         const authorization = localStorage.getItem('authToken');
         axios.put(`/events/${eventId}`, locationFinal, {
             headers: {
@@ -328,7 +330,7 @@ const CreateEvent = () => {
                                 <div className="text-coolGrey-dark inline-block mr-3 align-middle">
                                     <FontAwesomeIcon className="inline fa-lg " icon={faAngleDown} />
                                 </div>
-                                <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 pt-1"} >VIEW LOCATION SUGGESSTIONS</label>
+                                <label className={"text-xs block font-bold pb-2 text-coolGrey-dark text-left bg-grey-100 pt-1"} >VIEW LOCATION SUGGESTIONS</label>
 
                             </div>
 
@@ -366,15 +368,18 @@ const CreateEvent = () => {
             <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
                 {/* <Modal locationInfo={locationInfo} callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} /> */}
                 
-                <button
+                {/* <button
                     className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
                         buildPost();
+                        setDropDownData();
+                        showLocationToUser();
                     }}
                 >
-                    {/* {locationList[0] === undefined ? 'Generate Location' : 'Create Event'} */}
-                </button>
+                    {showLocations.length >= 0 ? 'Generate Location' : 'Create Event'}
+                    
+                </button> */}
                 {/* <NavLink to="/createdEvents" className="ml-4 font-bold text-brightPink text-xl inline mt-2.5">
                     Cancel
                 </NavLink> */}
