@@ -1,21 +1,12 @@
 import React, { Component } from "react";
 import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
+
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 import FormControl from '@material-ui/core/FormControl';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const ShowLocationSuggestions = ({ value, number, activity }) => {
-  return (
-      <div>
-              <FormControlLabel 
-              value={value + " - " + activity} 
-              control={<Radio color="primary"/>} 
-              label={value + " - " + activity} />
-      </div>
-  )
-}
+
 
 export class Modal extends Component {
   constructor(props) {
@@ -56,22 +47,7 @@ export class Modal extends Component {
 
   };
 
-  showLocations() {
-    console.log("Hitting here");
-    this.setState({
-      locationList: this.props.locationInfo.map(location => {
-          return (<ShowLocationSuggestions
-              value={location.location.location_type}
-              activity={location.activity.name}
-              key={location.location.location_type + '' + location.activity.name}
-          />)
-      }
-      ),
-      wait: false
-  })
-    console.log(this.props.locationList)
-    return(true);
-  }
+  
 
   theme = createMuiTheme({
     palette: {
@@ -86,23 +62,7 @@ export class Modal extends Component {
   
     return (
       <>
-        <button
-          className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => {
-              this.handleActivity();
-              
-              if(this.props.testDateTimes() && this.showLocations()){
-                //this.handleActivity();
-                console.log(this.props.locationInfo)
-                this.setState({
-                  showModal: true
-                })
-              }
-          }}
-        >
-          Generate Location
-        </button>
+        
         {this.state.showModal ? (
           <>
             <div

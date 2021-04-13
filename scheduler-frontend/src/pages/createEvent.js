@@ -9,6 +9,21 @@ import InputTextFormBlue from '../components/inputTextFormBlue';
 import DateSelect from '../components/dateSelect';
 import SearchSelect from '../components/searchSelect';
 
+const ShowLocationSuggestions = ({ location, activity, handleLocation }) => {
+    return (
+        <div>    
+            <button onClick={() => handleLocation(location, activity)} className="ml-4 bg-coolGreen text-black active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg mb-2 align-start md:w-3/4 w-3/4">{location + " - " + activity}</button>
+        </div>
+    )
+}
+
+const SetErrors = ({ error }) => {
+    return (
+        <div>
+            <label className="items-center font-medium tracking-wide text-red-400 text-md mt-1 ml-4">{error !== undefined ? 'An error occurred: ' : ''}{error}</label>
+        </div>
+    )
+}
 
 const CreateEvent = () => {
 
@@ -18,10 +33,13 @@ const CreateEvent = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [location, setLocation] = useState();
     const [activity, setActivity] = useState();
-    const [data, setData] = useState([]);
+    const [data] = useState([]);
     const [invitees, setInvitees] = useState([]);
     const [priorities, setPriorities] = useState([]);
     const [locationInfo, setLocationInfo] = useState([]);
+    const [locationList, setLocationList] = useState([]);
+    const [error, setError] = useState();
+    const [showError, setShowError] = useState([]);
 
     useEffect(() => {
         if(data.length === 0){
@@ -38,7 +56,26 @@ const CreateEvent = () => {
                 console.log(err.response.data);
             })
         }
-    });
+    }, [data]);
+
+    useEffect(() => {
+        setLocationList(
+          locationInfo.map(location => {
+              return (<ShowLocationSuggestions
+                  location={location.location.location_type}
+                  activity={location.activity.name}
+                  handleLocation={handleLocation}
+                  key={location.location.location_type + '' + location.activity.name}
+              />
+              )
+          }
+          )
+        )
+    }, [locationInfo]);
+
+    useEffect(() => {
+        setShowError( <SetErrors error={error} /> )
+    }, [error]);
 
     function addInvitees (eventId) {
         // get indexes of invitees who are priority
@@ -65,17 +102,13 @@ const CreateEvent = () => {
                 })
             }
         }
-        console.log("test before");
+        
         let finalInvitees = ({
             user_id: localStorage.getItem('user_id'),
             event_id: eventId,
             invitees: finalInviteesList
         })
 
-        console.log("test");
-
-        // post request for invitees 
-        //DID SOMETHING CHANGE?
         const authorization = localStorage.getItem('authToken');
         axios.post(`/invitations`, finalInvitees, {
             headers: {
@@ -85,9 +118,12 @@ const CreateEvent = () => {
         .then(res => {
             console.log("You correctly added invitees!")
             setLocationInfo(res.data.pairs);
+            console.log("after invitees invited: " + locationInfo)
+            setError(undefined);
         }).catch(err => {
             console.log("There was an error!")
             console.log(err.response.data);
+            setError(err.response.data.name[0]);
         })
     }
 
@@ -106,16 +142,17 @@ const CreateEvent = () => {
             headers: {
                 'Authorization': authorization
             }
-        })
-            .then(res => {
+        }).then(res => {
                 console.log(res)
                 eventId = res.data.id;    
                 console.log(eventId);  
                 //then add invites and submit another post request 
-                addInvitees(eventId)
+                addInvitees(eventId);
+                setError(undefined);
             }).catch(err => {
                 console.log("Something went wrong when creating an event");
                 console.log(err.response.data);
+                setError(err.response.data.name[0]);
             }) 
     };
 
@@ -162,7 +199,6 @@ const CreateEvent = () => {
         }
 
         return (createEvent);
-
     }
 
     const handleStartDate = (newValue) => {
@@ -189,16 +225,10 @@ const CreateEvent = () => {
         setDetails(event)
     }
 
-    const callBackLocation = (event) => {
-        setLocation(event.target.value)
-        console.log(event.target.value)
+    const handleLocation = (location, activity) => {
+        setLocation(location)
+        setActivity(activity)
     }
-
-    const callBackActivity = (event) => {
-        setActivity(event.target.value)
-        console.log(event.target.value)
-    }
-
 
     return (
         <div>
@@ -226,13 +256,27 @@ const CreateEvent = () => {
                 </form>
             </section>
 
+            <div className="">
+                {locationList}
+            </div>
+
             <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
-                <Modal locationInfo={locationInfo} callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} />
+                {/* <Modal locationInfo={locationInfo} callBackLocation={callBackLocation} callBackActivity={callBackActivity} create={buildPost} testDateTimes={testDateTimes} /> */}
+                
+                <button
+                    className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+                        buildPost();
+                    }}
+                >
+                    {locationList[0] === undefined ? 'Generate Location' : 'Create Event'}
+                </button>
                 <NavLink to="/createdEvents" className="ml-4 font-bold text-brightPink text-xl inline mt-2.5">
                     Cancel
                 </NavLink>
             </section>
-
+            {showError}
         </div>
     )
 }
