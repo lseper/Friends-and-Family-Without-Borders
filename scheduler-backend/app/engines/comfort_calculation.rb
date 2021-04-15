@@ -60,9 +60,6 @@ module ComfortCalculation
 
     # calculate the score for this invitee given the total amount of people at this event
     def calc_num_attendees_score(num_attendees, invitee)
-        puts invitee.class
-        puts invitee
-        puts invitee[:questionnaire]
         questionnaire_num_attendees_comfort = invitee[:questionnaire][:q7answer]
         num_attendees_score = num_attendees - questionnaire_num_attendees_comfort
 

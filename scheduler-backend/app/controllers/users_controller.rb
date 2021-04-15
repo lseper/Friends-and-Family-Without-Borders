@@ -8,14 +8,11 @@ class UsersController < ApplicationController
     @users = User.all
     users = []
     for user in @users
-<<<<<<< Updated upstream
       if get_questionnaire(user) != 0
         users.append(profile_info(user))
+      else
+        users.append(user)
       end
-=======
-      # TODO: add filtering for only users that have filled out a questionnaire here
-      users.append(profile_info(user))
->>>>>>> Stashed changes
     end
     render json: users
   end
@@ -24,7 +21,6 @@ class UsersController < ApplicationController
   # (total responses) / (total max scores for each thing)
   # GET /users/1
   def show
-    
     render json: profile_info(@user) 
   end
 
@@ -44,10 +40,10 @@ class UsersController < ApplicationController
         end
         render json: { auth_token: token, user_id: @user.id, filled_out: has_filled_out_questionnaire }
       else
-        render json: { message: "password incorrect" }, status: 422 # Unprocessable Entity (good for faulty usernames / passwords)
+        render json: { message: "password incorrect" }, status: :unprocessable_entity # Unprocessable Entity (good for faulty usernames / passwords)
       end
     else
-      render json: { message: "username incorrect" }, status: 422 
+      render json: { message: "username incorrect" }, status: :unprocessable_entity 
     end
   end
 
@@ -56,7 +52,7 @@ class UsersController < ApplicationController
     @user_exists = User.find_by(email: params[:email])
 
     if @user_exists
-      render json: { message: "User with the email already exists!" }, status: 500
+      render json: { message: "User with the email already exists!" }, status: :unprocessable_entity
     else
       @user = User.new(
         username: params[:username],
@@ -71,7 +67,7 @@ class UsersController < ApplicationController
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: { message: "Some internal server error occurred. Review your information and attempt to submit again"}, status: 500
+        render json: { message: "Some internal server error occurred. Review your information and attempt to submit again"}, status: :unprocessable_entity
       end
     end
   end
@@ -95,14 +91,12 @@ class UsersController < ApplicationController
   private
     def profile_info(user)
       # get the most recent questionnaire response
-      user_questionnaire = get_questionnaire(user)
       {
         id: user.id,
         username: user.username,
         name: user.name,
         email: user.email,
         privacy: user.privacy,
-        comfort_metric: comfort_metric(user_questionnaire)
       }
     end
 

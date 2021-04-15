@@ -26,7 +26,6 @@ class EventsController < ApplicationController
   # POST /user/:id/events
   # AUTHORIZATION NEEDED
   def create
-    puts Time.now
     @event = Event.new(
       description: event_params[:description],
       ending_at: event_params[:ending_at],
@@ -61,7 +60,6 @@ class EventsController < ApplicationController
 
     # add the chosen pair to the event via the event_las table
     event_la = EventLa.new(event_id: params[:id], location_activity_suggestion_id: pair[:id], overall_comfort_metric: pair[:average_comfort], people_comfortable: (pair[:priority_passed] + pair[:others_passed]))
-    
     if event_la.save
       render json: event_la
     else
