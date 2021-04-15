@@ -69,10 +69,7 @@ class InvitationsController < ApplicationController
 
             end
         end
-        
-        pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse!
-        # TODO: generate cumulative score for each pairing
-        # TODO: return ranked list of pairings based on score
+        pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse![0, 5]
         render json: { pairs: pairs }, status: :created
     end
 
@@ -142,6 +139,7 @@ class InvitationsController < ApplicationController
             location = nil
         end
         {
+            id: invite.id,
             organizer: organizer,
             event_details: event,
             confirmed: invite[:confirmed],
