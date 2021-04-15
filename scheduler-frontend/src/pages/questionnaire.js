@@ -5,6 +5,7 @@ import Button from '../components/button';
 import Loading from '../components/loading';
 import axios from 'axios';
 import Alert from '../components/alert';
+import { NavLink } from 'react-router-dom';
 
 export class Questionnaire extends Component {
   constructor(props) {
@@ -190,6 +191,9 @@ export class Questionnaire extends Component {
         <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
             <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
             <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
+            <NavLink to="/pastQuestionnaires">
+                <button className=" bg-coolGreen py-2 px-5 text-left rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> Past Questionnaires</button>
+            </NavLink>
         </div>
         <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
           <Question className="" question="How comfortable are you with events hosted outside?" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
