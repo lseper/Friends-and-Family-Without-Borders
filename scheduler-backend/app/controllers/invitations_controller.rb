@@ -130,10 +130,10 @@ class InvitationsController < ApplicationController
     def extract_invitation_info(invite)
         event = Event.find(invite[:event_id])
         organizer = User.find(event[:user_id])
-        event_la = EventLa.find_by(event_id: invite.event.id).location_activity_suggestion
+        event_la = EventLa.find_by(event_id: invite.event.id)
         if event_la
-            activity = event_la.activity
-            location = event_la.location
+            activity = event_la.location_activity_suggestion.activity
+            location = event_la.location_activity_suggestion.location
         else
             activity = nil
             location = nil
