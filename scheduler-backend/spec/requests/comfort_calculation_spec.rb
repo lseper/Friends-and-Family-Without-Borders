@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-include ComfortCalculation
+include ComfortCalculation, Format
 
 RSpec.describe ComfortCalculation do
     before(:context) do
@@ -8,7 +8,7 @@ RSpec.describe ComfortCalculation do
         beforeInvitee = Invitation.new(event_id: 1, user_id: 3, priority: true, confirmed: false, comfort_level: 0)
         @invitee = @App.setup_invitee(beforeInvitee)
         @pairs = LocationActivitySuggestion.all
-        @pairs = @App.setup_pairs(@pairs)
+        @pairs = setup_pairs(@pairs)
     end
     describe "calc_location_score" do
 

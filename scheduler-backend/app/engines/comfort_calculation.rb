@@ -1,5 +1,6 @@
 # TODO: Move comfort score calculation into here, so that it isn't just tacked onto the base ApplicationController
 module ComfortCalculation
+    THRESHOLD = 0.8
 
     # calculate the score for this invitee based on location
     def calc_location_score(location, invitee)
@@ -79,5 +80,41 @@ module ComfortCalculation
         else
             return 0
         end
+    end
+
+    def calc_comfort_scores_for_all_invitees(invitees, event)
+        # get all pairs
+        pairs = LocationActivitySuggestion.all
+        pairs = setup_pairs(pairs)
+        # TODO: match each user up with each potential pairing
+        for invitee in invitees
+            # how comfortable are you with the number of attendees at the event?
+            num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
+            # how comfortable are you with the mask requirement at the event?
+            mask_score = calc_mask_score(event[:masks_required], invitee)
+            for pair in pairs
+                pair_score = calc_pair_scores(pair, invitee)
+                # aggregate all of those metrics into one metric. The higher this score = more comfortable you are with this pair
+                total_suggestion_comfort = 1 - pair_score - num_attendees_score - mask_score
+                # add this score to the invitee object
+                invitee[:matches].append(total_suggestion_comfort)
+
+                # see if this invitee is comfortable enough to attend this event
+                if total_suggestion_comfort >= THRESHOLD
+                    if invitee[:priority]
+                        pair[:priority_passed] += 1
+                    else
+                        pair[:others_passed] += 1
+                    end
+                end
+                # update the overall average comfort metric for this location-activity pair
+                pair[:average_comfort] += (total_suggestion_comfort / invitees.length)
+
+            end
+        end
+        
+        pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse![0,5]
+
+        return pairs
     end
 end

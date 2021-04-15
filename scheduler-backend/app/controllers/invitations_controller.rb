@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-    include ComfortCalculation
+    include ComfortCalculation, Format
 
     before_action :set_invitation, only: [:show, :update, :destroy]
     before_action :authorized_as_owner, only: [:create]
@@ -40,36 +40,41 @@ class InvitationsController < ApplicationController
                 return # exit prematurely
             end
         end
-        # get all pairs
-        pairs = LocationActivitySuggestion.all
-        pairs = setup_pairs(pairs)
-        # TODO: match each user up with each potential pairing
-        for invitee in invitees
-            # how comfortable are you with the number of attendees at the event?
-            num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
-            # how comfortable are you with the mask requirement at the event?
-            mask_score = calc_mask_score(event[:masks_required], invitee)
-            for pair in pairs
-                pair_score = calc_pair_scores(pair, invitee)
-                # aggregate all of those metrics into one metric. The higher this score = more comfortable you are with this pair
-                total_suggestion_comfort = 1 - pair_score - num_attendees_score - mask_score
-                # add this score to the invitee object
-                invitee[:matches].append(total_suggestion_comfort)
+        # # get all pairs
+        # pairs = LocationActivitySuggestion.all
+        # pairs = setup_pairs(pairs)
+        # # TODO: match each user up with each potential pairing
+        # for invitee in invitees
+        #     # how comfortable are you with the number of attendees at the event?
+        #     num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
+        #     # how comfortable are you with the mask requirement at the event?
+        #     mask_score = calc_mask_score(event[:masks_required], invitee)
+        #     for pair in pairs
+        #         pair_score = calc_pair_scores(pair, invitee)
+        #         # aggregate all of those metrics into one metric. The higher this score = more comfortable you are with this pair
+        #         total_suggestion_comfort = 1 - pair_score - num_attendees_score - mask_score
+        #         # add this score to the invitee object
+        #         invitee[:matches].append(total_suggestion_comfort)
 
-                # see if this invitee is comfortable enough to attend this event
-                if total_suggestion_comfort >= THRESHOLD
-                    if invitee[:priority]
-                        pair[:priority_passed] += 1
-                    else
-                        pair[:others_passed] += 1
-                    end
-                end
-                # update the overall average comfort metric for this location-activity pair
-                pair[:average_comfort] += (total_suggestion_comfort / invitees.length)
+        #         # see if this invitee is comfortable enough to attend this event
+        #         if total_suggestion_comfort >= THRESHOLD
+        #             if invitee[:priority]
+        #                 pair[:priority_passed] += 1
+        #             else
+        #                 pair[:others_passed] += 1
+        #             end
+        #         end
+        #         # update the overall average comfort metric for this location-activity pair
+        #         pair[:average_comfort] += (total_suggestion_comfort / invitees.length)
 
-            end
-        end
-        pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse![0, 5]
+        #     end
+        # end
+        
+        # pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse!
+
+        pairs = calc_comfort_scores_for_all_invitees(invitees, event)
+        # TODO: generate cumulative score for each pairing
+        # TODO: return ranked list of pairings based on score
         render json: { pairs: pairs }, status: :created
     end
 
@@ -89,65 +94,33 @@ class InvitationsController < ApplicationController
 
     private
 
-    def setup_pairs(pairs)
-        new_pairs = []
-        for pair in pairs
-            new_pairs.append(setup_pair(pair))
-        end
-        return new_pairs
-    end
+    # def setup_pairs(pairs)
+    #     new_pairs = []
+    #     for pair in pairs
+    #         new_pairs.append(setup_pair(pair))
+    #     end
+    #     return new_pairs
+    # end
 
-    def setup_pair(pair)
-        {
-            id: pair[:id],
-            location: pair.location,
-            activity: pair.activity,
-            priority_passed: 0,
-            others_passed: 0,
-            average_comfort: 0.0
-        }
-    end
-
-    # def prepare_pair_json(pair)
+    # def setup_pair(pair)
     #     {
     #         id: pair[:id],
     #         location: pair.location,
     #         activity: pair.activity,
-    #         priority_passed: pair.get_priority_passed(),
-    #         others_passed: pair.get_others_passed(),
-    #         average_comfort: pair.get_average_comfort()
+    #         priority_passed: 0,
+    #         others_passed: 0,
+    #         average_comfort: 0.0
     #     }
     # end
-
-    def prepare_pairs_jsons(pairs)
-        new_pairs = []
-        for pair in pairs
-            new_pairs.push(prepare_pair_json(pair))
-        end
-        return new_pairs
-    end
     
-    def extract_invitation_info(invite)
-        event = Event.find(invite[:event_id])
-        organizer = User.find(event[:user_id])
-        event_la = EventLa.find_by(event_id: invite.event.id).location_activity_suggestion
-        if event_la
-            activity = event_la.activity
-            location = event_la.location
-        else
-            activity = nil
-            location = nil
-        end
-        {
-            id: invite.id,
-            organizer: organizer,
-            event_details: event,
-            confirmed: invite[:confirmed],
-            comfort_level: invite[:comfort_level],
-            activity: activity,
-            location: location
-        }
-    end
+    # def extract_invitation_info(invite)
+    #     event = Event.find(invite[:event_id])
+    #     organizer = User.find(event[:user_id])
+    #     {
+    #         organizer: organizer,
+    #         event_details: event
+    #     }
+    # end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_invitation
