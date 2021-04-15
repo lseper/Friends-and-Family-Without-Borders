@@ -46,6 +46,26 @@ RSpec.describe "users requests", type: :request do
             expect(response).to have_http_status(:unauthorized)
         end
 
+        # name: params[:name], privacy: params[:privacy], email: params[:email]
+        it "is authorized when the user is logged in" do
+            put '/users/1', headers: {'Authorization' => 'Bearer ' + @token}
+            expect(response).to have_http_status(:ok)
+        end
         
+        it "updates the information for the user appropriately" do
+            put '/users/1', params: { name: "Name Changed", privacy: false, email: "testuser@outlook.com"},
+            headers: {'Authorization' => 'Bearer ' + @token}
+            test_user = User.find(1)
+            expect(test_user.name).to eq("Name Changed")
+            expect(test_user.privacy).to eq(false)
+            expect(test_user.email).to eq("testuser@outlook.com")
+        end
+
+        it "does not update the user when invalid data is sent in the request" do
+            put '/users/1', params: { name: "Name Changed", privacy: nil, email: "testuser@outlook.com"},
+            headers: {'Authorization' => 'Bearer ' + @token}
+            expect(response).to have_http_status(:unprocessable_entity)
+        end
+
     end
 end
