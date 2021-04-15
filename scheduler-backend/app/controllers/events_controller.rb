@@ -13,7 +13,24 @@ class EventsController < ApplicationController
     @events = Event.where(user_id: params[:user_id])
     events_to_return = []
     for event in @events.to_ary
-      events_to_return.append({ event: event, invitees: get_invitations_for_event(event) })
+      event_la = EventLa.find_by(event_id: event.id)
+      if event_la
+        events_to_return.append({ 
+          event: event, 
+          location: event_la.location_activity_suggestion.location,
+          activity: event_la.location_activity_suggestion.activity,
+          invitees: get_invitations_for_event(event), 
+          overall_comfort_metric: event_la[:overall_comfort_metric], 
+          people_comfortable: event_la[:people_comfortable]})
+      else
+        events_to_return.append({ 
+          event: event, 
+          location: nil,
+          activity: nil,
+          invitees: get_invitations_for_event(event), 
+          overall_comfort_metric: 0, 
+          people_comfortable: 0})
+      end
     end
     render json: events_to_return
   end
@@ -29,7 +46,6 @@ class EventsController < ApplicationController
       start_time: event_params[:start_time],
       masks_required: event_params[:masks_required]
     )
-
     if @event.save
       render json: { id: @event.id }, status: :created
     else
@@ -56,7 +72,6 @@ class EventsController < ApplicationController
 
     # add the chosen pair to the event via the event_las table
     event_la = EventLa.new(event_id: params[:id], location_activity_suggestion_id: pair[:id], overall_comfort_metric: pair[:average_comfort], people_comfortable: (pair[:priority_passed] + pair[:others_passed]))
-    
     if event_la.save
       render json: event_la
     else

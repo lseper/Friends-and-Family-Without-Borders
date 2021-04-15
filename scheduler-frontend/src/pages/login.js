@@ -68,7 +68,7 @@ export class login extends Component {
           </div>
         </section>
         <section className="h-2/3 w-full flex justify-center items-start bg-white py-4">
-          <form action="" className=" sm:w-3/4 md:w-1/3 border-2 border-coolGreen rounded px-8 py-8 pt-8">
+          <form action="" className=" sm:w-3/4 md:w-1/3 border-2 rounded px-8 py-8 pt-8">
           <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
           &nbsp;&nbsp;&nbsp;
           <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />

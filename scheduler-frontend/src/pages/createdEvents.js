@@ -6,7 +6,7 @@ import Loading from '../components/loading';
 import { NavLink } from 'react-router-dom';
 import Alert from '../components/alert';
 
-const EventCard = ({ name, dateStart, dateEnd, location, details, invitees }) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfort }) => {
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
@@ -16,6 +16,7 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees }) =>
                 location={location}
                 details={details} 
                 invitees={invitees}
+                comfort={comfort}
                 />
         </div>
     )
@@ -67,6 +68,7 @@ export class createdEvents extends Component {
                             details={event.event.description}
                             invitees={event.invitees}
                             key={event.event.id}
+                            comfort={event.overall_comfort_metric}
                         />)
                     }),
                     loading: false,

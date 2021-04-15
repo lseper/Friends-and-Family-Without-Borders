@@ -48,6 +48,11 @@ export class CreatedEventsButton extends Component {
       //confirmed: true
   }
 
+  convertToPercentage = (num) => {
+    console.log(Math.floor((num) * 100))
+    return(Math.floor((num) * 100));
+}
+
   render() {
 
     // let comfort;
@@ -68,7 +73,7 @@ export class CreatedEventsButton extends Component {
               <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
               <div className="px-5 flex">
               <div className = "flex alight-right items-right pb-2" style={{ width: 70, height: 70 }}>
-                <CircularProgressbar value={70} text={`70%`}
+                <CircularProgressbar value={this.convertToPercentage(this.props.comfort)} text={`${this.convertToPercentage(this.props.comfort)}%`}
                 styles={buildStyles({     
                     // Text size
                     textSize: '24px',

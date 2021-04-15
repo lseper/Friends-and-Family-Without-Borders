@@ -54,7 +54,6 @@ RSpec.describe "events requests", type: :request do
 
     it "is creating an event" do
       post '/users/1/events', params: { event:{description: "example description", ending_at: "2021-04-03 03:00:00.000000", name: "example name", user_id: 1, start_time: "2021-04-03 02:00:00.000000", masks_required: false} }, headers: {'Authorization' => 'Bearer ' + @token}
-      puts JSON.parse(response.body)["id"]
       testEvent = Event.find(JSON.parse(response.body)["id"])
       expect(response).to have_http_status(:created)
       expect(testEvent[:name]).to eq("example name")
@@ -80,7 +79,7 @@ RSpec.describe "events requests", type: :request do
     end
 
     it "is authorized when the user requesting the events for themself" do
-      put '/events/1', params: { pair: {
+      put '/events/2', params: { pair: {
         id: 1,
         location: {
             id: 1,
@@ -92,7 +91,8 @@ RSpec.describe "events requests", type: :request do
             socialDistanceScore: 2,
             hasFood: false,
             minPeople: 6,
-            maxPeople: 20
+            maxPeople: 20,
+            masks_required: false
         },
         priority_passed: 1,
         others_passed: 0,
