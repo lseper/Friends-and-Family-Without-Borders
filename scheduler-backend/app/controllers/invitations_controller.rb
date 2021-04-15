@@ -142,6 +142,7 @@ class InvitationsController < ApplicationController
             location = nil
         end
         {
+            id: invite.id,
             organizer: organizer,
             event_details: event,
             confirmed: invite[:confirmed],
