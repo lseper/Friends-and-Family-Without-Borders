@@ -8,14 +8,9 @@ class UsersController < ApplicationController
     @users = User.all
     users = []
     for user in @users
-<<<<<<< Updated upstream
       if get_questionnaire(user) != 0
         users.append(profile_info(user))
       end
-=======
-      # TODO: add filtering for only users that have filled out a questionnaire here
-      users.append(profile_info(user))
->>>>>>> Stashed changes
     end
     render json: users
   end
