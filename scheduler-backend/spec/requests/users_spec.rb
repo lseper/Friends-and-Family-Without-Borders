@@ -4,7 +4,6 @@ RSpec.describe "users requests", type: :request do
     before(:context) do 
         get '/users'
         @response_hash = JSON.parse(response.body)
-        puts response
     end
     describe "GET #index" do
         it "returns the correct amount of users" do

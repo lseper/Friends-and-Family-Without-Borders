@@ -17,14 +17,16 @@ class EventsController < ApplicationController
       if event_la
         events_to_return.append({ 
           event: event, 
-          location: event_la.location,
-          activity: event_la.activity,
+          location: event_la.location_activity_suggestion.location,
+          activity: event_la.location_activity_suggestion.activity,
           invitees: get_invitations_for_event(event), 
           overall_comfort_metric: event_la[:overall_comfort_metric], 
           people_comfortable: event_la[:people_comfortable]})
       else
         events_to_return.append({ 
           event: event, 
+          location: nil,
+          activity: nil,
           invitees: get_invitations_for_event(event), 
           overall_comfort_metric: 0, 
           people_comfortable: 0})
