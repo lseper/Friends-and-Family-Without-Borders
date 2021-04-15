@@ -22,6 +22,8 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfo
     )
 }
 
+
+
 export class createdEvents extends Component {
 
     constructor(props) {
@@ -31,6 +33,11 @@ export class createdEvents extends Component {
             loading: true,
             showPopup: false,
         };
+    }
+
+    convertToPercentage = (num) => {
+        console.log(Math.floor((num) * 100))
+        return(Math.floor((num) * 100));
     }
 
     componentDidMount() {
@@ -68,7 +75,7 @@ export class createdEvents extends Component {
                             details={event.event.description}
                             invitees={event.invitees}
                             key={event.event.id}
-                            comfort={event.overall_comfort_metric}
+                            comfort={this.convertToPercentage(event.overall_comfort_metric)}
                         />)
                     }),
                     loading: false,
