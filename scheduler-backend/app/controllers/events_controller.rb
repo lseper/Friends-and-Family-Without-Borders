@@ -75,6 +75,7 @@ class EventsController < ApplicationController
     if event_la.save
       render json: event_la
     else
+      puts event_la.errors.to_hash
       # TODO: have better error response here
       render json: @event, status: :unprocessable_entity 
     end

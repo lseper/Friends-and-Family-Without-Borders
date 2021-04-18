@@ -100,5 +100,30 @@ RSpec.describe "events requests", type: :request do
     } }, headers: {'Authorization' => 'Bearer ' + @token}
       expect(response).to have_http_status(:ok)
     end
+
+    it "is authorized when the user requesting the events for themself" do
+      post '/login', params: {username: "testuser", password: "password"}
+      @token = JSON.parse(response.body)["auth_token"]
+      put '/events/1', params: { pair: {
+        id: 1,
+        location: {
+            id: 1,
+            location_type: "Outside"
+        },
+        activity: {
+            id: 2,
+            name: "sports",
+            socialDistanceScore: 2,
+            hasFood: false,
+            minPeople: 6,
+            maxPeople: 20,
+            masks_required: false
+        },
+        priority_passed: 1,
+        others_passed: 0,
+        average_comfort: 0.96
+    } }, headers: {'Authorization' => 'Bearer ' + @token}
+      expect(response).to have_http_status(:ok)
+    end
   end
 end
