@@ -10,8 +10,8 @@ class UsersController < ApplicationController
     for user in @users
       if get_questionnaire(user) != 0
         users.append(profile_info(user))
-      else
-        users.append(user)
+      # else
+      #   users.append(user)
       end
     end
     render json: users
@@ -75,7 +75,6 @@ class UsersController < ApplicationController
   # only allow changing of username, name, and privacy setting
   # PATCH/PUT /users/1
   def update
-
     if @user.update_columns(name: params[:name], privacy: params[:privacy], email: params[:email])
       render json: @user
     else

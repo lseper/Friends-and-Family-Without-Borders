@@ -35,13 +35,9 @@ User.create( username: "janedoe", password: "janedoe", password_confirmation: "j
 Event.create( name: "test event 1", description: "for testing event 1", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1, masks_required: true)
 Event.create( name: "test event 2", description: "for testing event 2", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1, masks_required: false)
 
-# creating all event_la for testing
-EventLa.create(location_activity_suggestion_id: 1, event_id: 1, overall_comfort_metric: 0.98, people_comfortable: 8)
-
 # create all invitations for testing
 Invitation.create( event_id: 1, user_id: 2, comfort_level: 0.95, confirmed: false, priority: true )
 
 # create all questionnaires for testing
 Questionnaire.create(q1answer: 1, q2answer: 2, q3answer: 3, q4answer: 4, q5answer: 5, q6answer: 6, q7answer: 7, q8answer: 8, user_id: 3)
 Questionnaire.create(q1answer: 1, q2answer: 2, q3answer: 3, q4answer: 4, q5answer: 5, q6answer: 6, q7answer: 7, q8answer: 8, user_id: 2)
-EventLa.create(location_activity_suggestion_id: 1, event_id: 1, overall_comfort_metric: 0.98, people_comfortable: 8)

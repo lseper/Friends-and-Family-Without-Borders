@@ -7,7 +7,7 @@ RSpec.describe "users requests", type: :request do
     end
     describe "GET #index" do
         it "returns the correct amount of users" do
-            expect(@response_hash.length).to eq(3)
+            expect(@response_hash.length).to eq(2)
         end
     end
 
@@ -49,23 +49,34 @@ RSpec.describe "users requests", type: :request do
         # name: params[:name], privacy: params[:privacy], email: params[:email]
         it "is authorized when the user is logged in" do
             put '/users/1', headers: {'Authorization' => 'Bearer ' + @token}
+            # unprocessable as no data is being sent, but is authorized
             expect(response).to have_http_status(:ok)
         end
-        
-        it "updates the information for the user appropriately" do
-            put '/users/1', params: { name: "Name Changed", privacy: false, email: "testuser@outlook.com"},
-            headers: {'Authorization' => 'Bearer ' + @token}
-            test_user = User.find(1)
-            expect(test_user.name).to eq("Name Changed")
-            expect(test_user.privacy).to eq(false)
-            expect(test_user.email).to eq("testuser@outlook.com")
+    end
+
+    describe "POST #create" do
+        it "creates the user successfully when valid data is passed in" do
+            post '/users', params: {
+                username: "benjammin",
+                password:"password",
+                name: "Ben Jammin",
+                privacy: false,
+                email: "ben@gmail.com"
+            }
+            user = User.find_by(username: "benjammin")
+            expect(user).not_to be_nil
         end
 
-        it "does not update the user when invalid data is sent in the request" do
-            put '/users/1', params: { name: "Name Changed", privacy: nil, email: "testuser@outlook.com"},
-            headers: {'Authorization' => 'Bearer ' + @token}
-            expect(response).to have_http_status(:unprocessable_entity)
+        it "does not create the user when invalid data is passed in" do
+            post '/users', params: {
+                username: "benjammin",
+                password:"password",
+                name: "Ben Jammin",
+                privacy: nil,
+                email: "ben@gmail.com"
+            }
+            user = User.find_by(username: "benjammin")
+            expect(user).to be_nil
         end
-
     end
 end
