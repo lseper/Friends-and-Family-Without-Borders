@@ -32,6 +32,8 @@ class EventsController < ApplicationController
           people_comfortable: 0})
       end
     end
+    #pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}
+    events_to_return = events_to_return.sort_by{|e| e[:event][:start_time] }
     render json: events_to_return
   end
 
