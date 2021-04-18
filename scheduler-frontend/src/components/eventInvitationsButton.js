@@ -6,7 +6,6 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 
 export class CreatedEventsButton extends Component {
 
@@ -42,30 +41,16 @@ export class CreatedEventsButton extends Component {
           console.log("There was an error with updating attendance!")
           console.log(err.response.data);
       })
-      //update with put request? need to probably pass event id to this prop to do that?
-      //user/{userid}/invitations/{invitationid}
-      //put request 
-      //confirmed: true
   }
 
   convertToPercentage = (num) => {
-    console.log(Math.floor((num) * 100))
     return(Math.floor((num) * 100));
 }
 
   render() {
 
-    // let comfort;
-    // if (this.props.comfort === "green") {
-    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-coolGreen py-2 px-2"></div>;
-    // } else if (this.props.comfort === "yellow") {
-    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-yellow-500 py-2 px-2"></div>
-    // } else {
-    //   comfort = <div className="rounded-full h-10 w-10 flex items-left bg-red-500 py-2 px-2"></div>
-    // }
-
     return (
-      <div className="flex flex-grow align-start items-start py-4 px-5 w-full md:w-3/4" >
+      <div className="flex flex-grow align-start items-start  px-5 w-full md:w-3/4" >
         <div className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 container bg-white" >
           <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white">
             <div className="text-sm font-bold text-coolGrey-dark">{this.props.creator} invites you to:</div>

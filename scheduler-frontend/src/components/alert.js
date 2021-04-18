@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Alert = ({ color, message }) => {
     const [showAlert, setShowAlert] = React.useState(true);
+
     return (
         <>
             {showAlert ? (

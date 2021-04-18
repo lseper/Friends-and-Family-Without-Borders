@@ -21,10 +21,10 @@ const DropDown = ({ name, data, handleCallback, initalState, border, downlable, 
   };
 
   return (
-    <div className="w-full pb-4 bg-grey-100">
+    <div className="w-full pb-2 bg-grey-100">
       {downlable ? null
         : < label className={"text-sm block font-bold pb-2 text-coolGrey-dark text-left"} >{name}</label>}
-      <Select className={"pb-2 text-coolGrey-dark text-left border" + border + " " + backgroundColor}
+      <Select className={" text-coolGrey-dark text-left border" + border + " " + backgroundColor}
         options={data}
         onChange={handleChange}
         value={data.find(obj => obj.value === selectedValue.value)}

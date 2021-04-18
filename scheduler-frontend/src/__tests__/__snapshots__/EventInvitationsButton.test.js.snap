@@ -1,0 +1,449 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<CreatedEventsButton
+  attending={true}
+  comfort={0.9}
+  creator="John Doe"
+  dateStringEnd="April 30th 2021 7:30:00 pm"
+  dateStringStart="April 30th 2021 5:30:00 pm"
+  details="Example Details"
+  invitationId={1}
+  location="Outdoors Golf"
+  name="Example"
+>
+  <div
+    className="flex flex-grow align-start items-start  px-5 w-full md:w-3/4"
+  >
+    <div
+      className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 container bg-white"
+    >
+      <div
+        action=""
+        className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white"
+      >
+        <div
+          className="text-sm font-bold text-coolGrey-dark"
+        >
+          John Doe
+           invites you to:
+        </div>
+        <div
+          className="flex py-2"
+        >
+          <p
+            className="text-2xl font-bold text-coolGrey-dark pt-2.5"
+          >
+            Example
+          </p>
+          <div
+            className="px-5 flex"
+          >
+            <div
+              className="flex alight-right items-right pb-2"
+              style={
+                Object {
+                  "height": 70,
+                  "width": 70,
+                }
+              }
+            >
+              <CircularProgressbar
+                background={false}
+                backgroundPadding={0}
+                circleRatio={1}
+                className=""
+                classes={
+                  Object {
+                    "background": "CircularProgressbar-background",
+                    "path": "CircularProgressbar-path",
+                    "root": "CircularProgressbar",
+                    "text": "CircularProgressbar-text",
+                    "trail": "CircularProgressbar-trail",
+                  }
+                }
+                counterClockwise={false}
+                maxValue={100}
+                minValue={0}
+                strokeWidth={8}
+                styles={
+                  Object {
+                    "background": Object {
+                      "fill": "#3e98c7",
+                    },
+                    "path": Object {
+                      "stroke": "#CB4335",
+                    },
+                    "root": Object {},
+                    "text": Object {
+                      "fill": "#CB4335",
+                      "fontSize": "24px",
+                    },
+                    "trail": Object {
+                      "stroke": "#CD8B76",
+                    },
+                  }
+                }
+                text="90%"
+                value={90}
+              >
+                <svg
+                  className="CircularProgressbar "
+                  data-test-id="CircularProgressbar"
+                  style={Object {}}
+                  viewBox="0 0 100 100"
+                >
+                  <Path
+                    className="CircularProgressbar-trail"
+                    counterClockwise={false}
+                    dashRatio={1}
+                    pathRadius={46}
+                    strokeWidth={8}
+                    style={
+                      Object {
+                        "stroke": "#CD8B76",
+                      }
+                    }
+                  >
+                    <path
+                      className="CircularProgressbar-trail"
+                      d="
+      M 50,50
+      m 0,-46
+      a 46,46 0 1 1 0,92
+      a 46,46 0 1 1 0,-92
+    "
+                      fillOpacity={0}
+                      strokeWidth={8}
+                      style={
+                        Object {
+                          "stroke": "#CD8B76",
+                          "strokeDasharray": "289.02652413026095px 289.02652413026095px",
+                          "strokeDashoffset": "0px",
+                        }
+                      }
+                    />
+                  </Path>
+                  <Path
+                    className="CircularProgressbar-path"
+                    counterClockwise={false}
+                    dashRatio={0.9}
+                    pathRadius={46}
+                    strokeWidth={8}
+                    style={
+                      Object {
+                        "stroke": "#CB4335",
+                      }
+                    }
+                  >
+                    <path
+                      className="CircularProgressbar-path"
+                      d="
+      M 50,50
+      m 0,-46
+      a 46,46 0 1 1 0,92
+      a 46,46 0 1 1 0,-92
+    "
+                      fillOpacity={0}
+                      strokeWidth={8}
+                      style={
+                        Object {
+                          "stroke": "#CB4335",
+                          "strokeDasharray": "289.02652413026095px 289.02652413026095px",
+                          "strokeDashoffset": "28.90265241302609px",
+                        }
+                      }
+                    />
+                  </Path>
+                  <text
+                    className="CircularProgressbar-text"
+                    style={
+                      Object {
+                        "fill": "#CB4335",
+                        "fontSize": "24px",
+                      }
+                    }
+                    x={50}
+                    y={50}
+                  >
+                    90%
+                  </text>
+                </svg>
+              </CircularProgressbar>
+            </div>
+          </div>
+        </div>
+        <h3
+          className="text-sm text-coolGrey-dark pb-2"
+        >
+          Example Details
+        </h3>
+        <div
+          className="flex content-center pb-4"
+        >
+          <hr
+            className="text-center"
+            style={
+              Object {
+                "backgroundColor": "#CD8B76",
+                "color": "#CD8B76",
+                "height": 5,
+                "width": 125,
+              }
+            }
+          />
+        </div>
+        <div
+          className="flex text-coolGrey-dark"
+        >
+          <FontAwesomeIcon
+            border={false}
+            className="inline fa-lg mr-2 "
+            fixedWidth={false}
+            flip={null}
+            icon={
+              Object {
+                "icon": Array [
+                  448,
+                  512,
+                  Array [],
+                  "f783",
+                  "M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm64-192c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-96zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z",
+                ],
+                "iconName": "calendar-day",
+                "prefix": "fas",
+              }
+            }
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size={null}
+            spin={false}
+            swapOpacity={false}
+            symbol={false}
+            title=""
+            transform={null}
+          >
+            <svg
+              aria-hidden="true"
+              className="svg-inline--fa fa-calendar-day fa-w-14 inline fa-lg mr-2 "
+              data-icon="calendar-day"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              style={Object {}}
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm64-192c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16v-96zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
+                fill="currentColor"
+                style={Object {}}
+              />
+            </svg>
+          </FontAwesomeIcon>
+          <div
+            className="flex"
+          >
+            <h3
+              className="font-bold text-coolGrey-dark"
+            >
+              April 30th 2021 5:30:00 pm
+               to 
+              April 30th 2021 7:30:00 pm
+            </h3>
+          </div>
+        </div>
+        <div
+          className="flex text-coolGrey-dark"
+        >
+          <FontAwesomeIcon
+            border={false}
+            className="inline fa-lg mr-2 "
+            fixedWidth={false}
+            flip={null}
+            icon={
+              Object {
+                "icon": Array [
+                  384,
+                  512,
+                  Array [],
+                  "f3c5",
+                  "M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z",
+                ],
+                "iconName": "map-marker-alt",
+                "prefix": "fas",
+              }
+            }
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size={null}
+            spin={false}
+            swapOpacity={false}
+            symbol={false}
+            title=""
+            transform={null}
+          >
+            <svg
+              aria-hidden="true"
+              className="svg-inline--fa fa-map-marker-alt fa-w-12 inline fa-lg mr-2 "
+              data-icon="map-marker-alt"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              style={Object {}}
+              viewBox="0 0 384 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
+                fill="currentColor"
+                style={Object {}}
+              />
+            </svg>
+          </FontAwesomeIcon>
+          <div
+            className="flex"
+          >
+            <h3
+              className="font-bold text-coolGrey-dark pb-2"
+            >
+              Outdoors Golf
+            </h3>
+          </div>
+        </div>
+        <div
+          className="flex w-full text-brightPink py-2"
+        >
+          <button
+            className="focus:outline-none hover:text-brightPink-dark"
+            onClick={[Function]}
+          >
+            <FontAwesomeIcon
+              border={false}
+              className="inline fa-2x mr-2 hover:text-brightPink-dark"
+              fixedWidth={false}
+              flip={null}
+              icon={
+                Object {
+                  "icon": Array [
+                    512,
+                    512,
+                    Array [],
+                    "f058",
+                    "M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z",
+                  ],
+                  "iconName": "check-circle",
+                  "prefix": "fas",
+                }
+              }
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              swapOpacity={false}
+              symbol={false}
+              title=""
+              transform={null}
+            >
+              <svg
+                aria-hidden="true"
+                className="svg-inline--fa fa-check-circle fa-w-16 inline fa-2x mr-2 hover:text-brightPink-dark"
+                data-icon="check-circle"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                style={Object {}}
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                  fill="currentColor"
+                  style={Object {}}
+                />
+              </svg>
+            </FontAwesomeIcon>
+          </button>
+          <div
+            className="px-5 flex "
+          >
+            <button
+              className="focus:outline-none hover:text-brightPink-dark"
+              onClick={[Function]}
+            >
+              <FontAwesomeIcon
+                border={false}
+                className="inline fa-2x mr-2 hover:text-brightPink-dark"
+                fixedWidth={false}
+                flip={null}
+                icon={
+                  Object {
+                    "icon": Array [
+                      512,
+                      512,
+                      Array [],
+                      "f057",
+                      "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z",
+                    ],
+                    "iconName": "times-circle",
+                    "prefix": "fas",
+                  }
+                }
+                inverse={false}
+                listItem={false}
+                mask={null}
+                pull={null}
+                pulse={false}
+                rotation={null}
+                size={null}
+                spin={false}
+                swapOpacity={false}
+                symbol={false}
+                title=""
+                transform={null}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="svg-inline--fa fa-times-circle fa-w-16 inline fa-2x mr-2 hover:text-brightPink-dark"
+                  data-icon="times-circle"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  style={Object {}}
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"
+                    fill="currentColor"
+                    style={Object {}}
+                  />
+                </svg>
+              </FontAwesomeIcon>
+            </button>
+          </div>
+          <div
+            className="flex text-coolGrey-dark text-bold pt-1"
+          >
+            <div>
+              Going
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</CreatedEventsButton>
+`;

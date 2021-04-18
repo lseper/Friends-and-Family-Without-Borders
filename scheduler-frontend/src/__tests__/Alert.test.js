@@ -27,7 +27,18 @@ it('displays the correct background color', () => {
     expect(firstDiv.hasClass('bg-red-500')).toBeTruthy()
 });
 
-it('displays the correct background color', () => {
+it('displays the correct background color if no background color is passed in', () => {
+    const wrapper = mount(
+        <Alert
+            message="Button"
+        />
+    )
+
+    const firstDiv = wrapper.find('div').at(0)
+    expect(firstDiv.hasClass("bg-")).toBeFalsy()
+});
+
+it('displays the correct text color', () => {
     const wrapper = mount(
         <Alert
             message="Button"
@@ -39,16 +50,27 @@ it('displays the correct background color', () => {
     expect(firstDiv.hasClass('text-white')).toBeTruthy()
 });
 
-it('displays the correct text', () => {
+it('displays the correct text when no message if passed in', () => {
     const wrapper = mount(
         <Alert
-            message="Button"
             color="red-500"
         />
     )
 
     const firstDiv = wrapper.find('span').at(1)
-    expect(firstDiv.text('Button')).toBeTruthy()
+    expect(firstDiv.text()).toBe("")
+});
+
+it('displays the correct text', () => {
+    const wrapper = mount(
+        <Alert
+            message= "Button"
+            color="red-500"
+        />
+    )
+
+    const firstDiv = wrapper.find('span').at(1)
+    expect(firstDiv.text()).toBe("Button")
 });
 
 it('displays the exclamation point icon', () => {
@@ -80,3 +102,4 @@ it('check that button click updates use state to chose alert popup', () => {
     xButton.simulate("click");
     expect(setState).toHaveBeenCalledWith(false);
 });
+

@@ -49,11 +49,14 @@ const CreateEvent = () => {
     const [first, setFirst] = useState([]);
     const [second, setSecond] = useState([]);
     const [third, setThird] = useState([]);
+    const [fourth, setFourth] = useState([]);
+    const [fifth, setFifth] = useState([]);
     const [dropDownLocations, setDropDownLocations] = useState([]);
     const [showAddLocationButton, setShowAddLocationButton] = useState(false)
     const [locationList, setLocationList] = useState([]);
     const [error, setError] = useState();
     const [showError, setShowError] = useState([]);
+    const [mask, setMask] = useState();
 
     useEffect(() => {
         if (data.length === 0) {
@@ -152,6 +155,8 @@ const CreateEvent = () => {
                 setFirst(res.data.pairs[0]);
                 setSecond(res.data.pairs[1]);
                 setThird(res.data.pairs[2]);
+                setFourth(res.data.pairs[3]);
+                setFifth(res.data.pairs[4]);
                 setError(undefined);
             }).catch(err => {
                 console.log("There was an error with adding invitees!")
@@ -167,7 +172,7 @@ const CreateEvent = () => {
             description: details,
             start_time: startDate,
             ending_at: endDate,
-            masks_required: false
+            masks_required: mask
         }
         let eventId = -1;
 
@@ -201,10 +206,17 @@ const CreateEvent = () => {
         }
         else if (location === second.id) {
             pair = second;
-        } else {
+        }         
+        else if (location === third.id) {
             pair = third;
         }
+        else if (location === fourth.id) {
+            pair = fourth;
+        }else {
+            pair = fifth;
+        }
 
+        console.log(pair);
         const locationFinal = {
             pair: pair 
         }
@@ -243,6 +255,14 @@ const CreateEvent = () => {
         setName(event)
     }
 
+    const handleMask = (event) => {
+        if (event === 1) {
+            setMask(true)
+          } else {
+            setMask(false)
+          }
+    }
+
     const handleDetails = (event) => {
         setDetails(event)
     }
@@ -271,8 +291,25 @@ const CreateEvent = () => {
                     &nbsp;&nbsp;&nbsp;
                     <DateSelect handleCallback={handleEndDate} label="EVENT END" />
                     &nbsp;&nbsp;&nbsp;
+                    <DropDown handleCallback={handleMask} 
+                        name="MASKS REQUIRED"               
+                        data = {[
+                            {
+                                value: 1,
+                                label: "Yes"
+                            },
+                            {
+                                value: 2,
+                                label: "No"
+                            }
+                        ]}  
+                        border="bg-coolBlue" 
+                        downlable={true} 
+                        primaryColor='#98D2EB'
+                        initalState={false}  />
+                    &nbsp;&nbsp;&nbsp;
                     <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={data} />
-                        &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                     <SearchSelect handleCallback={handlePrioritiesChange} label="SET PRIORITY INVITEES" data={invitees} />
                     &nbsp;&nbsp;&nbsp;
                     {locationList.length > 0 ?
@@ -293,17 +330,16 @@ const CreateEvent = () => {
                     >
                         <Button name="Add Location to Event" bgColor="bg-coolBlue" type="text" />
                     </div> :
-                    null
+                                    <button
+                                    className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => {
+                                        buildPost();
+                                    }}
+                                >
+                                    Create Event  
+                                </button> 
             }
-                <button
-                    className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => {
-                        buildPost();
-                    }}
-                >
-                    Create Event  
-                </button> 
             </section>
             
             </div>
