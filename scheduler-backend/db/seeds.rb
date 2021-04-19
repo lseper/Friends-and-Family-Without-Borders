@@ -32,8 +32,8 @@ User.create( username: "billbob", password: "billbob", password_confirmation: "b
 User.create( username: "janedoe", password: "janedoe", password_confirmation: "janedoe", name: "Jane Doe", email: "janedoe@gmail.com", privacy: true )
 
 # create all events for testing
-Event.create( name: "test event 1", description: "for testing event 1", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1, masks_required: true)
-Event.create( name: "test event 2", description: "for testing event 2", start_time: "2021-04-06 12:00:00", ending_at: "2021-04-06 13:00:00", user_id: 1, masks_required: false)
+Event.create( name: "test event 1", description: "for testing event 1", start_time: "2020-04-06 12:00:00", ending_at: "2020-04-06 13:00:00", user_id: 1, masks_required: true)
+Event.create( name: "test event 2", description: "for testing event 2", start_time: "2030-04-06 13:00:00", ending_at: "2030-04-06 14:00:00", user_id: 1, masks_required: false)
 
 # create all invitations for testing
 Invitation.create( event_id: 1, user_id: 2, comfort_level: 0.95, confirmed: false, priority: true )

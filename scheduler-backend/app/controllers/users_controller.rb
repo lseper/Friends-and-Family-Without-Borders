@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   # only allow changing of username, name, and privacy setting
   # PATCH/PUT /users/1
   def update
-    if @user.update_columns(name: params[:name], privacy: params[:privacy], email: params[:email])
+    if @user.update(username: params[:username], name: params[:name], privacy: params[:privacy])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity

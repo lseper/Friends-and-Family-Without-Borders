@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-18T13:07:41-05:00">2021-04-18T13:07:41-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-18T18:15:16-05:00">2021-04-18T18:15:16-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  92.04%
+  92.06%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.84
+         1.85
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>465</b> relevant lines,
-    <span class="green"><b>428</b> lines covered</span> and
+    <b>466</b> relevant lines,
+    <span class="green"><b>429</b> lines covered</span> and
     <span class="red"><b>37</b> lines missed. </span>
     (<span class="green">
-  92.04%
+  92.06%
 </span>
 )
   </div>
@@ -83,12 +83,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#6f4c61cd2ec87c4901d988d674ed8d47d6048213" class="src_link" title="app/controllers/events_controller.rb">app/controllers/events_controller.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">90.24 %</td>
-            <td class="cell--number">99</td>
-            <td class="cell--number">41</td>
-            <td class="cell--number">37</td>
+            <td class="green strong cell--number t-file__coverage">90.48 %</td>
+            <td class="cell--number">101</td>
+            <td class="cell--number">42</td>
+            <td class="cell--number">38</td>
             <td class="cell--number">4</td>
-            <td class="cell--number">1.68</td>
+            <td class="cell--number">1.79</td>
             
           </tr>
         
@@ -216,7 +216,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#eeeaddcb8c753ffd246781b64e8f1e543627058a" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">14</td>
+            <td class="cell--number">16</td>
             <td class="cell--number">11</td>
             <td class="cell--number">11</td>
             <td class="cell--number">0</td>
@@ -381,7 +381,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#915db8dff83e1af7d244dd4b9938f5574f01ece2" class="src_link" title="spec/requests/users_spec.rb">spec/requests/users_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">82</td>
+            <td class="cell--number">86</td>
             <td class="cell--number">44</td>
             <td class="cell--number">44</td>
             <td class="cell--number">0</td>
@@ -1839,7 +1839,7 @@
     <h3>app/controllers/events_controller.rb</h3>
     <h4>
       <span class="green">
-  90.24%
+  90.48%
 </span>
 
       lines covered
@@ -1848,8 +1848,8 @@
     
 
     <div class="t-line-summary">
-      <b>41</b> relevant lines.
-      <span class="green"><b>37</b> lines covered</span> and
+      <b>42</b> relevant lines.
+      <span class="green"><b>38</b> lines covered</span> and
       <span class="red"><b>4</b> lines missed.</span>
     </div>
 
@@ -2235,7 +2235,29 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">    #pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="6" data-linenumber="36">
+            <span class="hits">6</span>
+            
+
+            
+
+            <code class="ruby">    events_to_return = events_to_return.sort_by{|e| e[:event][:start_time] }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="37">
             <span class="hits">2</span>
             
 
@@ -2246,35 +2268,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="36">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="37">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
           <li class="never" data-hits="" data-linenumber="38">
             
             
 
             
 
-            <code class="ruby">  # POST /user/:id/events</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -2285,12 +2285,34 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="40">
+            
+            
+
+            
+
+            <code class="ruby">  # POST /user/:id/events</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
             <code class="ruby">  # AUTHORIZATION NEEDED</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="40">
+          <li class="covered" data-hits="1" data-linenumber="42">
             <span class="hits">1</span>
             
 
@@ -2301,7 +2323,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="41">
+          <li class="covered" data-hits="2" data-linenumber="43">
             <span class="hits">2</span>
             
 
@@ -2312,7 +2334,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="42">
+          <li class="never" data-hits="" data-linenumber="44">
             
             
 
@@ -2323,7 +2345,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="43">
+          <li class="never" data-hits="" data-linenumber="45">
             
             
 
@@ -2334,7 +2356,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="44">
+          <li class="never" data-hits="" data-linenumber="46">
             
             
 
@@ -2345,7 +2367,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="never" data-hits="" data-linenumber="47">
             
             
 
@@ -2356,7 +2378,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="46">
+          <li class="never" data-hits="" data-linenumber="48">
             
             
 
@@ -2367,7 +2389,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="49">
             
             
 
@@ -2378,7 +2400,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
+          <li class="never" data-hits="" data-linenumber="50">
             
             
 
@@ -2389,7 +2411,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="49">
+          <li class="covered" data-hits="2" data-linenumber="51">
             <span class="hits">2</span>
             
 
@@ -2400,7 +2422,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="50">
+          <li class="covered" data-hits="1" data-linenumber="52">
             <span class="hits">1</span>
             
 
@@ -2411,7 +2433,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="51">
+          <li class="never" data-hits="" data-linenumber="53">
             
             
 
@@ -2422,7 +2444,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="52">
+          <li class="covered" data-hits="1" data-linenumber="54">
             <span class="hits">1</span>
             
 
@@ -2433,35 +2455,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="53">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="54">
-            
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
           <li class="never" data-hits="" data-linenumber="55">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -2472,7 +2472,7 @@
 
             
 
-            <code class="ruby">  # PATCH/PUT /events/:id</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -2483,7 +2483,7 @@
 
             
 
-            <code class="ruby">  # send back to the backend all the information about the pair chosen (we can do this)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -2494,12 +2494,34 @@
 
             
 
+            <code class="ruby">  # PATCH/PUT /events/:id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="59">
+            
+            
+
+            
+
+            <code class="ruby">  # send back to the backend all the information about the pair chosen (we can do this)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="60">
+            
+            
+
+            
+
             <code class="ruby">  # as well as all the invitee scores FOR that pair (can we do this?) [Currently not doing this]</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
+          <li class="covered" data-hits="1" data-linenumber="61">
             <span class="hits">1</span>
             
 
@@ -2510,7 +2532,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="60">
+          <li class="covered" data-hits="2" data-linenumber="62">
             <span class="hits">2</span>
             
 
@@ -2521,7 +2543,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="61">
+          <li class="covered" data-hits="2" data-linenumber="63">
             <span class="hits">2</span>
             
 
@@ -2532,7 +2554,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="62">
+          <li class="never" data-hits="" data-linenumber="64">
             
             
 
@@ -2543,7 +2565,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="63">
+          <li class="covered" data-hits="2" data-linenumber="65">
             <span class="hits">2</span>
             
 
@@ -2554,7 +2576,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="64">
+          <li class="covered" data-hits="1" data-linenumber="66">
             <span class="hits">1</span>
             
 
@@ -2565,7 +2587,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
+          <li class="never" data-hits="" data-linenumber="67">
             
             
 
@@ -2576,7 +2598,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="66">
+          <li class="covered" data-hits="1" data-linenumber="68">
             <span class="hits">1</span>
             
 
@@ -2587,7 +2609,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
+          <li class="covered" data-hits="1" data-linenumber="69">
             <span class="hits">1</span>
             
 
@@ -2598,7 +2620,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="68">
+          <li class="covered" data-hits="1" data-linenumber="70">
             <span class="hits">1</span>
             
 
@@ -2609,7 +2631,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="69">
+          <li class="covered" data-hits="1" data-linenumber="71">
             <span class="hits">1</span>
             
 
@@ -2620,7 +2642,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="70">
+          <li class="covered" data-hits="1" data-linenumber="72">
             <span class="hits">1</span>
             
 
@@ -2631,7 +2653,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="71">
+          <li class="never" data-hits="" data-linenumber="73">
             
             
 
@@ -2642,7 +2664,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="72">
+          <li class="never" data-hits="" data-linenumber="74">
             
             
 
@@ -2653,7 +2675,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="75">
             
             
 
@@ -2664,7 +2686,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="74">
+          <li class="covered" data-hits="2" data-linenumber="76">
             <span class="hits">2</span>
             
 
@@ -2675,7 +2697,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="75">
+          <li class="covered" data-hits="2" data-linenumber="77">
             <span class="hits">2</span>
             
 
@@ -2686,7 +2708,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="76">
+          <li class="covered" data-hits="2" data-linenumber="78">
             <span class="hits">2</span>
             
 
@@ -2697,7 +2719,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="77">
+          <li class="never" data-hits="" data-linenumber="79">
             
             
 
@@ -2708,7 +2730,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="78">
+          <li class="missed" data-hits="0" data-linenumber="80">
             
             
 
@@ -2719,7 +2741,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="79">
+          <li class="never" data-hits="" data-linenumber="81">
             
             
 
@@ -2730,7 +2752,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="80">
+          <li class="missed" data-hits="0" data-linenumber="82">
             
             
 
@@ -2741,7 +2763,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="81">
+          <li class="never" data-hits="" data-linenumber="83">
             
             
 
@@ -2752,35 +2774,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="82">
+          <li class="never" data-hits="" data-linenumber="84">
             
             
 
             
 
             <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="83">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="84">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  private</code>
           </li>
         </div>
       
@@ -2796,7 +2796,29 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="86">
+          <li class="covered" data-hits="1" data-linenumber="86">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="87">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="88">
             
             
 
@@ -2807,7 +2829,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="87">
+          <li class="covered" data-hits="1" data-linenumber="89">
             <span class="hits">1</span>
             
 
@@ -2818,7 +2840,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="88">
+          <li class="covered" data-hits="3" data-linenumber="90">
             <span class="hits">3</span>
             
 
@@ -2829,7 +2851,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="89">
+          <li class="never" data-hits="" data-linenumber="91">
             
             
 
@@ -2840,7 +2862,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="90">
+          <li class="never" data-hits="" data-linenumber="92">
             
             
 
@@ -2851,7 +2873,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="91">
+          <li class="covered" data-hits="1" data-linenumber="93">
             <span class="hits">1</span>
             
 
@@ -2862,7 +2884,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="92">
+          <li class="missed" data-hits="0" data-linenumber="94">
             
             
 
@@ -2873,7 +2895,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="93">
+          <li class="never" data-hits="" data-linenumber="95">
             
             
 
@@ -2884,7 +2906,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="94">
+          <li class="never" data-hits="" data-linenumber="96">
             
             
 
@@ -2895,7 +2917,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="95">
+          <li class="never" data-hits="" data-linenumber="97">
             
             
 
@@ -2906,7 +2928,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="96">
+          <li class="covered" data-hits="1" data-linenumber="98">
             <span class="hits">1</span>
             
 
@@ -2917,7 +2939,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="10" data-linenumber="97">
+          <li class="covered" data-hits="10" data-linenumber="99">
             <span class="hits">10</span>
             
 
@@ -2928,7 +2950,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="98">
+          <li class="never" data-hits="" data-linenumber="100">
             
             
 
@@ -2939,7 +2961,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="99">
+          <li class="never" data-hits="" data-linenumber="101">
             
             
 
@@ -3834,7 +3856,7 @@
 
             
 
-            <code class="ruby">    if @user.update_columns(name: params[:name], privacy: params[:privacy], email: params[:email])</code>
+            <code class="ruby">    if @user.update(username: params[:username], name: params[:name], privacy: params[:privacy])</code>
           </li>
         </div>
       
@@ -7233,18 +7255,18 @@
 
             
 
-            <code class="ruby">    </code>
+            <code class="ruby">    # automatically adds validates :password, presence: true, on: [:create]</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="8">
+            
             
 
             
 
-            <code class="ruby">    validates :username, :name, :email, :password, :password_confirmation, presence: true</code>
+            <code class="ruby">    </code>
           </li>
         </div>
       
@@ -7255,18 +7277,18 @@
 
             
 
-            <code class="ruby">    validates :password, length: { in: 6..20 }</code>
+            <code class="ruby">    validates :username, :name, :email, presence: true</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="10">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="10">
+            
             
 
             
 
-            <code class="ruby">    validates :username, uniqueness: true</code>
+            <code class="ruby">    # looks like we are not going to be able to do password resetting (at least not easily)</code>
           </li>
         </div>
       
@@ -7277,7 +7299,7 @@
 
             
 
-            <code class="ruby">    validates :email, uniqueness: true</code>
+            <code class="ruby">    validates :password, length: { in: 6..20 }, on: [:create]</code>
           </li>
         </div>
       
@@ -7288,7 +7310,7 @@
 
             
 
-            <code class="ruby">    validates :privacy, inclusion: [true, false]</code>
+            <code class="ruby">    validates :username, uniqueness: true</code>
           </li>
         </div>
       
@@ -7299,12 +7321,34 @@
 
             
 
+            <code class="ruby">    validates :email, uniqueness: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    validates :privacy, inclusion: [true, false]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="15">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">    validates :privacy, exclusion: [nil]</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="14">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -10353,7 +10397,7 @@
 
             
 
-            <code class="ruby">Event.create( name: &quot;test event 1&quot;, description: &quot;for testing event 1&quot;, start_time: &quot;2021-04-06 12:00:00&quot;, ending_at: &quot;2021-04-06 13:00:00&quot;, user_id: 1, masks_required: true)</code>
+            <code class="ruby">Event.create( name: &quot;test event 1&quot;, description: &quot;for testing event 1&quot;, start_time: &quot;2020-04-06 12:00:00&quot;, ending_at: &quot;2020-04-06 13:00:00&quot;, user_id: 1, masks_required: true)</code>
           </li>
         </div>
       
@@ -10364,7 +10408,7 @@
 
             
 
-            <code class="ruby">Event.create( name: &quot;test event 2&quot;, description: &quot;for testing event 2&quot;, start_time: &quot;2021-04-06 12:00:00&quot;, ending_at: &quot;2021-04-06 13:00:00&quot;, user_id: 1, masks_required: false)</code>
+            <code class="ruby">Event.create( name: &quot;test event 2&quot;, description: &quot;for testing event 2&quot;, start_time: &quot;2030-04-06 13:00:00&quot;, ending_at: &quot;2030-04-06 14:00:00&quot;, user_id: 1, masks_required: false)</code>
           </li>
         </div>
       
@@ -12483,7 +12527,7 @@
 
             
 
-            <code class="ruby">            put &#39;/users/1&#39;, headers: {&#39;Authorization&#39; =&gt; &#39;Bearer &#39; + @token}</code>
+            <code class="ruby">            put &#39;/users/1&#39;, params: { </code>
           </li>
         </div>
       
@@ -12494,18 +12538,18 @@
 
             
 
-            <code class="ruby">            # unprocessable as no data is being sent, but is authorized</code>
+            <code class="ruby">                username: &quot;testuser2&quot;,</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="53">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="53">
+            
             
 
             
 
-            <code class="ruby">            expect(response).to have_http_status(:ok)</code>
+            <code class="ruby">                name: &quot;Test User Jr.&quot;,</code>
           </li>
         </div>
       
@@ -12516,7 +12560,7 @@
 
             
 
-            <code class="ruby">        end</code>
+            <code class="ruby">                privacy: false,</code>
           </li>
         </div>
       
@@ -12527,7 +12571,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">            }, headers: {&#39;Authorization&#39; =&gt; &#39;Bearer &#39; + @token}</code>
           </li>
         </div>
       
@@ -12538,7 +12582,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">            # unprocessable as no data is being sent, but is authorized</code>
           </li>
         </div>
       
@@ -12549,122 +12593,12 @@
 
             
 
-            <code class="ruby">    describe &quot;POST #create&quot; do</code>
+            <code class="ruby">            expect(response).to have_http_status(:ok)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="58">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        it &quot;creates the user successfully when valid data is passed in&quot; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">            post &#39;/users&#39;, params: {</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="60">
-            
-            
-
-            
-
-            <code class="ruby">                username: &quot;benjammin&quot;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="61">
-            
-            
-
-            
-
-            <code class="ruby">                password:&quot;password&quot;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="62">
-            
-            
-
-            
-
-            <code class="ruby">                name: &quot;Ben Jammin&quot;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="63">
-            
-            
-
-            
-
-            <code class="ruby">                privacy: false,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="64">
-            
-            
-
-            
-
-            <code class="ruby">                email: &quot;ben@gmail.com&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="65">
-            
-            
-
-            
-
-            <code class="ruby">            }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="66">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">            user = User.find_by(username: &quot;benjammin&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">            expect(user).not_to be_nil</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="68">
+          <li class="never" data-hits="" data-linenumber="58">
             
             
 
@@ -12675,139 +12609,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="69">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="70">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">        it &quot;does not create the user when invalid data is passed in&quot; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="71">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">            post &#39;/users&#39;, params: {</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="72">
-            
-            
-
-            
-
-            <code class="ruby">                username: &quot;benjammin&quot;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="73">
-            
-            
-
-            
-
-            <code class="ruby">                password:&quot;password&quot;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="74">
-            
-            
-
-            
-
-            <code class="ruby">                name: &quot;Ben Jammin&quot;,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="75">
-            
-            
-
-            
-
-            <code class="ruby">                privacy: nil,</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="76">
-            
-            
-
-            
-
-            <code class="ruby">                email: &quot;ben@gmail.com&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="77">
-            
-            
-
-            
-
-            <code class="ruby">            }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="78">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">            user = User.find_by(username: &quot;benjammin&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="79">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">            expect(user).to be_nil</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="80">
-            
-            
-
-            
-
-            <code class="ruby">        end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="81">
+          <li class="never" data-hits="" data-linenumber="59">
             
             
 
@@ -12818,7 +12620,293 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="82">
+          <li class="never" data-hits="" data-linenumber="60">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="61">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    describe &quot;POST #create&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="62">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        it &quot;creates the user successfully when valid data is passed in&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="63">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">            post &#39;/users&#39;, params: {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="64">
+            
+            
+
+            
+
+            <code class="ruby">                username: &quot;benjammin&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="65">
+            
+            
+
+            
+
+            <code class="ruby">                password:&quot;password&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="66">
+            
+            
+
+            
+
+            <code class="ruby">                name: &quot;Ben Jammin&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="67">
+            
+            
+
+            
+
+            <code class="ruby">                privacy: false,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="68">
+            
+            
+
+            
+
+            <code class="ruby">                email: &quot;ben@gmail.com&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="69">
+            
+            
+
+            
+
+            <code class="ruby">            }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="70">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">            user = User.find_by(username: &quot;benjammin&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="71">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">            expect(user).not_to be_nil</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="72">
+            
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="73">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="74">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        it &quot;does not create the user when invalid data is passed in&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="75">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">            post &#39;/users&#39;, params: {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="76">
+            
+            
+
+            
+
+            <code class="ruby">                username: &quot;benjammin&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="77">
+            
+            
+
+            
+
+            <code class="ruby">                password:&quot;password&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="78">
+            
+            
+
+            
+
+            <code class="ruby">                name: &quot;Ben Jammin&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="79">
+            
+            
+
+            
+
+            <code class="ruby">                privacy: nil,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="80">
+            
+            
+
+            
+
+            <code class="ruby">                email: &quot;ben@gmail.com&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="81">
+            
+            
+
+            
+
+            <code class="ruby">            }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="82">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">            user = User.find_by(username: &quot;benjammin&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="83">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">            expect(user).to be_nil</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="84">
+            
+            
+
+            
+
+            <code class="ruby">        end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="85">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="86">
             
             
 
