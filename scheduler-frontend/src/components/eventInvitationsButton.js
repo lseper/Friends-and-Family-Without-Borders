@@ -112,8 +112,8 @@ export class CreatedEventsButton extends Component {
                     }
               </div>
             </div>
-            <ControlledAccordions numComfort={9999999} invitees={this.props.invitees} />
           </div>
+          <ControlledAccordions numComfort={-1} invitees={this.props.invitees} />
         </div>
       </div>
     )

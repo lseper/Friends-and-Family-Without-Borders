@@ -44,7 +44,7 @@ export default function ControlledAccordions(invitees, numComfort) {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.secondaryHeading} variant="h4">{numComfort}/{numUsers} Comfortable Invitees</Typography>
+          <Typography className={classes.secondaryHeading} variant="h4">{ numComfort === -1 ? 'Invitees' : numComfort + '/' + numUsers + ' Comfortable Invitees'}</Typography>
         </AccordionSummary>
         <AccordionDetails className="w-full">
           <Typography className="w-full" component={'span'}>
