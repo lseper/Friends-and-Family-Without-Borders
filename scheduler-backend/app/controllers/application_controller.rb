@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::API
     public
+
+    # undecided placeholders for events that have not 
+    UNCHOSEN_LOCATION = Location.find_by(location_type: "Undecided")
+    UNCHOSEN_ACTIVITY = Activity.find_by(name: "undecided")
+
     # ------- comfort metric calculation ------
     def setup_pairs(pairs)
         new_pairs = []
@@ -33,24 +38,35 @@ class ApplicationController < ActionController::API
 
     # ----- methods used in multiple controllers
 
-    def get_invitations_for_event(event)
+    def get_invitations_for_event(event, see_all=true)
         invitees = Invitation.where(event_id: event[:id])
         invites = []
         for invite in invitees
-            invites.append(get_invitee_info(invite))
+            user = User.find(invite[:user_id])
+            if see_all # get all, regardless of privacy level
+                invites.append(get_invitee_info(user, invite))
+            else # get depending on privacy level
+                invites.append(get_invitee_info(user, invite, privacy=user.privacy))
+            end
         end
         return invites
     end
 
-    def get_invitee_info(invite)
-        user = User.find(invite[:user_id])
-        {
-            id: user[:id],
-            username: user[:username],
-            confirmed: invite[:confirmed],
-            priority: invite[:priority],
-            comfort_level: invite[:comfort_level]
-        }
+    def get_invitee_info(user, invite, privacy=false)
+        unless privacy # non-private visibility
+            return_hash = {
+                id: user[:id],
+                username: user[:username],
+                confirmed: invite[:confirmed],
+                priority: invite[:priority],
+                comfort_level: invite[:comfort_level]
+            }
+        else
+            return_hash = {
+                id: user[:id],
+                username: user[:username]
+            }
+        end
     end
 
     # ------------------------------------------------------

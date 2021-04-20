@@ -6,7 +6,7 @@ class User < ApplicationRecord
     has_secure_password
     # automatically adds validates :password, presence: true, on: [:create]
     
-    validates :username, :name, :email, presence: true
+    validates :username, :email, presence: true
     # looks like we are not going to be able to do password resetting (at least not easily)
     validates :password, length: { in: 6..20 }, on: [:create]
     validates :username, uniqueness: true

@@ -25,8 +25,8 @@ class EventsController < ApplicationController
       else
         events_to_return.append({ 
           event: event, 
-          location: nil,
-          activity: nil,
+          location: UNCHOSEN_LOCATION,
+          activity: UNCHOSEN_ACTIVITY,
           invitees: get_invitations_for_event(event), 
           overall_comfort_metric: 0, 
           people_comfortable: 0})

@@ -121,8 +121,8 @@ class InvitationsController < ApplicationController
             activity = event_la.location_activity_suggestion.activity
             location = event_la.location_activity_suggestion.location
         else
-            activity = nil
-            location = nil
+            activity = UNCHOSEN_ACTIVITY
+            location = UNCHOSEN_LOCATION
         end
         {
             id: invite.id,
@@ -131,7 +131,8 @@ class InvitationsController < ApplicationController
             confirmed: invite[:confirmed],
             comfort_level: invite[:comfort_level],
             activity: activity,
-            location: location
+            location: location,
+            invitees: get_invitations_for_event(event, see_all=false)
         }
     end
 

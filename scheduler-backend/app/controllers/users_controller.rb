@@ -59,7 +59,6 @@ class UsersController < ApplicationController
         password: params[:password],
         password_confirmation: params[:password], 
         email: params[:email],
-        name: params[:name],
         privacy: params[:privacy]
       )
 
@@ -75,7 +74,7 @@ class UsersController < ApplicationController
 # only allow changing of username, name, password, and privacy setting
   # PATCH/PUT /users/1
   def update
-    if @user.update(username: params[:username], name: params[:name], 
+    if @user.update(username: params[:username], 
       privacy: params[:privacy], password_digest: encode(params[:password]))
       render json: @user
     else

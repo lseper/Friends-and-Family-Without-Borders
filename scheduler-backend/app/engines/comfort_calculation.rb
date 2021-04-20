@@ -83,6 +83,7 @@ module ComfortCalculation
     end
 
     def calc_comfort_scores_for_all_invitees(invitees, event)
+        # TODO: Need to only have people that have filled out questionnaires be able to be invited!
         # get all pairs
         pairs = LocationActivitySuggestion.all
         pairs = setup_pairs(pairs)
