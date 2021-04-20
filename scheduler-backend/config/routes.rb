@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   # getting one specific event -- /events/1
 
   post '/login', to: "users#login" 
+  put '/users/:id/reset_password', to: "users#reset_password"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
