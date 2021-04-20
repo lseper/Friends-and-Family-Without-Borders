@@ -63,8 +63,8 @@ export class profile extends Component {
     this.setState({ preferredName: inputText })
   }
 
-  handleEmail= (inputText) => {
-    this.setState({ email: inputText })
+  handleUsername= (inputText) => {
+    this.setState({ userName: inputText })
   }
 
   buildPost = (event) => {
@@ -75,6 +75,7 @@ export class profile extends Component {
       email: this.state.email,
       privacy: this.state.publicInfo
     }
+    console.log(accountInformation)
     const authorization = localStorage.getItem('authToken');
     axios.put(`/users/${localStorage['user_id']}`, accountInformation, {
       headers: {
@@ -112,9 +113,9 @@ export class profile extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <ShowText label="USERNAME" placeholder={this.state.userName}/>
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleUsername} type="text" label="USERNAME" placeholder={this.state.userName}/>
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
+            <ShowText focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
             &nbsp;&nbsp;&nbsp;
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
             &nbsp;&nbsp;&nbsp;
