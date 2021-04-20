@@ -98,7 +98,7 @@ export class createAccount extends Component {
             &nbsp;&nbsp;&nbsp;
             {/* <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" downlable={true} /> */}
             <DropDown handleCallback={this.publicCallBack} 
-              name="INFORMATION PUBLIC TO USERS" 
+              name="EVENT RESPONSES PRIVATE" 
               data = {[
                 {
                   value: 1,

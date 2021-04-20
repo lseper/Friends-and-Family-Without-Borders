@@ -118,7 +118,7 @@ export class profile extends Component {
             &nbsp;&nbsp;&nbsp;
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
             &nbsp;&nbsp;&nbsp;
-            <DropDown name="INFORMATION PUBLIC TO USERS" 
+            <DropDown name="EVENT RESPONSES PRIVATE" 
               initalState={this.state.publicInfo} 
               downlable={true} 
               handleCallback={this.publicCallBack} 
