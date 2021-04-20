@@ -113,27 +113,27 @@ class InvitationsController < ApplicationController
     #     }
     # end
     
-    def extract_invitation_info(invite)
-        event = Event.find(invite[:event_id])
-        organizer = User.find(event[:user_id])
-        event_la = EventLa.find_by(event_id: invite.event.id)
-        if event_la
-            activity = event_la.location_activity_suggestion.activity
-            location = event_la.location_activity_suggestion.location
-        else
-            activity = nil
-            location = nil
-        end
-        {
-            id: invite.id,
-            organizer: organizer,
-            event_details: event,
-            confirmed: invite[:confirmed],
-            comfort_level: invite[:comfort_level],
-            activity: activity,
-            location: location
-        }
-    end
+    # def extract_invitation_info(invite)
+    #     event = Event.find(invite[:event_id])
+    #     organizer = User.find(event[:user_id])
+    #     event_la = EventLa.find_by(event_id: invite.event.id)
+    #     if event_la
+    #         activity = event_la.location_activity_suggestion.activity
+    #         location = event_la.location_activity_suggestion.location
+    #     else
+    #         activity = nil
+    #         location = nil
+    #     end
+    #     {
+    #         id: invite.id,
+    #         organizer: organizer,
+    #         event_details: event,
+    #         confirmed: invite[:confirmed],
+    #         comfort_level: invite[:comfort_level],
+    #         activity: activity,
+    #         location: location
+    #     }
+    # end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_invitation

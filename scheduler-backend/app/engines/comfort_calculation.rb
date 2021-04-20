@@ -100,13 +100,15 @@ module ComfortCalculation
                 invitee[:matches].append(total_suggestion_comfort)
 
                 # see if this invitee is comfortable enough to attend this event
-                if total_suggestion_comfort >= THRESHOLD
-                    if invitee[:priority]
-                        pair[:priority_passed] += 1
-                    else
-                        pair[:others_passed] += 1
-                    end
-                end
+
+                determine_attendance(pair, invitee, total_suggestion_comfort)
+                # if total_suggestion_comfort >= THRESHOLD
+                #     if invitee[:priority]
+                #         pair[:priority_passed] += 1
+                #     else
+                #         pair[:others_passed] += 1
+                #     end
+                # end
                 # update the overall average comfort metric for this location-activity pair
                 pair[:average_comfort] += (total_suggestion_comfort / invitees.length)
 
@@ -116,5 +118,27 @@ module ComfortCalculation
         pairs = pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}.reverse![0,5]
 
         return pairs
+    end
+
+    def determine_attendance(pair, invitee, total_suggestion_comfort)
+        if total_suggestion_comfort >= THRESHOLD
+            if invitee[:priority]
+                pair[:priority_passed] += 1
+            else
+                pair[:others_passed] += 1
+            end
+        end
+    end
+
+    def update_invitee_scores(event, pair, invitees)
+        for invitee in invitees
+            invitee_info = setup_invitee(invitee)
+            # re-calculating comfort scores for now. Could potentially refactor and have these sent from front-end(?)
+            num_attendees_score = calc_num_attendees_score(invitees.length, invitee_info)
+            masks_req_score = calc_mask_score(event[:masks_required], invitee_info)
+            pair_score = calc_pair_scores(pair, invitee_info)
+            comfort_score = 1 - pair_score - masks_req_score - num_attendees_score
+            invitee.update!(comfort_level: comfort_score) # will throw an error if unprocessable (internal server error)
+          end
     end
 end
