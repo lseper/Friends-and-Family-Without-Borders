@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
     belongs_to :user # event organizer
-    has_many :invitations
-    has_many :event_la
+    has_many :invitations, dependent: :destroy # cascade delete associated things
+    has_many :event_la, dependent: :destroy # cascade delete associated things
 
     # for events that have not yet started 
     scope :future, -> { where('start_time > ?', Time.now.to_s)}

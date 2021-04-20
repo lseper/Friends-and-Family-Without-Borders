@@ -48,7 +48,12 @@ RSpec.describe "users requests", type: :request do
 
         # name: params[:name], privacy: params[:privacy], email: params[:email]
         it "is authorized when the user is logged in" do
-            put '/users/1', headers: {'Authorization' => 'Bearer ' + @token}
+            put '/users/1', params: { 
+                username: "testuser2",
+                name: "Test User Jr.",
+                privacy: false,
+                password: "password2"
+            }, headers: {'Authorization' => 'Bearer ' + @token}
             # unprocessable as no data is being sent, but is authorized
             expect(response).to have_http_status(:ok)
         end

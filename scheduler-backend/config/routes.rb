@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :invitations, only: [:index, :update]
     resources :events, only: [:index, :create]
   end
-  resources :events, only: [:update]
+  resources :events, only: [:update, :destroy]
   resources :invitations, only: [:create, :show, :destroy]
   # getting one specific event -- /events/1
 

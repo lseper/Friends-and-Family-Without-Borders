@@ -9,12 +9,11 @@ default: &default
   host: localhost
   password: Coldcuts44 # (password)
 
-
 development:
   <<: *default
   host: localhost
   database: postgres # (database for development)
-  password: postgres # (password)
+  password: password # (password)
 
 test:
   <<: *default

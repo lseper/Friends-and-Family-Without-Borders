@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   before_action :set_event, only: [:show, :update, :destroy]
   before_action :authorized, only: [:index, :create]
-  before_action :authorized_as_owner, only: [:update]
+  before_action :authorized_as_owner, only: [:update, :destroy]
 
   # GET /user/:id/events
   # return JSON of all events that this user is the owner of
@@ -32,6 +32,8 @@ class EventsController < ApplicationController
           people_comfortable: 0})
       end
     end
+    #pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}
+    events_to_return = events_to_return.sort_by{|e| e[:event][:start_time] }
     render json: events_to_return
   end
 
@@ -75,9 +77,16 @@ class EventsController < ApplicationController
     if event_la.save
       render json: event_la
     else
-      puts event_la.errors.to_hash
-      # TODO: have better error response here
-      render json: @event, status: :unprocessable_entity 
+      render json: @event.errors, status: :unprocessable_entity 
+    end
+  end
+
+  # DELETE /events/[:id]
+  def destroy
+    if @event.destroy
+      render json: { message: 'Success' }
+    else
+      render json: @event.errors, status: :unprocessable_entity
     end
   end
 
