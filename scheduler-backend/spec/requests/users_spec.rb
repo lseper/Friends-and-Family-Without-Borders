@@ -46,11 +46,10 @@ RSpec.describe "users requests", type: :request do
             expect(response).to have_http_status(:unauthorized)
         end
 
-        # name: params[:name], privacy: params[:privacy], email: params[:email]
+        # name: privacy: params[:privacy], email: params[:email]
         it "is authorized when the user is logged in" do
             put '/users/1', params: { 
                 username: "testuser2",
-                name: "Test User Jr.",
                 privacy: false,
                 password: "password2"
             }, headers: {'Authorization' => 'Bearer ' + @token}
@@ -64,7 +63,6 @@ RSpec.describe "users requests", type: :request do
             post '/users', params: {
                 username: "benjammin",
                 password:"password",
-                name: "Ben Jammin",
                 privacy: false,
                 email: "ben@gmail.com"
             }
@@ -76,7 +74,6 @@ RSpec.describe "users requests", type: :request do
             post '/users', params: {
                 username: "benjammin",
                 password:"password",
-                name: "Ben Jammin",
                 privacy: nil,
                 email: "ben@gmail.com"
             }
