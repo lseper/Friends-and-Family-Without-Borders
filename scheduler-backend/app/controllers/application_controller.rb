@@ -38,37 +38,6 @@ class ApplicationController < ActionController::API
 
     # ----- methods used in multiple controllers
 
-    def get_invitations_for_event(event, see_all=true)
-        invitees = Invitation.where(event_id: event[:id])
-        invites = []
-        for invite in invitees
-            user = User.find(invite[:user_id])
-            if see_all # get all, regardless of privacy level
-                invites.append(get_invitee_info(user, invite))
-            else # get depending on privacy level
-                invites.append(get_invitee_info(user, invite, privacy=user.privacy))
-            end
-        end
-        return invites
-    end
-
-    def get_invitee_info(user, invite, privacy=false)
-        unless privacy # non-private visibility
-            return_hash = {
-                id: user[:id],
-                username: user[:username],
-                confirmed: invite[:confirmed],
-                priority: invite[:priority],
-                comfort_level: invite[:comfort_level]
-            }
-        else
-            return_hash = {
-                id: user[:id],
-                username: user[:username]
-            }
-        end
-    end
-
     # ------------------------------------------------------
 
     QUESTIONNAIRE_TOTAL = 120.0
