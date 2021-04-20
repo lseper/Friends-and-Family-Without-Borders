@@ -9,6 +9,7 @@ import Questionnaire from './pages/questionnaire';
 import Profile from './pages/profile';
 import CreatedEvents from './pages/createdEvents';
 import PastQuestionnaires from './pages/pastQuestionnaires';
+import ResetPassword from './pages/resetPassword';
 
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:3000';
@@ -27,6 +28,7 @@ export class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path="/createdEvents" component={CreatedEvents} />
             <Route path="/pastQuestionnaires" component={PastQuestionnaires} />
+            <Route path="/resetPassword" component={ResetPassword} />
           </Switch>
       </BrowserRouter>
     );

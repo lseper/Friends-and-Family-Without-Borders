@@ -20,7 +20,6 @@ export class createAccount extends Component {
   }
 
   buildPost = (event) => {
-    console.log("test if build post is getting hit");
     event.preventDefault();
     let accountInformation = {
       username: this.state.userName,
@@ -123,7 +122,7 @@ export class createAccount extends Component {
         <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
           <div className="flex">
             <div onClick={this.buildPost}>
-              <Button name="CREATE ACCOUNT" bgColor="bg-coolGreen" />
+              <Button name="CREATE ACCOUNT" bgColor="bg-coolGreen" hoverColor="bg-coolGreen-dark"/>
             </div>
             <NavLink to="/" className="ml-4 font-bold text-coolGrey-dark text-xl inline mt-2.5 flex">
               Cancel

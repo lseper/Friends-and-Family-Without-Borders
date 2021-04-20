@@ -80,13 +80,18 @@ export class login extends Component {
               </span>
             )}
             <NavLink to="/homePage">
-              <div className="w-full pt-4" onClick={this.buildPost}>
-                <Button name="SIGN IN" bgColor="bg-coolGreen" type="submit" />
+              <div className="pt-4" onClick={this.buildPost}>
+                <Button name="SIGN IN" bgColor="bg-coolGreen" type="submit" hoverColor = "bg-coolGreen-dark" widthFull = "w-full"/>
               </div>
             </NavLink>
-            <div className="flex pt-4">
-              <NavLink to="/createAccount">
-                <button className="text-left text-coolGreen underline"> SIGN UP HERE</button>
+            <div className="flex pt-2 w-3/4">
+              <NavLink to="/createAccount" className="flex w-3/4">
+                <button className="font-bold text-coolGrey-dark text-sm inline mt-2.5 flex"> Sign Up Here</button>
+              </NavLink>
+            </div>
+            <div className="flex pt-2">
+              <NavLink to="/resetPassword">
+                <button className="font-bold text-coolGrey-dark text-sm inline mt-2.5 flex"> Reset Password</button>
               </NavLink>
             </div>
           </form>

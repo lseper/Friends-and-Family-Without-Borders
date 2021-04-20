@@ -6,7 +6,7 @@ import Loading from '../components/loading';
 import { NavLink } from 'react-router-dom';
 import Alert from '../components/alert';
 
-const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfort }) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfort , numComfort}) => {
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
@@ -17,6 +17,7 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfo
                 details={details} 
                 invitees={invitees}
                 comfort={comfort}
+                numComfort={numComfort}
                 />
         </div>
     )
@@ -36,7 +37,6 @@ export class createdEvents extends Component {
     }
 
     convertToPercentage = (num) => {
-        console.log(Math.floor((num) * 100))
         return(Math.floor((num) * 100));
     }
 
@@ -62,11 +62,9 @@ export class createdEvents extends Component {
         })
             .then(res => {
                 console.log(res);
-                console.log(res.data);
                 
                 this.setState({
                     eventList: res.data.map(event => {
-                        console.log(event.invitees);
                         return (<EventCard
                             name={event.event.name}
                             dateStart={event.event.start_time}
@@ -76,6 +74,7 @@ export class createdEvents extends Component {
                             invitees={event.invitees}
                             key={event.event.id}
                             comfort={this.convertToPercentage(event.overall_comfort_metric)}
+                            numComfort={event.people_comfortable}
                         />)
                     }),
                     loading: false,

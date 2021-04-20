@@ -29,7 +29,6 @@ export class CreatedEventsButton extends Component {
       }
 
       const authorization = localStorage.getItem('authToken');
-      console.log(this.props.invitationId);
       axios.put(`/users/${localStorage['user_id']}/invitations/${this.props.invitationId}`, info, {
           headers: {
               'Authorization': authorization

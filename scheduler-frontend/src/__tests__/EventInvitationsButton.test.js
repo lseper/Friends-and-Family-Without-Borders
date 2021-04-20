@@ -4,7 +4,6 @@ import "jest-enzyme"
 import {shallow, configure, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-
 configure({adapter: new Adapter()});
 it('renders', () => {
     const tree = mount(
@@ -39,7 +38,6 @@ it('displays the correct event name', () => {
     )
 
     const firstDiv = wrapper.find('p')
-console.log(firstDiv.text())
     expect(firstDiv.text()).toBe("Example")
 });
 

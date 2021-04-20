@@ -5,7 +5,6 @@ import 'react-circular-progressbar/dist/styles.css';
 export class LocationSuggestion extends Component {
 
 convertToPercentage = (num) => {
-    console.log(Math.floor((num) * 100))
     return(Math.floor((num) * 100));
 }
 

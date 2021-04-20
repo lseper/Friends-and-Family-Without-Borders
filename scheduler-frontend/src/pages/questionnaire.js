@@ -35,10 +35,7 @@ export class Questionnaire extends Component {
     const token = localStorage.getItem("authToken").toString();
     console.log("User token on questionnaire page: ", token);
     axios.defaults.headers.common['Authorization'] = token;
-
-        //console.log(localStorage.getItem('filledOutQuestionnaire'));
         const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
-        //console.log(needPopup);
         if (needPopup) {
             this.setState({ showPopup: true })
         }
@@ -192,7 +189,7 @@ export class Questionnaire extends Component {
             <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
             <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
             <NavLink to="/pastQuestionnaires">
-                <button className=" bg-coolGreen py-2 px-5 text-left rounded hover:bg-coolBlue-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> Past Questionnaires</button>
+                <button className=" bg-coolGreen py-1 px-5 text-left rounded hover:bg-coolGreen-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> Past Questionnaires</button>
             </NavLink>
         </div>
         <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
@@ -207,8 +204,8 @@ export class Questionnaire extends Component {
         </div>
 
         <section className="">
-          <div className="px-5 pb-2" onClick={this.buildPost}>
-            <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" />
+          <div className="px-5 pb-4" onClick={this.buildPost}>
+            <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
           </div>
         </section>
       </div>

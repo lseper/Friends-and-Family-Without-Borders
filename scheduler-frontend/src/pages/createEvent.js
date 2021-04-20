@@ -5,20 +5,20 @@ import NavBar from '../components/navBar';
 import InputTextForm from '../components/inputTextForm';
 import DateSelect from '../components/dateSelect';
 import SearchSelect from '../components/searchSelect';
-import Button from '../components/button'
-import LocationSuggestion from '../components/locationSuggestions'
-import DropDown from '../components/dropDown'
+import Button from '../components/button';
+import LocationSuggestion from '../components/locationSuggestions';
+import DropDown from '../components/dropDown';
+import Alert from '../components/alert';;
 
 const SetErrors = ({ error }) => {
     return (
         <div>
-            <label className="items-center font-medium tracking-wide text-red-400 text-md mt-1 ml-4">{error !== undefined ? 'An error occurred: ' : ''}{error}</label>
+            <label className="items-center font-medium tracking-wide text-red-400 text-md mt-1">{error !== undefined ? 'An error occurred: ' : ''}{error}</label>
         </div>
     )
 }
 
 const ShowLocationSuggestions = ({ value, activity, avgComfort, comfortableAttendees, comfortablePriority, totalAttendees, totalPriority }) => {
-    console.log("test please hit here");
     return (
         <div>
             <LocationSuggestion
@@ -56,7 +56,8 @@ const CreateEvent = () => {
     const [locationList, setLocationList] = useState([]);
     const [error, setError] = useState();
     const [showError, setShowError] = useState([]);
-    const [mask, setMask] = useState();
+    const [mask, setMask] = useState(false);
+    const [createEventAlert, setCreateEventAlert] = useState(false);
 
     useEffect(() => {
         if (data.length === 0) {
@@ -96,9 +97,7 @@ const CreateEvent = () => {
     }, [locationInfo]);
 
     useEffect(() => {
-        console.log(locationInfo)
         for (let i = 0; i < locationInfo.length; i++) {
-            console.log(locationInfo[i].id)
             dropDownLocations.push({
                 "value": locationInfo[i].id,
                 "label": locationInfo[i].location.location_type + " " + locationInfo[i].activity.name
@@ -167,6 +166,7 @@ const CreateEvent = () => {
     }
 
     function buildPost() {
+        console.log(mask)
         let eventInfo = {
             name: name,
             description: details,
@@ -184,7 +184,6 @@ const CreateEvent = () => {
         }).then(res => {
                 console.log(res)
                 eventId = res.data.id;
-                console.log(eventId)
                 setEventId(eventId);
 
                 //then add invites and submit another post request 
@@ -216,7 +215,6 @@ const CreateEvent = () => {
             pair = fifth;
         }
 
-        console.log(pair);
         const locationFinal = {
             pair: pair 
         }
@@ -229,6 +227,11 @@ const CreateEvent = () => {
         })
             .then(res => {
                 console.log("Correctly added location!")
+                console.log("test");
+                alert("Event has been created! View Event on Created Events Page or Stay to Create a Another Event")
+                setCreateEventAlert(true);
+                window.location.reload();
+
             }).catch(err => {
                 console.log("There was an error with adding an event location!")
                 console.log(err.response.data);
@@ -275,6 +278,13 @@ const CreateEvent = () => {
     return (
         <div>
             <NavBar />
+            {
+                createEventAlert ?
+                    <div>
+                         <Alert color="brightPink" message="You have successfuly created an event with a location! To view go back to Created Events page..." />
+                    </div>: 
+                    null
+            }
             <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
                 <div className="px-1">
                     <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Create Event</label>
@@ -320,6 +330,7 @@ const CreateEvent = () => {
                         </div>
                         : null
                     }
+                    {showError}
                 </form>
             </section>
             <div className="flex items-left justify-start rounded-b py-4">
@@ -328,22 +339,21 @@ const CreateEvent = () => {
                     <div
                         onClick={addEventLocation}
                     >
-                        <Button name="Add Location to Event" bgColor="bg-coolBlue" type="text" />
+                        <Button name="Create Event With Location" bgColor="bg-coolBlue" type="text" />
                     </div> :
-                                    <button
+                                <button
                                     className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
                                     onClick={() => {
                                         buildPost();
                                     }}
                                 >
-                                    Create Event  
+                                    View Suggested Locations  
                                 </button> 
             }
             </section>
             
             </div>
-            {showError}
         </div>
     )
 }

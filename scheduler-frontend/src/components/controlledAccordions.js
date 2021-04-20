@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ControlledAccordions(invitees) {
+export default function ControlledAccordions(invitees, numComfort) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -31,7 +31,10 @@ export default function ControlledAccordions(invitees) {
     setExpanded(isExpanded ? panel : false);
   };
 
+
+  numComfort = invitees.numComfort;
   const users = invitees;
+  const numUsers = invitees.invitees.length;
 
   return (
     <div className={classes.root}>
@@ -41,7 +44,7 @@ export default function ControlledAccordions(invitees) {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.secondaryHeading} variant="h4">Invitees</Typography>
+          <Typography className={classes.secondaryHeading} variant="h4">{numComfort}/{numUsers} Comfortable Invitees</Typography>
         </AccordionSummary>
         <AccordionDetails className="w-full">
           <Typography className="w-full" component={'span'}>

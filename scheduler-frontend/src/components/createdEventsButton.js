@@ -21,7 +21,6 @@ export class createdEventsButton extends Component {
     }
 
     // convertToPercentage = (num) => {
-    //     console.log(num)
     //     return(Math.floor((num) * 100));
     // }
 
@@ -71,7 +70,7 @@ export class createdEventsButton extends Component {
                         </div>
                     </div>
                     <div className="py-2 w-full">
-                        <ControlledAccordions invitees={this.props.invitees}/>
+                        <ControlledAccordions numComfort={this.props.numComfort} invitees={this.props.invitees} />
 
                     </div>
                 </div>

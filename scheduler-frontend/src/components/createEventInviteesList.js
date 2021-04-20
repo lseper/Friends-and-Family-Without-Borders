@@ -22,7 +22,6 @@ export default function BasicTable({ users }) {
     const classes = useStyles();
 
     function convertToPercentage(num){
-        console.log(Math.floor((num) * 100))
         return(Math.floor((num) * 100));
     }
 

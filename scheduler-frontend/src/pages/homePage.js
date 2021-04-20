@@ -101,7 +101,7 @@ export class HomePage extends Component {
                 {this.state.showPopup ?
         
                 <div>
-                    <Alert color="brightPink" message="Please must fill out a questionnaire!"/>
+                    <Alert color="brightPink" message="Please first fill out a questionnaire!"/>
 
                 </div>
                 : null

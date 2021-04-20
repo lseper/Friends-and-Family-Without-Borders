@@ -75,7 +75,6 @@ export class profile extends Component {
       email: this.state.email,
       privacy: this.state.publicInfo
     }
-    console.log(accountInformation);
     const authorization = localStorage.getItem('authToken');
     axios.put(`/users/${localStorage['user_id']}`, accountInformation, {
       headers: {
@@ -137,7 +136,7 @@ export class profile extends Component {
               backgroundColor = "bg-coolGreen"
               primaryColor = '#BDE4A7' />
             <div onClick={this.buildPost} className="w-full">
-              <Button name="Update" bgColor="bg-coolGreen" />
+              <Button name="Update" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
             </div>
           </form>
         </section>
