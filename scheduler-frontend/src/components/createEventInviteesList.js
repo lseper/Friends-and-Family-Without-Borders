@@ -55,15 +55,15 @@ export default function BasicTable({ users }) {
                             <TableCell component="th" scope="row">
                                 {row.name}
                             </TableCell>
-                            <TableCell align="right"> {`${row.comfort}%`}</TableCell>
-                            <TableCell align="right">{row.attendance ?
+                            <TableCell align="right"> {!isNaN(row.comfort) ? `${row.comfort}%` : ''}</TableCell>
+                            <TableCell align="right">{row.attendance !== undefined ? row.attendance ?
                                 <div className="text-brightPink">
                                     <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCheckCircle} />
                                 </div>
                                 :
                                 <div className="text-brightPink">
                                     <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faTimesCircle} />
-                                </div>
+                                </div> : null
                             }</TableCell>
                         </TableRow>
                     ))}

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :reset_password]
   # before doing these actions, do authorized() first
   before_action :authorized, only: [:show, :update, :destroy]
 
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   # logging in to an existing user (POST)
   # Tell Front-End they can access the json body in the error via err.response
   def login
-    @user = User.where(username: params[:username]).first
+    @user = User.find_by(username: params[:username])
 
     if @user
       # hash the password sent by the user to match with the one in the database
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(username: params[:username], 
-      privacy: params[:privacy], password_digest: encode(params[:password]))
+      privacy: params[:privacy])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -85,6 +85,23 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+  end
+
+  # PUT /users/[:id]/reset_password
+  def reset_password
+    # check if email matches
+    if @user.email == params[:email]
+      # password resetting
+      @user.password = params[:new_password]
+      @user.password_confirmation = params[:new_password]
+      if @user.save()
+        render json: { message: "Successfully reset password!"}, status: :ok
+      else
+        render json: {message: "Something is wrong with the password you sent us!"}, status: :unprocessable_entity
+      end
+    else
+      render json: { message: "You must input the correct email to reset the password for this user!"}, status: :unauthorized
+    end
   end
 
   private

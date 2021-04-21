@@ -91,7 +91,7 @@ export class createAccount extends Component {
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
             <DropDown handleCallback={this.publicCallBack} 
-              name="INFORMATION PUBLIC TO USERS" 
+              name="EVENT RESPONSES PRIVATE" 
               data = {[
                 {
                   value: 1,

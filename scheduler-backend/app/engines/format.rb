@@ -76,4 +76,48 @@ module Format
             invitees: get_invitations_for_event(event, see_all=false)
         }
     end
+
+    def extract_events_info(events)
+        events_to_return = []
+
+        for event in events
+            eventLa = EventLa.find_by(event_id: event.id)
+            event_info = extract_event_info(event, eventLa)
+            events_to_return.append(event_info)
+        end
+
+        events_to_return = events_to_return.sort_by{|e| e[:event][:start_time] }
+
+        return events_to_return
+
+    end
+
+    def extract_event_info(event, eventLa)
+        location =  nil
+        activity = nil
+        overall_comfort_metric = 0
+        people_comfortable = 0 
+
+        if eventLa
+            location = eventLa.location_activity_suggestion.location
+            activity = eventLa.location_activity_suggestion.activity
+            overall_comfort_metric = eventLa[:overall_comfort_metric]
+            people_comfortable = eventLa[:people_comfortable]
+        end
+
+        return {
+            event: event, 
+            location: location,
+            activity: activity,
+            invitees: get_invitations_for_event(event), 
+            overall_comfort_metric: overall_comfort_metric, 
+            people_comfortable: people_comfortable
+        }
+
+    end
+
+    
+
+
+
 end

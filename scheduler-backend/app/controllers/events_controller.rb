@@ -11,29 +11,30 @@ class EventsController < ApplicationController
   # AUTHORIZATION NEEDED -- only user who created the event should be allowed to view it
   def index
     @events = Event.where(user_id: params[:user_id])
-    events_to_return = []
-    for event in @events.to_ary
-      event_la = EventLa.find_by(event_id: event.id)
-      if event_la
-        events_to_return.append({ 
-          event: event, 
-          location: event_la.location_activity_suggestion.location,
-          activity: event_la.location_activity_suggestion.activity,
-          invitees: get_invitations_for_event(event), 
-          overall_comfort_metric: event_la[:overall_comfort_metric], 
-          people_comfortable: event_la[:people_comfortable]})
-      else
-        events_to_return.append({ 
-          event: event, 
-          location: UNCHOSEN_LOCATION,
-          activity: UNCHOSEN_ACTIVITY,
-          invitees: get_invitations_for_event(event), 
-          overall_comfort_metric: 0, 
-          people_comfortable: 0})
-      end
-    end
+    # events_to_return = []
+    # for event in @events.to_ary
+    #   event_la = EventLa.find_by(event_id: event.id)
+    #   if event_la
+    #     events_to_return.append({ 
+    #       event: event, 
+    #       location: event_la.location_activity_suggestion.location,
+    #       activity: event_la.location_activity_suggestion.activity,
+    #       invitees: get_invitations_for_event(event), 
+    #       overall_comfort_metric: event_la[:overall_comfort_metric], 
+    #       people_comfortable: event_la[:people_comfortable]})
+    #   else
+    #     events_to_return.append({ 
+    #       event: event, 
+    #       location: nil,
+    #       activity: nil,
+    #       invitees: get_invitations_for_event(event), 
+    #       overall_comfort_metric: 0, 
+    #       people_comfortable: 0})
+    #   end
+    # end
     #pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}
-    events_to_return = events_to_return.sort_by{|e| e[:event][:start_time] }
+    events_to_return = extract_events_info(@events.to_ary)
+
     render json: events_to_return
   end
 

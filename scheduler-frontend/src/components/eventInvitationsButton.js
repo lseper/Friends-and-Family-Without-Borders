@@ -6,6 +6,7 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import ControlledAccordions from './controlledAccordions';
 
 export class CreatedEventsButton extends Component {
 
@@ -113,6 +114,7 @@ export class CreatedEventsButton extends Component {
               </div>
             </div>
           </div>
+          <ControlledAccordions numComfort={-1} invitees={this.props.invitees} />
         </div>
       </div>
     )
