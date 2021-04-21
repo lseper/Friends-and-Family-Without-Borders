@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
     
     # GET /invitations
     def index
-    @invitations = User.find(params[:user_id]).invitations
+    @invitations = User.find(params[:user_id]).invitations.future
     invited_events = []
     for invitation in @invitations
         # TODO: filter invitations to only return ones that have NOT already happened yet
