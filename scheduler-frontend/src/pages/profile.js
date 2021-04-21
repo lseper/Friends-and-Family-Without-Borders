@@ -6,6 +6,7 @@ import axios from 'axios';
 import Loading from '../components/loading';
 import InputTextForm from '../components/inputTextForm';
 import ShowText from '../components/showText'
+import Alert from '../components/alert'
 
 export class profile extends Component {
 
@@ -13,11 +14,12 @@ export class profile extends Component {
     super(props);
     this.state = {
       loading: true,
-      preferredName: '',
+      //preferredName: '',
       userName: '',
       password: '',
       email: '',
       publicInfo: '',
+      showAlert: false,
     };
   }
 
@@ -45,7 +47,7 @@ export class profile extends Component {
       .then(res => {
         console.log(res.data);
         this.setState({
-          preferredName: res.data.name,
+          //preferredName: res.data.name,
           userName: res.data.username,
           email: res.data.email,
           publicInfo: res.data.privacy,
@@ -68,10 +70,11 @@ export class profile extends Component {
   }
 
   buildPost = (event) => {
+
     event.preventDefault();
     let accountInformation = {
       username: this.state.userName,
-      name: this.state.preferredName,
+      // name: "test",
       email: this.state.email,
       privacy: this.state.publicInfo
     }
@@ -83,6 +86,7 @@ export class profile extends Component {
       }
     })
       .then(res => {
+        this.setState({ showAlert: true });
         localStorage.setItem('UpdateErrors', "None");
         console.log("Account has been updated!");
       }).catch(() => {
@@ -102,6 +106,12 @@ export class profile extends Component {
           <Loading /> :
           null
         }
+        {this.state.showAlert ?
+          <div>
+              <Alert color = "coolGreen" message ="Your profile information has been updated!"/>
+          </div>
+          : null
+          }
         <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
           <div className="px-1">
             <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> Your Profile</label>

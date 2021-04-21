@@ -180,7 +180,7 @@ export class Questionnaire extends Component {
         }
         {this.state.showPopup ?
         <div>
-            <Alert color="brightPink" message="Please must fill out a questionnaire!" />
+            <Alert color="coolGreen" message="Please first fill out a questionnaire!" />
         </div>
         : null
         }
@@ -204,8 +204,12 @@ export class Questionnaire extends Component {
         </div>
 
         <section className="">
-          <div className="px-5 pb-4" onClick={this.buildPost}>
+          <div className="px-6 pb-4">
+          <NavLink to="/homePage" onClick={this.buildPost}>
+          {/* <div className="px-5 pb-4" onClick={this.buildPost}> */}
             <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
+          {/* </div> */}
+          </NavLink>
           </div>
         </section>
       </div>
