@@ -15,7 +15,7 @@ const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attend
                 name={name}
                 dateStringStart={dateStart}
                 dateStringEnd={dateEnd}
-                location={location + " " + activity}
+                location={location + " - " + activity}
                 details={details}
                 creator={creator} 
                 attending = {attending}
@@ -64,17 +64,28 @@ export class HomePage extends Component {
                 console.log(res);
                 this.setState({
                     eventList: res.data.map(event => {
+
+                        let location = "";
+                        let activity = ""
+                        if(event.location == null){
+                            location = "No Location Specified";
+                            activity = "or Activity"
+                        }else {
+                            location = event.location.location_type;
+                            activity = event.activity.name
+                        }
+
                         return (<EventCard
                             name={event.event_details.name}
                             dateStart={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
                             dateEnd = {moment(event.event_details.ending_at).format("MMMM Do YYYY h:mm:ss a")}
-                            //location={event.location.location_type}
+                            location={location}
                             details={event.event_details.description}
                             creator={event.organizer.username}
                             key={event.event_details.Authorizationid}
                             attending = {event.confirmed}
                             id = {event.id}
-                            //activity = {event.activity.name}
+                            activity = {activity}
                             comfort = {event.comfort_level}
                         />)
                     }),
@@ -98,14 +109,14 @@ export class HomePage extends Component {
                     null
                 }
                 <NavBar />
-                {this.state.showPopup ?
+                {/* {this.state.showPopup ?
         
                 <div>
                     <Alert color="brightPink" message="Please first fill out a questionnaire!"/>
 
                 </div>
                 : null
-                }
+                } */}
                 {this.state.eventList.length === 0 ?
         
                     <div>

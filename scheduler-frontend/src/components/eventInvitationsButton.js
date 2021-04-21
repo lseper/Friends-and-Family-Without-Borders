@@ -22,6 +22,7 @@ export class CreatedEventsButton extends Component {
   }
 
   updateAttendance(status) {
+    console.log(this.state.attending)
       this.setState({attending: status});
 
       let info =  {

@@ -8,7 +8,7 @@ import SearchSelect from '../components/searchSelect';
 import Button from '../components/button';
 import LocationSuggestion from '../components/locationSuggestions';
 import DropDown from '../components/dropDown';
-import Alert from '../components/alert';;
+// import Alert from '../components/alert';;
 
 const SetErrors = ({ error }) => {
     return (
@@ -57,7 +57,7 @@ const CreateEvent = () => {
     const [error, setError] = useState();
     const [showError, setShowError] = useState([]);
     const [mask, setMask] = useState(false);
-    const [createEventAlert, setCreateEventAlert] = useState(false);
+    // const [createEventAlert, setCreateEventAlert] = useState(false);
 
     useEffect(() => {
         if (data.length === 0) {
@@ -228,8 +228,8 @@ const CreateEvent = () => {
             .then(res => {
                 console.log("Correctly added location!")
                 console.log("test");
-                alert("Event has been created! View Event on Created Events Page or Stay to Create a Another Event")
-                setCreateEventAlert(true);
+                alert("Event has been created! View event on Created Events Page or stay to create another event")
+                // setCreateEventAlert(true);
                 window.location.reload();
 
             }).catch(err => {
@@ -278,13 +278,13 @@ const CreateEvent = () => {
     return (
         <div>
             <NavBar />
-            {
+            {/* {
                 createEventAlert ?
                     <div>
                          <Alert color="brightPink" message="You have successfuly created an event with a location! To view go back to Created Events page..." />
                     </div>: 
                     null
-            }
+            } */}
             <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
                 <div className="px-1">
                     <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Create Event</label>
@@ -320,7 +320,7 @@ const CreateEvent = () => {
                     &nbsp;&nbsp;&nbsp;
                     <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={data} />
                     &nbsp;&nbsp;&nbsp;
-                    <SearchSelect handleCallback={handlePrioritiesChange} label="SET PRIORITY INVITEES" data={invitees} />
+                    <SearchSelect handleCallback={handlePrioritiesChange} label="SET REQUIRED INVITEES" data={invitees} />
                     &nbsp;&nbsp;&nbsp;
                     {locationList.length > 0 ?
                         <div>
