@@ -12,28 +12,31 @@ export class resetPassword extends Component {
       password: '',
       email: '',
       errors: '',
+      username: '',
     };
   }
 
   buildPost = (event) => {
     event.preventDefault();
     let accountInformation = {
-      password: this.state.password,
-      email: this.state.email
+      username: this.state.username,  
+      email: this.state.email,
+      new_password: this.state.password,
     }
 
     console.log(accountInformation);
 
-    // axios.post('/users', accountInformation)
-    //   .then(res => {
-    //   this.props.history.push('/login');
-    //   }).catch(err => {
-    //     console.log("We ran into an issue");
-    //     this.setState({
-    //       errors: err.response.data.message
-    //     })
-    //     console.log(err.response.data.message);
-    //   })
+    axios.put('/reset_password', accountInformation)
+      .then(res => {
+          console.log("successfully reset password!")
+      this.props.history.push('/');
+      }).catch(err => {
+        console.log("We ran into an issue");
+        this.setState({
+          errors: err.response.data.message
+        })
+        console.log(err.response.data.message);
+      })
   }
 
   passwordCallBack = (inputText) => {
@@ -42,6 +45,10 @@ export class resetPassword extends Component {
 
   emailCallBack = (inputText) => {
     this.setState({ email: inputText })
+  }
+
+  usernameCallBack = (inputText) => {
+    this.setState({ username: inputText })
   }
 
   render() {
@@ -55,6 +62,8 @@ export class resetPassword extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
+            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.usernameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+            &nbsp;&nbsp;&nbsp;
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="NEW PASSWORD" placeholder="examplePassword" />
