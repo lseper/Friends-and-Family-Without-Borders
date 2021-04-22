@@ -98,7 +98,7 @@ class UsersController < ApplicationController
         @user.password = params[:new_password]
         @user.password_confirmation = params[:new_password]
         if @user.save()
-          render json: { message: "Successfully reset password for #{params[:username]}!"}, status: :ok
+          render json: { message: "Successfully reset password for #{params[:username]}!"}, status: :created
         else
           render json: {message: "Something is wrong with the password you sent us!"}, status: :unprocessable_entity
         end

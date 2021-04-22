@@ -17,7 +17,6 @@ class Invitation < ApplicationRecord
     private
     def owner_is_not_invited
         if event.user.id == user.id
-            puts "cannot add the creator of an event to the same event"
             errors.add(:user, "cannot not be invited to an event they created!")
         end
     end

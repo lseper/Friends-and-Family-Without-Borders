@@ -31,11 +31,11 @@ RSpec.describe "events requests", type: :request do
       end
 
       it "returns one invitee for the first event" do
-        expect(@response_hash[0]['invitees'].length).to eq(1)
+        expect(@response_hash[0]['invitees'].length).to eq(2)
       end
 
       it "returns zero invitees for the second event" do
-        expect(@response_hash[1]['invitees'].length).to eq(0)
+        expect(@response_hash[1]['invitees'].length).to eq(1)
       end
       
     end
