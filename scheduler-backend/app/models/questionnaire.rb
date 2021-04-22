@@ -11,5 +11,6 @@ class Questionnaire < ApplicationRecord
     # people around tolerance? ()
 
     validates :q1answer, :q2answer, :q3answer, :q4answer, :q5answer, :q6answer, :q7answer, :q8answer, presence: true
-    validates :q1answer, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }
+    validates :q1answer, :q2answer, :q3answer, :q4answer, :q5answer, :q6answer, :q7answer, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10, only_integer: true }
+    validates :q8answer, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 30, only_integer: true }
 end
