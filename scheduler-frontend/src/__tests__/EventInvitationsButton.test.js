@@ -17,6 +17,17 @@ it('renders', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}
         />
     )
     expect(tree).toMatchSnapshot()
@@ -34,6 +45,17 @@ it('displays the correct event name', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}
         />
     )
 
@@ -53,6 +75,17 @@ it('displays the correct example details', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}
         />
     )
 
@@ -72,6 +105,17 @@ it('displays the correct startdate', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}       
         />
     )
 
@@ -91,6 +135,17 @@ it('displays the correct enddate', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}        
         />
     )
 
@@ -110,6 +165,18 @@ it('displays the correct enddate', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}         
+
         />
     )
 
@@ -129,6 +196,17 @@ it('find the number of font awesome icons', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}         
         />
     )
 
@@ -149,6 +227,17 @@ it('find the Circular Progress bar icon for comfort level', () => {
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}         
         />
     )
 
@@ -169,6 +258,17 @@ it('check that button click updates attending state when going button is pressed
         attending = {false}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}         
         />
     )
     
@@ -190,6 +290,17 @@ it('check that button click updates attending state when not going button is pre
         attending = {true}
         invitationId = {1}
         comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}         
         />
     )
     

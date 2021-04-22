@@ -24,7 +24,7 @@ export class createAccount extends Component {
     let accountInformation = {
       username: this.state.userName,
       password: this.state.password,
-      name: this.state.name,
+      name: "test",
       email: this.state.email,
       privacy: this.state.publicInfo
     }
@@ -41,7 +41,7 @@ export class createAccount extends Component {
         console.log("We have successfully signed up!");
         console.log("Authorization token is for the sign in page:", localStorage['authToken']);
         console.log("User id is for the sign in page:", localStorage['user_id']);
-        this.props.history.push('/');
+        this.props.history.push('/questionnaire');
       }).catch(err => {
         console.log("We ran into an issue");
         this.setState({
@@ -51,10 +51,6 @@ export class createAccount extends Component {
         console.log(err.response.data.message);
       })
     localStorage.setItem('filledOutQuestionnaire', false);
-  }
-
-  nameCallBack = (inputText) => {
-    this.setState({ name: inputText })
   }
 
   userNameCallBack = (inputText) => {
@@ -94,9 +90,6 @@ export class createAccount extends Component {
             &nbsp;&nbsp;&nbsp;
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.nameCallBack} type="text" label="PREFERRED NAME" placeholder="Name Example" />
-            &nbsp;&nbsp;&nbsp;
-            {/* <DropDown handleCallback={this.publicCallBack} name="INFORMATION PUBLIC TO USERS" option1="Yes" option2="No" downlable={true} /> */}
             <DropDown handleCallback={this.publicCallBack} 
               name="EVENT RESPONSES PRIVATE" 
               data = {[

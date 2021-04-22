@@ -17,7 +17,7 @@ development:
 
 test:
   <<: *default
-  database: postgres_test
+  database: postgres-test
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

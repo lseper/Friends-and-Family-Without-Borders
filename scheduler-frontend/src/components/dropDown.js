@@ -6,7 +6,6 @@ const DropDown = ({ name, data, handleCallback, initalState, border, downlable, 
   let initalValue;
   if (initalState !== undefined){
     if (initalState) {
-      console.log("test")
       initalValue = data[0]
     }
     else {

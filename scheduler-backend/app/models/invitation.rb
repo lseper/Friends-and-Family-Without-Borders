@@ -9,7 +9,7 @@ class Invitation < ApplicationRecord
     validates_uniqueness_of :user_id, :scope => [:event_id]
 
     # only invitations in the future
-    # scope :future, -> { join(:events).where('event.start_time > ?', Time.now.to_s)}
+    scope :future, -> { joins(:event).merge(Event.future) }
 
     # owner of the event cannot be invited to it
     validate :owner_is_not_invited
