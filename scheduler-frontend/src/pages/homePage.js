@@ -8,7 +8,7 @@ import Loading from '../components/loading'
 
 
 const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id, activity, comfort, invitees }) => {
-    
+    console.log(invitees);
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <EventInvitationsButton

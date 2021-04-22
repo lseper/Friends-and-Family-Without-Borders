@@ -53,7 +53,7 @@ export class CreatedEventsButton extends Component {
     return (
       <div className="flex flex-grow align-start items-start  px-5 w-full md:w-3/4" >
         <div className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 container bg-white" >
-          <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white">
+          <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white w-full">
             <div className="text-sm font-bold text-coolGrey-dark">{this.props.creator} invites you to:</div>
             <div className="flex py-2">
               <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
@@ -97,7 +97,11 @@ export class CreatedEventsButton extends Component {
                 <h3 className="font-bold text-coolGrey-dark pb-2">{this.props.location}</h3>
               </div>
             </div>
-            <div className="flex w-full text-brightPink py-2">
+          </div>
+          <div className = "flex w-full pb-4">
+              <ControlledAccordions numComfort={-1} invitees={this.props.invitees} />
+          </div>
+          <div className="flex w-full text-brightPink py-2">
               <button onClick = {() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
                 <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
               </button>
@@ -113,8 +117,6 @@ export class CreatedEventsButton extends Component {
                     }
               </div>
             </div>
-          </div>
-          <ControlledAccordions numComfort={-1} invitees={this.props.invitees} />
         </div>
       </div>
     )
