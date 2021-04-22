@@ -101,9 +101,11 @@ class UsersController < ApplicationController
         else
           render json: {message: "Something is wrong with the password you sent us!"}, status: :unprocessable_entity
         end
-    end
+      else
+        render json: { message: "You must input the correct email to reset the password for this user!"}, status: :unauthorized
+      end
     else
-      render json: { message: "You must input the correct email to reset the password for this user!"}, status: :unauthorized
+      render json: { message: "The user with the username you sent us does not exist!"}, status: :unprocessable_entity
     end
   end
 
