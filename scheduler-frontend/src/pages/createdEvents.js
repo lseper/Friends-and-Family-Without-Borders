@@ -11,7 +11,6 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfo
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
-                // key = {key}
                 name={name}
                 dateStart={dateStart}
                 dateEnd={dateEnd}
@@ -21,7 +20,6 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfo
                 invitees={invitees}
                 comfort={comfort}
                 numComfort={numComfort}
-                //handleDelete = {deleteEvent}
                 eventId = {eventId}
                 />
         </div>
@@ -44,26 +42,6 @@ export class createdEvents extends Component {
     convertToPercentage = (num) => {
         return(Math.floor((num) * 100));
     }
-
-    // handleDelete = (key) => {
-    //     this.deleteEvent(key);
-    // }
-
-    // deleteEvent = (eventId) => {
-    //     const authorization = localStorage.getItem('authToken');
-    //     console.log("YAYAYAY")
-    //     console.log(eventId);
-    //     // axios.get(`/users/${localStorage['user_id']}/events`, {
-    //     //     headers: {
-    //     //         'Authorization': authorization
-    //     //     }
-    //     // })
-    //     //     .then(res => {
-    //     //     }).catch(err => {
-    //     //         console.log(err);
-    //     //         this.setState({ loading: false })
-    //     //     })
-    // }
 
     componentDidMount() {
         // if a user is not logged in, brings them to the login page
@@ -113,7 +91,6 @@ export class createdEvents extends Component {
                             eventId={event.event.id}
                             comfort={this.convertToPercentage(event.overall_comfort_metric)}
                             numComfort={event.people_comfortable}
-                            //deleteEvent = {this.handleDelete()}
                         />)
                     }),
                     loading: false,
@@ -134,12 +111,6 @@ export class createdEvents extends Component {
                     null
                 }
                 <NavBar />
-                {/* {this.state.showPopup ?
-                    <div>
-                        <Alert color="brightPink" message="Please first fill out a questionnaire!" />
-                    </div>
-                    : null
-                } */}
                 {this.state.eventList.length === 0 ?
                     <div>
                         <Alert color="coolBlue" message="You currently have no created events, you should expand your friend circle!" />
