@@ -142,7 +142,7 @@ export class createdEvents extends Component {
                 } */}
                 {this.state.eventList.length === 0 ?
                     <div>
-                        <Alert color="brightPink" message="You currently have no created events, you should expand your friend circle!" />
+                        <Alert color="coolBlue" message="You currently have no created events, you should expand your friend circle!" />
                     </div>
                     : null
                 }
