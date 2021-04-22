@@ -15,25 +15,25 @@ RSpec.describe ComfortCalculation do
         it 'calc_location_score returns correct value when location_type is Outside' do
             @outside_pair = @pairs[0]
             location = @outside_pair[:location]
-            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(0.09)
+            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(0.175)
         end
         
         it 'calc_location_score returns correct value when location_type is Large Inside' do
             @large_inside_pair = @pairs[4]
             location = @large_inside_pair[:location]
-            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(0.08)
+            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(8 / (9/0.175))
         end
         
         it 'calc_location_score returns correct value when location_type is Small Inside' do
             @small_inside_pair = @pairs[8]
             location = @small_inside_pair[:location]
-            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(0.07)
+            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(7/ (9/0.175))
         end
     
         it 'calc_location_score returns correct value when location_type is Online' do
             @online_pair = @pairs[11]
             location = @online_pair[:location]
-            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(0.06)
+            expect(ComfortCalculation.calc_location_score(location, @invitee)).to eq(6 / (9/0.175))
         end
 
     end
@@ -43,7 +43,7 @@ RSpec.describe ComfortCalculation do
         it 'calc_eating_score returns correct value when has_food is true' do
             @food_pair = @pairs[0]
             activity = @food_pair[:activity]
-            expect(ComfortCalculation.calc_eating_score(activity, @invitee)).to eq(0.05)
+            expect(ComfortCalculation.calc_eating_score(activity, @invitee)).to eq(5 / (9/0.175))
         end
 
         it 'calc_eating_score returns correct value when has_food is true' do
@@ -59,13 +59,13 @@ RSpec.describe ComfortCalculation do
         it 'calc_social_distance_score returns correct value when socialDistanceScore is greater than the importance of social distancing to the invitee' do
             @high_sd_score_pair = @pairs[5]
             activity = @high_sd_score_pair[:activity]
-            expect(ComfortCalculation.calc_social_distance_score(activity, @invitee)).to eq(0.01)
+            expect(ComfortCalculation.calc_social_distance_score(activity, @invitee)).to eq(1 / (9/0.175))
         end
 
         it 'calc_social_distance_score returns correct value when socialDistanceScore is less than the importance of social distancing to the invitee' do
             @low_sd_score_pair = @pairs[1]
             activity = @low_sd_score_pair[:activity]
-            expect(ComfortCalculation.calc_social_distance_score(activity, @invitee)).to eq(0.04)
+            expect(ComfortCalculation.calc_social_distance_score(activity, @invitee)).to eq(4 / (9/0.175))
         end
 
     end
@@ -74,7 +74,7 @@ RSpec.describe ComfortCalculation do
 
         it 'calc_num_attendees_score returns correct value when the number of attendees is greater than the questionnaire response for the invitee' do
             num_attendees = 10
-            expect(ComfortCalculation.calc_num_attendees_score(num_attendees, @invitee)).to eq(0.03)
+            expect(ComfortCalculation.calc_num_attendees_score(num_attendees, @invitee)).to eq(0.02)
         end
 
         it 'calc_num_attendees_score returns correct value when the number of attendees is less than the questionnaire response for the invitee' do
@@ -87,7 +87,7 @@ RSpec.describe ComfortCalculation do
 
         it 'calc_mask_score returns correct value when no mask is required' do
             mask_required = false
-            expect(ComfortCalculation.calc_mask_score(mask_required, @invitee)).to eq(0.02)
+            expect(ComfortCalculation.calc_mask_score(mask_required, @invitee)).to eq(6 / (9/0.175))
         end
 
         it 'calc_mask_score returns correct value when a mask is required' do
@@ -117,7 +117,7 @@ RSpec.describe ComfortCalculation do
         it 'calc_pair_scores returns correct value' do
 
             @test_pair = @pairs[1]
-            expect(ComfortCalculation.calc_pair_scores(@test_pair, @invitee)).to eq(0.13)
+            expect(ComfortCalculation.calc_pair_scores(@test_pair, @invitee)).to eq(0.25277777777777777)
 
         end
 

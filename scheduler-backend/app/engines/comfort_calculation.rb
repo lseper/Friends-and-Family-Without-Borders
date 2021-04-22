@@ -1,6 +1,7 @@
 # TODO: Move comfort score calculation into here, so that it isn't just tacked onto the base ApplicationController
 module ComfortCalculation
     THRESHOLD = 0.8
+    DENOM = (9/0.175)
 
     # calculate the score for this invitee based on location
     def calc_location_score(location, invitee)
@@ -16,7 +17,7 @@ module ComfortCalculation
         else
             questionnaire_location_score = invitee[:questionnaire][:q4answer]
         end
-        location_score = (base_location_score - questionnaire_location_score) / 100.0
+        location_score = (base_location_score - questionnaire_location_score) / DENOM
         return location_score
     end
 
@@ -39,7 +40,7 @@ module ComfortCalculation
         else
             base_eating_score = 10
             questionnaire_eating_score = invitee[:questionnaire][:q5answer]
-            eating_score = (base_eating_score - questionnaire_eating_score) / 100.0
+            eating_score = (base_eating_score - questionnaire_eating_score) /  DENOM
             return eating_score
         end
     end
@@ -56,7 +57,7 @@ module ComfortCalculation
             social_score = social_score.abs() * 0.5 
         end
 
-        return social_score / 100.0
+        return social_score /  DENOM
     end
 
     # calculate the score for this invitee given the total amount of people at this event
@@ -76,7 +77,7 @@ module ComfortCalculation
       
         if !mask_required
             questionnaire_mask_score = invitee[:questionnaire][:q7answer]
-            return (10 - questionnaire_mask_score) / 100.0
+            return (questionnaire_mask_score - 1) /  DENOM
         else
             return 0
         end

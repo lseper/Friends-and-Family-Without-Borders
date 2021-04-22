@@ -250,6 +250,7 @@
           null,
           null,
           1,
+          1,
           null,
           null
         ]
@@ -257,6 +258,7 @@
       "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/engines/comfort_calculation.rb": {
         "lines": [
           null,
+          1,
           1,
           1,
           null,
@@ -896,6 +898,9 @@
           null,
           1,
           null,
+          null,
+          1,
+          null,
           1,
           1,
           2,
@@ -909,6 +914,17 @@
       "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/questionnaire.rb": {
         "lines": [
           1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           1,
           null
         ]
@@ -1032,6 +1048,7 @@
       "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/users_controller.rb": {
         "lines": [
           1,
+          null,
           1,
           null,
           1,
@@ -1118,6 +1135,26 @@
           null,
           1,
           0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          0,
+          null,
           null,
           null,
           1,
@@ -1279,6 +1316,6 @@
         ]
       }
     },
-    "timestamp": 1618962856
+    "timestamp": 1619133913
   }
 }
