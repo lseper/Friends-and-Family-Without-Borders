@@ -116,8 +116,4 @@ module Format
 
     end
 
-    
-
-
-
 end

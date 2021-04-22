@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # We cannot call set user in reset_password because they don't have an id yet
   before_action :set_user, only: [:show, :update, :destroy]
   # before doing these actions, do authorized() first
   before_action :authorized, only: [:show, :update, :destroy]

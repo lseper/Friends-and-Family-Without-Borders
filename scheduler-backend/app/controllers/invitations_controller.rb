@@ -6,7 +6,7 @@ class InvitationsController < ApplicationController
     before_action :authorized, only: [:index, :update]
     # Controller for Invitations
     
-    # GET /invitations
+    # GET users/:id/invitations
     def index
     @invitations = User.find(params[:user_id]).invitations.future
     invited_events = []
