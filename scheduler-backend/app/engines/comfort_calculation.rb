@@ -61,7 +61,7 @@ module ComfortCalculation
 
     # calculate the score for this invitee given the total amount of people at this event
     def calc_num_attendees_score(num_attendees, invitee)
-        questionnaire_num_attendees_comfort = invitee[:questionnaire][:q7answer]
+        questionnaire_num_attendees_comfort = invitee[:questionnaire][:q8answer]
         num_attendees_score = num_attendees - questionnaire_num_attendees_comfort
 
         if num_attendees_score <= 0
@@ -75,7 +75,7 @@ module ComfortCalculation
     def calc_mask_score(mask_required, invitee)
       
         if !mask_required
-            questionnaire_mask_score = invitee[:questionnaire][:q8answer]
+            questionnaire_mask_score = invitee[:questionnaire][:q7answer]
             return (10 - questionnaire_mask_score) / 100.0
         else
             return 0
