@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy, :reset_password]
+  before_action :set_user, only: [:show, :update, :destroy]
   # before doing these actions, do authorized() first
   before_action :authorized, only: [:show, :update, :destroy]
 
@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
-  # PUT /users/reset_password
+  # PUT /reset_password
   def reset_password
     @user = User.find_by(username: params[:username])
     if @user
