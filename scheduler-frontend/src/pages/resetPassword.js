@@ -75,6 +75,11 @@ export class resetPassword extends Component {
             )} */}
           </form>
         </section>
+        {this.state.errors !== '' && (
+          <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-brightPink text-xs mt-1 ml-1">
+            {this.state.errors}
+          </span>
+        )}
         <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
           <div className="flex">
             <div onClick={this.buildPost}>

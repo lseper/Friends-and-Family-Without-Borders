@@ -32,11 +32,14 @@ User.create( username: "billbob", password: "billbob", password_confirmation: "b
 User.create( username: "janedoe", password: "janedoe", password_confirmation: "janedoe", name: "Jane Doe", email: "janedoe@gmail.com", privacy: true )
 
 # create all events for testing
-Event.create( name: "test event 1", description: "for testing event 1", start_time: "2020-04-06 12:00:00", ending_at: "2020-04-06 13:00:00", user_id: 1, masks_required: true)
-Event.create( name: "test event 2", description: "for testing event 2", start_time: "2030-04-06 13:00:00", ending_at: "2030-04-06 14:00:00", user_id: 1, masks_required: false)
+Event.create( name: "test event 1", description: "for testing event 1", start_time: "2000-04-06 12:00:00", ending_at: "2000-04-06 13:00:00", user_id: 1, masks_required: true)
+Event.create( name: "test event 2", description: "for testing event 2", start_time: "2040-04-06 13:00:00", ending_at: "2040-04-06 14:00:00", user_id: 1, masks_required: false)
 
 # create all invitations for testing
 Invitation.create( event_id: 1, user_id: 2, comfort_level: 0.95, confirmed: false, priority: true )
+Invitation.create( event_id: 1, user_id: 3, comfort_level: 0.90, confirmed: false, priority: true )
+Invitation.create( event_id: 2, user_id: 2, comfort_level: 0.80, confirmed: false, priority: true )
+
 
 # create all questionnaires for testing
 Questionnaire.create(q1answer: 1, q2answer: 2, q3answer: 3, q4answer: 4, q5answer: 5, q6answer: 6, q7answer: 7, q8answer: 8, user_id: 3)
