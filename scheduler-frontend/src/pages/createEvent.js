@@ -8,7 +8,7 @@ import SearchSelect from '../components/searchSelect';
 import Button from '../components/button';
 import LocationSuggestion from '../components/locationSuggestions';
 import DropDown from '../components/dropDown';
-// import Alert from '../components/alert';;
+import {Prompt} from 'react-router'
 
 const SetErrors = ({ error }) => {
     return (
@@ -57,7 +57,8 @@ const CreateEvent = () => {
     const [error, setError] = useState();
     const [showError, setShowError] = useState([]);
     const [mask, setMask] = useState(false);
-    // const [createEventAlert, setCreateEventAlert] = useState(false);
+    const [noLocation, setNoLocation] = useState(true);
+    const [createdEvent, setCreatedEvent] = useState(false);
 
     useEffect(() => {
         if (data.length === 0) {
@@ -189,6 +190,7 @@ const CreateEvent = () => {
                 //then add invites and submit another post request 
                 addInvitees(eventId);
                 setError(undefined);
+                setCreatedEvent(true);
             }).catch(err => {
                 console.log("Something went wrong when creating an event");
                 console.log(err.response.data);
@@ -272,19 +274,17 @@ const CreateEvent = () => {
 
     const callBackLocation = (event) => {
         setLocation(event)
+        setNoLocation(false);
         setShowAddLocationButton(true);
     }
 
     return (
         <div>
+        <Prompt
+            when={noLocation && createdEvent}
+            message={location => `You have not added a location to your event. Are you sure you want to make an event without a location?`}
+          />
             <NavBar />
-            {/* {
-                createEventAlert ?
-                    <div>
-                         <Alert color="brightPink" message="You have successfuly created an event with a location! To view go back to Created Events page..." />
-                    </div>: 
-                    null
-            } */}
             <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
                 <div className="px-1">
                     <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Create Event</label>
