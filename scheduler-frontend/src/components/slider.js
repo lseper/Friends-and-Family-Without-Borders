@@ -20,8 +20,6 @@ const theme = createMuiTheme({
 
 const DiscreteSlider = ({ userNumber, callBack, maxPeople, marks }) => {
   const classes = useStyles();
-
-
   let [num, setValue] = React.useState(userNumber);
   num = userNumber;
 
@@ -29,29 +27,6 @@ const DiscreteSlider = ({ userNumber, callBack, maxPeople, marks }) => {
     setValue(newValue);
     callBack(newValue);
   };
-
-  // const marks = [
-  //   {
-  //     value: 2,
-  //     label: 2,
-  //   },
-  //   {
-  //     value: 4,
-  //     label: 4,
-  //   },
-  //   {
-  //     value: 6,
-  //     label: 6,
-  //   },
-  //   {
-  //     value: 8,
-  //     label: 8,
-  //   },
-  //   {
-  //     value: 10,
-  //     label: 10,
-  //   },
-  // ];
 
   return (
     <div className="flex items-stretch static ">

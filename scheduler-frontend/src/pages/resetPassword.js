@@ -4,7 +4,7 @@ import Button from '../components/button';
 import InputTextForm from '../components/inputTextForm'
 import axios from 'axios';
 
-export class resetPassword extends Component {
+export class ResetPassword extends Component {
 
   constructor(props) {
     super(props);
@@ -90,4 +90,4 @@ export class resetPassword extends Component {
   }
 }
 
-export default resetPassword;
+export default ResetPassword;

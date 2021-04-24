@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders 1`] = `
-<CreatedEventsButton
+<EventInvitationReport
   attending={true}
   comfort={0.9}
   creator="John Doe"
@@ -329,7 +329,7 @@ exports[`renders 1`] = `
       <div
         className="flex w-full pb-4"
       >
-        <ControlledAccordions
+        <ControlledAccordion
           invitees={
             Object {
               "id": 3,
@@ -789,7 +789,7 @@ exports[`renders 1`] = `
                                                 <div
                                                   className="md:w-full"
                                                 >
-                                                  <BasicTable
+                                                  <InviteesListTable
                                                     users={
                                                       Object {
                                                         "invitees": Object {
@@ -1649,7 +1649,7 @@ exports[`renders 1`] = `
                                                         </WithStyles(ForwardRef(Paper))>
                                                       </ForwardRef(TableContainer)>
                                                     </WithStyles(ForwardRef(TableContainer))>
-                                                  </BasicTable>
+                                                  </InviteesListTable>
                                                 </div>
                                               </span>
                                             </ForwardRef(Typography)>
@@ -1670,7 +1670,7 @@ exports[`renders 1`] = `
               </ForwardRef(Accordion)>
             </WithStyles(ForwardRef(Accordion))>
           </div>
-        </ControlledAccordions>
+        </ControlledAccordion>
       </div>
       <div
         className="flex w-full text-brightPink py-2"
@@ -1797,5 +1797,5 @@ exports[`renders 1`] = `
       </div>
     </div>
   </div>
-</CreatedEventsButton>
+</EventInvitationReport>
 `;

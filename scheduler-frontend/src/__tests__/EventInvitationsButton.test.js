@@ -1,5 +1,5 @@
 import React from 'react';
-import EventInvitationsButton from '../components/eventInvitationsButton'
+import EventInvitationsReport from '../components/eventInvitationsReport'
 import "jest-enzyme"
 import {shallow, configure, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16'
 configure({adapter: new Adapter()});
 it('renders', () => {
     const tree = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -35,7 +35,7 @@ it('renders', () => {
 
 it('displays the correct event name', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -65,7 +65,7 @@ it('displays the correct event name', () => {
 
 it('displays the correct example details', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -95,7 +95,7 @@ it('displays the correct example details', () => {
 
 it('displays the correct startdate', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -125,7 +125,7 @@ it('displays the correct startdate', () => {
 
 it('displays the correct enddate', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -155,7 +155,7 @@ it('displays the correct enddate', () => {
 
 it('displays the correct enddate', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -186,7 +186,7 @@ it('displays the correct enddate', () => {
 
 it('find the number of font awesome icons', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -217,7 +217,7 @@ it('find the number of font awesome icons', () => {
 
 it('find the Circular Progress bar icon for comfort level', () => {
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -248,7 +248,7 @@ it('find the Circular Progress bar icon for comfort level', () => {
 
 it('check that button click updates attending state when going button is pressed', () => {  
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"
@@ -280,7 +280,7 @@ it('check that button click updates attending state when going button is pressed
 
 it('check that button click updates attending state when not going button is pressed', () => {  
     const wrapper = mount(
-        <EventInvitationsButton
+        <EventInvitationsReport
         name="Example"
         dateStringStart="April 30th 2021 5:30:00 pm"
         dateStringEnd="April 30th 2021 7:30:00 pm"

@@ -5,7 +5,7 @@ import Button from '../components/button';
 import InputTextForm from '../components/inputTextForm'
 import axios from 'axios';
 
-export class createAccount extends Component {
+export class CreateAccount extends Component {
 
   constructor(props) {
     super(props);
@@ -43,7 +43,7 @@ export class createAccount extends Component {
         console.log("User id is for the sign in page:", localStorage['user_id']);
         this.props.history.push('/questionnaire');
       }).catch(err => {
-        console.log("We ran into an issue");
+        console.log("We ran into an issue with created an account");
         this.setState({
           errors: err.response.data.message
         })
@@ -129,4 +129,4 @@ export class createAccount extends Component {
   }
 }
 
-export default createAccount;
+export default CreateAccount;

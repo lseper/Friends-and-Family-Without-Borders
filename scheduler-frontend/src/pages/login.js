@@ -4,7 +4,7 @@ import InputTextForm from '../components/inputTextForm';
 import Button from '../components/button';
 import axios from 'axios';
 
-export class login extends Component {
+export class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -101,4 +101,4 @@ export class login extends Component {
   }
 }
 
-export default login;
+export default Login;

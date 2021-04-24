@@ -5,7 +5,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CreateEventInviteesList from './createEventInviteesList';
+import InviteesListTable from './inviteesListTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ControlledAccordions(invitees, numComfort) {
+export default function ControlledAccordion(invitees, numComfort) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -44,12 +44,12 @@ export default function ControlledAccordions(invitees, numComfort) {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.secondaryHeading} variant="h4">{ numComfort === -1 ? 'Invitees' : numComfort + '/' + numUsers + ' Comfortable Invitees'}</Typography>
+          <Typography className={classes.secondaryHeading} variant="h4">{numComfort === -1 ? 'Invitees' : numComfort + '/' + numUsers + ' Comfortable Invitees'}</Typography>
         </AccordionSummary>
         <AccordionDetails className="w-full">
           <Typography className="w-full" component={'span'}>
             <div className="md:w-full">
-              < CreateEventInviteesList
+              < InviteesListTable
                 users={users} />
             </div>
           </Typography>

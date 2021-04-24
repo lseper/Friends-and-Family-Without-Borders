@@ -24,7 +24,7 @@ export class Questionnaire extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
 
     // if a user is not logged in, brings them to the login page
     if (!localStorage['user_id'] && !localStorage['authToken']) {

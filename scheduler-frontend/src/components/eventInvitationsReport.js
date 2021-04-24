@@ -6,9 +6,9 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import ControlledAccordions from './controlledAccordions';
+import ControlledAccordion from './controlledAccordion';
 
-export class CreatedEventsButton extends Component {
+export class EventInvitationReport extends Component {
 
   constructor(props) {
     super(props);
@@ -24,29 +24,29 @@ export class CreatedEventsButton extends Component {
 
   updateAttendance(status) {
     console.log(this.state.attending)
-      this.setState({attending: status});
+    this.setState({ attending: status });
 
-      let info =  {
-        'confirmed': status
+    let info = {
+      'confirmed': status
+    }
+
+    const authorization = localStorage.getItem('authToken');
+    axios.put(`/users/${localStorage['user_id']}/invitations/${this.props.invitationId}`, info, {
+      headers: {
+        'Authorization': authorization
       }
-
-      const authorization = localStorage.getItem('authToken');
-      axios.put(`/users/${localStorage['user_id']}/invitations/${this.props.invitationId}`, info, {
-          headers: {
-              'Authorization': authorization
-          }
-      })
+    })
       .then(res => {
-          console.log("Correctly updated attendance!")
+        console.log("Correctly updated attendance!")
       }).catch(err => {
-          console.log("There was an error with updating attendance!")
-          console.log(err.response.data);
+        console.log("There was an error with updating attendance!")
+        console.log(err.response.data);
       })
   }
 
   convertToPercentage = (num) => {
-    return(Math.floor((num) * 100));
-}
+    return (Math.floor((num) * 100));
+  }
 
   render() {
 
@@ -58,19 +58,19 @@ export class CreatedEventsButton extends Component {
             <div className="flex py-2">
               <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
               <div className="px-5 flex">
-              <div className = "flex alight-right items-right pb-2" style={{ width: 70, height: 70 }}>
-                <CircularProgressbar value={this.convertToPercentage(this.props.comfort)} text={`${this.convertToPercentage(this.props.comfort)}%`}
-                styles={buildStyles({     
-                    // Text size
-                    textSize: '24px',
-                
-                    // Colors
-                    pathColor: '#CB4335',
-                    textColor: '#CB4335',
-                    trailColor: '#CD8B76',
-                    backgroundColor: '#3e98c7',
-                  })} />
-            </div>
+                <div className="flex alight-right items-right pb-2" style={{ width: 70, height: 70 }}>
+                  <CircularProgressbar value={this.convertToPercentage(this.props.comfort)} text={`${this.convertToPercentage(this.props.comfort)}%`}
+                    styles={buildStyles({
+                      // Text size
+                      textSize: '24px',
+
+                      // Colors
+                      pathColor: '#CB4335',
+                      textColor: '#CB4335',
+                      trailColor: '#CD8B76',
+                      backgroundColor: '#3e98c7',
+                    })} />
+                </div>
               </div>
             </div>
 
@@ -98,29 +98,29 @@ export class CreatedEventsButton extends Component {
               </div>
             </div>
           </div>
-          <div className = "flex w-full pb-4">
-              <ControlledAccordions numComfort={-1} invitees={this.props.invitees} />
+          <div className="flex w-full pb-4">
+            <ControlledAccordion numComfort={-1} invitees={this.props.invitees} />
           </div>
           <div className="flex w-full text-brightPink py-2">
-              <button onClick = {() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
-                <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
+            <button onClick={() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
+              <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
+            </button>
+            <div className="px-5 flex ">
+              <button onClick={() => this.updateAttendance(false)} className="focus:outline-none hover:text-brightPink-dark">
+                <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faTimesCircle} />
               </button>
-              <div className="px-5 flex ">
-                <button onClick = {() => this.updateAttendance(false)} className="focus:outline-none hover:text-brightPink-dark">
-                  <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faTimesCircle} />
-                </button>
-              </div>
-              <div className="flex text-coolGrey-dark text-bold pt-1">
-                  {!this.state.attending ?
-                  <div>Not Going</div> :
-                  <div>Going</div>
-                    }
-              </div>
             </div>
+            <div className="flex text-coolGrey-dark text-bold pt-1">
+              {!this.state.attending ?
+                <div>Not Going</div> :
+                <div>Going</div>
+              }
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default CreatedEventsButton
+export default EventInvitationReport;

@@ -8,7 +8,7 @@ import InputTextForm from '../components/inputTextForm';
 import ShowText from '../components/showText'
 import Alert from '../components/alert'
 
-export class profile extends Component {
+export class Profile extends Component {
 
   constructor(props) {
     super(props);
@@ -61,10 +61,6 @@ export class profile extends Component {
       })
   }
 
-  // handlePreferredName = (inputText) => {
-  //   this.setState({ preferredName: inputText })
-  // }
-
   handleUsername= (inputText) => {
     this.setState({ userName: inputText })
   }
@@ -74,7 +70,6 @@ export class profile extends Component {
     event.preventDefault();
     let accountInformation = {
       username: this.state.userName,
-      // name: "test",
       email: this.state.email,
       privacy: this.state.publicInfo
     }
@@ -127,8 +122,6 @@ export class profile extends Component {
             &nbsp;&nbsp;&nbsp;
             <ShowText focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
             &nbsp;&nbsp;&nbsp;
-            {/* <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handlePreferredName} type="text" label="PREFERRED NAME" placeholder={this.state.preferredName}/>
-            &nbsp;&nbsp;&nbsp; */}
             <DropDown name="EVENT RESPONSES PRIVATE" 
               initalState={this.state.publicInfo} 
               downlable={true} 
@@ -156,4 +149,4 @@ export class profile extends Component {
   }
 }
 
-export default profile;
+export default Profile;

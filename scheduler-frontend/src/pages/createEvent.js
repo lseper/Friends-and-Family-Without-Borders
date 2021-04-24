@@ -8,7 +8,7 @@ import SearchSelect from '../components/searchSelect';
 import Button from '../components/button';
 import LocationSuggestion from '../components/locationSuggestions';
 import DropDown from '../components/dropDown';
-import {Prompt} from 'react-router'
+import { Prompt } from 'react-router'
 
 const SetErrors = ({ error }) => {
     return (
@@ -36,36 +36,47 @@ const ShowLocationSuggestions = ({ value, activity, avgComfort, comfortableAtten
 
 const CreateEvent = () => {
 
+    //basic event infomration 
     const [name, setName] = useState();
     const [details, setDetails] = useState();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [location, setLocation] = useState([]);
-    const [data, setData] = useState([]);
+    const [mask, setMask] = useState(false);
+    const [eventId, setEventId] = useState([]);
+
+    //event invitees
+    const [allUsers] = useState([]);
     const [invitees, setInvitees] = useState([]);
     const [priorities, setPriorities] = useState([]);
-    const [locationInfo, setLocationInfo] = useState([]);
-    const [eventId, setEventId] = useState([]);
+
+    // set location options 
     const [first, setFirst] = useState([]);
     const [second, setSecond] = useState([]);
     const [third, setThird] = useState([]);
     const [fourth, setFourth] = useState([]);
     const [fifth, setFifth] = useState([]);
-    const [dropDownLocations, setDropDownLocations] = useState([]);
+
+    // used for location suggestions
+    const [location, setLocation] = useState([]);
+    const [locationInfo, setLocationInfo] = useState([]);
+    const [dropDownLocations] = useState([]);
     const [showAddLocationButton, setShowAddLocationButton] = useState(false)
     const [locationList, setLocationList] = useState([]);
-    const [error, setError] = useState();
-    const [showError, setShowError] = useState([]);
-    const [mask, setMask] = useState(false);
+
+    // used to encourage the user to set a location before leaving the page 
     const [noLocation, setNoLocation] = useState(true);
     const [createdEvent, setCreatedEvent] = useState(false);
 
+    // for error messages
+    const [error, setError] = useState();
+    const [showError, setShowError] = useState([]);
+
     useEffect(() => {
-        if (data.length === 0) {
+        if (allUsers.length === 0) {
             axios.get('/users').then(res => {
                 for (let i = 0; i < res.data.length; i++) {
                     if (res.data[i].id !== parseInt(localStorage['user_id'])) {
-                        data.push({
+                        allUsers.push({
                             "value": res.data[i].id,
                             "label": res.data[i].username
                         });
@@ -75,25 +86,25 @@ const CreateEvent = () => {
                 console.log(err.response.data);
             })
         }
-    }, [data]);
+    }, [allUsers]);
 
     useEffect(() => {
         setLocationList(
-          locationInfo.map(location => {
-              return (<ShowLocationSuggestions
-                value={location.location.location_type}
-                activity={location.activity.name}
-                key={location.location.location_type + '' + location.activity.name}
-                id={location.id}
-                avgComfort={location.average_comfort}
-                comfortableAttendees={location.others_passed}
-                comfortablePriority={location.priority_passed}
-                totalAttendees={invitees.length}
-                totalPriority={priorities.length}
-            />
-              )
-          }
-          )
+            locationInfo.map(location => {
+                return (<ShowLocationSuggestions
+                    value={location.location.location_type}
+                    activity={location.activity.name}
+                    key={location.location.location_type + '' + location.activity.name}
+                    id={location.id}
+                    avgComfort={location.average_comfort}
+                    comfortableAttendees={location.others_passed}
+                    comfortablePriority={location.priority_passed}
+                    totalAttendees={invitees.length}
+                    totalPriority={priorities.length}
+                />
+                )
+            }
+            )
         )
     }, [locationInfo]);
 
@@ -107,10 +118,40 @@ const CreateEvent = () => {
     }, [locationInfo])
 
     useEffect(() => {
-        setShowError( <SetErrors error={error} /> )
+        setShowError(<SetErrors error={error} />)
     }, [error]);
 
-    function addInvitees(eventId) {
+    function buildPost() {
+        console.log(mask)
+        let eventInfo = {
+            name: name,
+            description: details,
+            start_time: startDate,
+            ending_at: endDate,
+            masks_required: mask
+        }
+        let eventId = -1;
+
+        const authorization = localStorage.getItem('authToken');
+        axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
+            headers: {
+                'Authorization': authorization
+            }
+        }).then(res => {
+            console.log(res)
+            eventId = res.data.id;
+            setEventId(eventId);
+            addInvitees(eventId);
+            setError(undefined);
+            setCreatedEvent(true);
+        }).catch(err => {
+            console.log("Something went wrong when creating an event");
+            console.log(err.response.data);
+            setError(err.response.data.name[0]);
+        })
+    };
+
+    function getInviteesList() {
         // get indexes of invitees who are priority
         let priorityIndexes = [];
         for (let i = 0; i < invitees.length; i++) {
@@ -121,6 +162,7 @@ const CreateEvent = () => {
             }
         }
 
+        //create list of final invitees and add if they are priority or not
         let finalInviteesList = [];
         for (let i = 0; i < invitees.length; i++) {
             if (priorityIndexes.includes(i)) {
@@ -135,11 +177,15 @@ const CreateEvent = () => {
                 })
             }
         }
+        return (finalInviteesList)
+    }
+
+    function addInvitees(eventId) {
 
         let finalInvitees = ({
             user_id: localStorage.getItem('user_id'),
             event_id: eventId,
-            invitees: finalInviteesList
+            invitees: getInviteesList()
         })
 
         const authorization = localStorage.getItem('authToken');
@@ -163,62 +209,12 @@ const CreateEvent = () => {
                 console.log(err.response.data);
                 setError(err.response.data.name[0]);
             })
-
     }
-
-    function buildPost() {
-        console.log(mask)
-        let eventInfo = {
-            name: name,
-            description: details,
-            start_time: startDate,
-            ending_at: endDate,
-            masks_required: mask
-        }
-        let eventId = -1;
-
-        const authorization = localStorage.getItem('authToken');
-        axios.post(`/users/${localStorage['user_id']}/events`, eventInfo, {
-            headers: {
-                'Authorization': authorization
-            }
-        }).then(res => {
-                console.log(res)
-                eventId = res.data.id;
-                setEventId(eventId);
-
-                //then add invites and submit another post request 
-                addInvitees(eventId);
-                setError(undefined);
-                setCreatedEvent(true);
-            }).catch(err => {
-                console.log("Something went wrong when creating an event");
-                console.log(err.response.data);
-                setError(err.response.data.name[0]);
-            }) 
-    };
 
     function addEventLocation() {
 
-        //send entire suggestion-activity location
-        let pair = [];
-        if (location === first.id) {
-            pair = first;
-        }
-        else if (location === second.id) {
-            pair = second;
-        }         
-        else if (location === third.id) {
-            pair = third;
-        }
-        else if (location === fourth.id) {
-            pair = fourth;
-        }else {
-            pair = fifth;
-        }
-
         const locationFinal = {
-            pair: pair 
+            pair: determineLocation()
         }
 
         const authorization = localStorage.getItem('authToken');
@@ -231,7 +227,6 @@ const CreateEvent = () => {
                 console.log("Correctly added location!")
                 console.log("test");
                 alert("Event has been created! View event on Created Events Page or stay to create another event")
-                // setCreateEventAlert(true);
                 window.location.reload();
 
             }).catch(err => {
@@ -239,6 +234,26 @@ const CreateEvent = () => {
                 console.log(err.response.data);
             })
     };
+
+    function determineLocation() {
+        //send entire suggestion-activity location
+        let pair = [];
+        if (location === first.id) {
+            pair = first;
+        }
+        else if (location === second.id) {
+            pair = second;
+        }
+        else if (location === third.id) {
+            pair = third;
+        }
+        else if (location === fourth.id) {
+            pair = fourth;
+        } else {
+            pair = fifth;
+        }
+        return (pair)
+    }
 
     const handleStartDate = (newValue) => {
         setStartDate(newValue);
@@ -263,9 +278,9 @@ const CreateEvent = () => {
     const handleMask = (event) => {
         if (event === 1) {
             setMask(true)
-          } else {
+        } else {
             setMask(false)
-          }
+        }
     }
 
     const handleDetails = (event) => {
@@ -280,10 +295,10 @@ const CreateEvent = () => {
 
     return (
         <div>
-        <Prompt
-            when={noLocation && createdEvent}
-            message={location => `You have not added a location to your event. Are you sure you want to make an event without a location?`}
-          />
+            <Prompt
+                when={noLocation && createdEvent}
+                message={location => `You have not added a location to your event. Are you sure you want to make an event without a location?`}
+            />
             <NavBar />
             <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
                 <div className="px-1">
@@ -293,17 +308,17 @@ const CreateEvent = () => {
             </section>
             <section className="flex flex-grow align-start items-start pt-4 px-5 md:w-5/6 w-full">
                 <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-                    <InputTextForm focusRing = 'coolBlue' color = '#98D2EB' handleCallBack={handleName} type="text" label="EVENT NAME" placeholder="example" />
+                    <InputTextForm focusRing='coolBlue' color='#98D2EB' handleCallBack={handleName} type="text" label="EVENT NAME" placeholder="example" />
                     &nbsp;&nbsp;&nbsp;
-                    <InputTextForm focusRing = 'coolBlue' color = '#98D2EB' handleCallBack={handleDetails} type="text" label="EVENT DESCRIPTION" placeholder="example" />
+                    <InputTextForm focusRing='coolBlue' color='#98D2EB' handleCallBack={handleDetails} type="text" label="EVENT DESCRIPTION" placeholder="example" />
                     &nbsp;&nbsp;&nbsp;
                     <DateSelect handleCallback={handleStartDate} label="EVENT START" />
                     &nbsp;&nbsp;&nbsp;
                     <DateSelect handleCallback={handleEndDate} label="EVENT END" />
                     &nbsp;&nbsp;&nbsp;
-                    <DropDown handleCallback={handleMask} 
-                        name="MASKS REQUIRED"               
-                        data = {[
+                    <DropDown handleCallback={handleMask}
+                        name="MASKS REQUIRED"
+                        data={[
                             {
                                 value: 1,
                                 label: "Yes"
@@ -312,13 +327,13 @@ const CreateEvent = () => {
                                 value: 2,
                                 label: "No"
                             }
-                        ]}  
-                        border="bg-coolBlue" 
-                        downlable={true} 
+                        ]}
+                        border="bg-coolBlue"
+                        downlable={true}
                         primaryColor='#98D2EB'
-                        initalState={false}  />
+                        initalState={false} />
                     &nbsp;&nbsp;&nbsp;
-                    <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={data} />
+                    <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={allUsers} />
                     &nbsp;&nbsp;&nbsp;
                     <SearchSelect handleCallback={handlePrioritiesChange} label="SET REQUIRED INVITEES" data={invitees} />
                     &nbsp;&nbsp;&nbsp;
@@ -334,25 +349,24 @@ const CreateEvent = () => {
                 </form>
             </section>
             <div className="flex items-left justify-start rounded-b py-4">
-            <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
-            {showAddLocationButton ?
-                    <div
-                        onClick={addEventLocation}
-                    >
-                        <Button name="Create Event With Location" bgColor="bg-coolBlue" type="text" />
-                    </div> :
-                                <button
-                                    className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button"
-                                    onClick={() => {
-                                        buildPost();
-                                    }}
-                                >
-                                    View Suggested Locations  
-                                </button> 
-            }
-            </section>
-            
+                <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
+                    {showAddLocationButton ?
+                        <div
+                            onClick={addEventLocation}
+                        >
+                            <Button name="Create Event With Location" bgColor="bg-coolBlue" type="text" />
+                        </div> :
+                        <button
+                            className="bg-coolBlue text-white active:bg-coolBlue font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button"
+                            onClick={() => {
+                                buildPost();
+                            }}>
+                            View Suggested Locations
+                        </button>
+                    }
+                </section>
+
             </div>
         </div>
     )

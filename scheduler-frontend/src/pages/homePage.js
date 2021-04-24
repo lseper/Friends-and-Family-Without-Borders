@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventInvitationsButton from '../components/eventInvitationsButton';
+import EventInvitationsReport from '../components/eventInvitationsReport';
 import NavBar from '../components/navBar';
 import Alert from '../components/alert';
 import axios from 'axios';
@@ -11,7 +11,7 @@ const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attend
     console.log(invitees);
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
-            <EventInvitationsButton
+            <EventInvitationsReport
                 name={name}
                 dateStringStart={dateStart}
                 dateStringEnd={dateEnd}
@@ -40,7 +40,7 @@ export class HomePage extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
 
         // if a user is not logged in, brings them to the login page
         if (!localStorage['user_id'] && !localStorage['authToken']) {
@@ -111,14 +111,6 @@ export class HomePage extends Component {
                     null
                 }
                 <NavBar />
-                {/* {this.state.showPopup ?
-        
-                <div>
-                    <Alert color="brightPink" message="Please first fill out a questionnaire!"/>
-
-                </div>
-                : null
-                } */}
                 {this.state.eventList.length === 0 ?
         
                     <div>

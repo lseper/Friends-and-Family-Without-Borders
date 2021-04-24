@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function BasicTable({ users }) {
+export default function InviteesListTable({ users }) {
     const classes = useStyles();
 
     function convertToPercentage(num){

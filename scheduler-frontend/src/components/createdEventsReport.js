@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ControlledAccordions from './controlledAccordions';
-import { faCalendarDay, faWindowMinimize } from '@fortawesome/free-solid-svg-icons';
+import ControlledAccordion from './controlledAccordion';
+import { faCalendarDay} from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
 
-export class createdEventsButton extends Component {
+export class CreatedEventsReport extends Component {
 
     constructor(props) {
         super(props);
@@ -98,7 +98,7 @@ export class createdEventsButton extends Component {
                         </div>
                     </div>
                     <div className="pt-2 pb-4 w-full">
-                        <ControlledAccordions numComfort={this.props.numComfort} invitees={this.props.invitees} />
+                        <ControlledAccordion numComfort={this.props.numComfort} invitees={this.props.invitees} />
 
                     </div>
                 </div>
@@ -107,4 +107,4 @@ export class createdEventsButton extends Component {
     }
 }
 
-export default createdEventsButton;
+export default CreatedEventsReport;

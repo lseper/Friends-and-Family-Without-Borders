@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Slider from '../components/slider';
 
-export class question extends Component {
+export class Question extends Component {
 
   handleCallback = (sliderData) => {
     this.props.totalCallBack(sliderData, this.props.qNum);
@@ -24,4 +24,4 @@ export class question extends Component {
   }
 }
 
-export default question;
+export default Question;

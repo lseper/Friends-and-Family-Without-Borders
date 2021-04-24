@@ -11,9 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import moment from "moment";
 
-
-
-
 export class PastQuestionnaires extends Component {
 
   constructor(props) {
@@ -24,7 +21,7 @@ export class PastQuestionnaires extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
 
     // if a user is not logged in, brings them to the login page
     if (!localStorage['user_id'] && !localStorage['authToken']) {
@@ -62,13 +59,8 @@ export class PastQuestionnaires extends Component {
         console.log(this.state);
       }).catch(err => {
         console.log(err);
-        //this.setState({ loading: false })
       })
-
-
   }
-
-
 
   render() {
 
@@ -108,9 +100,7 @@ export class PastQuestionnaires extends Component {
     </TableContainer>
         </div>
         
-      </div>
-
-      
+      </div>      
     )
   }
 }

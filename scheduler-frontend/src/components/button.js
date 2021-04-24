@@ -1,6 +1,6 @@
 import React from 'react'
 
-const button = ({ name, bgColor, type, hoverColor, widthFull }) => {
+const Button = ({ name, bgColor, type, hoverColor, widthFull }) => {
     return (
         <div className="flex">
             <button
@@ -10,4 +10,4 @@ const button = ({ name, bgColor, type, hoverColor, widthFull }) => {
     )
 }
 
-export default button;
+export default Button;
