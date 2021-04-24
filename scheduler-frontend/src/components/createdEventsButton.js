@@ -9,8 +9,6 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
 
-
-
 export class createdEventsButton extends Component {
 
     constructor(props) {
@@ -19,11 +17,6 @@ export class createdEventsButton extends Component {
             eventId: this.props.eventId
         };
     }
-
-    // componentDidMount() {
-    //     console.log(this.props.eventId)
-    //     //this.setState({eventId: this.props.key})
-    // }
 
     formatDate(dateString) {
         const starttime = moment(dateString).format("MMMM Do YYYY h:mm:ss a");
@@ -36,11 +29,6 @@ export class createdEventsButton extends Component {
     }
 
     deleteEvent(id) {
-  
-        // let info =  {
-        //   '': status
-        // }
-        //console.log(this.state.attending)
         console.log(id);
   
         const authorization = localStorage.getItem('authToken');
@@ -50,18 +38,13 @@ export class createdEventsButton extends Component {
             }
         })
         .then(res => {
-            console.log("Event was deleted!")
+            alert("Event was deleted! Your page will now refresh!")
             window.location.reload();
         }).catch(err => {
             console.log("There was an error with updating attendance!")
             console.log(err.response.data);
         })
     }
-
-    // setTimeout = (() => {
-    //     alert("Event was deleted!")
-    //     window.location.reload();
-    // }, 3000)
 
     render() {
         return (

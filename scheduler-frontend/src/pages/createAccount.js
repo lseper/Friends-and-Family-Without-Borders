@@ -14,7 +14,7 @@ export class createAccount extends Component {
       userName: '',
       password: '',
       email: '',
-      publicInfo: false,
+      publicInfo: true,
       errors: '',
     };
   }
@@ -104,7 +104,8 @@ export class createAccount extends Component {
               ]} 
               downlable={true}
               backgroundColor = "bg-coolGreen"
-              primaryColor = '#BDE4A7' />
+              primaryColor = '#BDE4A7'
+              initalState = {true} />
             {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
                 {this.state.errors}

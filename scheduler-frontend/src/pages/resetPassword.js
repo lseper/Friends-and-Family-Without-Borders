@@ -68,18 +68,13 @@ export class resetPassword extends Component {
             &nbsp;&nbsp;&nbsp;
             <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="NEW PASSWORD" placeholder="examplePassword" />
             &nbsp;&nbsp;&nbsp;
-            {/* {this.state.errors !== '' && (
+            {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
                 {this.state.errors}
               </span>
-            )} */}
+            )}
           </form>
         </section>
-        {this.state.errors !== '' && (
-          <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-brightPink text-xs mt-1 ml-1">
-            {this.state.errors}
-          </span>
-        )}
         <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
           <div className="flex">
             <div onClick={this.buildPost}>
@@ -91,7 +86,6 @@ export class resetPassword extends Component {
           </div>
         </section>
       </div>
-
     )
   }
 }
