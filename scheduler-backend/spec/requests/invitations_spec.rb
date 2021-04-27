@@ -60,4 +60,21 @@ RSpec.describe "invitation requests", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
     end
   end
+  before(:context) do
+    post '/login', params: {username: "billbob", password: "billbob"}
+    # token for user_id = 2
+    @token = JSON.parse(response.body)["auth_token"]
+  end
+  describe "PUT #update" do
+    it "is unauthorized when not the user is trying to update" do
+      put '/users/2/invitations/1', params: { confirmed: false }, headers: {'Authorization' => 'Bearer ' + "fak3 t0k3n"}
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+    it "is updates the invitation when the invitation owner updates it" do
+      put '/users/2/invitations/1', params: { confirmed: true }, headers: {'Authorization' => 'Bearer ' + @token}
+      invite = Invitation.find(1)
+      expect(invite.confirmed).to eq(true)
+    end
+  end
 end

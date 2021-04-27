@@ -21,8 +21,6 @@ RSpec.describe "events requests", type: :request do
     before(:context) do 
       get '/users/1/events', headers: {'Authorization' => 'Bearer ' + @token}
       @response_hash = JSON.parse(response.body)
-      # puts @response_hash[0].keys[1] == 'invitees'
-      # # puts @response_hash[1]
     end
     describe "GET #index (specific)" do
 
