@@ -3,6 +3,7 @@ import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -22,7 +23,31 @@ export class EventInvitationReport extends Component {
     };
   }
 
-  updateAttendance(status) {
+  getDate = (start, end) => {
+    // if one the same date, don't print date twice
+    const startIndex = start.indexOf(":");
+    const endIndex = end.indexOf(":");
+    const firstStart = start.slice(0, startIndex - 1)
+    const endStart = end.slice(0, endIndex - 1)
+
+    if (firstStart == endStart) {
+      const endPrint = end.slice(endIndex - 1)
+      return (start + " until " + endPrint)
+    }
+    else {
+      return (start + " until " + end)
+    }
+  }
+
+  getMaskRequirements = (status) => {
+    if (status) {
+      return "Masks Required";
+    } else {
+      return "Masks are NOT Required"
+    }
+  }
+
+  updateAttendance = (status) => {
     console.log(this.state.attending)
     this.setState({ attending: status });
 
@@ -38,6 +63,7 @@ export class EventInvitationReport extends Component {
     })
       .then(res => {
         console.log("Correctly updated attendance!")
+        window.location.reload();
       }).catch(err => {
         console.log("There was an error with updating attendance!")
         console.log(err.response.data);
@@ -88,17 +114,24 @@ export class EventInvitationReport extends Component {
             <div className="flex text-coolGrey-dark">
               <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
               <div className="flex">
-                <h3 className="font-bold text-coolGrey-dark">{this.props.dateStringStart} to {this.props.dateStringEnd}</h3>
+                {/* <h3 className="font-bold text-coolGrey-dark">{this.props.dateStringStart} to {this.props.dateStringEnd}</h3> */}
+                <h3 className="text-coolGrey-dark">{this.getDate(this.props.dateStringStart, this.props.dateStringEnd)}</h3>
               </div>
             </div>
             <div className="flex text-coolGrey-dark">
               <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faMapMarkerAlt} />
               <div className="flex">
-                <h3 className="font-bold text-coolGrey-dark pb-2">{this.props.location}</h3>
+                <h3 className="ml-1 text-coolGrey-dark">{this.props.location}</h3>
+              </div>
+            </div>
+            <div className="flex text-coolGrey-dark">
+              <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faHeadSideMask} />
+              <div className="flex">
+                <h3 className="text-coolGrey-dark pb-2">{this.getMaskRequirements(this.props.maskRequired)}</h3>
               </div>
             </div>
           </div>
-          <div className="flex w-full pb-4">
+          <div className="flex w-full pb-4 border-1">
             <ControlledAccordion numComfort={-1} invitees={this.props.invitees} />
           </div>
           <div className="flex w-full text-brightPink py-2">

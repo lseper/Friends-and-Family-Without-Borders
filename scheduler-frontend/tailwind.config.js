@@ -5,8 +5,8 @@ module.exports = {
     extend: {
       colors: {
                 coolGreen: {
-                  DEFAULT: '#BDE4A7',
-                  dark: '#82E0AA'
+                  DEFAULT: '#8FD468',
+                  dark: '#6A9C4E'
                 },
                 coolBlue: {
                   DEFAULT: '#98D2EB',

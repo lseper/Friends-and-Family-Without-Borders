@@ -5,8 +5,9 @@ import axios from 'axios';
 import Loading from '../components/loading';
 import { NavLink } from 'react-router-dom';
 import Alert from '../components/alert';
+import moment from "moment"
 
-const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfort, numComfort, activity, deleteEvent, eventId}) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfort, numComfort, activity, eventId, maskRequired}) => {
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
@@ -20,12 +21,11 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfo
                 comfort={comfort}
                 numComfort={numComfort}
                 eventId = {eventId}
+                maskRequired = {maskRequired}
                 />
         </div>
     )
 }
-
-
 
 export class CreatedEvents extends Component {
 
@@ -81,8 +81,9 @@ export class CreatedEvents extends Component {
       
                         return (<EventCard
                             name={event.event.name}
-                            dateStart={event.event.start_time}
-                            dateEnd={event.event.ending_at}
+                            //moment(dateString).format("MMMM Do YYYY h:mm:ss a")
+                            dateStart={moment(event.event.start_time).format("MMMM Do YYYY h:mm:ss a")}
+                            dateEnd={moment(event.event.ending_at).format("MMMM Do YYYY h:mm:ss a")}
                             location={location}
                             activity = {activity}
                             details={event.event.description}
@@ -90,6 +91,7 @@ export class CreatedEvents extends Component {
                             eventId={event.event.id}
                             comfort={this.convertToPercentage(event.overall_comfort_metric)}
                             numComfort={event.people_comfortable}
+                            maskRequired = {event.event.masks_required}
                         />)
                     }),
                     loading: false,

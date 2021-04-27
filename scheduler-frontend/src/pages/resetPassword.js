@@ -62,11 +62,11 @@ export class ResetPassword extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.usernameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.usernameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="NEW PASSWORD" placeholder="examplePassword" />
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.passwordCallBack} type="password" label="NEW PASSWORD" placeholder="examplePassword" />
             &nbsp;&nbsp;&nbsp;
             {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">

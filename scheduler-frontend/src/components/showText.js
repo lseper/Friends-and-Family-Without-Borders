@@ -18,8 +18,8 @@ export class ShowText extends Component {
                 <p className={"text-lg block font-bold text-coolGrey-dark text-left bg-grey-100"} >{this.props.placeholder}</p>
                 <hr
                     style={{
-                        color: '#BDE4A7',
-                        backgroundColor: '#BDE4A7',
+                        color: '#8FD468',
+                        backgroundColor: '#8FD468',
                         height: 2
                     }}
                 />

@@ -35,13 +35,13 @@ export class Questionnaire extends Component {
     const token = localStorage.getItem("authToken").toString();
     console.log("User token on questionnaire page: ", token);
     axios.defaults.headers.common['Authorization'] = token;
-        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
-        if (needPopup) {
-            this.setState({ showPopup: true })
-        }
-        else {
-            this.setState({ showPopup: false })
-        }    
+    const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
+    if (needPopup) {
+      this.setState({ showPopup: true })
+    }
+    else {
+      this.setState({ showPopup: false })
+    }
 
     console.log("User id on questionnaire page: ", localStorage['user_id']);
     axios.get(`/users/${localStorage['user_id']}/questionnaires`)
@@ -179,37 +179,37 @@ export class Questionnaire extends Component {
           null
         }
         {this.state.showPopup ?
-        <div>
+          <div>
             <Alert color="coolGreen" message="Please first fill out a questionnaire!" />
-        </div>
-        : null
+          </div>
+          : null
         }
 
         <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-            <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
-            <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
-            <NavLink to="/pastQuestionnaires">
-                <button className=" bg-coolGreen py-1 px-5 text-left rounded hover:bg-coolGreen-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> Past Questionnaires</button>
-            </NavLink>
+          <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
+          <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
+          <NavLink to="/pastQuestionnaires">
+            <button className=" bg-coolGreen py-1 px-5 text-left rounded hover:bg-coolGreen-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> Past Questionnaires</button>
+          </NavLink>
         </div>
         <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
-          <Question className="" question="How comfortable are you with events hosted outside?" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How comfortable are you with events hosted inside, with room for social distancing?" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How comfortable are you with events hosted inside, not large enough for social distancing?" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How comfortable are you with online events?" userNumber={this.state.q4} qNum={4} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How comfortable are you with eating or drinking around people?" userNumber={this.state.q5} qNum={5} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How important is social distancing to you?" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How important is it that people are wearing masks at an event?" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} maxPeople = {10} marks = {marks10}/>
-          <Question className="" question="How many people do you feel comfortable being around at an event?" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} maxPeople = {30} marks = {marks50}/>
+          <Question className="" question="How comfortable are you with events hosted outside?" userNumber={this.state.q1} qNum={1} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How comfortable are you with events hosted inside, with room for social distancing?" userNumber={this.state.q2} qNum={2} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How comfortable are you with events hosted inside, not large enough for social distancing?" userNumber={this.state.q3} qNum={3} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How comfortable are you with online events?" userNumber={this.state.q4} qNum={4} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How comfortable are you with eating or drinking around people?" userNumber={this.state.q5} qNum={5} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How important is social distancing to you?" userNumber={this.state.q6} qNum={6} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How important is it that people are wearing masks at an event?" userNumber={this.state.q7} qNum={7} totalCallBack={this.handleTotalCallBack} maxPeople={10} marks={marks10} />
+          <Question className="" question="How many people do you feel comfortable being around at an event?" userNumber={this.state.q8} qNum={8} totalCallBack={this.handleTotalCallBack} maxPeople={30} marks={marks50} />
         </div>
 
         <section className="">
           <div className="px-6 pb-4">
-          <NavLink to="/homePage" onClick={this.buildPost}>
-          {/* <div className="px-5 pb-4" onClick={this.buildPost}> */}
-            <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
-          {/* </div> */}
-          </NavLink>
+            <NavLink to="/homePage" onClick={this.buildPost}>
+              {/* <div className="px-5 pb-4" onClick={this.buildPost}> */}
+              <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" hoverColor="bg-coolGreen-dark" />
+              {/* </div> */}
+            </NavLink>
           </div>
         </section>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import EventInvitationsReport from '../components/eventInvitationsReport'
 import "jest-enzyme"
-import {shallow, configure, mount} from 'enzyme'
+import {configure, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 configure({adapter: new Adapter()});
@@ -28,6 +28,7 @@ it('renders', () => {
             id: 3,
             username: "vicki"
         }}
+        maskRequired = {false}
         />
     )
     expect(tree).toMatchSnapshot()
@@ -56,6 +57,7 @@ it('displays the correct event name', () => {
             id: 3,
             username: "vicki"
         }}
+        maskRequired = {false}
         />
     )
 
@@ -86,6 +88,7 @@ it('displays the correct example details', () => {
             id: 3,
             username: "vicki"
         }}
+        maskRequired = {false}
         />
     )
 
@@ -93,7 +96,7 @@ it('displays the correct example details', () => {
     expect(firstDiv.text()).toBe("Example Details")
 });
 
-it('displays the correct startdate', () => {
+it('displays the correct start and end date', () => {
     const wrapper = mount(
         <EventInvitationsReport
         name="Example"
@@ -115,15 +118,16 @@ it('displays the correct startdate', () => {
         {
             id: 3,
             username: "vicki"
-        }}       
+        }} 
+        maskRequired = {false}      
         />
     )
 
     const firstDiv = wrapper.find('h3').at(1)
-    expect(firstDiv.text()).toBe("April 30th 2021 5:30:00 pm to April 30th 2021 7:30:00 pm")
+    expect(firstDiv.text()).toBe("April 30th 2021 5:30:00 pm until 7:30:00 pm")
 });
 
-it('displays the correct enddate', () => {
+it('displays the correct location/activity', () => {
     const wrapper = mount(
         <EventInvitationsReport
         name="Example"
@@ -145,7 +149,8 @@ it('displays the correct enddate', () => {
         {
             id: 3,
             username: "vicki"
-        }}        
+        }}  
+        maskRequired = {false}      
         />
     )
 
@@ -153,7 +158,7 @@ it('displays the correct enddate', () => {
     expect(firstDiv.text()).toBe("Outdoors Golf")
 });
 
-it('displays the correct enddate', () => {
+it('displays the correct event creator', () => {
     const wrapper = mount(
         <EventInvitationsReport
         name="Example"
@@ -175,13 +180,46 @@ it('displays the correct enddate', () => {
         {
             id: 3,
             username: "vicki"
-        }}         
+        }}  
+        maskRequired = {false}       
 
         />
     )
 
     const firstDiv = wrapper.find('div').at(3)
     expect(firstDiv.text()).toBe("John Doe invites you to:")
+});
+
+it('displays the correct mask requirements', () => {
+    const wrapper = mount(
+        <EventInvitationsReport
+        name="Example"
+        dateStringStart="April 30th 2021 5:30:00 pm"
+        dateStringEnd="April 30th 2021 7:30:00 pm"
+        location={"Outdoors" + " " + "Golf"}
+        details="Example Details"
+        creator="John Doe"
+        attending = {true}
+        invitationId = {1}
+        comfort = {.9}
+        invitees = {{
+            comfort_level: "0.975",
+            confirmed: false,
+            id: 2,
+            priority: true,
+            username: "abby"
+        }, 
+        {
+            id: 3,
+            username: "vicki"
+        }}  
+        maskRequired = {false}       
+
+        />
+    )
+
+    const firstDiv = wrapper.find('h3').at(3)
+    expect(firstDiv.text()).toBe("Masks are NOT Required")
 });
 
 it('find the number of font awesome icons', () => {
@@ -206,11 +244,12 @@ it('find the number of font awesome icons', () => {
         {
             id: 3,
             username: "vicki"
-        }}         
+        }}   
+        maskRequired = {false}      
         />
     )
 
-    const numIcons = 4;
+    const numIcons = 5;
     const icon = wrapper.find('FontAwesomeIcon');
     expect(icon.length).toBe(numIcons);
 });
@@ -237,7 +276,8 @@ it('find the Circular Progress bar icon for comfort level', () => {
         {
             id: 3,
             username: "vicki"
-        }}         
+        }} 
+        maskRequired = {false}        
         />
     )
 
@@ -268,7 +308,8 @@ it('check that button click updates attending state when going button is pressed
         {
             id: 3,
             username: "vicki"
-        }}         
+        }}  
+        maskRequired = {false}       
         />
     )
     
@@ -300,7 +341,8 @@ it('check that button click updates attending state when not going button is pre
         {
             id: 3,
             username: "vicki"
-        }}         
+        }}  
+        maskRequired = {false}       
         />
     )
     

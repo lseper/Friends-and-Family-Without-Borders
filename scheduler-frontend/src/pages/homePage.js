@@ -7,7 +7,7 @@ import moment from "moment";
 import Loading from '../components/loading'
 
 
-const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id, activity, comfort, invitees }) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id, activity, comfort, invitees, maskRequired }) => {
     console.log(invitees);
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
@@ -22,6 +22,7 @@ const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attend
                 invitationId = {id}
                 comfort = {comfort}
                 invitees = {invitees}
+                maskRequired = {maskRequired}
                 />
         </div>
     )
@@ -89,6 +90,7 @@ export class HomePage extends Component {
                             activity = {activity}
                             comfort = {event.comfort_level}
                             invitees = {event.invitees}
+                            maskRequired = {event.event_details.masks_required}
                         />)
                     }),
                     loading: false,

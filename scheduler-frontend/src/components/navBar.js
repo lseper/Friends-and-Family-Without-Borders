@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import { withRouter } from "react-router";
 import { AiOutlineBars } from "react-icons/ai";
 
-
 import React from "react";
 
 const logout = () => {

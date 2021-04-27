@@ -109,12 +109,15 @@ const CreateEvent = () => {
     }, [locationInfo]);
 
     useEffect(() => {
+        console.log(locationInfo.length)
         for (let i = 0; i < locationInfo.length; i++) {
+            console.log("test");
             dropDownLocations.push({
                 "value": locationInfo[i].id,
                 "label": locationInfo[i].location.location_type + " " + locationInfo[i].activity.name
             });
         }
+        console.log(dropDownLocations.length)
     }, [locationInfo])
 
     useEffect(() => {
@@ -226,7 +229,7 @@ const CreateEvent = () => {
             .then(res => {
                 console.log("Correctly added location!")
                 console.log("test");
-                alert("Event has been created! View event on Created Events Page or stay to create another event")
+                alert("Event has been created! View event on created events page or stay to create another event!")
                 window.location.reload();
 
             }).catch(err => {
@@ -339,9 +342,13 @@ const CreateEvent = () => {
                     &nbsp;&nbsp;&nbsp;
                     {locationList.length > 0 ?
                         <div>
+                            <div>
                             {locationList}
+                            </div>
                         &nbsp;&nbsp;&nbsp;
-                        <DropDown handleCallback={callBackLocation} name="SELECT LOCATION AND ACTIVITY" data={dropDownLocations} border="bg-coolBlue" downlable={true} primaryColor='#98D2EB' />
+                        <div className = "pt-2">
+                            <DropDown handleCallback={callBackLocation} name="SELECT LOCATION AND ACTIVITY" data={dropDownLocations} border="bg-coolBlue" downlable={true} primaryColor='#98D2EB' />
+                        </div>
                         </div>
                         : null
                     }

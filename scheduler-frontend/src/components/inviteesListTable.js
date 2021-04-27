@@ -35,8 +35,6 @@ export default function InviteesListTable({ users }) {
         return allUsers;
     }
 
-    
-
     const rows = createData()
  
     return (

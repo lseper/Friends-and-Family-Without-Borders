@@ -9,7 +9,10 @@ import InviteesListTable from './inviteesListTable';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    border: '1px solid rgba(0, 0, 0, .125)',
+    boxShadow: 'none',
     width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, .03)',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),

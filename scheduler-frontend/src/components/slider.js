@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#BDE4A7"
+      main: "#8FD468"
     },
   },
 });

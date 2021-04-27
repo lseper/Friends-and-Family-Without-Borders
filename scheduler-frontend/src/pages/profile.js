@@ -14,7 +14,6 @@ export class Profile extends Component {
     super(props);
     this.state = {
       loading: true,
-      //preferredName: '',
       userName: '',
       password: '',
       email: '',
@@ -47,7 +46,6 @@ export class Profile extends Component {
       .then(res => {
         console.log(res.data);
         this.setState({
-          //preferredName: res.data.name,
           userName: res.data.username,
           email: res.data.email,
           publicInfo: res.data.privacy,
@@ -118,9 +116,9 @@ export class Profile extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleUsername} type="text" label="USERNAME" placeholder={this.state.userName}/>
+            <ShowText focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
             &nbsp;&nbsp;&nbsp;
-            <ShowText focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.handleUsername} type="text" label="USERNAME" placeholder={this.state.userName}/>
             &nbsp;&nbsp;&nbsp;
             <DropDown name="EVENT RESPONSES PRIVATE" 
               initalState={this.state.publicInfo} 
@@ -138,7 +136,7 @@ export class Profile extends Component {
               ]}  
               border="border-coolGreen"
               backgroundColor = "bg-coolGreen"
-              primaryColor = '#BDE4A7' />
+              primaryColor = '#8FD468' />
             <div onClick={this.buildPost} className="w-full">
               <Button name="Update" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
             </div>
