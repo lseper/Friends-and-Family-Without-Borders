@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export class loading extends Component {
+export class Loading extends Component {
 
     render() {
         return (
@@ -19,4 +19,4 @@ export class loading extends Component {
     }
 }
 
-export default loading
+export default Loading

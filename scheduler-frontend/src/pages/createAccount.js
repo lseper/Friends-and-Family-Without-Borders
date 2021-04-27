@@ -5,7 +5,7 @@ import Button from '../components/button';
 import InputTextForm from '../components/inputTextForm'
 import axios from 'axios';
 
-export class createAccount extends Component {
+export class CreateAccount extends Component {
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ export class createAccount extends Component {
       userName: '',
       password: '',
       email: '',
-      publicInfo: false,
+      publicInfo: true,
       errors: '',
     };
   }
@@ -43,11 +43,10 @@ export class createAccount extends Component {
         console.log("User id is for the sign in page:", localStorage['user_id']);
         this.props.history.push('/questionnaire');
       }).catch(err => {
-        console.log("We ran into an issue");
+        console.log("We ran into an issue with created an account");
         this.setState({
           errors: err.response.data.message
         })
-        
         console.log(err.response.data.message);
       })
     localStorage.setItem('filledOutQuestionnaire', false);
@@ -84,11 +83,11 @@ export class createAccount extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#BDE4A7' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
+            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
             <DropDown handleCallback={this.publicCallBack} 
               name="EVENT RESPONSES PRIVATE" 
@@ -104,7 +103,8 @@ export class createAccount extends Component {
               ]} 
               downlable={true}
               backgroundColor = "bg-coolGreen"
-              primaryColor = '#BDE4A7' />
+              primaryColor = '#8FD468'
+              initalState = {true} />
             {this.state.errors !== '' && (
               <span className="flex justify-evenly align-center text-center items-center font-medium tracking-wide text-red-400 text-xs mt-1 ml-1">
                 {this.state.errors}
@@ -123,9 +123,8 @@ export class createAccount extends Component {
           </div>
         </section>
       </div>
-
     )
   }
 }
 
-export default createAccount;
+export default CreateAccount;

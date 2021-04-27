@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventInvitationsButton from '../components/eventInvitationsButton';
+import EventInvitationsReport from '../components/eventInvitationsReport';
 import NavBar from '../components/navBar';
 import Alert from '../components/alert';
 import axios from 'axios';
@@ -7,11 +7,11 @@ import moment from "moment";
 import Loading from '../components/loading'
 
 
-const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id, activity, comfort, invitees }) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id, activity, comfort, invitees, maskRequired }) => {
     console.log(invitees);
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
-            <EventInvitationsButton
+            <EventInvitationsReport
                 name={name}
                 dateStringStart={dateStart}
                 dateStringEnd={dateEnd}
@@ -22,6 +22,7 @@ const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attend
                 invitationId = {id}
                 comfort = {comfort}
                 invitees = {invitees}
+                maskRequired = {maskRequired}
                 />
         </div>
     )
@@ -40,7 +41,7 @@ export class HomePage extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
 
         // if a user is not logged in, brings them to the login page
         if (!localStorage['user_id'] && !localStorage['authToken']) {
@@ -89,6 +90,7 @@ export class HomePage extends Component {
                             activity = {activity}
                             comfort = {event.comfort_level}
                             invitees = {event.invitees}
+                            maskRequired = {event.event_details.masks_required}
                         />)
                     }),
                     loading: false,
@@ -111,14 +113,6 @@ export class HomePage extends Component {
                     null
                 }
                 <NavBar />
-                {/* {this.state.showPopup ?
-        
-                <div>
-                    <Alert color="brightPink" message="Please first fill out a questionnaire!"/>
-
-                </div>
-                : null
-                } */}
                 {this.state.eventList.length === 0 ?
         
                     <div>

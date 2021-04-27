@@ -11,9 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import moment from "moment";
 
-
-
-
 export class PastQuestionnaires extends Component {
 
   constructor(props) {
@@ -24,7 +21,7 @@ export class PastQuestionnaires extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
 
     // if a user is not logged in, brings them to the login page
     if (!localStorage['user_id'] && !localStorage['authToken']) {
@@ -42,33 +39,28 @@ export class PastQuestionnaires extends Component {
         this.setState({
           rows: res.data.map((entry) => {
             return (
-            <TableRow key={entry.created_at}>
-              <TableCell component="th" scope="row">
-                {moment(entry.created_at).format("MMMM Do YYYY h:mm a")}
-              </TableCell>
-              <TableCell align="right">{entry.q1answer}</TableCell>
-              <TableCell align="right">{entry.q2answer}</TableCell>
-              <TableCell align="right">{entry.q3answer}</TableCell>
-              <TableCell align="right">{entry.q4answer}</TableCell>
-              <TableCell align="right">{entry.q5answer}</TableCell>
-              <TableCell align="right">{entry.q6answer}</TableCell>
-              <TableCell align="right">{entry.q7answer}</TableCell>
-              <TableCell align="right">{entry.q8answer}</TableCell>
-            </TableRow>)
-            }),
-        
+              <TableRow key={entry.created_at}>
+                <TableCell component="th" scope="row">
+                  {moment(entry.created_at).format("MMMM Do YYYY h:mm a")}
+                </TableCell>
+                <TableCell align="right">{entry.q1answer}</TableCell>
+                <TableCell align="right">{entry.q2answer}</TableCell>
+                <TableCell align="right">{entry.q3answer}</TableCell>
+                <TableCell align="right">{entry.q4answer}</TableCell>
+                <TableCell align="right">{entry.q5answer}</TableCell>
+                <TableCell align="right">{entry.q6answer}</TableCell>
+                <TableCell align="right">{entry.q7answer}</TableCell>
+                <TableCell align="right">{entry.q8answer}</TableCell>
+              </TableRow>)
+          }),
+
         })
       }).then(() => {
         console.log(this.state);
       }).catch(err => {
         console.log(err);
-        //this.setState({ loading: false })
       })
-
-
   }
-
-
 
   render() {
 
@@ -81,36 +73,34 @@ export class PastQuestionnaires extends Component {
         }
 
         <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-            <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Past Questionnaires</label>
-            <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Here you will find all of your previous submitted questionnaire answers</label>
+          <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Past Questionnaires</label>
+          <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Here you will find all of your previous submitted questionnaire answers</label>
         </div>
 
         <div className="px-6 mt-3 py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
-        <TableContainer component={Paper}>
-      <Table >
-        <TableHead>
-          <TableRow>
-            <TableCell> Questionnaire Date/Time</TableCell>
-            <TableCell align="right">Question 1</TableCell>
-            <TableCell align="right">Question 2</TableCell>
-            <TableCell align="right">Question 3</TableCell>
-            <TableCell align="right">Question 4</TableCell>
-            <TableCell align="right">Question 5</TableCell>
-            <TableCell align="right">Question 6</TableCell>
-            <TableCell align="right">Question 7</TableCell>
-            <TableCell align="right">Question 8</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {this.state.rows}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          <TableContainer component={Paper}>
+            <Table >
+              <TableHead>
+                <TableRow>
+                  <TableCell> Questionnaire Date/Time</TableCell>
+                  <TableCell align="right">Question 1</TableCell>
+                  <TableCell align="right">Question 2</TableCell>
+                  <TableCell align="right">Question 3</TableCell>
+                  <TableCell align="right">Question 4</TableCell>
+                  <TableCell align="right">Question 5</TableCell>
+                  <TableCell align="right">Question 6</TableCell>
+                  <TableCell align="right">Question 7</TableCell>
+                  <TableCell align="right">Question 8</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.state.rows}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
-        
-      </div>
 
-      
+      </div>
     )
   }
 }

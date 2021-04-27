@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders 1`] = `
-<CreatedEventsButton
+<EventInvitationReport
   attending={true}
   comfort={0.9}
   creator="John Doe"
@@ -16,6 +16,7 @@ exports[`renders 1`] = `
     }
   }
   location="Outdoors Golf"
+  maskRequired={false}
   name="Example"
 >
   <div
@@ -255,11 +256,9 @@ exports[`renders 1`] = `
             className="flex"
           >
             <h3
-              className="font-bold text-coolGrey-dark"
+              className="text-coolGrey-dark"
             >
-              April 30th 2021 5:30:00 pm
-               to 
-              April 30th 2021 7:30:00 pm
+              April 30th 2021 5:30:00 pm until 7:30:00 pm
             </h3>
           </div>
         </div>
@@ -319,17 +318,79 @@ exports[`renders 1`] = `
             className="flex"
           >
             <h3
-              className="font-bold text-coolGrey-dark pb-2"
+              className="ml-1 text-coolGrey-dark"
             >
               Outdoors Golf
             </h3>
           </div>
         </div>
+        <div
+          className="flex text-coolGrey-dark"
+        >
+          <FontAwesomeIcon
+            border={false}
+            className="inline fa-lg mr-2 "
+            fixedWidth={false}
+            flip={null}
+            icon={
+              Object {
+                "icon": Array [
+                  512,
+                  512,
+                  Array [],
+                  "e063",
+                  "M.15,184.42C-2.17,244.21,23,298.06,64,334.88V512H224V316.51L3.67,156.25A182.28,182.28,0,0,0,.15,184.42ZM509.22,275c-21-47.12-48.5-151.75-73.12-186.75A208.11,208.11,0,0,0,266.11,0H200C117,0,42.48,50.57,13.25,123.65L239.21,288H511.76A31.35,31.35,0,0,0,509.22,275ZM320,224a32,32,0,1,1,32-32A32.07,32.07,0,0,1,320,224Zm16,144H496l16-48H256V512H401.88a64,64,0,0,0,60.71-43.76L464,464H336a16,16,0,0,1,0-32H474.67l10.67-32H336a16,16,0,0,1,0-32Z",
+                ],
+                "iconName": "head-side-mask",
+                "prefix": "fas",
+              }
+            }
+            inverse={false}
+            listItem={false}
+            mask={null}
+            pull={null}
+            pulse={false}
+            rotation={null}
+            size={null}
+            spin={false}
+            swapOpacity={false}
+            symbol={false}
+            title=""
+            transform={null}
+          >
+            <svg
+              aria-hidden="true"
+              className="svg-inline--fa fa-head-side-mask fa-w-16 inline fa-lg mr-2 "
+              data-icon="head-side-mask"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              style={Object {}}
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M.15,184.42C-2.17,244.21,23,298.06,64,334.88V512H224V316.51L3.67,156.25A182.28,182.28,0,0,0,.15,184.42ZM509.22,275c-21-47.12-48.5-151.75-73.12-186.75A208.11,208.11,0,0,0,266.11,0H200C117,0,42.48,50.57,13.25,123.65L239.21,288H511.76A31.35,31.35,0,0,0,509.22,275ZM320,224a32,32,0,1,1,32-32A32.07,32.07,0,0,1,320,224Zm16,144H496l16-48H256V512H401.88a64,64,0,0,0,60.71-43.76L464,464H336a16,16,0,0,1,0-32H474.67l10.67-32H336a16,16,0,0,1,0-32Z"
+                fill="currentColor"
+                style={Object {}}
+              />
+            </svg>
+          </FontAwesomeIcon>
+          <div
+            className="flex"
+          >
+            <h3
+              className="text-coolGrey-dark pb-2"
+            >
+              Masks are NOT Required
+            </h3>
+          </div>
+        </div>
       </div>
       <div
-        className="flex w-full pb-4"
+        className="flex w-full pb-4 border-1"
       >
-        <ControlledAccordions
+        <ControlledAccordion
           invitees={
             Object {
               "id": 3,
@@ -789,7 +850,7 @@ exports[`renders 1`] = `
                                                 <div
                                                   className="md:w-full"
                                                 >
-                                                  <BasicTable
+                                                  <InviteesListTable
                                                     users={
                                                       Object {
                                                         "invitees": Object {
@@ -1649,7 +1710,7 @@ exports[`renders 1`] = `
                                                         </WithStyles(ForwardRef(Paper))>
                                                       </ForwardRef(TableContainer)>
                                                     </WithStyles(ForwardRef(TableContainer))>
-                                                  </BasicTable>
+                                                  </InviteesListTable>
                                                 </div>
                                               </span>
                                             </ForwardRef(Typography)>
@@ -1670,7 +1731,7 @@ exports[`renders 1`] = `
               </ForwardRef(Accordion)>
             </WithStyles(ForwardRef(Accordion))>
           </div>
-        </ControlledAccordions>
+        </ControlledAccordion>
       </div>
       <div
         className="flex w-full text-brightPink py-2"
@@ -1797,5 +1858,5 @@ exports[`renders 1`] = `
       </div>
     </div>
   </div>
-</CreatedEventsButton>
+</EventInvitationReport>
 `;

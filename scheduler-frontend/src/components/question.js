@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Slider from '../components/slider';
 
-export class question extends Component {
+export class Question extends Component {
 
   handleCallback = (sliderData) => {
     this.props.totalCallBack(sliderData, this.props.qNum);
   }
 
   render() {
-
     return (
       <div className="flex flex-grow align-start items-start py-4 px-5 w-full md:w-3/4" >
         <form action="" className="flex flex-grow grid grid-cols-1 justify-start align-left items-left bg-white border-2 rounded px-8 py-8 pt-8 container bg-white">
@@ -24,4 +23,4 @@ export class question extends Component {
   }
 }
 
-export default question;
+export default Question;
