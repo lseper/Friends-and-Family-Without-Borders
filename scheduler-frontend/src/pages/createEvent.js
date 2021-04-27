@@ -229,6 +229,7 @@ const CreateEvent = () => {
             .then(res => {
                 console.log("Correctly added location!")
                 console.log("test");
+                setNoLocation(false);
                 alert("Event has been created! View event on created events page or stay to create another event!")
                 window.location.reload();
 
@@ -292,7 +293,6 @@ const CreateEvent = () => {
 
     const callBackLocation = (event) => {
         setLocation(event)
-        setNoLocation(false);
         setShowAddLocationButton(true);
     }
 
