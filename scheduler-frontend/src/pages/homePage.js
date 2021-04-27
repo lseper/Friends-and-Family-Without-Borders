@@ -7,7 +7,7 @@ import moment from "moment";
 import Loading from '../components/loading'
 
 
-const EventCard = ({ name, dateStart, dateEnd, location, details,creator, attending, id, activity, comfort, invitees, maskRequired }) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details, creator, attending, id, activity, comfort, invitees, maskRequired }) => {
     console.log(invitees);
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
@@ -68,14 +68,19 @@ export class HomePage extends Component {
                     eventList: res.data.map(event => {
 
                         let location = "";
-                        let activity = ""
+                        let activity = "";
+                        let comfort = "";
+
                         if(event.location == null){
                             location = "No Location Specified";
                             activity = "or Activity"
-                        }else {
+                            comfort = "N/A"
+                        } else {
                             location = event.location.location_type;
                             activity = event.activity.name
+                            comfort = event.comfort_level;
                         }
+                        console.log(comfort)
 
                         return (<EventCard
                             name={event.event_details.name}
@@ -88,7 +93,7 @@ export class HomePage extends Component {
                             attending = {event.confirmed}
                             id = {event.id}
                             activity = {activity}
-                            comfort = {event.comfort_level}
+                            comfort = {comfort}
                             invitees = {event.invitees}
                             maskRequired = {event.event_details.masks_required}
                         />)
@@ -124,7 +129,7 @@ export class HomePage extends Component {
                     <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
                         <div className="px-1 mt-3">
                             <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Event Invitations</label>
-                            <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark">Accept or decline your invitations</label>
+                            <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark">Accept or decline your invitations (100% is most comfortable)</label>
                         </div>
                     </section>
                     <div>

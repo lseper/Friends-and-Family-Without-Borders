@@ -189,7 +189,7 @@ export class Questionnaire extends Component {
           <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Questionnaire</label>
           <label htmlFor="title" className="text-lg text-left block text-coolGrey-dark mb-4">Rate your comfort for the following scenarios (10 is most comfortable)</label>
           <NavLink to="/pastQuestionnaires">
-            <button className=" bg-coolGreen py-1 px-5 text-left rounded hover:bg-coolGreen-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> Past Questionnaires</button>
+            <button className=" bg-coolGreen py-1 px-5 text-left rounded hover:bg-coolGreen-dark hover:shadow-md font-bold text-white focus:outline-none focus:shadow-outline shadow-xl "> PAST QUESTIONNAIRES</button>
           </NavLink>
         </div>
         <div className="flex grid grid-cols-1 md:grid-cols-1 flex-grow py-1">
@@ -207,7 +207,7 @@ export class Questionnaire extends Component {
           <div className="px-6 pb-4">
             <NavLink to="/homePage" onClick={this.buildPost}>
               {/* <div className="px-5 pb-4" onClick={this.buildPost}> */}
-              <Button name="Submit Questionnaire Responses" bgColor="bg-coolGreen" hoverColor="bg-coolGreen-dark" />
+              <Button name="SUBMIT RESPONSES" bgColor="bg-coolGreen" hoverColor="bg-coolGreen-dark" />
               {/* </div> */}
             </NavLink>
           </div>
