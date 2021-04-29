@@ -8,7 +8,6 @@ import Loading from '../components/loading'
 
 
 const EventCard = ({ name, dateStart, dateEnd, location, details, creator, attending, id, activity, comfort, invitees, maskRequired }) => {
-    console.log(invitees);
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <EventInvitationsReport
@@ -33,9 +32,7 @@ export class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPopup: false,
             needFriends: true,
-            loading: true,
             eventList: [], 
             loading: true
         };
@@ -48,13 +45,6 @@ export class HomePage extends Component {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
         }
-        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
-        if (needPopup) {
-            this.setState({ showPopup: true })
-        }
-        else {
-            this.setState({ showPopup: false })
-        }
 
         const authorization = localStorage.getItem('authToken');
         axios.get(`/users/${localStorage['user_id']}/invitations`, {
@@ -63,14 +53,16 @@ export class HomePage extends Component {
             }
         })
             .then(res => {
-                console.log(res);
                 this.setState({
+                    // loop through each event invitation returned from the backend
                     eventList: res.data.map(event => {
 
+                        // handle if location and activity are null 
                         let location = "";
                         let activity = "";
                         let comfort = "";
 
+                        // if location is null then activity, comfort, and numComfort are not applicable for the user 
                         if(event.location == null){
                             location = "No Location Specified";
                             activity = "or Activity"
@@ -80,8 +72,8 @@ export class HomePage extends Component {
                             activity = event.activity.name
                             comfort = event.comfort_level;
                         }
-                        console.log(comfort)
 
+                        // pass to event report component 
                         return (<EventCard
                             name={event.event_details.name}
                             dateStart={moment(event.event_details.start_time).format("MMMM Do YYYY h:mm:ss a")}
@@ -107,8 +99,6 @@ export class HomePage extends Component {
                 this.setState({ loading: false })
             })
     }
-
-
 
     render() {
         return (

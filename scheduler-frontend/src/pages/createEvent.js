@@ -75,6 +75,9 @@ const CreateEvent = () => {
     // for loading
     const [loading, setLoading] = useState(false);
 
+    // 
+    const [isDisabled, setIsDisabled] = useState(false);
+
     useEffect(() => {
         if (allUsers.length === 0) {
             axios.get('/users').then(res => {
@@ -110,26 +113,22 @@ const CreateEvent = () => {
             }
             )
         )
-    }, [locationInfo]);
+    }, [locationInfo, invitees, priorities]);
 
     useEffect(() => {
-        console.log(locationInfo.length)
         for (let i = 0; i < locationInfo.length; i++) {
-            console.log("test");
             dropDownLocations.push({
                 "value": locationInfo[i].id,
                 "label": locationInfo[i].location.location_type + " " + locationInfo[i].activity.name
             });
         }
-        console.log(dropDownLocations.length)
-    }, [locationInfo])
+    }, [locationInfo, dropDownLocations])
 
     useEffect(() => {
         setShowError(<SetErrors error={error} />)
     }, [error]);
 
     function buildPost() {
-        console.log(mask)
         let eventInfo = {
             name: name,
             description: details,
@@ -145,7 +144,6 @@ const CreateEvent = () => {
                 'Authorization': authorization
             }
         }).then(res => {
-            console.log(res)
             eventId = res.data.id;
             setEventId(eventId);
             addInvitees(eventId);
@@ -203,7 +201,6 @@ const CreateEvent = () => {
         })
             .then(res => {
                 console.log("You correctly added invitees!")
-                console.log(res.data.pairs);
                 setLocationInfo(res.data.pairs);
                 setFirst(res.data.pairs[0]);
                 setSecond(res.data.pairs[1]);
@@ -211,6 +208,7 @@ const CreateEvent = () => {
                 setFourth(res.data.pairs[3]);
                 setFifth(res.data.pairs[4]);
                 setError(undefined);
+                setIsDisabled(true);
             }).catch(err => {
                 console.log("There was an error with adding invitees!")
                 console.log(err.response.data);
@@ -232,7 +230,6 @@ const CreateEvent = () => {
         })
             .then(res => {
                 console.log("Correctly added location!")
-                console.log("test");
                 setNoLocation(false);
                 setLoading(false);
                 window.location.reload();
@@ -319,13 +316,13 @@ const CreateEvent = () => {
             </section>
             <section className="flex flex-grow align-start items-start pt-4 px-5 md:w-5/6 w-full">
                 <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-                    <InputTextForm focusRing='coolBlue' color='#98D2EB' handleCallBack={handleName} type="text" label="EVENT NAME" placeholder="example" />
+                    <InputTextForm focusRing='coolBlue' color='#98D2EB' handleCallBack={handleName} type="text" label="EVENT NAME" placeholder="example" isDisabled={isDisabled} />
                     &nbsp;&nbsp;&nbsp;
-                    <InputTextForm focusRing='coolBlue' color='#98D2EB' handleCallBack={handleDetails} type="text" label="EVENT DESCRIPTION" placeholder="example" />
+                    <InputTextForm focusRing='coolBlue' color='#98D2EB' handleCallBack={handleDetails} type="text" label="EVENT DESCRIPTION" placeholder="example" isDisabled={isDisabled} />
                     &nbsp;&nbsp;&nbsp;
-                    <DateSelect handleCallback={handleStartDate} label="EVENT START" />
+                    <DateSelect isDisabled={isDisabled} handleCallback={handleStartDate} label="EVENT START" />
                     &nbsp;&nbsp;&nbsp;
-                    <DateSelect handleCallback={handleEndDate} label="EVENT END" />
+                    <DateSelect isDisabled={isDisabled} handleCallback={handleEndDate} label="EVENT END" />
                     &nbsp;&nbsp;&nbsp;
                     <DropDown handleCallback={handleMask}
                         name="MASKS REQUIRED"
@@ -342,11 +339,12 @@ const CreateEvent = () => {
                         border="bg-coolBlue"
                         downlable={true}
                         primaryColor='#98D2EB'
-                        initalState={false} />
+                        initalState={false} 
+                        isDisabled = {isDisabled}/>
                     &nbsp;&nbsp;&nbsp;
-                    <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={allUsers} />
+                    <SearchSelect handleCallback={handleSelectChange} label="SEARCH AND ADD INVITEES" data={allUsers} isDisabled = {isDisabled} />
                     &nbsp;&nbsp;&nbsp;
-                    <SearchSelect handleCallback={handlePrioritiesChange} label="SET REQUIRED INVITEES" data={invitees} />
+                    <SearchSelect handleCallback={handlePrioritiesChange} label="SET REQUIRED INVITEES" data={invitees} isDisabled = {isDisabled}  />
                     &nbsp;&nbsp;&nbsp;
                     {locationList.length > 0 ?
                         <div>
@@ -366,9 +364,7 @@ const CreateEvent = () => {
             <div className="flex items-left justify-start rounded-b py-4">
                 <section className="w-full flex justify-start align-bottom items-left bg-grey-500 pb-4 px-5">
                     {showAddLocationButton ?
-                        <div
-                            onClick={addEventLocation}
-                        >
+                        <div onClick={addEventLocation}>
                             <Button name="Create Event With Location" bgColor="bg-coolBlue" type="text" />
                         </div> :
                         <button

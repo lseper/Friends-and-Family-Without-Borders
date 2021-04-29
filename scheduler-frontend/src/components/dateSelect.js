@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const DateSelect = ({ handleCallback, label }) => {
+const DateSelect = ({ handleCallback, label, isDisabled }) => {
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -25,6 +25,7 @@ const DateSelect = ({ handleCallback, label }) => {
                         onChange={date => handleDate(date)}
                         showTimeSelect
                         dateFormat="Pp"
+                        readOnly = {isDisabled}
                         minDate={new Date()} />
                     <hr
                         style={{

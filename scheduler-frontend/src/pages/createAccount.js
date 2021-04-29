@@ -28,7 +28,6 @@ export class CreateAccount extends Component {
       email: this.state.email,
       privacy: this.state.publicInfo
     }
-    console.log(accountInformation);
 
     axios.post('/users', accountInformation)
       .then(res => {
@@ -39,8 +38,6 @@ export class CreateAccount extends Component {
         localStorage.setItem('user_id', userId)
         axios.defaults.headers.common['Authorization'] = authorization;
         console.log("We have successfully signed up!");
-        console.log("Authorization token is for the sign in page:", localStorage['authToken']);
-        console.log("User id is for the sign in page:", localStorage['user_id']);
         this.props.history.push('/questionnaire');
       }).catch(err => {
         console.log("We ran into an issue with created an account");
@@ -83,11 +80,11 @@ export class CreateAccount extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+            <InputTextForm isDisabled={false} focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
+            <InputTextForm isDisabled={false} focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD (requires 6-10 characters)" placeholder="examplePassword" />
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
+            <InputTextForm isDisabled={false} focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.emailCallBack} type="email" label="EMAIL" placeholder="example@gmail.com" />
             &nbsp;&nbsp;&nbsp;
             <DropDown handleCallback={this.publicCallBack} 
               name="EVENT RESPONSES PRIVATE" 

@@ -30,10 +30,7 @@ export class PastQuestionnaires extends Component {
     }
 
     const token = localStorage.getItem("authToken").toString();
-    console.log("User token on questionnaire page: ", token);
     axios.defaults.headers.common['Authorization'] = token;
-
-    console.log("User id on past questionnaire page: ", localStorage['user_id']);
     axios.get(`/users/${localStorage['user_id']}/questionnaires`)
       .then(res => {
         this.setState({

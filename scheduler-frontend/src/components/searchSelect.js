@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const SearchSelect = ({ handleCallback, label, data }) => {
+const SearchSelect = ({ handleCallback, label, data, isDisabled }) => {
 
     const handleSelectChange = (event) => {
         handleCallback(event);
@@ -16,6 +16,7 @@ const SearchSelect = ({ handleCallback, label, data }) => {
                 onChange={(newValue) => handleSelectChange(newValue)}
                 className="basic-multi-select"
                 classNamePrefix="select"
+                isDisabled = {isDisabled}
                 theme={theme => ({
                     ...theme,
                     borderRadius: 0,

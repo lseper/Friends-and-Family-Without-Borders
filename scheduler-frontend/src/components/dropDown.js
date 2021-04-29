@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-const DropDown = ({ name, data, handleCallback, initalState, border, downlable, backgroundColor, primaryColor }) => {
+const DropDown = ({ name, data, handleCallback, initalState, border, downlable, backgroundColor, primaryColor, isDisabled }) => {
 
   let initalValue;
   if (initalState !== undefined){
@@ -28,6 +28,7 @@ const DropDown = ({ name, data, handleCallback, initalState, border, downlable, 
         onChange={handleChange}
         value={data.find(obj => obj.value === selectedValue.value)}
         defaultValue={selectedValue}
+        isDisabled = {isDisabled}
         theme={theme => ({
           ...theme,
           borderRadius: 0,
