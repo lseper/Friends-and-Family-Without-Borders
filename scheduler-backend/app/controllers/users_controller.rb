@@ -67,7 +67,7 @@ class UsersController < ApplicationController
         token = encode( { user_id: @user.id } )
         render json: { auth_token: token, user_id: @user.id }
       else
-        render json: { message: "Please make sure to send a username, password (between 6 - 10 characters), email, and privacy setting (true or false)!"}, status: :unprocessable_entity
+        render json: { message: "Please make sure to send a username, password (between 6 - 20 characters, using at least 1: lowercase letter, uppercase letter, symbol, and number), email, and privacy setting (true or false)!"}, status: :unprocessable_entity
       end
     end
   end
