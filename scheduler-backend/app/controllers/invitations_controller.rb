@@ -11,7 +11,6 @@ class InvitationsController < ApplicationController
     @invitations = User.find(params[:user_id]).invitations.future
     invited_events = []
     for invitation in @invitations
-        # TODO: filter invitations to only return ones that have NOT already happened yet
         invited_events.append(extract_invitation_info(invitation))
     end
     render json: invited_events

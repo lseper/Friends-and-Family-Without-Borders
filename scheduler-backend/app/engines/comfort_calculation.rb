@@ -1,4 +1,3 @@
-# TODO: Move comfort score calculation into here, so that it isn't just tacked onto the base ApplicationController
 module ComfortCalculation
     THRESHOLD = 0.8
     DENOM = (9/0.175)
@@ -84,11 +83,9 @@ module ComfortCalculation
     end
 
     def calc_comfort_scores_for_all_invitees(invitees, event)
-        # TODO: Need to only have people that have filled out questionnaires be able to be invited!
         # get all pairs
         pairs = LocationActivitySuggestion.all
         pairs = setup_pairs(pairs)
-        # TODO: match each user up with each potential pairing
         for invitee in invitees
             # how comfortable are you with the number of attendees at the event?
             num_attendees_score = calc_num_attendees_score(invitees.length, invitee)
@@ -104,14 +101,7 @@ module ComfortCalculation
                 # see if this invitee is comfortable enough to attend this event
 
                 determine_attendance(pair, invitee, total_suggestion_comfort)
-                # if total_suggestion_comfort >= THRESHOLD
-                #     if invitee[:priority]
-                #         pair[:priority_passed] += 1
-                #     else
-                #         pair[:others_passed] += 1
-                #     end
-                # end
-                # update the overall average comfort metric for this location-activity pair
+
                 pair[:average_comfort] += (total_suggestion_comfort / invitees.length)
 
             end
@@ -135,7 +125,7 @@ module ComfortCalculation
     def update_invitee_scores(event, pair, invitees)
         for invitee in invitees
             invitee_info = setup_invitee(invitee)
-            # re-calculating comfort scores for now. Could potentially refactor and have these sent from front-end(?)
+            # re-calculating comfort scores for chosen event
             num_attendees_score = calc_num_attendees_score(invitees.length, invitee_info)
             masks_req_score = calc_mask_score(event[:masks_required], invitee_info)
             pair_score = calc_pair_scores(pair, invitee_info)
