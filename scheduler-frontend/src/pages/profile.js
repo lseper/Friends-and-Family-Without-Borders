@@ -107,9 +107,9 @@ export class Profile extends Component {
           }
         <section className="App py-5 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
           <div className="px-1">
-            <label htmlFor="title" className="text-3xl text-left block font-bold pb-2 text-coolGrey-dark"> Your Profile</label>
+            <label htmlFor="title" className="text-3xl text-left block font-bold pt-2 text-coolGrey-dark"> Your Profile</label>
             <div className="flex">
-              <label htmlFor="title" className="text-lg text-left block pb-2 pt-1 text-coolGrey-dark border-coolGrey"> View and Update Information</label>
+              <label htmlFor="title" className="text-lg text-left block pb-2 text-coolGrey-dark border-coolGrey"> View and Update Information</label>
             </div>
           </div>
 
@@ -138,7 +138,7 @@ export class Profile extends Component {
               backgroundColor = "bg-coolGreen"
               primaryColor = '#8FD468' />
             <div onClick={this.buildPost} className="w-full">
-              <Button name="Update" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
+              <Button name="UPDATE" bgColor="bg-coolGreen" hoverColor = "bg-coolGreen-dark"/>
             </div>
           </form>
         </section>

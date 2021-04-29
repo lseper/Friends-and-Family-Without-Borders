@@ -9,6 +9,7 @@ import Button from '../components/button';
 import LocationSuggestion from '../components/locationSuggestions';
 import DropDown from '../components/dropDown';
 import { Prompt } from 'react-router'
+import Loading from '../components/loading'
 
 const SetErrors = ({ error }) => {
     return (
@@ -70,6 +71,9 @@ const CreateEvent = () => {
     // for error messages
     const [error, setError] = useState();
     const [showError, setShowError] = useState([]);
+
+    // for loading
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (allUsers.length === 0) {
@@ -215,7 +219,7 @@ const CreateEvent = () => {
     }
 
     function addEventLocation() {
-
+        setLoading(true)
         const locationFinal = {
             pair: determineLocation()
         }
@@ -230,7 +234,7 @@ const CreateEvent = () => {
                 console.log("Correctly added location!")
                 console.log("test");
                 setNoLocation(false);
-                alert("Event has been created! View event on created events page or stay to create another event!")
+                setLoading(false);
                 window.location.reload();
 
             }).catch(err => {
@@ -298,6 +302,10 @@ const CreateEvent = () => {
 
     return (
         <div>
+            {loading ?
+                    <Loading /> :
+                    null
+            }
             <Prompt
                 when={noLocation && createdEvent}
                 message={location => `You have not added a location to your event. Are you sure you want to make an event without a location?`}
@@ -306,7 +314,7 @@ const CreateEvent = () => {
             <section className="App pt-8 px-5 grid grid-cols-1 w-full flex justify-start items-coolGrey-dark md:w-5/6">
                 <div className="px-1">
                     <label htmlFor="title" className="text-3xl text-left block font-bold text-coolGrey-dark"> Create Event</label>
-                    <label htmlFor="title" className="text-lg text-left block pb-2 text-coolGrey-dark"> Fill out the following information</label>
+                    <label htmlFor="title" className="text-lg text-left block pb-2 text-coolGrey-dark"> Fill out the following information (100% is most comfortable)</label>
                 </div>
             </section>
             <section className="flex flex-grow align-start items-start pt-4 px-5 md:w-5/6 w-full">

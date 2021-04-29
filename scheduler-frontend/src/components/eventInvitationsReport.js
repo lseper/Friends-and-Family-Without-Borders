@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import ControlledAccordion from './controlledAccordion';
+import Loading from '../components/loading'
 
 export class EventInvitationReport extends Component {
 
@@ -19,7 +20,8 @@ export class EventInvitationReport extends Component {
       dateStringEnd: '',
       location: '',
       organizer: '',
-      attending: this.props.attending
+      attending: this.props.attending,
+      loading: false
     };
   }
 
@@ -49,7 +51,7 @@ export class EventInvitationReport extends Component {
 
   updateAttendance = (status) => {
     console.log(this.state.attending)
-    this.setState({ attending: status });
+    this.setState({ attending: status, loading: true });
 
     let info = {
       'confirmed': status
@@ -64,6 +66,7 @@ export class EventInvitationReport extends Component {
       .then(res => {
         console.log("Correctly updated attendance!")
         window.location.reload();
+        this.setState({ loading: false });
       }).catch(err => {
         console.log("There was an error with updating attendance!")
         console.log(err.response.data);
@@ -71,83 +74,95 @@ export class EventInvitationReport extends Component {
   }
 
   convertToPercentage = (num) => {
-    return (Math.floor((num) * 100));
+    if (num == "N/A") {
+      return "N/A"
+    } else {
+      return (Math.floor((num) * 100));
+    }
   }
 
   render() {
 
     return (
-      <div className="flex flex-grow align-start items-start  px-5 w-full md:w-3/4" >
-        <div className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 container bg-white" >
-          <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white w-full">
-            <div className="text-sm font-bold text-coolGrey-dark">{this.props.creator} invites you to:</div>
-            <div className="flex py-2">
-              <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
-              <div className="px-5 flex">
-                <div className="flex alight-right items-right pb-2" style={{ width: 70, height: 70 }}>
-                  <CircularProgressbar value={this.convertToPercentage(this.props.comfort)} text={`${this.convertToPercentage(this.props.comfort)}%`}
-                    styles={buildStyles({
-                      // Text size
-                      textSize: '24px',
+      <div>
+        <div>
+          {this.state.loading ?
+            <Loading /> :
+            null
+          }
+        </div>
+        <div className="flex flex-grow align-start items-start  px-5 w-full md:w-3/4" >
+          <div className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 container bg-white" >
+            <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white w-full">
+              <div className="text-sm font-bold text-coolGrey-dark">{this.props.creator} invites you to:</div>
+              <div className="flex py-2">
+                <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
+                <div className="px-5 flex">
+                  <div className="flex alight-right items-right pb-2" style={{ width: 70, height: 70 }}>
+                    <CircularProgressbar value={this.convertToPercentage(this.props.comfort)} text={`${this.convertToPercentage(this.props.comfort)}%`}
+                      styles={buildStyles({
+                        // Text size
+                        textSize: '24px',
 
-                      // Colors
-                      pathColor: '#CB4335',
-                      textColor: '#CB4335',
-                      trailColor: '#CD8B76',
-                      backgroundColor: '#3e98c7',
-                    })} />
+                        // Colors
+                        pathColor: '#CB4335',
+                        textColor: '#CB4335',
+                        trailColor: '#CD8B76',
+                        backgroundColor: '#3e98c7',
+                      })} />
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-sm text-coolGrey-dark pb-2">{this.props.details}</h3>
+              <div className="flex content-center pb-4">
+                <hr className="text-center"
+                  style={{
+                    color: '#CD8B76',
+                    backgroundColor: '#CD8B76',
+                    height: 5,
+                    width: 125
+                  }}
+                />
+              </div>
+              <div className="flex text-coolGrey-dark">
+                <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
+                <div className="flex">
+                  {/* <h3 className="font-bold text-coolGrey-dark">{this.props.dateStringStart} to {this.props.dateStringEnd}</h3> */}
+                  <h3 className="text-coolGrey-dark">{this.getDate(this.props.dateStringStart, this.props.dateStringEnd)}</h3>
+                </div>
+              </div>
+              <div className="flex text-coolGrey-dark">
+                <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faMapMarkerAlt} />
+                <div className="flex">
+                  <h3 className="ml-1 text-coolGrey-dark">{this.props.location}</h3>
+                </div>
+              </div>
+              <div className="flex text-coolGrey-dark">
+                <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faHeadSideMask} />
+                <div className="flex">
+                  <h3 className="text-coolGrey-dark pb-2">{this.getMaskRequirements(this.props.maskRequired)}</h3>
                 </div>
               </div>
             </div>
-
-            <h3 className="text-sm text-coolGrey-dark pb-2">{this.props.details}</h3>
-            <div className="flex content-center pb-4">
-              <hr className="text-center"
-                style={{
-                  color: '#CD8B76',
-                  backgroundColor: '#CD8B76',
-                  height: 5,
-                  width: 125
-                }}
-              />
+            <div className="flex w-full pb-4 border-1">
+              <ControlledAccordion numComfort={-1} invitees={this.props.invitees} />
             </div>
-            <div className="flex text-coolGrey-dark">
-              <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
-              <div className="flex">
-                {/* <h3 className="font-bold text-coolGrey-dark">{this.props.dateStringStart} to {this.props.dateStringEnd}</h3> */}
-                <h3 className="text-coolGrey-dark">{this.getDate(this.props.dateStringStart, this.props.dateStringEnd)}</h3>
-              </div>
-            </div>
-            <div className="flex text-coolGrey-dark">
-              <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faMapMarkerAlt} />
-              <div className="flex">
-                <h3 className="ml-1 text-coolGrey-dark">{this.props.location}</h3>
-              </div>
-            </div>
-            <div className="flex text-coolGrey-dark">
-              <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faHeadSideMask} />
-              <div className="flex">
-                <h3 className="text-coolGrey-dark pb-2">{this.getMaskRequirements(this.props.maskRequired)}</h3>
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full pb-4 border-1">
-            <ControlledAccordion numComfort={-1} invitees={this.props.invitees} />
-          </div>
-          <div className="flex w-full text-brightPink py-2">
-            <button onClick={() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
-              <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
-            </button>
-            <div className="px-5 flex ">
-              <button onClick={() => this.updateAttendance(false)} className="focus:outline-none hover:text-brightPink-dark">
-                <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faTimesCircle} />
+            <div className="flex w-full text-brightPink py-2">
+              <button onClick={() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
+                <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
               </button>
-            </div>
-            <div className="flex text-coolGrey-dark text-bold pt-1">
-              {!this.state.attending ?
-                <div>Not Going</div> :
-                <div>Going</div>
-              }
+              <div className="px-5 flex ">
+                <button onClick={() => this.updateAttendance(false)} className="focus:outline-none hover:text-brightPink-dark">
+                  <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faTimesCircle} />
+                </button>
+              </div>
+              <div className="flex text-coolGrey-dark text-bold pt-1">
+                {!this.state.attending ?
+                  <div>Not Going</div> :
+                  <div>Going</div>
+                }
+              </div>
             </div>
           </div>
         </div>
