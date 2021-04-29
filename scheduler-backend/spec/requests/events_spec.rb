@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "events requests", type: :request do
   before(:context) do 
-    post '/login', params: { username: "testuser", password: "password" }
+    post '/login', params: { username: "testuser", password: "Password@2021" }
     # token for user_id = 1
     @token = JSON.parse(response.body)["auth_token"]
   end
@@ -69,7 +69,7 @@ RSpec.describe "events requests", type: :request do
 
   describe "PUT #update" do
     it "is unauthorized when the user tries to update an event they are not the owner of" do
-      post '/login', params: { username: "billbob", password: "billbob" }
+      post '/login', params: { username: "billbob", password: "BillBob@2021" }
       # token for user_id = 2
       false_token = JSON.parse(response.body)["auth_token"]
       put '/events/2', headers: {'Authorization' => 'Bearer ' + false_token}
@@ -100,7 +100,7 @@ RSpec.describe "events requests", type: :request do
     end
 
     it "is authorized when the user requesting the events for themself" do
-      post '/login', params: {username: "testuser", password: "password"}
+      post '/login', params: {username: "testuser", password: "Password@2021"}
       @token = JSON.parse(response.body)["auth_token"]
       put '/events/1', params: { pair: {
         id: 1,

@@ -12,7 +12,7 @@ RSpec.describe "users requests", type: :request do
     end
 
     before(:context) do
-        post '/login', params: { username: "testuser", password: "password" }
+        post '/login', params: { username: "testuser", password: "Password@2021" }
         # token for user_id = 1
         @token = JSON.parse(response.body)["auth_token"]
     end
@@ -36,7 +36,7 @@ RSpec.describe "users requests", type: :request do
     end
 
     before(:context) do 
-        post '/login', params: { username: "testuser", password: "password" }
+        post '/login', params: { username: "testuser", password: "Password@2021" }
         # token for user_id = 1
         @token = JSON.parse(response.body)["auth_token"]
     end
@@ -61,7 +61,7 @@ RSpec.describe "users requests", type: :request do
         it "creates the user successfully when valid data is passed in" do
             post '/users', params: {
                 username: "benjammin",
-                password:"password",
+                password:"Password@2021",
                 privacy: false,
                 email: "ben@gmail.com"
             }

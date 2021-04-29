@@ -27,10 +27,11 @@ LocationActivitySuggestion.create( location_id: 4, activity_id: 3 )
 
 
 # create all users for testing
-User.create( username: "testuser", password: "password", password_confirmation: "password", name: "Test User", email: "testuser@gmail.com", privacy: true )
-User.create( username: "billbob", password: "billbob", password_confirmation: "billbob", name: "Bill Bob", email: "billbob@gmail.com", privacy: true )
-User.create( username: "janedoe", password: "janedoe", password_confirmation: "janedoe", name: "Jane Doe", email: "janedoe@gmail.com", privacy: true )
+User.create( username: "testuser", password: "Password@2021", password_confirmation: "Password@2021", name: "Test User", email: "testuser@gmail.com", privacy: true )
+User.create( username: "billbob", password: "BillBob@2021", password_confirmation: "BillBob@2021", name: "Bill Bob", email: "billbob@gmail.com", privacy: true )
+User.create( username: "janedoe", password: "JaneDoe@2021", password_confirmation: "JaneDoe@2021", name: "Jane Doe", email: "janedoe@gmail.com", privacy: true )
 
+puts User.all
 # create all events for testing
 Event.create( name: "test event 1", description: "for testing event 1", start_time: "2000-04-06 12:00:00", ending_at: "2000-04-06 13:00:00", user_id: 1, masks_required: true)
 Event.create( name: "test event 2", description: "for testing event 2", start_time: "2040-04-06 13:00:00", ending_at: "2040-04-06 14:00:00", user_id: 1, masks_required: false)

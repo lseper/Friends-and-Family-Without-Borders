@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "invitation requests", type: :request do
   before(:context) do 
-    post '/login', params: { username: "billbob", password: "billbob" }
+    post '/login', params: { username: "billbob", password: "BillBob@2021" }
     # token for user_id = 2
     @token = JSON.parse(response.body)["auth_token"]
   end
@@ -18,7 +18,7 @@ RSpec.describe "invitation requests", type: :request do
   end
 
   before(:context) do
-    post '/login', params: {username: "billbob", password: "billbob"}
+    post '/login', params: {username: "billbob", password: "BillBob@2021"}
     # token for user_id = 2
     @token = JSON.parse(response.body)["auth_token"]
     get '/users/2/invitations', headers: {'Authorization' => 'Bearer ' + @token}
@@ -31,7 +31,7 @@ RSpec.describe "invitation requests", type: :request do
   end
 
   before(:context) do
-    post '/login', params: {username: "billbob", password: "billbob"}
+    post '/login', params: {username: "billbob", password: "BillBob@2021"}
     # token for user_id = 2
     @token = JSON.parse(response.body)["auth_token"]
   end
@@ -47,7 +47,7 @@ RSpec.describe "invitation requests", type: :request do
         expect(response).to have_http_status(:unauthorized)
     end
     it "does not let the event owner add themselves to the event" do
-        post '/login', params: { username: "testuser", password: "password" }
+        post '/login', params: { username: "testuser", password: "Password@2021" }
         # token for user_id = 1
         @token = JSON.parse(response.body)["auth_token"]
         post "/invitations", params: {
@@ -61,7 +61,7 @@ RSpec.describe "invitation requests", type: :request do
     end
   end
   before(:context) do
-    post '/login', params: {username: "billbob", password: "billbob"}
+    post '/login', params: {username: "billbob", password: "BillBob@2021"}
     # token for user_id = 2
     @token = JSON.parse(response.body)["auth_token"]
   end
