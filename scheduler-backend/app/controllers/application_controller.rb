@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::API
     public
 
-    # undecided placeholders for events that have not 
-    UNCHOSEN_LOCATION = Location.find_by(location_type: "Undecided")
-    UNCHOSEN_ACTIVITY = Activity.find_by(name: "undecided")
 
 
 
@@ -11,18 +8,17 @@ class ApplicationController < ActionController::API
 
     # ----- methods used in multiple controllers
 
-    def setup_invitee(invitee)
-        {
-            user: User.find(invitee[:user_id]),
-            questionnaire: Questionnaire.find_by(user_id: invitee[:user_id]),
-            priority: invitee[:priority],
-            matches: []
-        }
-    end
+    # def setup_invitee(invitee)
+    #     {
+    #         user: User.find(invitee[:user_id]),
+    #         questionnaire: Questionnaire.find_by(user_id: invitee[:user_id]),
+    #         priority: invitee[:priority],
+    #         matches: []
+    #     }
+    # end
 
     # ------------------------------------------------------
 
-    QUESTIONNAIRE_TOTAL = 120.0
 
     # ------------ Encryption and user authentication stuff ----------
 

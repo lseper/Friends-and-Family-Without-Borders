@@ -116,4 +116,13 @@ module Format
 
     end
 
+    def setup_invitee(invitee)
+        {
+            user: User.find(invitee[:user_id]),
+            questionnaire: Questionnaire.find_by(user_id: invitee[:user_id]),
+            priority: invitee[:priority],
+            matches: []
+        }
+    end
+
 end

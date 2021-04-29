@@ -4,9 +4,8 @@ include ComfortCalculation, Format
 
 RSpec.describe ComfortCalculation do
     before(:context) do
-        @App = ApplicationController.new
         beforeInvitee = Invitation.new(event_id: 1, user_id: 3, priority: true, confirmed: false, comfort_level: 0)
-        @invitee = @App.setup_invitee(beforeInvitee)
+        @invitee = setup_invitee(beforeInvitee)
         @pairs = LocationActivitySuggestion.all
         @pairs = setup_pairs(@pairs)
     end

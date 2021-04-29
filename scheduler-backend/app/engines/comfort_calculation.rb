@@ -1,9 +1,12 @@
 module ComfortCalculation
+    include Format 
+
     THRESHOLD = 0.8
     DENOM = (9/0.175)
 
     # calculate the score for this invitee based on location
     def calc_location_score(location, invitee)
+        
         location_type = location[:location_type]
         base_location_score = 10
         questionnaire_location_score = 0

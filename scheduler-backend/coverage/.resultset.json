@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/environment.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/application.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/application.rb": {
         "lines": [
           1,
           null,
@@ -64,7 +64,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/boot.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -72,7 +72,7 @@
           1
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/environments/test.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -135,7 +135,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/application_controller_renderer.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -147,7 +147,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/backtrace_silencers.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -159,7 +159,7 @@
           1
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/cors.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/cors.rb": {
         "lines": [
           null,
           null,
@@ -179,7 +179,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/filter_parameter_logging.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -189,7 +189,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/inflections.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -209,7 +209,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/mime_types.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/mime_types.rb": {
         "lines": [
           null,
           null,
@@ -217,7 +217,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/wrap_parameters.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/initializers/wrap_parameters.rb": {
         "lines": [
           null,
           null,
@@ -235,7 +235,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/routes.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -255,14 +255,17 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/engines/comfort_calculation.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/engines/comfort_calculation.rb": {
         "lines": [
           1,
           1,
+          null,
+          1,
           1,
           null,
           null,
           1,
+          null,
           10,
           10,
           10,
@@ -395,7 +398,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/engines/format.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/engines/format.rb": {
         "lines": [
           1,
           null,
@@ -515,10 +518,19 @@
           null,
           null,
           null,
+          1,
+          null,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/location.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/location.rb": {
         "lines": [
           1,
           1,
@@ -527,14 +539,14 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/application_record.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/activity.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/activity.rb": {
         "lines": [
           1,
           1,
@@ -543,138 +555,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/spec/requests/events_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/spec/requests/invitations_spec.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/spec/requests/events_spec.rb": {
         "lines": [
           1,
           null,
@@ -685,6 +566,137 @@
           1,
           null,
           1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/spec/requests/invitations_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
           1,
           1,
           1,
@@ -758,7 +770,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/spec/requests/users_spec.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/spec/requests/users_spec.rb": {
         "lines": [
           1,
           null,
@@ -845,7 +857,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/db/seeds.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/db/seeds.rb": {
         "lines": [
           null,
           1,
@@ -896,7 +908,7 @@
           1
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/location_activity_suggestion.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/location_activity_suggestion.rb": {
         "lines": [
           1,
           1,
@@ -911,7 +923,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/user.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -933,7 +945,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/event.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/event.rb": {
         "lines": [
           1,
           1,
@@ -961,7 +973,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/invitation.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/invitation.rb": {
         "lines": [
           1,
           1,
@@ -988,7 +1000,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/questionnaire.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/questionnaire.rb": {
         "lines": [
           1,
           1,
@@ -1008,15 +1020,78 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/application_controller.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/users_controller.rb": {
         "lines": [
           1,
+          null,
+          1,
+          null,
           1,
           null,
           null,
           1,
           1,
+          1,
+          1,
+          3,
+          2,
           null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          10,
+          null,
+          10,
+          null,
+          10,
+          10,
+          10,
+          10,
+          5,
+          null,
+          10,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          2,
+          0,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          2,
+          1,
+          1,
+          null,
+          1,
           null,
           null,
           null,
@@ -1024,6 +1099,44 @@
           null,
           null,
           1,
+          1,
+          null,
+          1,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
           null,
           4,
           null,
@@ -1033,8 +1146,50 @@
           null,
           null,
           null,
+          1,
+          13,
+          13,
+          6,
+          null,
+          7,
+          null,
+          null,
+          null,
           null,
           1,
+          5,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -1106,154 +1261,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/users_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          3,
-          2,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          10,
-          null,
-          10,
-          null,
-          10,
-          10,
-          10,
-          10,
-          5,
-          null,
-          10,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          2,
-          null,
-          2,
-          0,
-          null,
-          2,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          2,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          4,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          13,
-          13,
-          6,
-          null,
-          7,
-          null,
-          null,
-          null,
-          null,
-          1,
-          5,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/events_controller.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/events_controller.rb": {
         "lines": [
           1,
           null,
@@ -1336,7 +1344,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/event_la.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/models/event_la.rb": {
         "lines": [
           1,
           1,
@@ -1346,7 +1354,7 @@
           null
         ]
       },
-      "C:/Users/Monty Seper/Documents/GitHub/sophomore-yr/se4/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/invitations_controller.rb": {
+      "/Users/michaelkelly/Desktop/team-project-repository-emily-parker-michael-liam-nicole/scheduler-backend/app/controllers/invitations_controller.rb": {
         "lines": [
           1,
           1,
@@ -1422,6 +1430,6 @@
         ]
       }
     },
-    "timestamp": 1619731836
+    "timestamp": 1619732062
   }
 }
