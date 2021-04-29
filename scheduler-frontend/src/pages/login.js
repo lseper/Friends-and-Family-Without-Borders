@@ -35,7 +35,6 @@ export class Login extends Component {
         localStorage.setItem('authToken', authorization);
         const userId = res.data.user_id;
         localStorage.setItem('user_id', userId)
-        console.log(res);
         const filledOut = res.data.filled_out;
         localStorage.setItem('filledOutQuestionnaire', filledOut)
         axios.defaults.headers.common['Authorization'] = authorization;
@@ -67,9 +66,9 @@ export class Login extends Component {
         </section>
         <section className="h-2/3 w-full flex justify-center items-start bg-white py-4">
           <form action="" className=" sm:w-3/4 md:w-1/3 border-2 rounded px-8 py-8 pt-8">
-          <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
+          <InputTextForm isDisabled={false} focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.userNameCallBack} type="text" label="USERNAME" placeholder="exampleUsername" />
           &nbsp;&nbsp;&nbsp;
-          <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
+          <InputTextForm isDisabled={false} focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.passwordCallBack} type="password" label="PASSWORD" placeholder="examplePassword" />
           &nbsp;&nbsp;&nbsp;      
             {/* log in error messages */}
             {this.state.errors !== '' && (

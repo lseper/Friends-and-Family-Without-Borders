@@ -8,7 +8,6 @@ import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
-// import { Prompt } from 'react-router'
 import Loading from '../components/loading';
 
 export class CreatedEventsReport extends Component {
@@ -29,7 +28,7 @@ export class CreatedEventsReport extends Component {
         const firstStart = start.slice(0, startIndex - 1)
         const endStart = end.slice(0, endIndex - 1)
 
-        if (firstStart == endStart) {
+        if (firstStart === endStart) {
             const endPrint = end.slice(endIndex - 1)
             return (start + " until " + endPrint)
         }
@@ -47,7 +46,6 @@ export class CreatedEventsReport extends Component {
     }
 
     deleteEvent(id) {
-        //console.log(id);
         this.setState({ loading: true })
 
         const authorization = localStorage.getItem('authToken');
@@ -137,7 +135,7 @@ export class CreatedEventsReport extends Component {
                             </div>
                         </div>
                         <div className="pt-2 pb-4 w-full">
-                            <ControlledAccordion numComfort={this.props.numComfort == "N/A" ? -1 : this.props.numComfort} invitees={this.props.invitees} />
+                            <ControlledAccordion numComfort={this.props.numComfort === "N/A" ? -1 : this.props.numComfort} invitees={this.props.invitees} />
                         </div>
                     </div>
                 </div>

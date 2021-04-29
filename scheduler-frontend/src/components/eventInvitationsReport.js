@@ -32,7 +32,7 @@ export class EventInvitationReport extends Component {
     const firstStart = start.slice(0, startIndex - 1)
     const endStart = end.slice(0, endIndex - 1)
 
-    if (firstStart == endStart) {
+    if (firstStart === endStart) {
       const endPrint = end.slice(endIndex - 1)
       return (start + " until " + endPrint)
     }
@@ -50,7 +50,6 @@ export class EventInvitationReport extends Component {
   }
 
   updateAttendance = (status) => {
-    console.log(this.state.attending)
     this.setState({ attending: status, loading: true });
 
     let info = {
@@ -74,7 +73,7 @@ export class EventInvitationReport extends Component {
   }
 
   convertToPercentage = (num) => {
-    if (num == "N/A") {
+    if (num === "N/A") {
       return "N/A"
     } else {
       return (Math.floor((num) * 100));
@@ -91,9 +90,11 @@ export class EventInvitationReport extends Component {
             null
           }
         </div>
-        <div className="flex flex-grow align-start items-start  px-5 w-full md:w-3/4" >
-          <div className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 container bg-white" >
-            <div action="" className="flex flex-grow grid grid-col-1 justify-start align-left items-left bg-white py-2 container bg-white w-full">
+        <div className="flex align-start items-start px-5 w-full md:w-3/4" >
+          <div className="flex flex-wrap justify-start align-left items-left bg-white border-2 rounded px-8 py-2 pt-2 bg-white" >
+
+            {/* Basic Event Details  */}
+            <section action="" className="flex grid grid-col-1 justify-start align-left items-left bg-white py-2 bg-white w-full">
               <div className="text-sm font-bold text-coolGrey-dark">{this.props.creator} invites you to:</div>
               <div className="flex py-2">
                 <p className="text-2xl font-bold text-coolGrey-dark pt-2.5">{this.props.name}</p>
@@ -113,7 +114,6 @@ export class EventInvitationReport extends Component {
                   </div>
                 </div>
               </div>
-
               <h3 className="text-sm text-coolGrey-dark pb-2">{this.props.details}</h3>
               <div className="flex content-center pb-4">
                 <hr className="text-center"
@@ -128,7 +128,6 @@ export class EventInvitationReport extends Component {
               <div className="flex text-coolGrey-dark">
                 <FontAwesomeIcon className="inline fa-lg mr-2 " icon={faCalendarDay} />
                 <div className="flex">
-                  {/* <h3 className="font-bold text-coolGrey-dark">{this.props.dateStringStart} to {this.props.dateStringEnd}</h3> */}
                   <h3 className="text-coolGrey-dark">{this.getDate(this.props.dateStringStart, this.props.dateStringEnd)}</h3>
                 </div>
               </div>
@@ -144,11 +143,15 @@ export class EventInvitationReport extends Component {
                   <h3 className="text-coolGrey-dark pb-2">{this.getMaskRequirements(this.props.maskRequired)}</h3>
                 </div>
               </div>
-            </div>
-            <div className="flex w-full pb-4 border-1">
+            </section>
+
+            {/* invitees */}
+            <section className="flex w-full pb-4 border-1">
               <ControlledAccordion numComfort={-1} invitees={this.props.invitees} />
-            </div>
-            <div className="flex w-full text-brightPink py-2">
+            </section>
+
+            {/* Attendance  */}
+            <section className="flex w-full text-brightPink py-2">
               <button onClick={() => this.updateAttendance(true)} className="focus:outline-none hover:text-brightPink-dark">
                 <FontAwesomeIcon className="inline fa-2x mr-2 hover:text-brightPink-dark" icon={faCheckCircle} />
               </button>
@@ -163,7 +166,7 @@ export class EventInvitationReport extends Component {
                   <div>Going</div>
                 }
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>

@@ -186,7 +186,7 @@ it('displays the correct event creator', () => {
         />
     )
 
-    const firstDiv = wrapper.find('div').at(5)
+    const firstDiv = wrapper.find('div').at(4)
     expect(firstDiv.text()).toBe("John Doe invites you to:")
 });
 

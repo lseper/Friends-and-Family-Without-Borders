@@ -33,7 +33,6 @@ export class Questionnaire extends Component {
     }
 
     const token = localStorage.getItem("authToken").toString();
-    console.log("User token on questionnaire page: ", token);
     axios.defaults.headers.common['Authorization'] = token;
     const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
     if (needPopup) {
@@ -43,7 +42,6 @@ export class Questionnaire extends Component {
       this.setState({ showPopup: false })
     }
 
-    console.log("User id on questionnaire page: ", localStorage['user_id']);
     axios.get(`/users/${localStorage['user_id']}/questionnaires`)
       .then(res => {
         this.setState({
@@ -82,7 +80,6 @@ export class Questionnaire extends Component {
     axios.post(`/users/${localStorage['user_id']}/questionnaires`, questionnaireInfo)
       .then(res => {
         localStorage.setItem('filledOutQuestionnaire', true);
-        console.log(res);
       }).catch(err => {
         console.log("Something went wrong when making questionnaire");
         console.log(err.response.data)
@@ -206,9 +203,7 @@ export class Questionnaire extends Component {
         <section className="">
           <div className="px-6 pb-4">
             <NavLink to="/homePage" onClick={this.buildPost}>
-              {/* <div className="px-5 pb-4" onClick={this.buildPost}> */}
               <Button name="SUBMIT RESPONSES" bgColor="bg-coolGreen" hoverColor="bg-coolGreen-dark" />
-              {/* </div> */}
             </NavLink>
           </div>
         </section>

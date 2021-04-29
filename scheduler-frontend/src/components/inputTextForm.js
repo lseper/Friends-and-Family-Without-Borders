@@ -15,7 +15,12 @@ export class InputTextForm extends Component {
     render() {
         return (
             <div className = "w-full">
-                <input onChange={name => this.handleCallBack(name)} type={this.props.type} className={"text-lg w-full focus:ring-2 block pb-1 text-coolGrey-dark focus:outline-none text-left focus:ring-" + this.props.focusRing} placeholder={this.props.placeholder}></input>
+                <input 
+                    onChange={name => this.handleCallBack(name)} 
+                    type={this.props.type} 
+                    className={"text-lg w-full focus:ring-2 block pb-1 text-coolGrey-dark focus:outline-none text-left focus:ring-" + this.props.focusRing} placeholder={this.props.placeholder}
+                    disabled={this.props.isDisabled}
+                    ></input>
                 <hr
                     style={{
                         color: this.props.color,

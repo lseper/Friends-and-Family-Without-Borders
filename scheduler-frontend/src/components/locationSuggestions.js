@@ -33,8 +33,6 @@ export class LocationSuggestion extends Component {
             <label className="text-left text-xs block text-coolGrey-dark px-2">{this.props.comfortableAttendees}/{this.props.totalAttendees - this.props.totalPriority} Comfortable Attendees </label>
             <label className="text-left text-xs block text-coolGrey-dark px-2 pb-2">{this.props.comfortablePriority}/{this.props.totalPriority} Comfortable Priority Attendees </label>
           </div>
-
-
         </form>
 
       </div>

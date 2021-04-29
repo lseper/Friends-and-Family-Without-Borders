@@ -5,7 +5,6 @@ import Button from '../components/button';
 import axios from 'axios';
 import Loading from '../components/loading';
 import InputTextForm from '../components/inputTextForm';
-import ShowText from '../components/showText'
 import Alert from '../components/alert'
 
 export class Profile extends Component {
@@ -44,7 +43,7 @@ export class Profile extends Component {
       }
     })
       .then(res => {
-        console.log(res.data);
+
         this.setState({
           userName: res.data.username,
           email: res.data.email,
@@ -71,7 +70,7 @@ export class Profile extends Component {
       email: this.state.email,
       privacy: this.state.publicInfo
     }
-    console.log(accountInformation)
+
     const authorization = localStorage.getItem('authToken');
     axios.put(`/users/${localStorage['user_id']}`, accountInformation, {
       headers: {
@@ -116,9 +115,9 @@ export class Profile extends Component {
         </section>
         <section className="flex flex-grow align-start items-start py-4 px-5 md:w-5/6 w-full">
           <form action="" className="flex grid grid-cols-1 flex-grow bg-white border-2 rounded px-8 py-8 pt-8">
-            <ShowText focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.handleEmail} type="text" label="EMAIL" placeholder={this.state.email}/>
+            <InputTextForm isDisabled={true} focusRing = 'coolGreen' color = '#8FD468' type="text" label="EMAIL" placeholder={this.state.email}/>
             &nbsp;&nbsp;&nbsp;
-            <InputTextForm focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.handleUsername} type="text" label="USERNAME" placeholder={this.state.userName}/>
+            <InputTextForm isDisabled={false} focusRing = 'coolGreen' color = '#8FD468' handleCallBack={this.handleUsername} type="text" label="USERNAME" placeholder={this.state.userName}/>
             &nbsp;&nbsp;&nbsp;
             <DropDown name="EVENT RESPONSES PRIVATE" 
               initalState={this.state.publicInfo} 

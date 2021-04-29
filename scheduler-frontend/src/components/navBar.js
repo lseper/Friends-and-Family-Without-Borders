@@ -9,9 +9,6 @@ const logout = () => {
   localStorage.setItem('authToken', '');
   localStorage.setItem('user_id', '');
 
-  console.log("Authorization token after logging out: ", localStorage['authToken']);
-  console.log("User id after loggin out: ", localStorage['user_id']);
-
   if (localStorage['authToken'] === '' && localStorage['user_id'] === '') {
     alert("Logging out!");
   }

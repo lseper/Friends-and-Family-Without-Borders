@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import Alert from '../components/alert';
 import moment from "moment"
 
-const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfort, numComfort, activity, eventId, maskRequired}) => {
+const EventCard = ({ name, dateStart, dateEnd, location, details, invitees, comfort, numComfort, activity, eventId, maskRequired }) => {
     return (
         <div className="flex grid grid-cols-1 flex place-items-left py-4">
             <CreatedEventButton
@@ -15,14 +15,14 @@ const EventCard = ({ name, dateStart, dateEnd, location, details, invitees,comfo
                 dateStart={dateStart}
                 dateEnd={dateEnd}
                 location={location}
-                activity = {activity}
-                details={details} 
+                activity={activity}
+                details={details}
                 invitees={invitees}
                 comfort={comfort}
                 numComfort={numComfort}
-                eventId = {eventId}
-                maskRequired = {maskRequired}
-                />
+                eventId={eventId}
+                maskRequired={maskRequired}
+            />
         </div>
     )
 }
@@ -34,12 +34,11 @@ export class CreatedEvents extends Component {
         this.state = {
             eventList: [],
             loading: true,
-            showPopup: false,
         };
     }
 
     convertToPercentage = (num) => {
-        return(Math.floor((num) * 100));
+        return (Math.floor((num) * 100));
     }
 
     componentDidMount = () => {
@@ -47,13 +46,6 @@ export class CreatedEvents extends Component {
         if (!localStorage['user_id'] && !localStorage['authToken']) {
             this.props.history.push('/');
             localStorage.setItem('LoginErrors', 'You were signed out, please sign in again');
-        }
-        const needPopup = (localStorage.getItem('filledOutQuestionnaire') === "false");
-        if (needPopup) {
-            this.setState({ showPopup: true })
-        }
-        else {
-            this.setState({ showPopup: false })
         }
 
         const authorization = localStorage.getItem('authToken');
@@ -63,40 +55,43 @@ export class CreatedEvents extends Component {
             }
         })
             .then(res => {
-                console.log(res);
-                
                 this.setState({
-            
+
+                    // loop through each created event returned from the backend
                     eventList: res.data.map(event => {
 
+                        // handle if location and activity are null 
                         let location = "";
                         let activity = "";
                         let comfort = "";
                         let numComfort = "";
-                        if(event.location == null){
+
+                        // if location is null then activity, comfort, and numComfort are not applicable for the user 
+                        if (event.location == null) {
                             location = "No Location Specified";
                             activity = "or Activity"
                             comfort = "N/A"
                             numComfort = "N/A"
-                        }else {
+                        } else {
                             location = event.location.location_type;
                             activity = event.activity.name;
                             comfort = this.convertToPercentage(event.overall_comfort_metric);
                             numComfort = event.people_comfortable
                         }
-      
+
+                        // pass to event report component 
                         return (<EventCard
                             name={event.event.name}
                             dateStart={moment(event.event.start_time).format("MMMM Do YYYY h:mm:ss a")}
                             dateEnd={moment(event.event.ending_at).format("MMMM Do YYYY h:mm:ss a")}
                             location={location}
-                            activity = {activity}
+                            activity={activity}
                             details={event.event.description}
                             invitees={event.invitees}
                             eventId={event.event.id}
-                            comfort = {comfort}
+                            comfort={comfort}
                             numComfort={numComfort}
-                            maskRequired = {event.event.masks_required}
+                            maskRequired={event.event.masks_required}
                         />)
                     }),
                     loading: false,
@@ -132,6 +127,7 @@ export class CreatedEvents extends Component {
                         </NavLink>
                     </div>
                     <div>
+                        {/* View Created Events Reports  */}
                         {this.state.eventList}
                     </div>
                 </div>
