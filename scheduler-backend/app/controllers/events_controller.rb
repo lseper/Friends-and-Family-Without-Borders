@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  # importing ComfortCalculation methods
+  # importing ComfortCalculation methods and formatting helpers
   include ComfortCalculation, Format
 
   before_action :set_event, only: [:show, :update, :destroy]
@@ -9,37 +9,16 @@ class EventsController < ApplicationController
   # GET /user/:id/events
   # return JSON of all events that this user is the owner of
   # AUTHORIZATION NEEDED -- only user who created the event should be allowed to view it
+  # To only return future events, write Event.future.where(...) instead of just Event.where(...)
   def index
     @events = Event.where(user_id: params[:user_id])
-    # events_to_return = []
-    # for event in @events.to_ary
-    #   event_la = EventLa.find_by(event_id: event.id)
-    #   if event_la
-    #     events_to_return.append({ 
-    #       event: event, 
-    #       location: event_la.location_activity_suggestion.location,
-    #       activity: event_la.location_activity_suggestion.activity,
-    #       invitees: get_invitations_for_event(event), 
-    #       overall_comfort_metric: event_la[:overall_comfort_metric], 
-    #       people_comfortable: event_la[:people_comfortable]})
-    #   else
-    #     events_to_return.append({ 
-    #       event: event, 
-    #       location: nil,
-    #       activity: nil,
-    #       invitees: get_invitations_for_event(event), 
-    #       overall_comfort_metric: 0, 
-    #       people_comfortable: 0})
-    #   end
-    # end
-    #pairs.sort_by{|p| [p[:priority_passed], p[:others_passed], p[:average_comfort]]}
     events_to_return = extract_events_info(@events.to_ary)
 
     render json: events_to_return
   end
 
   # POST /user/:id/events
-  # AUTHORIZATION NEEDED
+  # AUTHORIZATION NEEDED -- only the logged in user can create an event under their profile
   def create
     @event = Event.new(
       description: event_params[:description],
@@ -58,21 +37,10 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/:id
   # send back to the backend all the information about the pair chosen (we can do this)
-  # as well as all the invitee scores FOR that pair (can we do this?) [Currently not doing this]
+  # AUTHORIZATION NEEDED -- only event owner can update the event
   def update
     invitees = Invitation.where(event_id: @event.id)
     pair = params[:pair]
-    # update each invitee's comfort level
-    # for invitee in invitees
-    #   invitee_info = setup_invitee(invitee)
-    #   # re-calculating comfort scores for now. Could potentially refactor and have these sent from front-end(?)
-    #   num_attendees_score = calc_num_attendees_score(invitees.length, invitee_info)
-    #   masks_req_score = calc_mask_score(@event[:masks_required], invitee_info)
-    #   pair_score = calc_pair_scores(pair, invitee_info)
-    #   comfort_score = 1 - pair_score - masks_req_score - num_attendees_score
-    #   invitee.update!(comfort_level: comfort_score) # will throw an error if unprocessable (internal server error)
-    # end
-
     update_invitee_scores(@event, pair, invitees)
 
     # add the chosen pair to the event via the event_las table

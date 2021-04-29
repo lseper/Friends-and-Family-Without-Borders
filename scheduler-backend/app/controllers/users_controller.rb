@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         end
         render json: { auth_token: token, user_id: @user.id, filled_out: has_filled_out_questionnaire }
       else
-        render json: { message: "password incorrect" }, status: :unprocessable_entity # Unprocessable Entity (good for faulty usernames / passwords)
+        render json: { message: "password incorrect" }, status: :unprocessable_entity 
       end
     else
       render json: { message: "username incorrect" }, status: :unprocessable_entity 
